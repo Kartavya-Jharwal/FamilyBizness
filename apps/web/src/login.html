@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login — FamilyBizness</title>
+    <link rel="stylesheet" href="/tokens/tokens.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand-mark" href="/">FamilyBizness</a>
+        <nav class="header-nav" aria-label="Primary">
+          <a href="/legacy.html">Legacy</a>
+        </nav>
+      </header>
+
+      <div class="page-header">
+        <p class="section-label" style="color: var(--color-brass-soft)">
+          Cold visit · step 2
+        </p>
+        <h1>Sign in</h1>
+        <p>Stub only — no credentials are accepted or stored.</p>
+      </div>
+
+      <main class="page-body">
+        <form class="form-stub" action="/splash.html" method="get">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            placeholder="you@family.office"
+          />
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+          />
+          <button class="btn btn-ink" type="submit">Continue</button>
+        </form>
+        <p class="stub-note">
+          Next: custom splash → security verification. Documented in Auth Flow;
+          not a real auth system.
+        </p>
+      </main>
+
+      <footer class="site-footer">
+        <a href="/legacy.html">← Legacy</a>
+        <span>Login stub</span>
+      </footer>
+    </div>
+  </body>
+</html>

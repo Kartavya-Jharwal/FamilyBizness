@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verification — FamilyBizness</title>
+    <link rel="stylesheet" href="/tokens/tokens.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand-mark" href="/">FamilyBizness</a>
+      </header>
+
+      <div class="page-header">
+        <p class="section-label" style="color: var(--color-brass-soft)">
+          Cold visit · step 4
+        </p>
+        <h1>Security verification</h1>
+        <p>Stub only — no challenge is issued or checked.</p>
+      </div>
+
+      <main class="page-body">
+        <form class="form-stub" action="/" method="get">
+          <label for="code">One-time code</label>
+          <input
+            id="code"
+            name="code"
+            type="text"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            placeholder="000 000"
+          />
+          <button class="btn btn-ink" type="submit">Verify (return home)</button>
+        </form>
+        <p class="stub-note">
+          End of documented cold-visit flow. Real MFA / device trust comes later.
+        </p>
+      </main>
+
+      <footer class="site-footer">
+        <a href="/splash.html">← Splash</a>
+        <span>Verification stub</span>
+      </footer>
+    </div>
+  </body>
+</html>

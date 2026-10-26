@@ -1,0 +1,78 @@
+/**
+ * FamilyBizness design tokens — SINGLE SOURCE OF TRUTH.
+ * Import this file; do not hardcode colours, fonts, or spacing from memory.
+ * See docs/04 - Design/Design.md
+ */
+
+:root {
+  /* Brand */
+  --color-ink: #0e1f2c;
+  --color-ink-muted: #3d5263;
+  --color-paper: #f2f6f8;
+  --color-mist: #d8e4ea;
+  --color-sea: #1a5f6e;
+  --color-sea-deep: #0f3d48;
+  --color-brass: #a67c3d;
+  --color-brass-soft: #c9a66b;
+  --color-foam: #eef5f7;
+  --color-danger: #8b2e2e;
+
+  /* Surfaces / atmosphere */
+  --gradient-hero: linear-gradient(
+    155deg,
+    #0e1f2c 0%,
+    #1a3d4a 42%,
+    #1a5f6e 78%,
+    #2a6f7a 100%
+  );
+  --gradient-wash: radial-gradient(
+    ellipse 80% 60% at 70% 20%,
+    rgba(201, 166, 107, 0.18) 0%,
+    transparent 55%
+  ),
+    radial-gradient(
+      ellipse 60% 50% at 15% 80%,
+      rgba(238, 245, 247, 0.12) 0%,
+      transparent 50%
+    );
+
+  /* Typography */
+  --font-display: "Syne", "Segoe UI", sans-serif;
+  --font-body: "Karla", "Segoe UI", sans-serif;
+  --font-size-hero: clamp(2.75rem, 6vw, 4.5rem);
+  --font-size-h1: clamp(1.75rem, 3vw, 2.25rem);
+  --font-size-h2: clamp(1.25rem, 2vw, 1.5rem);
+  --font-size-body: 1.0625rem;
+  --font-size-small: 0.875rem;
+  --line-height-tight: 1.15;
+  --line-height-body: 1.6;
+  --letter-brand: 0.04em;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6rem;
+
+  /* Layout */
+  --max-width: 68rem;
+  --nav-height: 4rem;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 180ms;
+  --duration-med: 480ms;
+  --duration-slow: 900ms;
+
+  /* Contrast-safe text on hero */
+  --color-on-hero: #f2f6f8;
+  --color-on-hero-muted: rgba(242, 246, 248, 0.78);
+  --color-on-hero-faint: rgba(242, 246, 248, 0.55);
+}

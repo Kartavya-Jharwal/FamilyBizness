@@ -1,0 +1,10 @@
+{
+  "name": "@familybizness/web",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "bun run ../../scripts/dev-web.ts",
+    "build": "bun run ../../scripts/build-web.ts",
+    "preview": "bun run ../../scripts/preview-web.ts"
+  }
+}

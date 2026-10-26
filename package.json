@@ -1,0 +1,16 @@
+{
+  "name": "familybizness",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "bun run scripts/dev-web.ts",
+    "build": "bun run scripts/build-web.ts",
+    "preview": "bun run scripts/preview-web.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
