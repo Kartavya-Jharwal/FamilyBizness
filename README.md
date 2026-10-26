@@ -17,11 +17,12 @@ bun run preview   # http://localhost:4173
 
 ## Live preview (GitHub Pages)
 
-After Actions deploy:
+Deployed via Actions (`pages.yml`):
 
-**https://kartavya-jharwal.github.io/FamilyBizness/**
+- **https://kartavya.tech/FamilyBizness/**
+- Mirror: https://kartavya-jharwal.github.io/FamilyBizness/
 
-(Enable Pages → Source: GitHub Actions if the first deploy needs a one-time settings click.)
+Pages source: **GitHub Actions** (already enabled).
 
 ## Layout
 
