@@ -35,3 +35,6 @@ donot/**
 !donot/contenders/
 !donot/contenders/README.md
 !donot/README.md
+
+# Typo / alternate local ingest folder (use donot/contenders/)
+donor/
