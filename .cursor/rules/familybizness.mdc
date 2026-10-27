@@ -11,7 +11,7 @@ alwaysApply: true
 - Folders: numbered function names (`01 - Notes/`, …); one home per topic; `Subject - Description.ext` Title Case; no version numbers in filenames.
 - New non-obvious folder → one-line README.
 - Keep Trace, Architecture, Design.md current.
-- `donot/` contender clones: never commit (except README placeholders). Prefer contender → static UI → integrate over greenfield full app.
+- `donor/` contender clones: never commit (except README placeholders). Prefer contender → static UI → integrate over greenfield full app.
 - Don’t build full auth / portfolio engines / financial models unless asked.
 - Release blockers: poor text contrast; overlapping chart labels — render and verify before shipping.
 - Preview app: `apps/web` Bun static → GitHub Pages. Brand-first hero; pillars after first viewport.

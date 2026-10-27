@@ -5,7 +5,7 @@ Clone candidate apps here for review and refactor. Contents (except this README)
 ## How to add a contender
 
 ```bash
-cd donot/contenders
+cd donor/contenders
 git clone <repo-url> <short-name>
 ```
 
@@ -17,7 +17,7 @@ git clone https://github.com/example/wealth-dashboard.git wealth-dashboard
 
 ## Workflow
 
-1. **Clone** into `donot/contenders/<name>/`.
+1. **Clone** into `donor/contenders/<name>/`.
 2. **Explore** — map screens/modules to FamilyBizness pillars (`docs/05 - Requirements/Pillars.md`).
 3. **Refactor toward static web UI** (HTML/CSS/JS or a static export) inside the clone or a branch you keep local.
 4. **Fit** surviving pieces into `apps/web` (or a future app package), using `packages/tokens/tokens.css` and FamilyBizness navigation.

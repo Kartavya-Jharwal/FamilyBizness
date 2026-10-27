@@ -7,7 +7,7 @@ FamilyBizness/
   apps/web/              # Bun static preview → GitHub Pages
   packages/tokens/       # ONE design-tokens file (tokens.css)
   docs/                  # Markdown only (no mkdocs yet)
-  donot/contenders/      # gitignored clones for ingest (not committed)
+  donor/contenders/      # gitignored clones for ingest (not committed)
   scripts/               # build / dev / preview for web
   .github/workflows/     # Pages deploy
 ```
@@ -20,7 +20,7 @@ FamilyBizness/
 
 ## Contender ingest path
 
-1. Clone full contender apps into `donot/contenders/<name>/` (never commit clones).
+1. Clone full contender apps into `donor/contenders/<name>/` (never commit clones).
 2. Refactor each contender toward a **static web UI**.
 3. Fit surviving UI/modules into `apps/web` (or future `apps/*`) under FamilyBizness navigation and tokens.
 

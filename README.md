@@ -31,7 +31,7 @@ Pages source: **GitHub Actions** (already enabled).
 | `apps/web` | Minimal Bun static MVP shell |
 | `packages/tokens` | Design tokens (single file) |
 | `docs/` | Markdown docs (numbered folders) |
-| `donot/contenders/` | Local contender clones — **not committed** |
+| `donor/contenders/` | Local contender clones — **not committed** |
 | `.github/workflows/pages.yml` | Deploy `dist/` to Pages |
 
 ## Docs index
@@ -46,11 +46,11 @@ Pages source: **GitHub Actions** (already enabled).
 ## Contender workflow
 
 ```bash
-cd donot/contenders
+cd donor/contenders
 git clone <url> <name>
 ```
 
-Then refactor to static UI and fit into `apps/web`. Details: [`donot/contenders/README.md`](donot/contenders/README.md).
+Then refactor to static UI and fit into `apps/web`. Details: [`donor/contenders/README.md`](donor/contenders/README.md).
 
 ## Agent rules
 

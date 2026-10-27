@@ -43,7 +43,7 @@ Do not invent a detailed pillar map beyond that until a donor is explicitly assi
 
 | Step | Status |
 |------|--------|
-| Clone Wealthfolio into ingest tree | Done (path naming flipped `donor` ↔ `donot`; rename back to `donor` in flight) |
+| Clone Wealthfolio into ingest tree | Done (`donor/contenders/Wealthfolio`) |
 | Strip Docker / trademarks; keep AGPL + NOTICE | Done early |
 | Cursor “Static UI shell” plan + implement todos | Partially done — Connect/MCP/cloud delete, code scrub, static adapter, faux AI largely done; Cursor plan file still shows some todos pending/in_progress |
 | Detach `.git` + NOTICE fetch stamp | Appears done on disk under `donor/contenders/Wealthfolio` |
@@ -57,7 +57,7 @@ Do not invent a detailed pillar map beyond that until a donor is explicitly assi
 
 ## Ingest path naming
 
-User intent: folder is **`donor/`**, not `donot/`. Setup agents used both; a rename agent was correcting docs/gitignore mid-flight. Prefer `donor/contenders/Wealthfolio` going forward.
+Canonical ingest folder is **`donor/`** (not `donot/`). Contender clones live under `donor/contenders/`.
 
 ## Preview (donor silo, not parent)
 
@@ -74,6 +74,5 @@ bun run preview
 1. Finish / verify Wealthfolio static demo (build + preview; scrub grep; no Connect/MCP leftovers).
 2. Fill `donor/contenders/Wealthfolio/donor.plan.md` placeholders (name, upstream URL, fetch datetime, product string, harm nominee).
 3. Complete harm-review sign-off before any public demo URL.
-4. Finish `donot` → `donor` rename + leftover duplicate tree cleanup.
-5. Only then: map surviving screens into `apps/web` pillar navigation (start with Pillars 4–5).
-6. Clone next donors using `donor/Donor.plan.md`.
+4. Map surviving screens into `apps/web` pillar navigation (start with Pillars 4–5).
+5. Clone next donors using `donor/Donor.plan.md`.

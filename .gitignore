@@ -31,10 +31,10 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 Thumbs.db
 
 # Contender clones and local ingest — NEVER commit
-donot/**
-!donot/contenders/
-!donot/contenders/README.md
-!donot/README.md
+donor/**
+!donor/contenders/
+!donor/contenders/README.md
+!donor/README.md
 
-# Typo / alternate local ingest folder (use donot/contenders/)
-donor/
+# Legacy typo path (unused; ignore if a leftover local folder remains)
+donot/

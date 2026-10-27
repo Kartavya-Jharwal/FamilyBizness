@@ -11,8 +11,8 @@ FamilyBizness is a wealth platform for an SFO: estate + family-business financia
 ## Build posture
 
 1. Start **minimal**. Scaffold around the product; do not build the full app.
-2. Prefer **contender refactor path**: clone into `donot/contenders/` → static web UI → fit into this monorepo.
-3. Never commit contender clones (`donot/` is gitignored aside from READMEs).
+2. Prefer **contender refactor path**: clone into `donor/contenders/` → static web UI → fit into this monorepo.
+3. Never commit contender clones (`donor/` is gitignored aside from READMEs).
 4. No full auth, portfolio engines, or financial models unless explicitly requested.
 5. Docs = Markdown under `docs/` only (no mkdocs yet).
 

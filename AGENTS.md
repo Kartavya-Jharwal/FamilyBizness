@@ -10,7 +10,7 @@ Wealth management for an SFO: estate planning + family-business financial affair
 
 - **Do** scaffold, document, and integrate via contender → static UI → fit into `apps/web`.
 - **Don’t** vibe-code the full app from scratch. **Don’t** build real auth, portfolio engines, or financial models until asked.
-- **Don’t** commit anything under `donot/` except the README placeholders. Contender clones stay local.
+- **Don’t** commit anything under `donor/` except the README placeholders. Contender clones stay local.
 
 ## Folder & naming
 
