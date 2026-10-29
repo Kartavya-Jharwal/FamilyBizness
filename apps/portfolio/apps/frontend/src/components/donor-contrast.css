@@ -1,0 +1,18 @@
+@import "../../../../../../packages/tokens/tokens.css";
+
+/* Small financial figures need enough contrast against dark donor surfaces. */
+.dark .app-shell main .text-success {
+  color: var(--color-gain-on-dark);
+}
+
+.dark .app-shell main .text-destructive {
+  color: var(--color-loss-on-dark);
+}
+
+.dark .app-shell .recharts-cartesian-axis-tick-value {
+  fill: var(--color-on-hero);
+}
+
+.dark .app-shell .text-muted-foreground\/50 {
+  color: var(--color-muted-on-dark);
+}

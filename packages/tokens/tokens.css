@@ -5,40 +5,96 @@
  */
 
 :root {
+  /* Classic / Flexoki foundation; original credits are recorded under upstream/.
+     Light and dark primitives are
+     separate so applications can bind their own theme selectors to them. */
+  --design-light-bg: 48 100% 97%;
+  --design-light-bg-raised: 51 59% 95%;
+  --design-light-ui: 51 21% 88%;
+  --design-light-ui-2: 50 14% 83%;
+  --design-light-ui-3: 55 10% 79%;
+  --design-light-text: 0 3% 6%;
+  --design-light-text-muted: 50 3% 36%;
+  --design-light-text-faint: 49 7% 70%;
+  --design-light-danger: 3 62% 42%;
+  --design-light-success: 73 84% 26%;
+  --design-light-warning: 45 99% 28%;
+  --design-light-info: 214 67% 39%;
+  --design-dark-bg: 0 3% 6%;
+  --design-dark-bg-raised: 30 4% 11%;
+  --design-dark-ui: 30 3% 15%;
+  --design-dark-ui-2: 40 3% 20%;
+  --design-dark-ui-3: 30 3% 24%;
+  --design-dark-text: 55 10% 79%;
+  --design-dark-text-muted: 43 3% 60.5%;
+  --design-dark-text-faint: 45 2% 33%;
+  --design-dark-danger: 5 61% 58.5%;
+  --design-dark-success: 72 46% 41%;
+  --design-dark-warning: 45 82% 45%;
+  --design-dark-info: 210 47% 50%;
+  --design-font-sans: "Inter Variable", "Inter", "Rubik Arabic", ui-sans-serif, system-ui, sans-serif;
+  --design-font-serif: "Merriweather", "Rubik Arabic", ui-serif, Georgia, serif;
+  --design-font-mono: "JetBrains Mono", "Rubik Arabic", ui-monospace, monospace;
+  --design-radius-card: 0.625rem;
+  --design-radius-control: 0.5rem;
+  --design-radius-pill: 9999px;
+  --design-control-height: 2.75rem;
+  --design-chart-light-1: #659892;
+  --design-chart-light-2: #83925b;
+  --design-chart-light-3: #b99f64;
+  --design-chart-light-4: #bb7b5b;
+  --design-chart-light-5: #688daf;
+  --design-chart-light-6: #938dba;
+  --design-chart-light-7: #c07b9b;
+  --design-chart-light-8: #9f9d96;
+  --design-chart-light-9: #cecdc3;
+  --design-chart-dark-1: #5ea49c;
+  --design-chart-dark-2: #899857;
+  --design-chart-dark-3: #c5a556;
+  --design-chart-dark-4: #c87c51;
+  --design-chart-dark-5: #769ebb;
+  --design-chart-dark-6: #a59cc4;
+  --design-chart-dark-7: #d489a7;
+  --design-chart-dark-8: #9f9d96;
+  --design-chart-dark-9: #878580;
+  --design-series-light-1: #205ea6;
+  --design-series-light-2: #a02f6f;
+  --design-series-light-3: #24837b;
+  --design-series-light-4: #5e409d;
+  --design-series-light-5: #66800b;
+  --design-series-light-6: #ad8301;
+  --design-series-light-7: #bc5215;
+  --design-series-light-8: #af3029;
+  --design-series-dark-1: #4385be;
+  --design-series-dark-2: #ce5d97;
+  --design-series-dark-3: #3aa99f;
+  --design-series-dark-4: #8b7ec8;
+  --design-series-dark-5: #879a39;
+  --design-series-dark-6: #d0a215;
+  --design-series-dark-7: #da702c;
+  --design-series-dark-8: #d14d41;
   /* Brand */
-  --color-ink: #0e1f2c;
-  --color-ink-muted: #3d5263;
-  --color-paper: #f2f6f8;
-  --color-mist: #d8e4ea;
-  --color-sea: #1a5f6e;
-  --color-sea-deep: #0f3d48;
-  --color-brass: #a67c3d;
-  --color-brass-soft: #c9a66b;
-  --color-foam: #eef5f7;
-  --color-danger: #8b2e2e;
+  --color-ink: hsl(var(--design-light-text));
+  --color-ink-muted: hsl(var(--design-light-text-muted));
+  --color-paper: hsl(var(--design-light-bg));
+  --color-mist: hsl(var(--design-light-ui));
+  --color-sea: hsl(var(--design-light-info));
+  --color-sea-deep: #1a4f8c;
+  --color-brass: hsl(var(--design-light-warning));
+  --color-brass-soft: var(--design-chart-dark-3);
+  --color-foam: hsl(var(--design-light-bg));
+  --color-danger: hsl(var(--design-light-danger));
+  --color-gain-on-dark: #c2df93;
+  --color-loss-on-dark: #ffb4ab;
+  --color-muted-on-dark: #b9c7ce;
 
   /* Surfaces / atmosphere */
-  --gradient-hero: linear-gradient(
-    155deg,
-    #0e1f2c 0%,
-    #1a3d4a 42%,
-    #1a5f6e 78%,
-    #2a6f7a 100%
-  );
-  --gradient-wash: radial-gradient(
-    ellipse 80% 60% at 70% 20%,
-    rgba(201, 166, 107, 0.18) 0%,
-    transparent 55%
-  ),
-    radial-gradient(
-      ellipse 60% 50% at 15% 80%,
-      rgba(238, 245, 247, 0.12) 0%,
-      transparent 50%
-    );
+  --gradient-hero: linear-gradient(155deg, hsl(var(--design-dark-bg)) 0%, hsl(var(--design-dark-bg-raised)) 65%, hsl(var(--design-dark-ui-2)) 100%);
+  --gradient-wash: none;
 
   /* Typography */
-  --font-display: "Syne", "Segoe UI", sans-serif;
-  --font-body: "Karla", "Segoe UI", sans-serif;
+  --font-display: var(--design-font-sans);
+  --font-body: var(--design-font-sans);
   --font-size-hero: clamp(2.75rem, 6vw, 4.5rem);
   --font-size-h1: clamp(1.75rem, 3vw, 2.25rem);
   --font-size-h2: clamp(1.25rem, 2vw, 1.5rem);
@@ -62,8 +118,8 @@
   /* Layout */
   --max-width: 68rem;
   --nav-height: 4rem;
-  --radius-sm: 2px;
-  --radius-md: 4px;
+  --radius-sm: var(--design-radius-control);
+  --radius-md: var(--design-radius-card);
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -72,7 +128,7 @@
   --duration-slow: 900ms;
 
   /* Contrast-safe text on hero */
-  --color-on-hero: #f2f6f8;
-  --color-on-hero-muted: rgba(242, 246, 248, 0.78);
-  --color-on-hero-faint: rgba(242, 246, 248, 0.55);
+  --color-on-hero: hsl(var(--design-light-bg));
+  --color-on-hero-muted: color-mix(in srgb, var(--color-on-hero) 78%, transparent);
+  --color-on-hero-faint: color-mix(in srgb, var(--color-on-hero) 55%, transparent);
 }

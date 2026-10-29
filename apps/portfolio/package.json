@@ -1,0 +1,31 @@
+{
+  "name": "familybizness-donor-portfolio",
+  "private": true,
+  "version": "3.11.0-demo",
+  "type": "module",
+  "workspaces": [
+    "apps/frontend",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun run --cwd apps/frontend dev",
+    "build": "bun run --cwd apps/frontend build",
+    "preview": "bun run --cwd apps/frontend preview",
+    "test": "bun run --cwd apps/frontend test",
+    "type-check": "bun run --cwd packages/ui build:types && bun run --cwd packages/addon-sdk build:types && bun run --cwd apps/frontend type-check",
+    "donor:smoke": "bun run --cwd apps/frontend test src/test/donor-pass src/pages/insights/analysis src/adapters/static-demo.test.ts src/features/governance/constitution"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "picocolors": "^1.1.1",
+    "typescript": "5.9.3",
+    "vite": "6.4.5",
+    "vitest": "^3.2.0"
+  },
+  "overrides": {
+    "vite": "6.4.5"
+  }
+}

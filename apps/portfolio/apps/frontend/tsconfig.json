@@ -1,0 +1,43 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": [
+      "vitest/globals",
+      "node",
+      "vite/client"
+    ],
+    "noEmit": true,
+    "composite": false,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@fb/addon-sdk": [
+        "../../packages/addon-sdk/src"
+      ],
+      "@fb/ui": [
+        "../../packages/ui/src"
+      ],
+      "@fb/ui/*": [
+        "../../packages/ui/src/*"
+      ],
+      "#platform": [
+        "./src/adapters/web/core"
+      ],
+      "@/adapters": [
+        "./src/adapters/web/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../../packages/ui"
+    },
+    {
+      "path": "../../packages/addon-sdk"
+    }
+  ]
+}

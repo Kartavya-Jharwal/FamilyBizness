@@ -1,5 +1,7 @@
 # Wealthfolio — Contender Plan
 
+> The snapshot below records the recovered plan, not current progress. The merged local donor is now in `donor/contenders/Wealthfolio`; an adapted demo has been placed in `apps/portfolio` and connected to the login stub. Its Pages-style build and basic dashboard have been checked locally. Integration, full screen testing, upstream branding cleanup, and the playbook's public-demo review remain incomplete. The original plan and reusable checklist are linked from the [strategy index](README.md).
+
 Recovered from Cursor logs (2026-10-26/27). Canonical product facts → [`../00 - Canonical/Identity.md`](../00%20-%20Canonical/Identity.md). Pillars → [`../05 - Requirements/Pillars.md`](../05%20-%20Requirements/Pillars.md). Contender path → [`../03 - Architecture/Architecture.md`](../03%20-%20Architecture/Architecture.md).
 
 ## What the plan actually was
@@ -11,7 +13,7 @@ Source artefacts (local / gitignored — not in this repo):
 | Artefact | Role |
 |----------|------|
 | Cursor plan `static_ui_shell_c221db79.plan.md` | Locked decisions + todos for Wealthfolio conversion |
-| `donor/Donor.plan.md` | Repeatable playbook for every future donor |
+| [Donor - Conversion Playbook.md](Donor%20-%20Conversion%20Playbook.md) | Repeatable playbook for every future donor |
 | `donor/contenders/Wealthfolio/donor.plan.md` | Per-silo copy (still mostly unfilled placeholders) |
 
 Transcripts: [Wealthfolio static shell](529fa136-84fb-4e4b-9297-addc8af23e92) · [Donor playbook write](5a0e4268-3206-49dc-96ab-047eeb30d962) · [FamilyBizness setup](25cfcb2d-e0de-494e-916c-5fef0fd6e9fe) · [Parent chat](c26de1d5-2f8b-4ec7-95d8-fbf767d7398e).
@@ -75,4 +77,4 @@ bun run preview
 2. Fill `donor/contenders/Wealthfolio/donor.plan.md` placeholders (name, upstream URL, fetch datetime, product string, harm nominee).
 3. Complete harm-review sign-off before any public demo URL.
 4. Map surviving screens into `apps/web` pillar navigation (start with Pillars 4–5).
-5. Clone next donors using `donor/Donor.plan.md`.
+5. Clone next donors using the [conversion playbook](Donor%20-%20Conversion%20Playbook.md).

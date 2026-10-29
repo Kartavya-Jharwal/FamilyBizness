@@ -1,0 +1,6 @@
+[install]
+# Workspaces: apps/frontend + packages/*
+exact = false
+
+[run]
+bun = true

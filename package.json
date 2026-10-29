@@ -1,14 +1,22 @@
 {
   "name": "familybizness",
   "private": true,
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/web",
+    "packages/tokens"
+  ],
   "scripts": {
     "dev": "bun run scripts/dev-web.ts",
     "build": "bun run scripts/build-web.ts",
-    "preview": "bun run scripts/preview-web.ts"
+    "preview": "bun run scripts/preview-web.ts",
+    "donor:smoke": "bun run --cwd apps/portfolio donor:smoke",
+    "donor:verify": "bun run donor:type-check && bun run donor:smoke && bun run build && node scripts/verify-donor-pass.mjs",
+    "donor:type-check": "bun run --cwd apps/portfolio type-check"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.7"
   },
   "peerDependencies": {
     "typescript": "^5"

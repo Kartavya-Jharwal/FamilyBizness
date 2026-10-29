@@ -1,5 +1,5 @@
-# donor/
+# Donor ingest
 
-**Do not commit** contender source trees. This tree is for local ingest only.
+`donor/contenders/` holds local, uncommitted source used to prepare static UI demos. The reusable [conversion playbook](../docs/02%20-%20Strategy/Donor%20-%20Conversion%20Playbook.md) lives in the strategy documentation.
 
-Donor conversion playbook: [Donor.plan.md](Donor.plan.md). See [contenders/README.md](contenders/README.md).
+Do not commit contender source trees here. Promote an adapted result into the application when it is ready for integration.

@@ -10,6 +10,7 @@ const srcDir = join(root, "apps", "web", "src");
 const publicDir = join(root, "apps", "web", "public");
 const tokensSrc = join(root, "packages", "tokens", "tokens.css");
 const distDir = join(root, "dist");
+const portfolioDir = join(root, "apps", "portfolio");
 
 const basePath = (
   process.env.BASE_PATH ??
@@ -36,6 +37,14 @@ function withBase(content: string, base: string): string {
 }
 
 async function main() {
+  const portfolioBuild = Bun.spawn(["bun", "run", "build"], {
+    cwd: portfolioDir,
+    env: { ...process.env, VITE_BASE: `${basePath}/portfolio/` },
+    stdout: "inherit",
+    stderr: "inherit",
+  });
+  if (await portfolioBuild.exited !== 0) throw new Error("Portfolio build failed");
+
   await rm(distDir, { recursive: true, force: true });
   await mkdir(distDir, { recursive: true });
 
@@ -66,6 +75,7 @@ async function main() {
     await writeFile(out, content);
   }
 
+  await cp(join(portfolioDir, "dist"), join(distDir, "portfolio"), { recursive: true });
   await writeFile(join(distDir, ".nojekyll"), "");
   console.log(`Built dist/ (BASE_PATH=${basePath || "/"})`);
 }

@@ -6,6 +6,7 @@ import { existsSync } from "node:fs";
 
 const distDir = join(import.meta.dir, "..", "dist");
 const port = Number(process.env.PORT ?? 4173);
+const basePath = (process.env.BASE_PATH ?? "").replace(/\/$/, "");
 
 if (!existsSync(distDir)) {
   console.error("dist/ missing — run: bun run build");
@@ -31,7 +32,10 @@ Bun.serve({
   async fetch(req) {
     const url = new URL(req.url);
     let path = decodeURIComponent(url.pathname);
-    if (path === "/") path = "/index.html";
+    if (basePath && (path === basePath || path.startsWith(`${basePath}/`))) {
+      path = path.slice(basePath.length) || "/";
+    }
+    if (path.endsWith("/")) path += "index.html";
     const filePath = join(distDir, path.slice(1));
     if (!existsSync(filePath)) {
       return new Response("Not found", { status: 404 });

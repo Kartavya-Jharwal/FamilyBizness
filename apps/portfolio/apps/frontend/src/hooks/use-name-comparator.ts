@@ -1,0 +1,8 @@
+import { useLocalizationSettings } from "@fb/ui";
+import { useMemo } from "react";
+
+/** Comparator for sorting human-readable names in the app's UI language. */
+export function useNameComparator() {
+  const { uiLocale } = useLocalizationSettings();
+  return useMemo(() => new Intl.Collator(uiLocale).compare, [uiLocale]);
+}

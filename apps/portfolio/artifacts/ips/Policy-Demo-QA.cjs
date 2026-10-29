@@ -1,0 +1,44 @@
+const { chromium } = require('C:/Users/KJ/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const path = require('node:path');
+const fs = require('node:fs');
+(async () => {
+  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } });
+  const errors = [];
+  page.on('console', message => console.log('CONSOLE', message.type(), message.text()));
+  page.on('requestfailed', request => console.log('REQUESTFAILED', request.url(), request.failure()?.errorText));
+  page.on('pageerror', error => { errors.push(error.message); console.log('PAGEERROR', error.message); });
+  await page.goto('http://127.0.0.1:5191/portfolio/#/governance/constitution', { waitUntil: 'domcontentloaded', timeout: 120000 });
+  await page.waitForTimeout(3000);
+  console.log('STARTUP', await page.locator('body').innerText());
+  await page.screenshot({ path: path.join(__dirname, 'Policy - Startup QA.png'), fullPage: true });
+  await page.getByRole('button', { name: 'Load working example' }).waitFor({ timeout: 30000 });
+  await page.getByRole('button', { name: 'Load working example' }).click();
+  await page.getByText('Draft preview: Pass', { exact: true }).first().waitFor();
+  const counts = { pass: await page.getByText('Draft preview: Pass', { exact: true }).count(), review: await page.getByText('Draft preview: Needs review', { exact: true }).count() };
+  await page.screenshot({ path: path.join(__dirname, 'Desktop - Working Policy.png'), fullPage: true });
+  await page.getByRole('button', { name: 'Save locally', exact: true }).click();
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', { name: 'Activate saved revision as IPS' }).click();
+  await page.getByText(/Active IPS revision 1/).waitFor();
+  await page.screenshot({ path: path.join(__dirname, 'Desktop - Working Policy Active.png'), fullPage: true });
+  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  await page.screenshot({ path: path.join(__dirname, 'Desktop - Working Policy Dark.png'), fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: path.join(__dirname, 'Mobile - Working Policy.png'), fullPage: true });
+  await page.getByText('Draft policy checks', { exact: true }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: path.join(__dirname, 'Mobile - Draft Policy Checks.png'), fullPage: true });
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+  await page.setViewportSize({ width: 1440, height: 1100 });
+  const editor = page.getByLabel('Constitution Markdown');
+  await editor.fill((await editor.inputValue()).replaceAll('```text', '').replaceAll('```', ''));
+  await page.getByText('Draft preview: Needs review', { exact: true }).first().waitFor();
+  const reviewExamples = await page.getByText('Draft preview: Needs review', { exact: true }).count();
+  await page.getByText('Draft preview: Needs review', { exact: true }).first().scrollIntoViewIfNeeded();
+  await page.screenshot({ path: path.join(__dirname, 'Desktop - Two Review Examples.png'), fullPage: true });
+  const result = { counts, reviewExamples, active: await page.getByText(/Active IPS revision 1/).count(), overflow, errors };
+  fs.writeFileSync(path.join(__dirname, 'Policy-Demo-QA.json'), JSON.stringify(result, null, 2));
+  console.log(JSON.stringify(result));
+  } finally { await browser.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

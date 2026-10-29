@@ -1,0 +1,119 @@
+{
+  "donor": "policy-module",
+  "capturedOn": "2026-10-28",
+  "source": "User-supplied project authored by a separate agent from an exploratory policy-as-code seed prompt; seed text unavailable",
+  "upstreamUrl": null,
+  "upstreamRevision": null,
+  "license": null,
+  "status": "user-authorized-reuse",
+  "files": [
+    {
+      "path": "bun.lock",
+      "sha256": "835d2d277ecf85ce8b42e693128e55d23b3e7212f48bc8c070c2456acf73bcf9"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "sha256": "c971926abccc506da1532570c55a95d5298b606901c4801866a4862969c13302"
+    },
+    {
+      "path": "next.config.ts",
+      "sha256": "72312f318eba2fc2ca850c1465c8ce49ab024a47b7c2cb2d23aff10ca1428e04"
+    },
+    {
+      "path": "package.json",
+      "sha256": "726913bc5a1247c8e0f8a3e278d46968108d373b17799fb68e9e6b8326d19849"
+    },
+    {
+      "path": "postcss.config.mjs",
+      "sha256": "b8cd36495468ea54e029eb4b2e0e98f0feff6f95d6513e70db37a71c0e3bfba4"
+    },
+    {
+      "path": "public/artifacts/family-constitution.md",
+      "sha256": "7b929e92085c5b3e682eb753f54d47959f68b828034c7086497ac1fde92194cf"
+    },
+    {
+      "path": "public/artifacts/policy-ast.json",
+      "sha256": "f41896cbeec13d648645708fd6152b4584b70c60635f48523261589d8b4c9e9f"
+    },
+    {
+      "path": "public/artifacts/policy-contract.json",
+      "sha256": "7c57d9d9d13d7bcb78c04ddac20a9143d37740df6d085f9fd671ab075297e818"
+    },
+    {
+      "path": "public/artifacts/README.txt",
+      "sha256": "8fe38068181a986f956dde4cb82547677fc5c00a80c1d89974d7b40f25e287f0"
+    },
+    {
+      "path": "scripts/policy-check.ts",
+      "sha256": "c529a855d451c0d9ef9905c2803838f39a8717de4c8837ad4c5b838187c989f6"
+    },
+    {
+      "path": "src/app/api/health/route.ts",
+      "sha256": "560dad905fc7914f03d78ce4dd40730fa78820709ed3e9ecb7b067a6cc991df7"
+    },
+    {
+      "path": "src/app/globals.css",
+      "sha256": "5f5b480987c2a9ad65d88cc5fbf705c2f474301e53aa293f52318fa6f0544825"
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "sha256": "7b275a2ac46f66443aed797f8163c4f10cef99b11a23baffeb8a60d485f168d7"
+    },
+    {
+      "path": "src/app/page.tsx",
+      "sha256": "7ec87a78e5a0103e9e7dc073467eb799422bafda3965011b0dc367b693b96c66"
+    },
+    {
+      "path": "src/components/constitution-workspace.tsx",
+      "sha256": "14a74dbfc24056a04e489bf151cd8bb9ada625f2463119e1868d393c611b9887"
+    },
+    {
+      "path": "src/components/font-settle.tsx",
+      "sha256": "9d4602012c243d6908c611a6719c67dc5ac122c1b26f0baf1845cf43d4013f5a"
+    },
+    {
+      "path": "src/components/import-dialog.tsx",
+      "sha256": "72a79544ba6059cf1f37ada6d11e9fa8d9feb4bbd58259ce0cbfc95baeb26cc4"
+    },
+    {
+      "path": "src/components/markdown-editor.tsx",
+      "sha256": "7606b4c1f39ecfd6863d79607d14ab34dd0d6d68a9e17c358f8c4fa42797bf19"
+    },
+    {
+      "path": "src/components/policy-inspector.tsx",
+      "sha256": "cc96bbaae0ea795f568af17c2bcab4d31def4b449383d6a5f2c921a09f82f778"
+    },
+    {
+      "path": "src/lib/contract.ts",
+      "sha256": "c7265e232efcfd2a50f529d03ebbc5edc306539d153d4abfb4512048376a09a7"
+    },
+    {
+      "path": "src/lib/documents.ts",
+      "sha256": "d552d0ee022027f5deb59519bd2f1df0b6460c5c7b0871f0a0e09897a7e4dfe2"
+    },
+    {
+      "path": "src/lib/exports.ts",
+      "sha256": "de873d1b34a29c2b0bc96abd783926d137fd02ce831423e52fefdf49871299ab"
+    },
+    {
+      "path": "src/lib/nlp-engine.ts",
+      "sha256": "f85dae44b93e5244aa0eb614171bdfa171d256d20ad16d5f6127be8ff088e2fc"
+    },
+    {
+      "path": "src/lib/policy.ts",
+      "sha256": "9b68b5f10929194e93e06ffa46449e81a7ec16ce251b4ab597e20bf73f02f25f"
+    },
+    {
+      "path": "src/lib/review.ts",
+      "sha256": "4f6ac8e3f8d527166796aee72ca341f46bf90889b66a530137c73ddf080bf330"
+    },
+    {
+      "path": "src/lib/rule-engine-adapter.ts",
+      "sha256": "381667e4dd4dd079d26a60c8d87ebbac61ddb29115ac71a831a651c5d33150bd"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "4ea5303fb21d01b83151db57d43246ba2ac0bbb4e79b9e83b3a120b2599c4351"
+    }
+  ]
+}

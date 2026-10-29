@@ -11,4 +11,4 @@ Mandated product pillars. Product identity → [`../00 - Canonical/Identity.md`]
 | 5 | Financial modelling & analytics | Financials, AUM, returns, use of capital, broader modelling. |
 | 6 | SFO / MFO operating model | How the office runs (single- or multi-family). |
 
-UI today: navigation stubs under `apps/web` after the hero. Full modules via contender → static → integrate.
+The shell exposes links to all six pillars. The portfolio demo now contains selected working slices for portfolio, analytics and constitution linkage; the other pillars remain navigation stubs or future scope. See the [MVP Feature Scope](Product%20Requirements%20-%20MVP%20Feature%20Scope.md) for donor ownership, implemented prototype coverage and remaining work.

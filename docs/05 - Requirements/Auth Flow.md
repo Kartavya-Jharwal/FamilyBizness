@@ -5,7 +5,7 @@ Documented path for a first-time / unauthenticated visitor. **Do not build full 
 | Step | Screen | Status |
 |------|--------|--------|
 | 1 | Family history / legacy / founding narrative | Stub: `legacy.html` |
-| 2 | Login | Stub: `login.html` |
+| 2 | Login | `login.html` links directly to the portfolio demo; no credentials are collected |
 | 3 | Custom splash | Stub: `splash.html` |
 | 4 | Security verification | Stub: `verify.html` |
 
