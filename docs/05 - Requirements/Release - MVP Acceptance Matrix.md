@@ -1,10 +1,10 @@
 # MVP Release Acceptance Matrix
 
-This matrix is the release audit of documented product threads, assessed against the local source on 3 November 2026. Product identity remains in [Identity](../00%20-%20Canonical/Identity.md). The [whole-brief contract](Acceptance%20-%20Whole%20Brief.md) supplies the capability IDs. The current release coordinator must attach fresh execution evidence before treating a row as release-verified.
+This matrix is the release audit of documented product threads, assessed against the local source on 3 November 2026. Product identity remains in [Identity](../00%20-%20Canonical/Identity.md). The [whole-brief contract](Acceptance%20-%20Whole%20Brief.md) supplies the capability IDs. The initial inspection is retained below; [coordinated release closure](#coordinated-release-closure) records the subsequent fixes and executed gates. The [release record](../03%20-%20Architecture/Release%20-%20MVP.md) owns publication evidence.
 
 **Code present** means inspected implementation exists; it is not a fresh runtime pass. **Gap** means the documented acceptance is not satisfied by the inspected source. **Historical** means an intake or earlier implementation description has been superseded. **Excluded** identifies production services deliberately outside this static MVP; it does not mark those services implemented.
 
-## Product acceptance
+## Initial product inspection (superseded by closure)
 
 | ID / thread | Inspected implementation | Audit disposition / required release demonstration |
 |---|---|---|
@@ -60,7 +60,7 @@ This matrix is the release audit of documented product threads, assessed against
 
 ## Evidence status
 
-This document records code/source inspection only. It does not claim a new test run, browser pass, deployment, legal review or completion of the rows above. Release execution and resolution should be recorded by the coordinator in the integration/release record and linked here.
+The initial audit above recorded source inspection only. Subsequent execution and resolution are recorded in the coordinated closure below and the linked release record. No legal review is implied.
 
 ### Review/source gap implementation
 
@@ -84,3 +84,5 @@ The implementation gaps identified above are closed for the browser-local MVP co
 Local gates: 186 smoke tests across 30 files passed, plus the added recurrence regression passed separately; package/UI/frontend TypeScript passed; root static build, original branding/license audit and six-donor frontend/mount/license manifest audit passed. `verify-mvp-release.cjs` passed the packaged independent-case/constitution, ERP, estate, review/source, calendar and lab journey. Desktop/mobile and settled light/dark screens were inspected.
 
 Public deployment status and revision are maintained in [Release - MVP](../03%20-%20Architecture/Release%20-%20MVP.md). Production services/auth/financial execution remain intentionally excluded rather than falsely marked implemented. All six active software donors are accounted for in the contribution ledger; Golden Bird remains one data/constitution example.
+
+Public closure: the [successful Pages deployment and public acceptance journey](../03%20-%20Architecture/Release%20-%20MVP.md) are verified. Golden Bird is an optional assignment case; independent constitution adoption and selection were exercised in a separate family workspace.

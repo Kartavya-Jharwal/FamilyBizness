@@ -2,14 +2,22 @@
 
 This record owns the delivery state of the current browser-local MVP. Product scope and exclusions: [MVP Feature Scope](../05%20-%20Requirements/Product%20Requirements%20-%20MVP%20Feature%20Scope.md). Requirement evidence: [acceptance matrix](../05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md).
 
-## Release candidate
+## Shipped MVP
 
 The source now includes independent cases/constitutions, the source-linked family KPI/action home, actual donor frontend/code contributions, ERP task/ownership masks, Council/Board calendar interactions, explicit stewardship reviews and source states, structure comparison, analytical workspaces and portable board/case exports. Golden Bird remains one optional teaching case.
 
-Local verification: the donor smoke gate passed 186 tests across 30 files; the subsequently added recurrence regression passed separately. Root package/UI/frontend TypeScript checks passed. The GitHub Pages-base static artifact builds; branding/license audit and six-donor source/mount/license audit pass. The packaged browser acceptance script covers entry/base paths, independent constitution adoption and selection, ERP actions, estate alternatives, FMEA/source states, calendar, lab and responsive layouts. The packaged browser journey passed. Independent profile/constitution creation and switching, ERP completion evidence, all estate alternative rows, FMEA/action storage, local source states, calendar conflicts and both stochastic examples were exercised without page errors. Settled entry and dark controls plus desktop/mobile screens were visually inspected. Public publication is the remaining delivery gate.
+Local verification: the donor smoke gate passed 186 tests across 30 files; the subsequently added recurrence regression passed separately. Root package/UI/frontend TypeScript checks passed. The GitHub Pages-base static artifact builds; branding/license audit and six-donor source/mount/license audit pass. The packaged browser acceptance script covers entry/base paths, independent constitution adoption and selection, ERP actions, estate alternatives, FMEA/source states, calendar, lab and responsive layouts. The packaged browser journey passed. Independent profile/constitution creation and switching, ERP completion evidence, all estate alternative rows, FMEA/action storage, local source states, calendar conflicts and both stochastic examples were exercised without page errors. Settled entry and dark controls plus desktop/mobile screens were visually inspected. The same acceptance script subsequently passed against the public deployment, with no page errors.
 
 ## Delivery
 
-The intended public URL is [FamilyBizness](https://kartavya.tech/FamilyBizness/). GitHub Actions builds and deploys the same static package after the release source is pushed. `release.json` identifies the revision and build time of a deployed artifact. A local build or a scheduled workflow is not a completed public deployment.
+Published on 3 November 2026 at [FamilyBizness](https://kartavya.tech/FamilyBizness/).
+
+- Deployed application revision: `0c1732f48c3bb94a5791fc0a05a8861836a9719b`.
+- [Successful build, checks and Pages deployment](https://github.com/Kartavya-Jharwal/FamilyBizness/actions/runs/41633519384).
+- [Public release marker](https://kartavya.tech/FamilyBizness/release.json) matches that revision; build time `2026-11-03T12:11:17.223Z`.
+- `MVP_QA_URL=https://kartavya.tech/FamilyBizness/ node scripts/verify-mvp-release.cjs` passed the public combined journey after deployment.
+- The exact uploaded Pages artifact was downloaded for the handover, rather than rebuilding a different package. The handover includes the static site, corresponding source archive at the deployed revision, current release documentation and browser evidence.
+
+The first clean Linux release attempt exposed Git line-ending conversion of donor licenses. The release preserves those files byte-for-byte through `.gitattributes`; the replacement workflow passed the exact-license fingerprints and source/mount checks. Subsequent documentation-only commits do not change the deployed application revision.
 
 Donor provenance and what was actually transferred: [Frontend contribution ledger](Donors%20-%20Frontend%20Contribution%20Ledger.md). Every copied/adapted component remains under its applicable original license, with corresponding source available in this repository.

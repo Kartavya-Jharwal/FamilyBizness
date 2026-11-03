@@ -8,7 +8,7 @@
 |------|--------|
 | Name | **FamilyBizness** |
 | One-liner | Wealth management platform for a single-family office (SFO) to plan the estate and run the financial affairs of a family business, optimising returns for current and future generations. |
-| Form | Functional prototype / MVP packaged for GitHub Pages: branded entry shell and integrated planning/portfolio workspaces. Deployment status is recorded in the integration verification document. |
+| Form | Functional prototype / MVP packaged for GitHub Pages: branded entry shell and integrated planning/portfolio workspaces. Deployment status is recorded in the [MVP release record](../03%20-%20Architecture/Release%20-%20MVP.md). |
 | Legal baseline | English law (estate & wealth structuring). |
 
 ## Audience
