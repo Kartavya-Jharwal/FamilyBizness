@@ -21,7 +21,7 @@ The policy parser is an actual code donation, while its inspector is a host rend
 
 ## Single host and source trace
 
-All current software donors are listed in the manifest. `Portfolio-retired` is a recoverable retired alternative, not an additional active donor or another application to ship. Golden Bird is a selectable data/constitution example, not a software donor, fixed product identity or final family business.
+All current software donors are listed in the manifest. `Portfolio-retired` is a recoverable retired alternative, not an additional active donor or another application to ship. Golden Bird, Calcot / Stone, Sandoval and Vasnani are constitution/data sources for the [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md), not additional software donors or four consolidated businesses.
 
 The distributed product needs no donor clone or Git metadata. Original snapshots remain ignored under `.local-references/contenders`; selected adapted files and required notices/licenses are in normal host source/public paths. Runtime field metadata and algorithms are checked into host source, so CI never downloads a donor or executes its server to build the MVP. Copied ERPNext metadata/code retains its GPL notice and unchanged license; Cal.diy retains MIT; existing application/analysis notices retain their AGPL terms.
 

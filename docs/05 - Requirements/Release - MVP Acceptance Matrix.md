@@ -86,3 +86,7 @@ Local gates: all 187 smoke tests across 30 files passed, including the recurrenc
 Public deployment status and revision are maintained in [Release - MVP](../03%20-%20Architecture/Release%20-%20MVP.md). Production services/auth/financial execution remain intentionally excluded rather than falsely marked implemented. All six active software donors are accounted for in the contribution ledger; Golden Bird remains one data/constitution example.
 
 Public closure: the [successful Pages deployment and public acceptance journey](../03%20-%20Architecture/Release%20-%20MVP.md) are verified. Golden Bird is an optional assignment case; independent constitution adoption and selection were exercised in a separate family workspace.
+
+## Four-constitution offer revision
+
+The [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md) supersedes the earlier primary independent-family/constitution-authoring flow. G1–G3 now include the Calcot sale-or-retain preparation rule and dependent continuity actions. C1–C3 use one selected charter with all four source documents and explicit conflict resolutions. O1–O3 include mentoring, management-entry assessment, liquidity review, papers/minutes and material-news protocols in the shared operations register. D1 uses shared office personas while preserving earlier profiles separately. Community requests remain drafts until actual diligence, capacity and approval are recorded. The current release record owns fresh execution and publication evidence for this revision.

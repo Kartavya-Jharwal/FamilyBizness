@@ -6,13 +6,15 @@ Product identity and legal baseline: [Identity](../00%20-%20Canonical/Identity.m
 
 `apps/web` is the brand-first static entry and guide. `apps/portfolio` is the existing donor-derived React host for all functional workspaces. Bun packages both into root `dist/`, with Portfolio under `/portfolio/` and the configured project base path. GitHub Pages serves the static artifact. Donor servers, authentication providers and Git metadata are not runtime dependencies.
 
-Entry/profile selection and case setup live inside Portfolio. Legacy login/splash/verification URLs redirect to that host. The main family workspace is the single KPI/action home; Family business, Portfolio, Calendar, constitution tools and stewardship reviews are working sections. The optional studio remains an advanced presentation, not another required dashboard.
+Visitor-profile selection for the prepared office lives inside Portfolio. Legacy login/splash/verification URLs redirect to that host. The main family workspace is the single KPI/action home; Family business, Portfolio, Calendar, constitution tools and stewardship reviews are working sections. The optional studio remains an advanced presentation, not another required dashboard.
 
 ## Family and constitution ownership
 
-Browser profiles own independent case records. A family can start blank or copy a teaching template. Golden Bird is an optional sample, not the final family/business/constitution of the platform. Constitution packs, sources, adopted parameters, active selection and generic policy revisions remain scoped to the selected profile. Source changes invalidate dependent constitutional bindings.
+The prepared office uses one existing module store shared by visitor personas. `profile-workspace.ts` resolves office-persona IDs to that store; immutable session scope still belongs to the individual application load. Earlier independent profiles retain their own case storage and are available through secondary recovery entry.
 
-The [case setup guide](../05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md) owns the setup/constitution lifecycle; [Trace](Trace.md) maps source topics to consuming tools. Original supplied Golden Bird material is retained as internal provenance alongside its selected fictional English-law/GBP adaptation.
+The [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md) owns selected provisions from all four documents. `family-office-constitution.ts` supplies the adopted pack and trace; `family-office-case.ts` reuses the existing validated GBP numerical scenario and imports the combined operational records once, transactionally. No new backend, accounting ledger or financial engine is introduced. Source changes invalidate dependent constitutional bindings.
+
+The [office profile guide](../05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md) owns entry/maintenance behavior; [Trace](Trace.md) maps the selected topics to existing tools.
 
 ## Saved data boundaries
 

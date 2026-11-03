@@ -1,3 +1,4 @@
+import { preparedOfficeId } from "@/features/profiles/profile-workspace";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CardContent, CardHeader, CardTitle } from "@fb/ui";
@@ -18,7 +19,7 @@ export function ConstitutionChecksWorkspace() {
   const [version,setVersion]=useState(0);
   let pack:ConstitutionPack|null=null;let error="";
   try{pack=activeConstitution(localStorage,profile);}catch(e){error=String(e);}
-  return <div className="space-y-6"><ConstitutionLibrary profile={profile} onChange={()=>setVersion(v=>v+1)}/>{error&&<p role="alert" className="break-words text-destructive">{error}</p>}{pack?<ConstitutionRuleChecks key={`${pack.id}:${pack.revision}:${version}`} profile={profile} pack={pack}/>:<p className="rounded-md border bg-muted p-4">Add or import a constitution and adopt its reviewed parameters to enable this family's cash and voting checks.</p>}</div>;
+  return <div className="space-y-6"><details className="rounded-md border p-4" open={profile!==preparedOfficeId}><summary className="cursor-pointer text-sm font-medium">Constitution administration and revisions</summary><div className="mt-4"><ConstitutionLibrary profile={profile} onChange={()=>setVersion(v=>v+1)}/></div></details>{error&&<p role="alert" className="break-words text-destructive">{error}</p>}{pack?<ConstitutionRuleChecks key={`${pack.id}:${pack.revision}:${version}`} profile={profile} pack={pack}/>:<p className="rounded-md border bg-muted p-4">Add or import a constitution and adopt its reviewed parameters to enable this family's cash and voting checks.</p>}</div>;
 }
 
 function ConstitutionRuleChecks({profile,pack}:{profile:string;pack:ConstitutionPack}) {

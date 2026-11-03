@@ -4,7 +4,7 @@
 
 The platform implements the [six mandated pillars](../05%20-%20Requirements/Pillars.md) in the existing [FamilyBizness application](../00%20-%20Canonical/Identity.md). Its purpose is to make governance and wealth decisions inspectable: who can decide, which constitutional rule applies, what financial consequences follow, and what must be funded or completed.
 
-The current data are a labelled illustrative case. The team has not supplied its selected Assignment 1 excerpts or settled the final anchor business. The source register can preserve excerpts from multiple assignments without inventing a new historical constitution. Before submission, the team must explain its chosen case basis and replace or explicitly justify numerical assumptions. No grade or professor approval is assumed.
+The current fictional application uses the [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md), selected from the four supplied Golden Bird, Calcot / Stone, Sandoval and Vasnani constitutions. That record explains adopted provisions, conflicting alternatives and the retained GBP numerical scenario. Visitor profiles share one prepared office; original source businesses and balance sheets are not consolidated. The team remains responsible for its final evaluation and institutional submission evidence.
 
 ## Governance and succession
 

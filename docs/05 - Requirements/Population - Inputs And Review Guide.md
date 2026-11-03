@@ -2,15 +2,17 @@
 
 Product identity: [Identity](../00%20-%20Canonical/Identity.md). Current implementation and verification: [Integration](../03%20-%20Architecture/Integration%20-%20Family%20Office%20Workspaces.md).
 
-## Populated example
+## Prepared office
 
-Choose **Project Golden Bird** from the Portfolio profile chooser to open the supplied constitution as a fictional English-law and GBP case. It is already populated across governance, source clauses, constitutional checks, financials, estate, portfolio assumptions, performance, office providers and calendar. The [canonical case](../00%20-%20Canonical/Golden%20Bird%20-%20English%20Law%20Case.md) owns the adaptation. Saved edits persist; other profiles are unaffected. The manual sequence below remains available for a different case.
+Choose a visitor profile such as **Patriarch** or **Family technician** to enter the already-populated office. The [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md) owns the selected provisions from Golden Bird, Calcot / Stone, Sandoval and Vasnani, the rationale for conflicting alternatives and the retained GBP numerical scenario. Visitor profiles share these records. Earlier Golden Bird and independent workspaces remain recoverable separately.
 
 ## Source material
 
-A resubmitted combined constitution is not required to populate this platform. Enter selected excerpts from the four assignments separately. Preserve each assignment/team member, section/page/revision, exact wording, interpretation and assumption basis. Do not label a synthetic numeric rule as an original constitutional clause. The team owns the choice of one anchor case or a disclosed composite case.
+All four supplied constitutions have been reviewed for selected application provisions. The prepared pack includes source identity, section, selected text, interpretation and assumption basis. Operating-source review labels identify the fictional application specification, not a historical family vote or legal approval. The user need not write or upload a new constitution to use the prepared office.
 
-## Population sequence
+## Optional maintenance and repopulation
+
+The following sequence is for deliberate administrative changes, not required onboarding.
 
 1. **Family case:** enter the family, anchor business, case basis, reporting date/currency and selected source identities in `/office/case`.
 2. **Governance:** replace participants, entity holding chains, ownership/voting, RACI, eligible approvers and continuity milestones. Stage edits, validate and save. Record sources and due dates; completion requires evidence.

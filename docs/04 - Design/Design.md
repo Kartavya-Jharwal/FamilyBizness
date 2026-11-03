@@ -4,7 +4,7 @@ The shared source for colours, typography, spacing, geometry and chart roles is 
 
 ## Product structure
 
-The public first viewport leads with FamilyBizness. Pillars follow it. Entry leads into Portfolio's profile chooser and family setup. Each family owns its case and constitution selection; Golden Bird is an optional teaching example. The family workspace is the single KPI/action home. Family business groups governance, constitution linkage, estate, operations and financial reports. Calendar presents the shared operational records; advanced presentation/lab surfaces stay secondary.
+The public first viewport leads with FamilyBizness. Pillars follow it. Entry leads into Portfolio's visitor-profile chooser for one prepared family office. The combined charter selects from all four supplied constitutions; creating a family or authoring a constitution is not the main flow. Earlier saved workspaces stay secondary. The family workspace is the single KPI/action home. Family business groups governance, constitution linkage, estate, operations and financial reports. Calendar presents the shared operational records; advanced presentation/lab surfaces stay secondary.
 
 ## Donor adaptation
 
@@ -14,7 +14,7 @@ Use semantic surface, text, input, status and chart roles; do not import a donor
 
 ## Working interactions
 
-Daily work prioritizes the next action, its owner, date and evidence. Source configuration, data tools, provider costs and model setup are expandable/administrative controls. Constitution tools show source-to-parameter-to-result links. Missing inputs and unscored FMEA findings never appear as successful/low-risk evaluations. Numeric assumptions are editable in their owning workspaces; JSON is an advanced portable format.
+Daily work prioritizes the next action, its owner, date and evidence. Source configuration, data tools, provider costs and model setup are expandable/administrative controls. Constitution linkage opens a readable family charter with selected priorities and links to the actual work. Checks and source-to-parameter-to-result links remain accessible; library/revision tools and case/backup controls are expandable administration. Missing inputs and unscored FMEA findings never appear as successful/low-risk evaluations. Numeric assumptions are editable in their owning workspaces; JSON is an advanced portable format.
 
 Portfolio scenarios show actual computed outputs with units, legends and separate expected/observed/nominal/real definitions. Estate alternatives retain economic scope and separate charges at different dates. Tables scroll locally on narrow screens. Calendar meetings remain stacked/readable when overlapping.
 

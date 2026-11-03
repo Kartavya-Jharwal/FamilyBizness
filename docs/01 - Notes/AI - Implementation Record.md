@@ -56,3 +56,11 @@ The delegated runs later stopped at the account usage limit. Their saved files w
 The user clarified that donors must contribute stripped frontend UI masks/components/code, with Portfolio tokens taking precedence, and that Golden Bird is only one assignment example. Parallel bounded work covered donor extraction/provenance, independent case/constitution management, and documentation-gap/review-queue implementation. The parent closed structure comparison, public entry, routing, static packaging, release verification and delivery.
 
 Actual corrections included replacing pattern-only ERP/calendar claims with fingerprinted source contributions; preserving cash/voting scopes while making their parameters case-specific; retaining an optional example rather than fixing product identity; and adding source-observation fingerprints so stale FMEA scores do not appear current. Final pass/failure counts and deployed revision belong to the release acceptance record.
+
+## Four-constitution product correction
+
+The user supplied the Sandoval, Calcot / Stone and Vasnani documents and clarified that the application should use selected provisions across all four constitutions, rather than asking visiting families to create constitutions. The implementation now provides one populated office with shared visitor personas. The previous independent-case/library capability is retained for recovery and maintenance, while the main entry and constitution view are tailored to the combined operating charter.
+
+The source review selected Calcot sale-or-retain readiness and minority/beneficiary treatment; Vasnani staged liquidity, independent assessment and early dispute discussion; and Sandoval cross-branch mentoring and reporting discipline. Golden Bird's existing cash/voting basis and numerical GBP scenario remain selected rather than combining incompatible profit ratios, cap tables, revenues or legal systems. Actual work records, governance preparation rules, dependent continuity actions and draft community requests use the existing data owners. The source documents are not represented as agreeing to identical numerical rules.
+
+The final test counts, visual acceptance and deployed revision belong to the release record. No historic ratification, legal approval, executed sale, automatically funded buy-back or recipient diligence has been invented.

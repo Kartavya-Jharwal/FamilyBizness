@@ -98,7 +98,7 @@ export function decodeOperations(value: string): OperationsData {
   const ids = new Set<string>();
   for (const row of data.obligations) {
     if (!row || typeof row !== "object" || ["id", "title", "due", "owner", "entity", "category", "status", "source", "sourceRoute", "recurrence", "notes", "evidence"].some(key => typeof row[key] !== "string") || typeof row.scenario !== "boolean" || !["Open", "Complete", "Cancelled"].includes(row.status) || validateObligation(row) || ids.has(row.id) || !row.id) throw new Error("Invalid or duplicate obligation record.");
-    if (row.sourceRoute && !["/office", "/office/governance", "/office/finance", "/office/estate", "/office/simulation", "/office/sources", "/governance/constitution", "/activities", "/office/review"].includes(row.sourceRoute)) throw new Error("Source links must point to a supported workspace.");
+    if (row.sourceRoute && !["/office", "/office/governance", "/office/finance", "/office/estate", "/office/simulation", "/office/sources", "/governance/constitution", "/activities", "/office/review", "/office/philanthropy"].includes(row.sourceRoute)) throw new Error("Source links must point to a supported workspace.");
     ids.add(row.id);
   }
   return data as OperationsData;

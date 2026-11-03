@@ -28,13 +28,13 @@ Mandated capabilities (detail → [`../05 - Requirements/Pillars.md`](../05%20-%
 5. Financial modelling & analytics  
 6. SFO / MFO operating model  
 
-## Family cases and constitutions
+## Family office and constitution
 
-The platform supports independent family/business cases and their selected constitutions. Golden Bird is an optional assignment example; it does not define the final family, business or constitution for the product.
+The application is one prepared family-office experience. Its [combined operating charter](Family%20Office%20-%20Combined%20Operating%20Charter.md) selects provisions from Golden Bird, Calcot / Stone, Sandoval and Vasnani. These are source constitutions for the application, not four merged businesses or a requirement for visiting families to build constitutions. Golden Bird alone does not define the product.
 
 ## Cold-visit flow
 
-Public introduction and continuity narrative lead to profile selection and family-case setup inside Portfolio. Existing browser profiles resume their own records; a visitor can create an independent case or choose a sample. Current contract: [Entry and profile flow](../05%20-%20Requirements/Auth%20Flow.md).
+Public introduction and continuity narrative lead to visitor-profile selection inside Portfolio. Patriarch, family board and professional profiles enter the same prepared office and saved records. Add profile adds a visitor. Existing earlier workspaces remain recoverable as a secondary option. Current contract: [Entry and profile flow](../05%20-%20Requirements/Auth%20Flow.md).
 
 ## Link-outs
 

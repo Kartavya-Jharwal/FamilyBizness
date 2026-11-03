@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
 export const officeLinks = [
-  ["/office/case", "Family case"],
+  ["/office/case", "Family office"],
   ["/dashboard", "Portfolio"], ["/office", "Calendar"], ["/office/business", "Family business"], ["/office/governance", "Governance"],
   ["/office/policy", "Investment policy"], ["/governance/constitution", "Constitution & IPS"],
   ["/office/simulation", "Portfolio & scenarios"],

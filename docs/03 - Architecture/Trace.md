@@ -1,6 +1,6 @@
 # Constitution to tool trace
 
-Each family case owns its selected constitution packs, adopted parameters and source register. Golden Bird is one optional worked assignment case. Current setup and ownership: [Cases](../05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md), [Identity](../00%20-%20Canonical/Identity.md).
+The prepared office uses the [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md), selecting from all four source constitutions. Visitor personas share the same existing records. Current lifecycle: [Office profiles](../05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md).
 
 | Constitutional topic | Runtime owner and dependent behavior | Evidence retained |
 |---|---|---|
@@ -19,9 +19,20 @@ The source register records document identity, section, selected text, interpret
 
 The cash waterfall applies to remaining distributable cash after its safeguards; it is not an AUM withdrawal cap. Reserved owner approval uses eligible disinterested voting rights, while quorum uses eligible voter headcount and branch representation. Those scopes remain separate from generic number-of-approver rules and applicable company instruments.
 
-## Worked case
+## Selected source bindings
 
-[Golden Bird English-law case](../00%20-%20Canonical/Golden%20Bird%20-%20English%20Law%20Case.md) supplies a populated teaching example. Its adopted clause IDs retain Article/Appendix anchors, including decision rights, distributions, succession, instruments and reporting. Original uploaded excerpts and file fingerprints remain internal provenance. Other families may use their own constitutions without inheriting Golden Bird's identity, amounts or thresholds.
+| Binding | Source selection | Existing consuming record/tool |
+|---|---|---|
+| FO-CASH / FO-VOTES | Golden Bird cash and disinterested authority; Calcot resilience/delegation | Adopted pack, cash/vote checks, budget application and board evidence |
+| FO-OWNERS / FO-GOVERNANCE | Selected numerical ownership and governance; Calcot beneficiary distinction | Ownership graph, estate register and meeting roster |
+| FO-EXIT | Calcot sale-or-retain plan | Recurring ERP readiness task, RACI preparation rule and dependent continuity actions |
+| FO-TRANSFER | Vasnani staged liquidity and independent valuation | Estate-linked liquidity review task; no automatic sale/pricing engine |
+| FO-EMPLOYMENT / FO-DEVELOPMENT | Vasnani entry experience; Sandoval mentoring; Calcot stewardship | Independent assessment rule, recurring mentoring and literacy reviews |
+| FO-DISPUTES / FO-COMMS | Vasnani early discussion/material news; Sandoval papers/minutes | Shared review queue, calendar-linked deadlines and protocol tasks |
+| FO-LEGACY | Community and education across the three added sources | Two draft requests, diligence, existing capital/approval/commitment workflow |
+| FO-CONTINUITY / FO-INSTRUMENTS | Selected English-law review and authority | Estate/trust scenarios, instrument reviews, source revisions and literal please fix |
+
+Original Golden Bird source material and its English-law adaptation remain internal/reference provenance, not the sole product constitution. Conflicting donor thresholds are selected explicitly in the charter rather than accumulated. Original family business accounts and cap tables are not merged.
 
 ## Donor and release evidence
 

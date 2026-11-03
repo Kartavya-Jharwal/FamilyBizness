@@ -16,7 +16,7 @@ bun run build     # builds the shell and portfolio into dist/
 bun run preview   # combined preview: http://localhost:4173
 ```
 
-The browser-local MVP includes independent family cases and constitution libraries, governance/succession, estate and trust planning, financial consolidation, portfolio analytics, a shared office calendar/task register, stewardship reviews and board exports. Golden Bird is one optional assignment example. No donor server or real financial/authentication service is required.
+The browser-local MVP opens one prepared family office with a charter selected from four constitutions, governance/succession, estate and trust planning, financial consolidation, portfolio analytics, a shared office calendar/task register, stewardship reviews and board exports. Golden Bird, Calcot / Stone, Sandoval and Vasnani supply the selected operating provisions; visitor profiles share the office records. No donor server or real financial/authentication service is required.
 
 ## Live preview (GitHub Pages)
 
