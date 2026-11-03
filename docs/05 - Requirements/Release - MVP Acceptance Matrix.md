@@ -81,7 +81,7 @@ The implementation gaps identified above are closed for the browser-local MVP co
 | D1 / Q1 | Transactional case/constitution/review backups, independent profile persistence; root Pages-base artifact, self-hosted font, legacy redirects, desktop/mobile/dark visual inspection and no page errors in acceptance journey |
 | D2 | Actual implementation notes, source ledger and release evidence documented. Genuine institutional/team submission evidence remains supplied by its owners and is not fabricated |
 
-Local gates: 186 smoke tests across 30 files passed, plus the added recurrence regression passed separately; package/UI/frontend TypeScript passed; root static build, original branding/license audit and six-donor frontend/mount/license manifest audit passed. `verify-mvp-release.cjs` passed the packaged independent-case/constitution, ERP, estate, review/source, calendar and lab journey. Desktop/mobile and settled light/dark screens were inspected.
+Local gates: all 187 smoke tests across 30 files passed, including the recurrence regression; package/UI/frontend TypeScript passed; root static build, original branding/license audit and six-donor frontend/mount/license manifest audit passed. `verify-mvp-release.cjs` passed the packaged independent-case/constitution, ERP, estate, review/source, calendar and lab journey. Desktop/mobile and settled light/dark screens were inspected.
 
 Public deployment status and revision are maintained in [Release - MVP](../03%20-%20Architecture/Release%20-%20MVP.md). Production services/auth/financial execution remain intentionally excluded rather than falsely marked implemented. All six active software donors are accounted for in the contribution ledger; Golden Bird remains one data/constitution example.
 
