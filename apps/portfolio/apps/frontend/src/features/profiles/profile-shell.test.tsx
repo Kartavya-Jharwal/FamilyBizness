@@ -1,46 +1,19 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, cleanup } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
+vi.mock("./session",()=>({installProfileSession:vi.fn()}));
 import { ProfileShell } from "./profile-shell";
-import { useProfile } from "./profile-context";
-
-const session = vi.hoisted(() => ({ install: vi.fn() }));
-vi.mock("./session", () => ({ installProfileSession: session.install }));
-
-afterEach(() => vi.unstubAllGlobals());
-
-it("admits the static profile using a scope identity rather than a fake auth token", () => {
-  expect(session.install).toHaveBeenCalledWith({
-    profileId: "demo-profile",
-    scopeId: "demo-static-scope",
-  });
+afterEach(()=>{cleanup();localStorage.clear();});
+it("offers populated roles on a cold visit without mounting financial children",()=>{
+ render(<ProfileShell><p>Financial workspace</p></ProfileShell>);
+ expect(screen.getByRole("button",{name:"Open Patriarch"})).toBeInTheDocument();
+ expect(screen.getByRole("button",{name:"Open Family technician"})).toBeInTheDocument();
+ expect(screen.queryByText("Financial workspace")).not.toBeInTheDocument();
 });
-
-it("mounts the fixed local profile without contacting a profile service", () => {
-  const network = vi.fn(() => { throw new Error("Static profile attempted network access"); });
-  vi.stubGlobal("fetch", network);
-  function ProfileProbe() {
-    const value = useProfile();
-    return <div>{value?.profile?.name}: {value?.profileCount}</div>;
-  }
-  render(<ProfileShell><ProfileProbe /></ProfileShell>);
-  expect(screen.getByText("Family Office: 1")).toBeInTheDocument();
-  expect(network).not.toHaveBeenCalled();
-});
-
-it("keeps profile controls local and does not imply server admission or mutation", () => {
-  const network = vi.fn(() => { throw new Error("Static profile attempted network access"); });
-  vi.stubGlobal("fetch", network);
-  function ProfileProbe() {
-    const value = useProfile();
-    if (!value) throw new Error("Missing static profile context");
-    value.addProfile();
-    value.manageProfile();
-    value.lockProfile();
-    value.switchProfile();
-    value.selectProfile("unavailable-profile");
-    return <div>{value.profile?.id}</div>;
-  }
-  render(<ProfileShell><ProfileProbe /></ProfileShell>);
-  expect(screen.getByText("demo-profile")).toBeInTheDocument();
-  expect(network).not.toHaveBeenCalled();
+it("adds a persistent local profile through host setup",async()=>{
+ render(<ProfileShell><p>Workspace</p></ProfileShell>);
+ fireEvent.click(screen.getByRole("button",{name:"Add profile"}));
+ fireEvent.change(screen.getByLabelText("Profile name"),{target:{value:"Board visitor"}});
+ fireEvent.click(screen.getByRole("button",{name:"Save profile"}));
+ expect(await screen.findByRole("button",{name:"Open Board visitor"})).toBeInTheDocument();
+ expect(JSON.parse(localStorage.getItem("familybizness:demo-profiles")!)).toHaveLength(9);
 });

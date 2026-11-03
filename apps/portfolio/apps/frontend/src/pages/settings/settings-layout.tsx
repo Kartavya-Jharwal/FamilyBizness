@@ -63,6 +63,7 @@ export default function SettingsLayout() {
       {
         title: t("settings:nav.sections.data"),
         items: [
+          { title: "Sources & stewardship", href: "sources", subtitle: "Sample data sources, review evidence and corrective actions", icon: <Icons.Activity className="size-5" /> },
           {
             title: t("settings:nav.items.securities"),
             href: "securities",

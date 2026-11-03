@@ -11,4 +11,4 @@ Mandated product pillars. Product identity → [`../00 - Canonical/Identity.md`]
 | 5 | Financial modelling & analytics | Financials, AUM, returns, use of capital, broader modelling. |
 | 6 | SFO / MFO operating model | How the office runs (single- or multi-family). |
 
-The shell exposes links to all six pillars. The portfolio demo now contains selected working slices for portfolio, analytics and constitution linkage; the other pillars remain navigation stubs or future scope. See the [MVP Feature Scope](Product%20Requirements%20-%20MVP%20Feature%20Scope.md) for donor ownership, implemented prototype coverage and remaining work.
+All six pillars now have functional workspaces in the main application. Current model ownership, supported scope and verification are recorded in [Integrated Workspaces](../03%20-%20Architecture/Integration%20-%20Family%20Office%20Workspaces.md). The [Whole Brief Acceptance](Acceptance%20-%20Whole%20Brief.md) defines what must be demonstrated; selected Assignment 1 sources remain a team population dependency.

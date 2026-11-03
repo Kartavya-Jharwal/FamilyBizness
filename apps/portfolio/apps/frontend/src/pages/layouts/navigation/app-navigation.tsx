@@ -1,7 +1,6 @@
 import { getDynamicNavItems, subscribeToNavigationUpdates } from "@/addons/addons-runtime-context";
 import { Icons } from "@fb/ui/components/ui/icons";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { useTranslation } from "react-i18next";
 import { getAddonNavPinKey, useAddonNavigationPins } from "./addon-navigation-pins";
 
 export interface NavLink {
@@ -22,74 +21,26 @@ export interface NavigationProps {
   setAddonPinned?: (item: NavLink, pinned: boolean) => void;
 }
 
-type TFunction = ReturnType<typeof useTranslation>["t"];
-
-function buildStaticNavigation(t: TFunction): NavigationProps {
+function buildStaticNavigation(): NavigationProps {
   return {
     primary: [
-      {
-        icon: <Icons.Insight className="size-6" />,
-        title: t("common:dashboard"),
-        href: "/dashboard",
-        keywords: ["home", "overview", "summary"],
-        label: t("common:nav.label_dashboard"),
-      },
-      {
-        icon: <Icons.Dashboard className="size-6" />,
-        title: t("common:insights"),
-        href: "/insights",
-        keywords: ["insights", "Analytics"],
-        label: t("common:nav.label_insights"),
-      },
-      {
-        icon: <Icons.Holdings className="size-6" />,
-        title: t("common:holdings"),
-        href: "/holdings",
-        keywords: ["Holdings", "portfolio", "assets", "positions", "stocks"],
-        label: t("common:nav.label_holdings"),
-      },
-      {
-        icon: <Icons.Activity className="size-6" />,
-        title: t("common:activities"),
-        href: "/activities",
-        keywords: ["transactions", "trades", "history"],
-        label: t("common:nav.label_activities"),
-      },
-      {
-        icon: <Icons.Goals className="size-6" />,
-        title: t("common:goals"),
-        href: "/goals",
-        keywords: ["goals", "fire", "retire", "retirement", "savings", "planner"],
-        label: t("common:nav.label_goals"),
-      },
-      {
-        icon: <Icons.Sparkles className="size-6" />,
-        title: t("common:assistant"),
-        href: "/assistant",
-        keywords: ["ai", "assistant", "chat", "help", "ask"],
-        label: t("common:nav.label_assistant"),
-      },
+      { icon: <Icons.Dashboard className="size-6" />, title: "Family workspace", href: "/office/case" },
+      { icon: <Icons.Holdings className="size-6" />, title: "Portfolio", href: "/dashboard" },
+      { icon: <Icons.Goals className="size-6" />, title: "Family business", href: "/office/business", keywords: ["ERPNext", "estate planning", "operations", "tasks", "financial reports"] },
+      { icon: <Icons.Activity className="size-6" />, title: "Constitution & IPS", href: "/governance/constitution" },
+      { icon: <Icons.Insight className="size-6" />, title: "Investment policy", href: "/office/policy" },
+      { icon: <Icons.Activity className="size-6" />, title: "Calendar", href: "/office" },
     ],
     secondary: [
-      {
-        icon: <Icons.Activity className="size-6" />,
-        title: "Constitution",
-        href: "/governance/constitution",
-        keywords: ["governance", "policy", "constitution"],
-      },
-      {
-        icon: <Icons.Settings className="size-6" />,
-        title: t("common:settings"),
-        href: "/settings",
-        keywords: ["preferences", "config", "configuration"],
-      },
+      { icon: <Icons.Activity className="size-6" />, title: "Stewardship review", href: "/office/review", keywords: ["warnings", "risk", "FMEA", "please fix", "sources"] },
+      { icon: <Icons.Insight className="size-6" />, title: "Insights", href: "/insights" },
+      { icon: <Icons.Settings className="size-6" />, title: "Administration", href: "/settings", keywords: ["settings", "currency", "accounts", "configuration"] },
     ],
   };
 }
 
 export function useNavigation() {
-  const { t } = useTranslation();
-  const staticNavigation = useMemo(() => buildStaticNavigation(t), [t]);
+  const staticNavigation = useMemo(() => buildStaticNavigation(), []);
   const [dynamicItems, setDynamicItems] = useState<NavigationProps["addons"]>([]);
   const { hasConfiguredAddonPins, pinnedAddonIdSet, setAddonPinned, setPinnedAddonIds } =
     useAddonNavigationPins();

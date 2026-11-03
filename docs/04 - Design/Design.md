@@ -1,35 +1,23 @@
 # Design
 
-## Shared foundations
+The shared source for colours, typography, spacing, geometry and chart roles is [tokens.css](../../packages/tokens/tokens.css). Portfolio's semantic UI components and theme take precedence when donor frontend code is adapted. Foundation provenance: [upstream](../../upstream/README.md).
 
-The single source for shared colours, typography, spacing and geometry is [`packages/tokens/tokens.css`](../../packages/tokens/tokens.css). The default portfolio theme and the preview shell consume this file. The foundations are adapted from Wealthfolio's Classic theme; see [upstream design references](../../upstream/README.md) for provenance and attribution.
+## Product structure
 
-Classic supplies light and dark surface roles, semantic colours, chart and series palettes, and Inter, Merriweather and JetBrains Mono font stacks. The shell uses the shared sans stack and light and dark palette. Donor-specific alternate themes and component styling remain in the portfolio app; they are not yet a fully unified design system.
+The public first viewport leads with FamilyBizness. Pillars follow it. Entry leads into Portfolio's profile chooser and family setup. Each family owns its case and constitution selection; Golden Bird is an optional teaching example. The family workspace is the single KPI/action home. Family business groups governance, constitution linkage, estate, operations and financial reports. Calendar presents the shared operational records; advanced presentation/lab surfaces stay secondary.
 
-Change shared values in the token file, then consume them through semantic roles. When changing the portfolio's theme definitions, regenerate its theme stylesheet using `bun run themes:generate` from `apps/portfolio/apps/frontend`.
+## Donor adaptation
 
-## Preview shell
+Donor visual masks, controls and UI logic are integrated into host components. ERP-derived task/ownership interfaces share the existing operations and estate records. Calendar controls/list/week interactions retain meetings, family participants and conflict visibility. The [contribution ledger](../03%20-%20Architecture/Donors%20-%20Frontend%20Contribution%20Ledger.md) records exact extraction/provenance; a clone or concept reference alone is not a delivered UI contribution.
 
-The first viewport leads with the brand and a single CTA group. Pillars follow the hero.
+Use semantic surface, text, input, status and chart roles; do not import a donor's global palette or another font pipeline. The public entry uses the canonical font stack and self-hosted font file. Labels, statuses and uncertainty must remain readable without depending on colour.
 
-## Incoming donor views
+## Working interactions
 
-ERPNext and cal.diy are intake references for the requested finance/operations and obligations-calendar slices. Their original shells and global styles do not become the host design system. Future KPI-tree home, persona views, family/ownership graphs, succession events, source-linked statements and IPS/risk views should use the existing host components and canonical semantic roles. Connector previews must distinguish sample-loaded, disconnected, consent-required and failed states. Statement and trade details should show their accounting/trading source and observation date. FMEA/RPN views require explicit scoring inputs and must not turn missing evidence into a low-risk score.
+Daily work prioritizes the next action, its owner, date and evidence. Source configuration, data tools, provider costs and model setup are expandable/administrative controls. Constitution tools show source-to-parameter-to-result links. Missing inputs and unscored FMEA findings never appear as successful/low-risk evaluations. Numeric assumptions are editable in their owning workspaces; JSON is an advanced portable format.
 
-The local simulation donor should consume canonical tokens and distinguish fictional scenario parameters, generated paths and summarized outcomes. Label chart axes, units, percentile bands and the seed; limit visible paths so labels and distributions remain readable. These intake views are planned independently of the existing live preview.
+Portfolio scenarios show actual computed outputs with units, legends and separate expected/observed/nominal/real definitions. Estate alternatives retain economic scope and separate charges at different dates. Tables scroll locally on narrow screens. Calendar meetings remain stacked/readable when overlapping.
 
-## Constitution workspace
+## Release gates
 
-The constitution feature reuses Portfolio's shell and UI components, with a desktop source/inspector split and stacked narrow-screen panels. Its source-text preview escapes markup and uses the host theme. The separate Next palette, font pipeline and forced-light editor remain in the donor snapshot. Implementation scope and visual acceptance are tracked in: [Policy Module - Donor Audit And Integration Plan](../02%20-%20Strategy/Policy%20Module%20-%20Donor%20Audit%20And%20Integration%20Plan.md).
-
-## Release blockers
-
-Unreadable text and overlapping chart labels are release blockers. Render and inspect relevant light and dark views and viewport sizes before shipping UI changes.
-
-## Analysis donor review
-
-The local analysis workbench uses canonical tokens for its neutral shell and light/dark charts. Retained views and extraction ownership are defined in [Ghostfolio - Integration Plan](../02%20-%20Strategy/Ghostfolio%20-%20Integration%20Plan.md). Fork attribution remains visible in a dedicated legal view.
-
-The React extraction uses host semantic theme roles, components, density, formatting and Insights navigation. Rule statuses, return methods and look-through denominators are reconciled through an explicit read boundary, with unavailable inputs visible. The integration plan owns the mapping contract, evidence and remaining provider/evaluator work. No parallel donor theme or new primitive palette was introduced.
-
-The combined product shell uses neutral FB artwork and FamilyBizness labels. Original donor names and credits remain visible on the dedicated legal page. Scripted assistant progress and the fixed ending are labelled as a preview; source logos and obsolete onboarding screenshots are omitted from the distributed product. Scoped review evidence lives in [Donor - Combined Pass Sign-Off](../02%20-%20Strategy/Donor%20-%20Combined%20Pass%20Sign-Off.md).
+Unreadable text, overlapping chart labels, viewport overflow, inaccessible controls and runtime errors in acceptance journeys block release. Verify relevant desktop/mobile and light/dark states on the packaged artifact. Current evidence is maintained in [MVP acceptance](../05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md) and [integration](../03%20-%20Architecture/Integration%20-%20Family%20Office%20Workspaces.md).

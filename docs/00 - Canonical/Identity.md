@@ -8,7 +8,7 @@
 |------|--------|
 | Name | **FamilyBizness** |
 | One-liner | Wealth management platform for a single-family office (SFO) to plan the estate and run the financial affairs of a family business, optimising returns for current and future generations. |
-| Form | Functional prototype / MVP on a live URL (GitHub Pages preview shell today). |
+| Form | Functional prototype / MVP packaged for GitHub Pages: branded entry shell and integrated planning/portfolio workspaces. Deployment status is recorded in the integration verification document. |
 | Legal baseline | English law (estate & wealth structuring). |
 
 ## Audience
@@ -28,14 +28,13 @@ Mandated capabilities (detail → [`../05 - Requirements/Pillars.md`](../05%20-%
 5. Financial modelling & analytics  
 6. SFO / MFO operating model  
 
+## Family cases and constitutions
+
+The platform supports independent family/business cases and their selected constitutions. Golden Bird is an optional assignment example; it does not define the final family, business or constitution for the product.
+
 ## Cold-visit flow
 
-Documented (not fully built) → [`../05 - Requirements/Auth Flow.md`](../05%20-%20Requirements/Auth%20Flow.md):
-
-1. Family history / legacy / founding narrative  
-2. Login  
-3. Custom splash  
-4. Security verification  
+Public introduction and continuity narrative lead to profile selection and family-case setup inside Portfolio. Existing browser profiles resume their own records; a visitor can create an independent case or choose a sample. Current contract: [Entry and profile flow](../05%20-%20Requirements/Auth%20Flow.md).
 
 ## Link-outs
 

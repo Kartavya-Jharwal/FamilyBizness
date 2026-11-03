@@ -16,7 +16,7 @@ bun run build     # builds the shell and portfolio into dist/
 bun run preview   # combined preview: http://localhost:4173
 ```
 
-The portfolio is a static single-family-office prototype with fictional sample data. Its figures are illustrative; sign-in and the other office capabilities are still stubs.
+The browser-local MVP includes independent family cases and constitution libraries, governance/succession, estate and trust planning, financial consolidation, portfolio analytics, a shared office calendar/task register, stewardship reviews and board exports. Golden Bird is one optional assignment example. No donor server or real financial/authentication service is required.
 
 ## Live preview (GitHub Pages)
 
@@ -31,7 +31,7 @@ Pages source: **GitHub Actions** (already enabled).
 
 | Path | Role |
 |------|------|
-| `apps/web` | Minimal Bun static MVP shell |
+| `apps/web` | Brand-first entry, continuity narrative and platform guide |
 | `apps/portfolio` | Adapted portfolio demo, built with Bun and Vite |
 | `packages/tokens` | Design tokens (single file) |
 | `upstream/` | Origins and attribution for shared donor-derived foundations |
@@ -48,6 +48,16 @@ Pages source: **GitHub Actions** (already enabled).
 - [Pillars](docs/05%20-%20Requirements/Pillars.md)
 - [Auth Flow](docs/05%20-%20Requirements/Auth%20Flow.md)
 - [MVP Feature Scope](docs/05%20-%20Requirements/Product%20Requirements%20-%20MVP%20Feature%20Scope.md)
+
+## Release verification
+
+```bash
+bun run donor:verify
+```
+
+- [MVP acceptance](docs/05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md)
+- [Actual donor frontend/code ledger](docs/03%20-%20Architecture/Donors%20-%20Frontend%20Contribution%20Ledger.md)
+- [Case and constitution setup](docs/05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md)
 
 ## Contender workflow
 

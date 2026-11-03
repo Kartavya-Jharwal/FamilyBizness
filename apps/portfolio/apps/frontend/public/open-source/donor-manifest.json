@@ -1,0 +1,204 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-11-03",
+  "hostSource": "https://github.com/Kartavya-Jharwal/FamilyBizness",
+  "distributionBoundary": "Static browser frontend only. Donor Git directories, backend services, provider stores and source-specific global themes are excluded. Host routing, records, components and canonical tokens take precedence.",
+  "donors": [
+    {
+      "id": "portfolio",
+      "name": "Wealthfolio",
+      "upstream": "https://github.com/wealthfolio/wealthfolio",
+      "revision": null,
+      "revisionNote": "The intake preserved files but did not record the upstream commit before removing nested Git metadata. Snapshot hashes below identify the retained local frontend.",
+      "license": "AGPL-3.0",
+      "kind": "Adapted frontend fork",
+      "visible": "Portfolio, accounts, holdings, activity, insights, profiles and shared UI shell",
+      "sourceFiles": [
+        {
+          "path": "apps/frontend/src/App.tsx",
+          "sha256": "84634ca44b792630a0c59d34ccb1f5fcc72843420573beeb9eb9cfebda2be779"
+        },
+        {
+          "path": "apps/frontend/src/pages/layouts/app-layout.tsx",
+          "sha256": "686e8ec987b10f75e3dc07d21830ce19f7e3ce85bd3c8cb49731ff193c1f1a5a"
+        },
+        {
+          "path": "apps/frontend/src/themes/definitions/classic.css",
+          "sha256": "eb70348f6587c930d28e6241e6d338108d45b0c47507cfae53d840f618cdeb02"
+        }
+      ],
+      "hostFiles": [
+        "src/App.tsx",
+        "src/pages/layouts/app-layout.tsx",
+        "src/pages/dashboard/portfolio-page.tsx",
+        "src/features/profiles/profile-shell.tsx",
+        "src/themes/definitions/classic.css"
+      ]
+    },
+    {
+      "id": "analysis",
+      "name": "Ghostfolio",
+      "upstream": "https://github.com/ghostfolio/ghostfolio",
+      "revision": "db930bbab938c6a1c4dbbfea6afb9bb1001155db",
+      "license": "AGPL-3.0",
+      "kind": "Selected workflow/layout adaptation",
+      "visible": "Insights X-ray, attribution/history and fund look-through",
+      "sourceFiles": [
+        {
+          "path": "apps/client/src/app/pages/portfolio/x-ray/x-ray-page.component.html",
+          "sha256": "b86497360dc40eb6ea983ddd336634ddeffdc9a15f7580d82bfc3b01e9325db2"
+        },
+        {
+          "path": "apps/client/src/app/pages/portfolio/analysis/analysis-page.html",
+          "sha256": "48d94889cb348e15270e54a5ffcb245f56483d52f734b3f559ec0713ed9d7be5"
+        },
+        {
+          "path": "apps/client/src/app/static/look-through.ts",
+          "sha256": "1903da98a776ca00599c3eef77b1bce4f0228d040868e74b3627bd32986ace9f"
+        }
+      ],
+      "hostFiles": [
+        "src/pages/insights/analysis/analysis-workspace.tsx",
+        "src/pages/insights/analysis/fund-exposure.tsx",
+        "src/pages/insights/analysis/read-model.ts"
+      ]
+    },
+    {
+      "id": "constitution",
+      "name": "User-supplied policy module",
+      "upstream": null,
+      "revision": null,
+      "revisionNote": "User-authorized locally supplied source; no third-party upstream identity or license was supplied. Full snapshot fingerprints are in upstream/policy-module.snapshot.json.",
+      "license": "User-authorized source; dependency notices retained",
+      "kind": "Parser/contract code extraction and inspector layout adaptation",
+      "visible": "Constitution draft/source/inspector, local revision and IPS review",
+      "sourceFiles": [
+        {
+          "path": "src/components/constitution-workspace.tsx",
+          "sha256": "14a74dbfc24056a04e489bf151cd8bb9ada625f2463119e1868d393c611b9887"
+        },
+        {
+          "path": "src/components/policy-inspector.tsx",
+          "sha256": "cc96bbaae0ea795f568af17c2bcab4d31def4b449383d6a5f2c921a09f82f778"
+        },
+        {
+          "path": "src/lib/policy.ts",
+          "sha256": "9b68b5f10929194e93e06ffa46449e81a7ec16ce251b4ab597e20bf73f02f25f"
+        },
+        {
+          "path": "src/lib/nlp-engine.ts",
+          "sha256": "f85dae44b93e5244aa0eb614171bdfa171d256d20ad16d5f6127be8ff088e2fc"
+        },
+        {
+          "path": "src/lib/contract.ts",
+          "sha256": "c7265e232efcfd2a50f529d03ebbc5edc306539d153d4abfb4512048376a09a7"
+        }
+      ],
+      "hostFiles": [
+        "src/features/governance/constitution/constitution-page.tsx",
+        "src/features/governance/constitution/policy.ts",
+        "src/features/governance/constitution/nlp-engine.ts",
+        "src/features/governance/constitution/contract.ts"
+      ]
+    },
+    {
+      "id": "erp",
+      "name": "ERPNext",
+      "upstream": "https://github.com/frappe/erpnext",
+      "revision": "4d8a0664a9e2a0375025ac2685841ed05095f023",
+      "license": "GPL-3.0",
+      "kind": "Selected DocType frontend mask and Task list code adaptation",
+      "visible": "Family business task list/detail, project/priority/progress, selected-item actions and estate ownership filters/register",
+      "sourceFiles": [
+        {
+          "path": "erpnext/projects/doctype/task/task.json",
+          "sha256": "92d120001494b7ceed6cfe9c69b77b1ad2663b5e37e6bbca2b4809e592c8da42"
+        },
+        {
+          "path": "erpnext/projects/doctype/task/task_list.js",
+          "sha256": "3ecad924254850709f18ed23a37240e5d00c18c0273072eef20beb3ee85b7ad1"
+        },
+        {
+          "path": "erpnext/accounts/doctype/shareholder/shareholder.json",
+          "sha256": "b89d9a6a07d5d862ee1b7dcc9b24ddb489788aa09e3b6e010fde58cbe25bd69a"
+        }
+      ],
+      "hostFiles": [
+        "src/features/family-office/erpnext-frontend.ts",
+        "src/features/family-office/erpnext-task-workspace.tsx",
+        "src/features/family-office/erpnext-ownership-register.tsx"
+      ]
+    },
+    {
+      "id": "calendar",
+      "name": "Cal.diy",
+      "upstream": "https://github.com/calcom/cal.diy",
+      "revision": "91eefbf9f460bac7d69327fea4d9560295390e0a",
+      "license": "MIT",
+      "kind": "Selected frontend component and overlap-code adaptation",
+      "visible": "Calendar date navigation, agenda/week day/event mapping, display switch and overlapping-meeting warning",
+      "sourceFiles": [
+        {
+          "path": "apps/web/modules/calendars/weeklyview/components/heading/SchedulerHeading.tsx",
+          "sha256": "4f8930cfbced98bf9ca6f5757168c1590e302a11e6102a33b409b11ec3f1c6af"
+        },
+        {
+          "path": "apps/web/modules/calendars/weeklyview/components/Calendar.tsx",
+          "sha256": "6eb1bc48f30eba0cc0ceb28af2eb2b7f39425d2bc12f88a108aa74fcd8d668b6"
+        },
+        {
+          "path": "apps/web/modules/calendars/weeklyview/components/event/EventList.tsx",
+          "sha256": "883149c2ac08c98053d589a42af23e4ab29b73678137e6a8013b754976a0a226"
+        },
+        {
+          "path": "packages/ui/components/calendar-switch/CalendarSwitch.tsx",
+          "sha256": "c2c85abde7468e6b00baef1714a179afdb9ee2445d676e13e46ad31dd283bec4"
+        },
+        {
+          "path": "packages/features/calendars/weeklyview/utils/overlap.ts",
+          "sha256": "92561c79c976fe156b2e4dbe5fdaaf8f599ee6462349bfb19a16813e28475cd5"
+        },
+        {
+          "path": "apps/web/modules/bookings/components/BookingCalendarView.tsx",
+          "sha256": "c46dad06f2933478891692d65aa30f3e056e99108d473d5f61d82727f2e2cc94"
+        }
+      ],
+      "hostFiles": [
+        "src/features/family-office/cal-calendar-frontend.tsx",
+        "src/features/family-office/operations-model.ts",
+        "src/features/family-office/operations-page.tsx"
+      ]
+    },
+    {
+      "id": "simulation",
+      "name": "Local simulation lab",
+      "upstream": null,
+      "revision": null,
+      "revisionNote": "Locally agent-authored donor, not a third-party upstream repository.",
+      "license": "Local project code; no third-party library implementation copied",
+      "kind": "Model code and frontend control/results mask extraction",
+      "visible": "Portfolio stochastic process lab: GBM/OU controls, path/percentile charts, histogram and accessible results",
+      "sourceFiles": [
+        {
+          "path": "src/models.ts",
+          "sha256": "9900c47bd065c137582066a620e1b9a260df73628b990d8f61c7f8198925db18"
+        },
+        {
+          "path": "src/main.ts",
+          "sha256": "1014313acc49056079c303c66e76b65949a56b71f66d278842d6511fe69df87a"
+        }
+      ],
+      "hostFiles": [
+        "src/features/family-office/simulation-donor.ts",
+        "src/features/family-office/simulation-lab-workspace.tsx",
+        "src/features/family-office/simulation-page.tsx"
+      ]
+    }
+  ],
+  "distributedLicenseFingerprints": {
+    "portfolio/LICENSE": "e0eedba615d5cd1b986afb6c5b3a4b1ae33713e7e9dc74d19daec5e3221f9d2e",
+    "ghostfolio/LICENSE": "93d1cebd66c75ccba84725a118a4a2d9f27e5b26c5a5fb1f469285db4de46231",
+    "calendar/LICENSE": "79129e9260f65a7b1ade5f855c5a07fd1e660c433f010f1c9cd62ee971663ad3",
+    "financial-reporting/LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809"
+  }
+}

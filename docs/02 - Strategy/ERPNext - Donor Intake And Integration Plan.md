@@ -1,6 +1,6 @@
 # ERPNext - Donor Intake And Integration Plan
 
-Status: local reference donor cloned and inspected; no ERPNext service, connector or host feature has been installed. Product identity remains in [Identity](../00%20-%20Canonical/Identity.md); current coverage is summarized in [MVP Feature Scope](../05%20-%20Requirements/Product%20Requirements%20-%20MVP%20Feature%20Scope.md).
+Historical intake record. Current frontend execution: [Integration](../03%20-%20Architecture/Integration%20-%20Family%20Office%20Workspaces.md#frontend-donor-integration). Donor services and synchronization are excluded by design. Product identity remains in [Identity](../00%20-%20Canonical/Identity.md); current coverage is summarized in [MVP Feature Scope](../05%20-%20Requirements/Product%20Requirements%20-%20MVP%20Feature%20Scope.md).
 
 ## Source and setup
 
@@ -77,3 +77,8 @@ Real connector access, provider authentication/consent, automated pulls, cloud p
 ## Intake checks performed
 
 The shallow clone completed. Its origin, branch, exact commit, license files and ignored status were checked. The source paths above were inspected. No dependency installation, ERPNext boot, database migration, live provider connection, tax calculation, main-app edit, commit or deployment was performed as part of this intake.
+
+
+## Execution update — 3 November 2026
+
+The user clarified the execution contract: strip donor backend/Git infrastructure and embed frontend patterns in Portfolio, with Portfolio tokens taking precedence. Current execution is recorded in [Integration](../03%20-%20Architecture/Integration%20-%20Family%20Office%20Workspaces.md#frontend-donor-integration).

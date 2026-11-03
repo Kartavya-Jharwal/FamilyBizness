@@ -13,7 +13,7 @@
     "preview": "bun run --cwd apps/frontend preview",
     "test": "bun run --cwd apps/frontend test",
     "type-check": "bun run --cwd packages/ui build:types && bun run --cwd packages/addon-sdk build:types && bun run --cwd apps/frontend type-check",
-    "donor:smoke": "bun run --cwd apps/frontend test src/test/donor-pass src/pages/insights/analysis src/adapters/static-demo.test.ts src/features/governance/constitution"
+    "donor:smoke": "bun run --cwd apps/frontend test src/test/donor-pass src/pages/insights/analysis src/adapters/static-demo.test.ts src/features/governance/constitution src/features/family-office"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",

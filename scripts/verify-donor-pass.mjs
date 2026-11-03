@@ -31,6 +31,9 @@ for(const file of ['NOTICE.md','zod-LICENSE']) {
   const built=path.resolve('dist/portfolio/open-source/policy-module',file);
   assert(fs.readFileSync(source).equals(fs.readFileSync(built)),'Policy provenance missing or changed in distribution: '+file);
 }
+for (const file of ['calendar/NOTICE.md', 'calendar/LICENSE', 'simulation/NOTICE.md', 'financial-reporting/NOTICE.md']) {
+  assert(fs.readFileSync(path.join(legalRoot,file)).equals(fs.readFileSync(path.resolve('dist/portfolio/open-source',file))), 'Integrated source notice missing or changed: '+file);
+}
 for(const file of ['logo.png','logo-gold.png','logo-vantage.png','wf-vector.png','wf-vector2.png','splashscreen.png','app-icon-192.png']) assert(!fs.existsSync(path.join(frontend,'public',file)),'Original branded asset remains: '+file);
 for(const theme of ['light','dark','system']) for(const suffix of ['.png','.webp','@2x.webp']) assert(!fs.existsSync(path.resolve(root,`dist/themes/theme-${theme}${suffix}`)),'Legacy screenshot in generated distribution');
 const attribution=fs.readFileSync(path.join(frontend,'src/pages/insights/analysis/attribution-page.tsx'),'utf8');

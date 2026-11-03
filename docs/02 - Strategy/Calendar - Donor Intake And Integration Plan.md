@@ -1,6 +1,6 @@
 # Calendar - Donor Intake And Integration Plan
 
-Status: local source donor captured and inspected, 28 October 2026. No host calendar feature is implemented by this intake. Product facts remain in [Identity](../00%20-%20Canonical/Identity.md).
+Historical intake record, 28 October 2026. Current embedded frontend: [Integration](../03%20-%20Architecture/Integration%20-%20Family%20Office%20Workspaces.md#frontend-donor-integration). Product facts remain in [Identity](../00%20-%20Canonical/Identity.md).
 
 ## Source and setup
 
@@ -77,3 +77,8 @@ Connector buttons for external calendars can show a truthful unconnected/sample 
 ## Intake result
 
 The clone completed successfully and the root license, repository commit, package scripts and relevant scheduling surfaces were inspected. No dependencies were installed, no build or runtime test was claimed, and no host app source was changed. The donor is ready for a separately scoped static extraction and family-office tailoring pass.
+
+
+## Execution update — 3 November 2026
+
+The user clarified the execution contract: strip donor backend/Git infrastructure and embed frontend patterns in Portfolio, with Portfolio tokens taking precedence. Current execution is recorded in [Integration](../03%20-%20Architecture/Integration%20-%20Family%20Office%20Workspaces.md#frontend-donor-integration).

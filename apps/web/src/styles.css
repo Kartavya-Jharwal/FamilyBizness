@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/Inter-Variable.woff2") format("woff2");
+}
 
 *,
 *::before,
@@ -405,3 +411,25 @@ img {
     grid-column: 2;
   }
 }
+
+.journey {max-width:var(--max-width);margin:auto;padding:var(--space-7) var(--space-5)}
+.journey-grid {display:grid;grid-template-columns:1.3fr 1fr;gap:var(--space-7);align-items:start}
+.journey-card {border:1px solid var(--color-mist);border-radius:var(--radius-md);padding:var(--space-6);background:hsl(var(--design-light-bg-raised))}
+.journey label {display:block;margin-block:var(--space-4)}
+.journey input,.journey select {display:block;width:100%;padding:var(--space-3);margin-top:var(--space-2);font:inherit;color:var(--color-ink);background:var(--color-paper);border:1px solid var(--color-ink-muted);border-radius:var(--radius-sm)}
+.journey button {cursor:pointer;font:inherit;margin:var(--space-2) var(--space-2) var(--space-2) 0}
+.journey button:hover {transform:translateY(-2px)}
+.journey :focus-visible {outline:3px solid var(--color-sea);outline-offset:3px}
+.journey pre {white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--design-font-mono);font-size:var(--font-size-small)}
+.journey section {scroll-margin-top:var(--nav-height);margin-bottom:var(--space-7)}
+.journey h1 {font-size:var(--font-size-h1);line-height:var(--line-height-tight)}
+.journey .eyebrow {color:var(--color-ink-muted);font-size:var(--font-size-small);letter-spacing:var(--letter-brand)}
+.arrival {animation:arrival var(--duration-slow) var(--ease-out)}
+@keyframes arrival {from {opacity:0;transform:translateY(12px)} to {opacity:1;transform:none}}
+@media(max-width:700px){.journey-grid{grid-template-columns:1fr}.journey{padding:var(--space-5)}}
+@media(prefers-reduced-motion:reduce){.arrival{animation:none}.journey button:hover{transform:none}}
+.journey [hidden] { display: none !important; }
+
+.journey-page .site-header {position:relative;height:auto;min-height:var(--nav-height);flex-wrap:wrap;gap:var(--space-3);background:var(--color-paper);border-bottom:1px solid var(--color-mist)}
+.journey-page .site-header a {color:var(--color-ink)}
+.journey-page .site-header a:hover {color:var(--color-sea)}

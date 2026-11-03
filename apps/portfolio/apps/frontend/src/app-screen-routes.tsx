@@ -1,3 +1,4 @@
+import PhilanthropyPage from "@/features/family-office/philanthropy-page";
 import { lazy, memo, Suspense, useEffect, useState } from "react";
 import { Navigate, Route, Routes, type Location } from "react-router-dom";
 
@@ -42,6 +43,16 @@ import GoalDetailPage from "@/features/goals/pages/goal-detail-page";
 import GoalRetirementGuidePage from "@/features/goals/pages/goal-retirement-guide-page";
 
 const ConstitutionPage = lazy(() => import("./features/governance/constitution/constitution-page"));
+const OfficeReviewPage = lazy(() => import("./features/family-office/office-review-workspace"));
+const OfficeReviewWorkspace = lazy(() => import("./features/family-office/office-review-workspace").then(m=>({default:m.OfficeReviewWorkspace})));
+const OperationsPage = lazy(() => import("./features/family-office/operations-page"));
+const GovernancePage = lazy(() => import("./features/family-office/governance-page"));
+const BusinessPage = lazy(() => import("./features/family-office/business-page"));
+const SimulationPage = lazy(() => import("./features/family-office/simulation-page"));
+const SourcesPage = lazy(() => import("./features/family-office/sources-page"));
+const PolicyPage = lazy(() => import("./features/family-office/policy-page"));
+const CasePage = lazy(() => import("./features/family-office/case-page"));
+const PresentationPage = lazy(() => import("./features/family-office/presentation-page"));
 
 function useDynamicAddonRoutes() {
   const [dynamicRoutes, setDynamicRoutes] =
@@ -78,7 +89,19 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
 
   return (
     <Routes location={location}>
-      <Route index element={<PortfolioPage />} />
+      <Route index element={<Navigate to="/office/case" replace />} />
+      <Route path="office/case" element={<Suspense fallback={<p className="p-6">Loading family case…</p>}><CasePage /></Suspense>} />
+      <Route path="office/philanthropy" element={<PhilanthropyPage />} />
+      <Route path="office/overview" element={<Suspense fallback={<p className="p-6">Loading stewardship studio…</p>}><PresentationPage /></Suspense>} />
+      <Route path="office/review" element={<Suspense fallback={<p className="p-6">Opening stewardship review...</p>}><OfficeReviewPage /></Suspense>} />
+      <Route path="office/business" element={<Suspense fallback={<p className="p-6">Opening family business...</p>}><BusinessPage /></Suspense>} />
+      <Route path="office" element={<Suspense fallback={<p className="p-6">Loading family office…</p>}><OperationsPage /></Suspense>} />
+      <Route path="office/governance" element={<Suspense fallback={<p className="p-6">Loading governance…</p>}><GovernancePage /></Suspense>} />
+      <Route path="office/estate" element={<Suspense fallback={<p className="p-6">Loading estate scenario…</p>}><Navigate to="/office/business?tab=estate" replace /></Suspense>} />
+      <Route path="office/finance" element={<Suspense fallback={<p className="p-6">Loading financials…</p>}><Navigate to="/office/business?tab=financials" replace /></Suspense>} />
+      <Route path="office/simulation" element={<Suspense fallback={<p className="p-6">Loading scenarios…</p>}><SimulationPage /></Suspense>} />
+      <Route path="office/sources" element={<Suspense fallback={<p className="p-6">Loading source register…</p>}><SourcesPage /></Suspense>} />
+      <Route path="office/policy" element={<Suspense fallback={<p className="p-6">Loading family policy…</p>}><PolicyPage /></Suspense>} />
       <Route path="dashboard" element={<PortfolioPage />} />
       <Route path="activities" element={<ActivityPage />} />
       <Route path="activities/manage" element={<ActivityManagerPage />} />
@@ -119,6 +142,7 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
       ))}
       <Route path="settings" element={<SettingsLayout />}>
         <Route index element={<GeneralSettingsPage />} />
+        <Route path="sources" element={<Suspense fallback={<p>Opening source administration...</p>}><OfficeReviewWorkspace /></Suspense>} />
         <Route path="general" element={<GeneralSettingsPage />} />
         <Route path="accounts" element={<SettingsAccountsPage />} />
         <Route path="portfolios" element={<PortfoliosPage />} />

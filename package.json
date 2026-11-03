@@ -10,7 +10,7 @@
     "build": "bun run scripts/build-web.ts",
     "preview": "bun run scripts/preview-web.ts",
     "donor:smoke": "bun run --cwd apps/portfolio donor:smoke",
-    "donor:verify": "bun run donor:type-check && bun run donor:smoke && bun run build && node scripts/verify-donor-pass.mjs",
+    "donor:verify": "bun run donor:type-check && bun run donor:smoke && bun run build && node scripts/verify-donor-pass.mjs && node scripts/verify-donor-frontend.mjs --built",
     "donor:type-check": "bun run --cwd apps/portfolio type-check"
   },
   "devDependencies": {

@@ -1,0 +1,10 @@
+import { describe,it,expect } from "vitest";
+import { caseDefaults,caseKey,exportCase,importCase,inspectCase } from "./case-model";
+import { sourceKey } from "./source-model";
+function memory(){const values=new Map<string,string>();return {values,getItem:(k:string)=>values.get(k)??null,setItem:(k:string,v:string)=>{values.set(k,v);},removeItem:(k:string)=>{values.delete(k);}};}
+describe("portable family case",()=>{
+ it("distinguishes absent, valid and invalid saved data",()=>{const s=memory();expect(inspectCase(s,"p").find(m=>m.id==="case")?.status).toBe("not-saved");s.setItem(caseKey("p"),JSON.stringify(caseDefaults));expect(inspectCase(s,"p").find(m=>m.id==="case")?.status).toBe("valid");s.setItem(caseKey("p"),"{}");expect(inspectCase(s,"p").find(m=>m.id==="case")?.status).toBe("invalid");});
+ it("round trips only validated saved modules into another profile",()=>{const s=memory();s.setItem(caseKey("a"),JSON.stringify(caseDefaults));const pack=exportCase(s,"a");expect(Object.keys(pack.modules)).toEqual(["case"]);importCase(JSON.stringify(pack),s,"b");expect(JSON.parse(s.getItem(caseKey("b"))!)).toEqual(caseDefaults);});
+ it("validates every included module before changing any data",()=>{const s=memory();const raw=JSON.stringify({schema:1,exportedAt:new Date().toISOString(),modules:{case:caseDefaults,finance:{}},policy:null});expect(()=>importCase(raw,s,"p")).toThrow();expect(s.values.size).toBe(0);});
+ it("rolls back earlier writes when storage rejects a subsequent write",()=>{const s=memory();s.setItem(caseKey("p"),JSON.stringify({...caseDefaults,family:"Original"}));let rejected=false;const failing={...s,setItem:(k:string,v:string)=>{if(k===sourceKey("p")&&!rejected){rejected=true;throw new Error("quota");}s.setItem(k,v);}};expect(()=>importCase(JSON.stringify({schema:1,exportedAt:new Date().toISOString(),modules:{case:caseDefaults,sources:{schema:1,sources:[]}},policy:null}),failing,"p")).toThrow("quota");expect(JSON.parse(s.getItem(caseKey("p"))!).family).toBe("Original");expect(s.getItem(sourceKey("p"))).toBe(null);});
+});

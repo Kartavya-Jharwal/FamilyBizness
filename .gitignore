@@ -30,7 +30,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .DS_Store
 Thumbs.db
 
-# Contender clones and local ingest — NEVER commit
+# Contender clones and local ingest â€” NEVER commit
 donor/**
 !donor/contenders/
 !donor/contenders/README.md
@@ -38,3 +38,13 @@ donor/**
 
 # Legacy typo path (unused; ignore if a leftover local folder remains)
 donot/
+
+# Recoverable original sources retired from active donor intake
+.local-references/
+
+# Packaged delivery artifacts
+artifacts/submission/
+
+# Local visual verification output (release evidence is recorded in docs)
+apps/portfolio/artifacts/
+apps/portfolio/.dependency-cache-before-type-repair/

@@ -33,7 +33,8 @@ function withBase(content: string, base: string): string {
   if (!base) return content;
   return content
     .replace(/\b(href|src|action)="\/(?!\/)/g, `$1="${base}/`)
-    .replace(/url\(\/(?!\/)/g, `url(${base}/`);
+    .replace(/(content="[^"]*url=)\/(?!\/)/gi, `$1${base}/`)
+    .replace(/url\((["']?)\/(?!\/)/g, `url($1${base}/`);
 }
 
 async function main() {
@@ -77,6 +78,11 @@ async function main() {
 
   await cp(join(portfolioDir, "dist"), join(distDir, "portfolio"), { recursive: true });
   await writeFile(join(distDir, ".nojekyll"), "");
+  const revision = process.env.GITHUB_SHA ?? process.env.MVP_REVISION ?? "local-build";
+  await writeFile(join(distDir, "release.json"), JSON.stringify({
+    schema: 1, product: "FamilyBizness", release: "MVP", revision,
+    builtAt: new Date().toISOString(), basePath: basePath || "/",
+  }, null, 2));
   console.log(`Built dist/ (BASE_PATH=${basePath || "/"})`);
 }
 

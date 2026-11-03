@@ -9,7 +9,7 @@ const port = Number(process.env.PORT ?? 4173);
 const basePath = (process.env.BASE_PATH ?? "").replace(/\/$/, "");
 
 if (!existsSync(distDir)) {
-  console.error("dist/ missing — run: bun run build");
+  console.error("dist/ missing â€” run: bun run build");
   process.exit(1);
 }
 
@@ -20,6 +20,9 @@ const mime: Record<string, string> = {
   ".svg": "image/svg+xml",
   ".png": "image/png",
   ".ico": "image/x-icon",
+  ".woff2": "font/woff2",
+  ".json": "application/json",
+  ".md": "text/plain; charset=utf-8",
 };
 
 function extOf(path: string) {
@@ -29,6 +32,7 @@ function extOf(path: string) {
 
 Bun.serve({
   port,
+  hostname: "127.0.0.1",
   async fetch(req) {
     const url = new URL(req.url);
     let path = decodeURIComponent(url.pathname);
@@ -48,4 +52,4 @@ Bun.serve({
   },
 });
 
-console.log(`Preview dist/ → http://localhost:${port}`);
+console.log(`Preview dist/ â†’ http://localhost:${port}`);

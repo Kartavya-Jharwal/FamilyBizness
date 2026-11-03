@@ -1,12 +1,9 @@
-# Auth flow (cold visit)
+# Entry and profile flow
 
-Documented path for a first-time / unauthenticated visitor. **Do not build full auth yet** — pages are stubs.
+The MVP opens profile selection and family setup inside Portfolio. The public landing and continuity narrative lead to `/portfolio/`; legacy login/splash/verification URLs redirect there so existing links still work.
 
-| Step | Screen | Status |
-|------|--------|--------|
-| 1 | Family history / legacy / founding narrative | Stub: `legacy.html` |
-| 2 | Login | `login.html` links directly to the portfolio demo; no credentials are collected |
-| 3 | Custom splash | Stub: `splash.html` |
-| 4 | Security verification | Stub: `verify.html` |
+A cold visitor chooses a saved browser profile, starts a blank family case, or selects a teaching case. Golden Bird is one optional constitution/case, not the platform's final family. Profile-specific setup, case management and constitution selection belong to the host application. A returning visitor resumes the selected local profile and can switch from its profile controls.
 
-Audience and product form: [`../00 - Canonical/Identity.md`](../00%20-%20Canonical/Identity.md).
+This is the completed prototype entry flow. Real authentication, MFA and shared server permissions remain outside the deliberately browser-local MVP. No fake OTP or biometric challenge is presented as authentication.
+
+Product form and audiences: [Identity](../00%20-%20Canonical/Identity.md).

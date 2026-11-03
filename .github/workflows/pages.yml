@@ -22,7 +22,7 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: 1.3.14
 
       - name: Install
         run: bun install
@@ -42,6 +42,7 @@ jobs:
           bun run donor:type-check
           bun run donor:smoke
           node scripts/verify-donor-pass.mjs
+          node scripts/verify-donor-frontend.mjs --built
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
