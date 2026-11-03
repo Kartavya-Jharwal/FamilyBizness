@@ -38,6 +38,3 @@ export default function PhilanthropyPage(){
  <Section title="Payment evidence ledger"><DataTable headings={["Date","Request","Entry","Amount","Source reference","Recorded by","Evidence"]} rows={data.payments.map(p=>[p.date,data.records.find(r=>r.id===p.recordId)?.title??p.recordId,p.kind,money(p.amount),p.reference,p.recordedBy,p.evidence])}/></Section>
  </FamilyOfficeShell>;
 }
-
-
-

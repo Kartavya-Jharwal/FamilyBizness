@@ -95,4 +95,3 @@ export function EstateWorkspace() {
 
 
 export default function EstateStatutoryPage() { return <FamilyOfficeShell title="Estate & wealth structuring"><EstateWorkspace /></FamilyOfficeShell>; }
-

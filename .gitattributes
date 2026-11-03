@@ -1,0 +1,3 @@
+# Preserve donor license bytes and their captured fingerprints across platforms.
+**/LICENSE -text
+**/*-LICENSE -text

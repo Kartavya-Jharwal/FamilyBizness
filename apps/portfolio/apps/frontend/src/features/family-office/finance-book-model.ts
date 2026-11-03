@@ -66,5 +66,3 @@ export function forecastPolicyFacts(book:FinanceBook){
  if(minHeadroom<-.01)throw new Error("Forecast cash falls below the designated reserve. Resolve the liquidity shortfall before policy review.");
  return {currency:b.currency,distributionPercent:wealth.grossAum>0?Math.max(...distributionByYear.values())/wealth.grossAum*100:undefined,reserveAmount:minReserve};
 }
-
-

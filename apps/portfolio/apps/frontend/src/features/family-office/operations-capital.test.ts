@@ -29,4 +29,3 @@ describe("capital commitments and evidenced payments",()=>{
   expect(()=>capitalSchema.parse({...paid,payments:[{...payment,evidence:""}]})).toThrow();
  });
 });
-

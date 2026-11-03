@@ -110,6 +110,3 @@ export function linkedWorkflowObligations(data:OperationsData,store:Pick<Storage
  if(s.services.status==="saved")for(const service of s.services.value.services.filter(s=>s.status!=="Retired"))candidates.push({...base,id:`service:${service.id}`,workflowId:service.id,title:`Service review: ${service.name}`,owner:service.owner,entity:service.provider,source:service.source,sourceRoute:"/office",due:service.reviewDue});
  const ids=new Set(data.obligations.map(r=>r.id));return decodeOperations(JSON.stringify({version:1,obligations:[...data.obligations,...candidates.filter(c=>!ids.has(c.id))]}));
 }
-
-
-

@@ -56,4 +56,3 @@ export function recordCapitalPayment(data:Capital,payment:CapitalPayment):Capita
  capitalPaymentSchema.parse(payment);const row=data.records.find(r=>r.id===payment.recordId);if(!row||row.status!=="Approved")throw new Error("Only approved commitments can have externally evidenced payments.");
  return capitalSchema.parse({...data,payments:[...data.payments,payment]});
 }
-

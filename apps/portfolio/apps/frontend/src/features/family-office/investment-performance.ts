@@ -35,4 +35,3 @@ export function performance(raw:PerformanceInput){
  const losses=rows.map(r=>-r.net).sort((a,b)=>a-b),monthlyVaR95=losses[Math.ceil(.95*n)-1],tail=losses.filter(v=>v>=monthlyVaR95),monthlyCVaR95=tail.reduce((a,b)=>a+b,0)/tail.length;
  return {annualisedReal:(netWealth**(12/n))/(1+p.annualInflation/100)-1,targetGap:netWealth**(12/n)-1-p.targetAnnual/100,rows,grossTwr,netTwr,benchmarkTwr,annualisedNet:netWealth**(12/n)-1,annualisedVolatility:vol,sharpe:vol>1e-12?(mean-rf)*12/vol:null,maxDrawdown:worst,linked,attributionResidual:grossTwr-benchmarkTwr-linked.allocation-linked.selection-linked.interaction,feeTaxImpact:grossTwr-netTwr,monthlyVaR95,monthlyCVaR95,observations:n};
 }
-

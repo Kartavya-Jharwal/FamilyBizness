@@ -25,4 +25,3 @@ describe("board reporting and operating model",()=>{
   expect(()=>serviceCosts(p,NaN)).toThrow();
  });
 });
-
