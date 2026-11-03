@@ -9,7 +9,7 @@ try{
  assert((await page.locator('#pillars').boundingBox()).y>=950,'Pillars enter the first brand viewport');
  assert((await page.request.get(base+'fonts/Inter-Variable.woff2')).ok(),'Bundled entry font unavailable');
  const manifest=await (await page.request.get(app+'open-source/donor-manifest.json')).json();assert(manifest.donors.length===6,'Missing donor manifest');
- await page.screenshot({path:path.join(out,'landing-desktop.png')});
+ await page.waitForFunction(()=>['.hero-brand','.hero-cta'].every(selector=>getComputedStyle(document.querySelector(selector)).opacity==='1'));await page.screenshot({path:path.join(out,'landing-desktop.png')});
  await page.goto(base+'legacy.html');await page.getByRole('heading',{name:"A family's story continues through its decisions.",exact:true}).waitFor();
  for(const legacy of ['login','splash','verify']){await page.goto(base+legacy+'.html');await page.getByRole('heading',{name:'Who is visiting the family office?',exact:true}).waitFor();assert(page.url().startsWith(app),'Entry redirect lost Pages base path');}
  step='prepared composite office';await page.getByRole('button',{name:'Open Patriarch',exact:true}).click();await page.getByRole('heading',{name:'Family stewardship office',exact:true}).waitFor();
