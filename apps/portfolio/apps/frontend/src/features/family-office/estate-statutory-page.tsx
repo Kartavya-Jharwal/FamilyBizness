@@ -1,3 +1,4 @@
+import { RollingNumberInput } from "@fb/ui";
 import { ErpEstateOwnershipRegister } from "./erpnext-ownership-register";
 import { useState } from "react";
 
@@ -22,7 +23,7 @@ import { readFinanceBook, consolidateBook, dcfValue, fairValueWealth } from "./f
 
 const gbp=(n:number)=>new Intl.NumberFormat("en-GB",{style:"currency",currency:"GBP",maximumFractionDigits:0}).format(n);
 
-function Num({label,value,set}:{label:string;value:number;set:(v:number)=>void}) {return <Field label={label}><input type="number" min={0} step="any" className={fieldClass} value={value} onChange={e=>{if(e.target.value!=="")set(Number(e.target.value));}}/></Field>;}
+function Num({label,value,set}:{label:string;value:number;set:(v:number)=>void}) {return <Field label={label}><RollingNumberInput type="number" min={0} step="any" className={fieldClass} value={value} onChange={e=>{if(e.target.value!=="")set(Number(e.target.value));}}/></Field>;}
 
 function Check({label,value,set}:{label:string;value:boolean;set:(v:boolean)=>void}) {return <label className="flex items-start gap-2 text-sm"><input type="checkbox" className="mt-1" checked={value} onChange={e=>set(e.target.checked)}/><span>{label}</span></label>;}
 

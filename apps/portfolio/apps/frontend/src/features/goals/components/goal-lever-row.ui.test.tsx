@@ -54,3 +54,10 @@ describe("GoalLeverRow number input", () => {
     expect(onChange).toHaveBeenCalledWith(-0.02);
   });
 });
+
+it("keeps stepped percentage edits in the donor lever's commit-on-blur flow", () => {
+  const onChange=vi.fn();renderRateLever(0.05,onChange);
+  fireEvent.click(screen.getByRole("button",{name:"Increase Fund return"}));
+  expect(screen.getByRole("textbox")).toHaveValue("5.1");
+  fireEvent.blur(screen.getByRole("textbox"));expect(onChange).toHaveBeenCalledWith(0.051);
+});

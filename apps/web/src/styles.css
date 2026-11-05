@@ -447,7 +447,7 @@ img {
 .family-hero .hero-brand { font-weight: 500; letter-spacing: calc(-1 * var(--letter-brand)); }
 .family-hero .hero-line { font-size: var(--font-size-body); max-width: calc(var(--max-width) / 2); }
 .family-hero .hero-cta { gap: var(--space-3); }
-.family-hero .btn { display: inline-flex; gap: var(--space-6); border-radius: var(--design-radius-pill); padding: var(--space-3) var(--space-5); }
+.family-hero .btn { display: inline-flex; gap: var(--space-6); border-radius: var(--design-radius-button); padding: var(--space-3) var(--space-5); }
 .family-hero-portrait { position: relative; display: grid; place-items: center; align-self: stretch; min-height: calc(var(--space-9) * 4); margin: 0; border: 1px solid var(--color-on-hero-faint); border-radius: var(--radius-md); background: color-mix(in srgb, var(--color-on-hero) 3%, transparent); overflow: hidden; }
 .portrait-orbit { display: grid; place-items: center; width: 70%; aspect-ratio: 1; border: 1px solid var(--color-on-hero-faint); border-radius: var(--design-radius-pill); color: var(--color-on-hero-muted); }
 .portrait-orbit span { font-family: var(--design-font-serif); font-size: var(--font-size-hero); font-style: italic; font-weight: 400; }

@@ -64,7 +64,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
 
   const containerClassName = "pointer-events-none fixed inset-x-0 bottom-0 z-50";
   const buttonClassName =
-    "text-foreground relative z-10 flex h-14 w-full items-center justify-center rounded-full transition-colors landscape:size-11";
+    "text-foreground relative z-10 flex h-14 w-full items-center justify-center rounded-(--design-radius-navigation-item) transition-colors landscape:size-11";
 
   const handleNavigation = useCallback(
     (event: MouseEvent, href: string, isActive: boolean) => {
@@ -97,7 +97,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
 
   const renderIcon = useCallback((icon?: ReactNode) => resolveNavigationIcon(icon, "size-6"), []);
 
-  const primaryItems = navigation?.primary ?? [];
+  const primaryItems = (navigation?.primary ?? []).flatMap(item => [item, ...(item.children ?? [])]);
   const secondaryItems = navigation?.secondary ?? [];
   const pinnedAddonItems = navigation?.pinnedAddons ?? [];
   const addonMenuItems = navigation?.addonMenuItems ?? navigation?.addons ?? [];
@@ -166,7 +166,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
                   {isActive && (
                     <motion.div
                       layoutId={`mobile-nav-indicator-${uniqueId}`}
-                      className="absolute inset-0 -z-10 rounded-full border border-black/10 bg-black/5 shadow-sm dark:border-white/10 dark:bg-white/10"
+                      className="absolute inset-0 -z-10 rounded-(--design-radius-navigation-item) border border-black/10 bg-black/5 shadow-sm dark:border-white/10 dark:bg-white/10"
                       initial={false}
                       transition={{
                         type: "spring",
@@ -198,7 +198,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
                 {moreItems.some((item) => isItemActive(item.href)) && (
                   <motion.div
                     layoutId={`mobile-nav-indicator-${uniqueId}`}
-                    className="absolute inset-0 -z-10 rounded-full border border-black/10 bg-black/5 shadow-sm dark:border-white/10 dark:bg-white/10"
+                    className="absolute inset-0 -z-10 rounded-(--design-radius-navigation-item) border border-black/10 bg-black/5 shadow-sm dark:border-white/10 dark:bg-white/10"
                     initial={false}
                     transition={{
                       type: "spring",

@@ -12,7 +12,7 @@ import { TrendUpIcon } from "@phosphor-icons/react/dist/csr/TrendUp";
 import { WalletIcon } from "@phosphor-icons/react/dist/csr/Wallet";
 import { Card, CardContent, CardHeader } from "@fb/ui/components/ui/card";
 import { Skeleton } from "@fb/ui/components/ui/skeleton";
-import { Suspense, useCallback, useMemo, useState } from "react";
+import { Suspense, type ReactNode, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NetWorthContent } from "../net-worth/net-worth-content";
 import { DashboardActions } from "./dashboard-actions";
@@ -45,7 +45,7 @@ const PageLoader = () => (
   </div>
 );
 
-export default function PortfolioPage() {
+export default function PortfolioPage({ policySummary, officeWidgets }: { policySummary?: ReactNode; officeWidgets?: ReactNode } = {}) {
   const { t } = useTranslation();
   const dashboardPortfolio = useDashboardPortfolio();
   const { isFocusMode, toggleFocusMode } = useNavigationMode();
@@ -135,6 +135,7 @@ export default function PortfolioPage() {
               </div>
             ) : (
               <DashboardContent
+                policySummary={policySummary} officeWidgets={officeWidgets}
                 key={dashboardPortfolio.portfolio?.id ?? "all"}
                 scope={dashboardPortfolio.scope}
                 scopeLabel={dashboardPortfolio.portfolio?.name}
@@ -184,7 +185,7 @@ export default function PortfolioPage() {
     handleAddAsset,
     handleAddLiability,
     spendingEnabled,
-    dashboardPortfolio,
+    dashboardPortfolio, policySummary, officeWidgets,
   ]);
 
   return (

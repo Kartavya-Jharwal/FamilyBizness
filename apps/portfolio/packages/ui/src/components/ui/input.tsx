@@ -1,9 +1,13 @@
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import * as React from "react";
 
+import { RollingNumberInput } from "./rolling-number-input";
 import { cn } from "../../lib/utils";
 
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+  if (type === "number" || props.inputMode === "decimal" || props.inputMode === "numeric") {
+    return <RollingNumberInput type={type ?? "text"} className={className} {...props}/>;
+  }
   return (
     <InputPrimitive
       type={type}

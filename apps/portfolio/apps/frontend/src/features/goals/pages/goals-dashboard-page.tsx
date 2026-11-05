@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { GoalCard } from "../components/goal-card";
+import { FamilyGoalPlanning } from "../components/family-goal-planning";
 import { useGoals } from "../hooks/use-goals";
 
 function StatBlock({ label, value }: { label: string; value: React.ReactNode }) {
@@ -121,6 +122,7 @@ export default function GoalsDashboardPage() {
         }
       />
       <PageContent>
+        <FamilyGoalPlanning />
         {!hasGoals ? (
           <div className="flex flex-col items-center justify-center gap-5 py-28 text-center">
             <div className="bg-muted/60 flex h-16 w-16 items-center justify-center rounded-2xl">

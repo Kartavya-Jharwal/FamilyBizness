@@ -40,6 +40,7 @@ function DriverRow({
 }
 
 interface VelocityCardProps {
+  driversAvailable?: boolean;
   velocity: Velocity;
   /** Average monthly net worth change over the trailing year, for the pace multiple. */
   trailingYearMonthly?: number;
@@ -52,6 +53,7 @@ export function VelocityCard({
   trailingYearMonthly,
   currency,
   periodLabel,
+  driversAvailable = true,
 }: VelocityCardProps) {
   const { t } = useTranslation();
   const { formatCalendarDate } = useDateFormatting();
@@ -135,7 +137,8 @@ export function VelocityCard({
           })}
       </p>
 
-      {drivers.length > 0 && (
+      {!driversAvailable && <p className="mt-4 text-xs text-muted-foreground">Capital movement includes flows and revaluations. Investment-gain attribution requires dated flow records.</p>}
+      {driversAvailable && drivers.length > 0 && (
         <>
           <p className={`${CARD_LABEL} mt-5 mb-3`}>
             {t("insights:networth.velocity.drivers_of_change")}

@@ -1,3 +1,4 @@
+import { RollingNumberInput } from "../ui/rolling-number-input";
 "use client";
 
 import { Badge } from "../ui/badge";
@@ -536,9 +537,12 @@ export function NumberCell<TData>({
       className="text-end"
     >
       {isEditing ? (
-        <input
+        <RollingNumberInput
           ref={inputRef}
           type="text"
+          data-rolling-compact
+          data-number-value={formatting.parseNumber(value)}
+          data-number-decimal-separator={formatting.decimalSeparator}
           inputMode="decimal"
           value={value}
           min={min}

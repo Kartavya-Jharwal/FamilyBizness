@@ -45,3 +45,14 @@ The composition uses a ruled page heading, compact tabular metrics, quiet embedd
 The main landing is the public family story: founding fathers, present stewardship and the next generation. Four explicit photo slots await supplied imagery. A single “Let's log in” action opens profile selection. Team, substantial AI usage, report and pending video credits sit before the narrative footer. Missing student names/video are not fabricated.
 
 All profile image slots share a circular mask and actual Dither placeholder, including at small sidebar sizes. The image manifest is the replacement boundary. Daily graphs use the local Dither chart engine with host semantic colours and canonical label sizes; specialised donor charts retain their existing interactions with real Dither paint masks. The kit does not introduce another palette or font stack. IPS, charter and settings categories are separate navigation concepts.
+
+## Finance navigation and purpose planning
+
+Goals, budget/expenditure, spending insights, investment fees, and trading analytics are children of Capital & liquidity; connections/imports are in Settings → Data. The sidebar opens expanded, with a native finance branch closed outside its active destinations; phone More navigation includes the children. Goal purposes use the existing goal creation flow. Add-on preview boundaries and source citations: [Architecture](../03%20-%20Architecture/Architecture.md#restored-goals-and-finance-add-on-shells). All surfaces use host semantic roles from canonical tokens. Unconnected fees are unavailable rather than zero; synthetic calendar data is labelled, privacy-aware and excluded from saved records.
+
+
+## Overview, controls and financial sheets
+
+The donor PortfolioPage again owns the full-width overview history/fill, period controls, accounts and holdings. Policy status sits below the chart; analysis shortcuts lead directly to allocations, FIRE, X-ray and financial sheets. Financial statements use native tables with entity columns, consolidation adjustments, group totals and local horizontal scrolling.
+
+Canonical finite corner tokens are reduced by 30%; shared theme radius offsets scale with them. Circular profile/logo masks retain their circle geometry. Numeric entry uses one shared rolling control, retaining native typing, form/ref semantics, decimal/locale parsing, bounds and disabled states. Click, press-and-hold and vertical drag update existing fields. Each reel animates a small independent digit position to preserve large-currency cents. Responsive sizes and citation: [breakpoints and numeric controls](Responsive%20Breakpoints%20And%20Numeric%20Controls.md).

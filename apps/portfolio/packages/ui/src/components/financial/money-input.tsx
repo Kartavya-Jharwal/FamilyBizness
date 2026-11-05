@@ -6,6 +6,8 @@ import { Input } from "../ui/input";
 import { useNumberFormatting } from "../formatting-provider";
 
 export interface MoneyInputProps {
+  /** Compact control for inline table and lever editors. */
+  compact?: boolean;
   /** Current numeric value */
   value?: number | string | null;
   /**
@@ -61,6 +63,7 @@ const MoneyInput = React.forwardRef<HTMLInputElement, MoneyInputProps>(
   (
     {
       value,
+      compact = false,
       onValueChange,
       onChange,
       maxDecimalPlaces = DECIMAL_PRECISION,
@@ -112,6 +115,7 @@ const MoneyInput = React.forwardRef<HTMLInputElement, MoneyInputProps>(
         autoFocus={autoFocus}
         onKeyDown={onKeyDown}
         onBlur={onBlur}
+        min={0}
         allowNegative={false}
         decimalScale={maxDecimalPlaces}
         fixedDecimalScale={fixedDecimalScale}
@@ -137,6 +141,10 @@ const MoneyInput = React.forwardRef<HTMLInputElement, MoneyInputProps>(
           }
         }}
         inputMode="decimal"
+        step="any"
+        data-rolling-compact={compact || undefined}
+        data-number-value={numericValue}
+        data-number-decimal-separator={formatting.decimalSeparator}
         onPaste={(event) => {
           const clipboardValue = event.clipboardData.getData("text");
           const input = event.currentTarget;

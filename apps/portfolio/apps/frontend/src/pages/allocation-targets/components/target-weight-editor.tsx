@@ -1,3 +1,4 @@
+import { RollingNumberInput } from "@fb/ui";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
@@ -258,7 +259,7 @@ export function TargetWeightEditor({
                 {/* Target input */}
                 <div className="flex items-center justify-end gap-0.5">
                   {row.isEditing ? (
-                    <input
+                    <RollingNumberInput
                       type="number"
                       aria-label={`${row.cat.name} ${t("allocation:vsTarget.target")}`}
                       min={0}

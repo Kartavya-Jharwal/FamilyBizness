@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { DitherChartMask } from "@/components/dither-chart-mask";
 import { AppScreenRoutes } from "@/app-screen-routes";
 import AppLauncher from "@/components/app-launcher";
@@ -8,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { MobileNavigationContainer } from "@/pages/layouts/mobile-navigation-container";
 import useGlobalEventListener from "@/use-global-event-listener";
 import { ApplicationShell, ErrorBoundary, PageScrollContainer } from "@fb/ui";
-import { useMemo, type ComponentProps, type ReactNode } from "react";
+import { useEffect, useMemo, type ComponentProps, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigation } from "./navigation/app-navigation";
 import { AppSidebar } from "./navigation/app-sidebar";
@@ -76,6 +77,19 @@ const AppLayoutContent = () => {
       outsidePrefixes: OUTSIDE_TAB_PREFIXES,
     };
   }, [tabsKey, addonsKey]);
+
+  const officeQueries = useQueryClient();
+  useEffect(() => {
+    let frame = 0;
+    const refresh = (event: Event) => {
+      const key = event instanceof StorageEvent ? event.key : (event as CustomEvent).detail?.key;
+      if (typeof key !== "string" || !/:family-office:(book|investment):1$|:office-effective-policy:v1$/.test(key)) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => { void officeQueries.invalidateQueries(); });
+    };
+    window.addEventListener("familybizness:record-updated", refresh); window.addEventListener("storage", refresh);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("familybizness:record-updated", refresh); window.removeEventListener("storage", refresh); };
+  }, [officeQueries]);
 
   useGlobalEventListener();
 

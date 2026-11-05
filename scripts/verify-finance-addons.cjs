@@ -1,0 +1,14 @@
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'C:/Users/KJ/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('node:fs');
+const out='apps/portfolio/artifacts/finance-addons';fs.mkdirSync(out,{recursive:true});
+(async()=>{const browser=await chromium.launch({channel:'msedge',headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+try{await page.goto('http://localhost:4178/FamilyBizness/portfolio/#/office/case');await page.getByRole('button',{name:'Open Patriarch',exact:true}).click();await page.getByRole('heading',{name:'Stewardship',exact:true}).waitFor();
+for(const [route,title] of [['/goals','Wealth with a purpose'],['/settings/connections','Connections & imports'],['/office/fees','Investment fees'],['/office/trading','Trading analytics']]){
+await page.evaluate(route=>location.hash=route,route);await page.getByText(title,{exact:true}).first().waitFor();await page.waitForTimeout(400);
+if(route.endsWith('connections')){await page.getByRole('button',{name:'Connect · preview'}).first().click();await page.getByText(/Connect Trade Republic: not implemented for now/).waitFor();await page.locator('[data-sonner-toast] button').first().click();}
+if(route.endsWith('trading')){await page.getByRole('button',{name:'Demo day 5',exact:true}).click();await page.getByText(/Demo day 5: illustrative/).waitFor();await page.locator('[data-slot=card]').filter({hasText:'Family capital curve'}).screenshot({path:out+'/capital-curve.png'});}
+await page.screenshot({path:`${out}/${route.split('/').pop()}-desktop.png`,fullPage:true});
+await page.setViewportSize({width:390,height:844});await page.waitForTimeout(300);if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error(route+' mobile overflow');await page.screenshot({path:`${out}/${route.split('/').pop()}-mobile.png`,fullPage:true});await page.setViewportSize({width:1440,height:1000});}
+await page.evaluate(()=>location.hash='/goals');await page.getByRole('link',{name:/Philanthropy Plan a goal/}).click();await page.getByLabel('Title',{exact:true}).waitFor({timeout:3000}).catch(()=>{});if(await page.locator('input[value="Philanthropy"]').count()!==1)throw Error('Purpose was not prefilled');
+await page.evaluate(()=>{document.documentElement.classList.add('dark');location.hash='/office/trading';});await page.getByRole('heading',{name:'Trading analytics',exact:true}).waitFor();await page.screenshot({path:`${out}/trading-dark.png`,fullPage:true});if(errors.length)throw Error(errors.join('\n'));console.log('PASS: finance routes, connector toast, demo calendar, purpose prefill, desktop/mobile overflow and dark screenshot');
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exit(1)});

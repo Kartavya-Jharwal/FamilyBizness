@@ -1,0 +1,44 @@
+/* Reel geometry adapted from Pavel Troshkin's supplied Reactive CSS counter.
+   Citation: https://reactivecss.com / https://github.com/troshkinpavel/reactivecss
+   Runtime interaction is handled by the existing React form boundary. */
+@property --rolling-shown { syntax: "<number>"; inherits: true; initial-value: 0; }
+.rolling-number-field { display: inline-grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: stretch; gap: var(--space-1); width: 100%; min-width: 0; padding: var(--space-1); border: 1px solid var(--field-border); border-radius: var(--control-radius); background: var(--input-bg); color: var(--foreground); box-shadow: var(--field-shadow); }
+.rolling-number-field:focus-within { outline: 2px solid var(--ring); outline-offset: var(--space-1); }
+.rolling-number-field:has([aria-invalid=true]) { border-color: var(--destructive); }
+.rolling-number-window { position: relative; display: grid; min-width: 0; align-items: center; }
+.rolling-native-input { width: 100%; min-width: 0; height: 100%; min-height: var(--design-number-step-size); border: 0 !important; border-radius: 0; background: transparent !important; box-shadow: none !important; padding-inline: var(--space-1); font: inherit; font-variant-numeric: tabular-nums; outline: none !important; appearance: textfield; }
+.rolling-native-input::-webkit-inner-spin-button, .rolling-native-input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.rolling-number-field:not(.is-editing) .rolling-native-input { color: transparent !important; caret-color: transparent; }
+.rolling-number-display { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end; min-width: 0; overflow: hidden; padding-inline: var(--space-1); cursor: ns-resize; touch-action: none; user-select: none; font-variant-numeric: tabular-nums; }
+.rolling-number-field.is-editing .rolling-number-display { visibility: hidden; pointer-events: none; }
+.rolling-reels { display: inline-flex; align-items: center; max-width: 100%; white-space: nowrap; }
+.rolling-number-field.is-dragging .rolling-reel { transition-duration: var(--design-number-drag-duration); }
+.rolling-reel { --rolling-cell: var(--design-number-digit-cell); --rolling-shown: var(--rolling-target); --rolling-blur: min(1, max(var(--rolling-target) - var(--rolling-shown), var(--rolling-shown) - var(--rolling-target))); --rolling-digit: mod(var(--rolling-shown), 10); inline-size: var(--design-number-digit-width); block-size: var(--rolling-cell); overflow: hidden; mask: linear-gradient(transparent, black 22%, black 78%, transparent); transition: --rolling-shown var(--design-number-roll-duration) cubic-bezier(.2,.9,.25,1); }
+.rolling-strip { display: grid; justify-items: center; translate: 0 calc(var(--rolling-digit) * -1 * var(--rolling-cell)); filter: blur(calc(var(--rolling-blur) * var(--design-number-digit-blur))); }
+.rolling-strip i { block-size: var(--rolling-cell); line-height: var(--rolling-cell); font-style: normal; }
+.rolling-punctuation { line-height: var(--design-number-digit-cell); }
+.rolling-placeholder { color: var(--muted-foreground); }
+.rolling-step { display: grid; place-items: center; inline-size: var(--design-number-step-size); aspect-ratio: 1; padding: 0; border: 0; border-radius: var(--control-radius); background: var(--muted); color: var(--foreground); cursor: pointer; touch-action: manipulation; user-select: none; -webkit-touch-callout: none; }
+.rolling-step svg { inline-size: 45%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.rolling-step:hover { background: var(--accent); }
+.rolling-step:active { scale: .94; }
+.rolling-step:focus-visible { outline: 2px solid var(--ring); outline-offset: var(--space-1); }
+.rolling-step:disabled { opacity: .35; cursor: default; }
+.rolling-number-field.is-disabled { opacity: .6; }
+.rolling-number-field.is-disabled .rolling-number-display { cursor: default; pointer-events: none; }
+@media (pointer: coarse) { .rolling-step { inline-size: var(--design-number-step-size-touch); }.rolling-native-input { min-height: var(--design-number-step-size-touch); } }
+@media (max-width: 639px) { .rolling-number-field { gap: 0; }.rolling-number-display, .rolling-native-input { font-size: var(--font-size-small); } }
+@media (prefers-reduced-motion: reduce) { .rolling-reel { transition: none; }.rolling-step:active { scale: 1; } }
+@supports not (translate: 0 calc(mod(1, 10) * 1em)) { .rolling-number-display { display: none; }.rolling-number-field:not(.is-editing) .rolling-native-input { color: var(--foreground) !important; } }
+
+.rolling-number-field[data-rolling-compact=true] { padding: 0; gap: 0; border: 0; box-shadow: none; background: transparent; }
+.rolling-number-field[data-rolling-compact=true] .rolling-step { inline-size: var(--space-5); }
+.rolling-number-field[data-rolling-compact=true] .rolling-native-input { min-height: var(--space-5); }
+
+/* Embedded narrow forms keep the full value above equal-width step targets. */
+.rolling-number-field.is-narrow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rolling-number-field.is-narrow .rolling-number-window { grid-column: 1 / -1; grid-row: 1; }
+.rolling-number-field.is-narrow .rolling-step { inline-size: 100%; aspect-ratio: auto; block-size: var(--design-number-step-size); grid-row: 2; }
+.rolling-number-field.is-narrow .rolling-minus { grid-column: 1; }
+.rolling-number-field.is-narrow .rolling-plus { grid-column: 2; }
+@media (pointer: coarse) { .rolling-number-field.is-narrow .rolling-step { block-size: var(--design-number-step-size-touch); } }

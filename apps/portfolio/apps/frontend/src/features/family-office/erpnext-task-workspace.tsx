@@ -1,3 +1,5 @@
+import { Input as NumericAwareInput } from "@fb/ui";
+import { RollingNumberInput } from "@fb/ui";
 /** ERPNext Task + Projects Workspace frontend adaptation; GPL-3.0. See erpnext-frontend.ts. */
 import { useMemo, useState } from "react";
 import { Button, Card, CardContent, CardHeader, CardTitle } from "@fb/ui";
@@ -55,10 +57,10 @@ export function ErpTaskFields({ draft, onChange }: { draft: Obligation; onChange
   const simple = { subject: { key: "title", label: "Title", type: "text" }, company: { key: "entity", label: "Entity", type: "text" }, exp_end_date: { key: "due", label: "Due date", type: "date" } } as const;
   return <fieldset className="space-y-4"><legend className="font-medium">Task details</legend><div className="grid gap-4 sm:grid-cols-2">{erpTaskMask.map(mask => {
     const binding = simple[mask.fieldname as keyof typeof simple];
-    if (binding) return <label key={mask.fieldname} className="text-sm">{binding.label}<input required className={field} type={binding.type} value={draft[binding.key]} onChange={e => onChange({ ...draft, [binding.key]: e.target.value })} /></label>;
+    if (binding) return <label key={mask.fieldname} className="text-sm">{binding.label}<NumericAwareInput required className={field} type={binding.type} value={draft[binding.key]} onChange={e => onChange({ ...draft, [binding.key]: e.target.value })} /></label>;
     if (mask.fieldname === "project") return <label className="text-sm" key={mask.fieldname}>{mask.label}<input className={field} value={task.project} onChange={e => onChange({ ...draft, task: { ...task, project: e.target.value } })} /></label>;
     if (mask.fieldname === "priority") return <div key={mask.fieldname}><label className="text-sm" htmlFor="erp-task-priority">{mask.label}</label><select id="erp-task-priority" className={field} value={task.priority} onChange={e => onChange({ ...draft, task: { ...task, priority: e.target.value as typeof task.priority } })}>{mask.options.split("\n").map(option => <option key={option}>{option}</option>)}</select></div>;
-    if (mask.fieldname === "progress") return <label className="text-sm" key={mask.fieldname}>Progress (%)<input className={field} type="number" min={0} max={100} value={task.progress} onChange={e => { if (e.target.value !== "") onChange({ ...draft, task: { ...task, progress: e.target.valueAsNumber } }); }} /></label>;
+    if (mask.fieldname === "progress") return <label className="text-sm" key={mask.fieldname}>Progress (%)<RollingNumberInput className={field} type="number" min={0} max={100} value={task.progress} onChange={e => { if (e.target.value !== "") onChange({ ...draft, task: { ...task, progress: e.target.valueAsNumber } }); }} /></label>;
     if (mask.fieldname === "exp_start_date") return <label className="text-sm" key={mask.fieldname}>Expected start date<input className={field} type="date" value={task.startDate} onChange={e => onChange({ ...draft, task: { ...task, startDate: e.target.value } })} /></label>;
     return null;
   })}<label className="text-sm">Responsible owner<input required className={field} value={draft.owner} onChange={e => onChange({ ...draft, owner: e.target.value })} /></label></div></fieldset>;

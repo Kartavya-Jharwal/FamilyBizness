@@ -41,6 +41,7 @@ jobs:
         run: |
           bun run donor:type-check
           bun run --cwd apps/portfolio/apps/frontend test src/adapters/static-demo.test.ts src/features/family-office/stewardship-priorities.test.ts src/features/family-office/please-fix-model.test.ts src/features/family-office/donor-frontend.test.tsx src/components/dither-kit/financial-bands.test.ts src/features/profiles/profile-avatar.test.tsx src/features/profiles/profile-avatar-picker.test.tsx
+          bun run --cwd apps/portfolio/apps/frontend test src/components/rolling-number-input.test.tsx src/features/goals/components/goal-lever-row.ui.test.tsx src/features/profiles/role-consolidation.test.ts src/features/family-office/policy-dashboard.test.ts src/features/family-office/financial-statement-sheets.test.tsx src/features/family-office/family-analysis-model.test.ts src/adapters/prepared-office-portfolio.test.ts src/pages/net-worth/components/velocity-card.test.tsx src/pages/settings/settings-layout.test.tsx
           node scripts/verify-donor-frontend.mjs --built
           node scripts/verify-dither-kit.mjs
 

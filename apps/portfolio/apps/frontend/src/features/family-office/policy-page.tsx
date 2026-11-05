@@ -1,3 +1,4 @@
+import { RollingNumberInput } from "@fb/ui";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, CardContent, CardHeader, CardTitle } from "@fb/ui";
@@ -32,7 +33,7 @@ export function PolicyWorkspace(){
         <label>Rule ID<input className={field} value={r.id} onChange={e=>change(i,{id:e.target.value})}/></label>
         <label>Reviewed source<select aria-label="Reviewed source" className={field} value={r.sourceId} onChange={e=>change(i,{sourceId:e.target.value})}><option value="">Select source</option>{initial.sources.map(s=><option key={s.id} value={s.id} disabled={s.status!=="reviewed"}>{s.id} · {s.section} · {s.status}</option>)}</select></label>
         <label>Rule type<select className={field} value={r.kind} onChange={e=>change(i,{kind:e.target.value as ExecutableRule["kind"]})}>{ruleKinds.map(k=><option key={k}>{k}</option>)}</select></label>
-        {r.kind!=="excluded-sector"&&<label>{r.kind==="approval-threshold"?"Amount above which approvals are required":r.kind==="reserve-minimum"?"Minimum reserve amount":"Percentage limit"}<input type="number" min={0} className={field} value={r.value} onChange={e=>change(i,{value:Number(e.target.value)})}/></label>}
+        {r.kind!=="excluded-sector"&&<label>{r.kind==="approval-threshold"?"Amount above which approvals are required":r.kind==="reserve-minimum"?"Minimum reserve amount":"Percentage limit"}<RollingNumberInput type="number" min={0} className={field} value={r.value} onChange={e=>change(i,{value:Number(e.target.value)})}/></label>}
         {(r.kind==="approval-threshold"||r.kind==="excluded-sector")&&<label>{r.kind==="excluded-sector"?"Excluded sector (exact classification)":"Required distinct approvals"}<input className={field} value={r.text} onChange={e=>change(i,{text:e.target.value})}/></label>}
       </div><blockquote className="border-l-2 pl-3 text-sm">{initial.sources.find(s=>s.id===r.sourceId)?.excerpt??"Select a reviewed source to see the trace."}</blockquote><Button variant="outline" onClick={()=>{setRules(rules.filter((_,n)=>n!==i));setChecked(false);}}>Remove rule</Button></fieldset>)}
       <Button variant="outline" onClick={()=>{setRules([...rules,{id:`RULE-${rules.length+1}`,sourceId:"",kind:"cash-minimum",value:0,text:""}]);setChecked(false);}}>Add rule</Button>

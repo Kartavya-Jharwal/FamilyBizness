@@ -147,3 +147,9 @@ describe("VelocityCard", () => {
     expect(screen.queryByText("Drivers of change")).not.toBeInTheDocument();
   });
 });
+
+it("withholds investment-gain attribution when only valuation movements are available", () => {
+  render(<VelocityCard velocity={{...base,netChange:300,portfolioGains:300,perMonth:75}} currency="GBP" periodLabel="ALL" driversAvailable={false}/>);
+  expect(screen.getByText(/Capital movement includes flows and revaluations/)).toBeInTheDocument();
+  expect(screen.queryByText("Investment gains")).not.toBeInTheDocument();
+});

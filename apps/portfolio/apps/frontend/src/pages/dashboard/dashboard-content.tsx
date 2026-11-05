@@ -16,7 +16,7 @@ import { GainAmount, GainPercent, IntervalSelector } from "@fb/ui";
 import { SpendingDatePicker } from "@/features/spending/components/spending-date-picker";
 import { Skeleton } from "@fb/ui/components/ui/skeleton";
 import { format } from "date-fns";
-import { useMemo } from "react";
+import { type ReactNode, useMemo } from "react";
 import { PrivacyToggle } from "@/components/privacy-toggle";
 import type { AccountScope } from "@/lib/types";
 import { accountScopeKey } from "@/pages/allocation-targets/components/target-scope";
@@ -69,12 +69,15 @@ function getDashboardNetContributionMaxDomainSpanRatio(
 }
 
 interface DashboardContentProps {
+  policySummary?: ReactNode;
+  officeWidgets?: ReactNode;
   scope?: AccountScope;
   scopeLabel?: string;
   accountIds?: string[];
 }
 
 export function DashboardContent({
+  policySummary, officeWidgets,
   scope = { type: "all" },
   scopeLabel,
   accountIds,
@@ -244,7 +247,7 @@ export function DashboardContent({
             : `linear-gradient(to top, color-mix(in srgb, var(--success) 30%, transparent), color-mix(in srgb, var(--success) 15%, transparent) 50%, transparent 100%)`,
         }}
       >
-        <div className="h-70">
+        <div className="dashboard-history-surface">
           <HistoryChart
             data={chartData}
             isLoading={isValuationHistoryLoading}
@@ -277,6 +280,7 @@ export function DashboardContent({
         {/* Two columns once the content area, not the window (the sidebar may be open),
             fits Accounts beside the 24rem right column. */}
         <div className="@container grow px-4 pt-14 pb-[var(--mobile-nav-total-offset)] md:px-6 md:pt-12 md:pb-6 lg:px-10 lg:pt-14 lg:pb-8">
+          {policySummary && <div className="mb-6">{policySummary}</div>}
           <div className="grid grid-cols-1 gap-8 @min-[53rem]:grid-cols-[minmax(0,2fr)_minmax(24rem,1fr)] @min-[53rem]:gap-20">
             <div>
               <AccountsSummary
@@ -296,6 +300,7 @@ export function DashboardContent({
               <SavingGoals />
             </div>
           </div>
+          {officeWidgets && <div className="mt-8 space-y-6">{officeWidgets}</div>}
         </div>
       </div>
     </div>

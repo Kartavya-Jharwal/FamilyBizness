@@ -1,0 +1,14 @@
+/* Statement layout reads the host surfaces and canonical spacing/type roles. */
+.fo-sheet-scroll { max-inline-size: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: var(--control-radius); }
+.fo-sheet-scroll:focus-visible { outline: 2px solid var(--ring); outline-offset: var(--space-1); }
+.fo-sheet-table { inline-size: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--font-size-small); font-variant-numeric: tabular-nums lining-nums; }
+.fo-sheet-table caption { caption-side: top; padding: var(--space-3); text-align: start; color: var(--muted-foreground); background: var(--background); border-block-end: 1px solid var(--border); }
+.fo-sheet-table th, .fo-sheet-table td { padding: var(--space-3); border-block-end: 1px solid var(--border); vertical-align: top; }
+.fo-sheet-table thead th { min-inline-size: var(--space-9); max-inline-size: calc(var(--space-9) * 2); font-weight: 500; text-align: end; background: var(--muted); }
+.fo-sheet-table thead th:first-child { text-align: start; }
+.fo-sheet-table tbody th { min-inline-size: calc(var(--space-9) * 2); font-weight: 400; text-align: start; }
+.fo-sheet-table td { text-align: start; min-inline-size: var(--space-9); max-inline-size: calc(var(--space-9) * 3); }
+.fo-sheet-table td[data-numeric=true] { text-align: end; white-space: nowrap; }
+.fo-sheet-table tr[data-total=true] th, .fo-sheet-table tr[data-total=true] td { font-weight: 600; background: var(--background); border-block-start: 1px solid var(--border); }
+.fo-sheet-table tbody tr:last-child > * { border-block-end: 0; }
+.fo-sheet-table tbody tr:hover > * { background: var(--accent); }

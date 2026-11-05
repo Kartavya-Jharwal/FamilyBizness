@@ -25,7 +25,7 @@ import { Textarea } from "@fb/ui/components/ui/textarea";
 import { useEffect, useEffectEvent, useMemo, useState } from "react";
 import { useEffectOnChange } from "@/hooks/use-effect-on-change";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useCreateGoalFlow } from "../hooks/use-create-goal-flow";
 import { useGoals } from "../hooks/use-goals";
 import { toast } from "sonner";
@@ -83,9 +83,12 @@ export default function GoalNewPage() {
     DEFAULT_RETIREMENT_CURRENT_AGE,
     today,
   );
-  const [selectedType, setSelectedType] = useState<GoalType | null>(null);
+  const [params] = useSearchParams();
+  const requestedType = params.get("type");
+  const [selectedType, setSelectedType] = useState<GoalType | null>(() => ["education", "retirement", "wedding", "custom_save_up"].includes(requestedType ?? "") ? requestedType as GoalType : null);
   const [plannerMode, setPlannerMode] = useState<PlannerMode>("traditional");
-  const [title, setTitle] = useState("");
+  const purpose = params.get("purpose") ?? "";
+  const [title, setTitle] = useState(purpose);
   const [description, setDescription] = useState("");
   const [targetAmount, setTargetAmount] = useState(0);
   const [targetDate, setTargetDate] = useState("");
@@ -146,6 +149,7 @@ export default function GoalNewPage() {
   );
 
   const retirementExists = hasRetirementGoal(goals);
+  useEffect(() => { if (retirementExists && requestedType === "retirement") setSelectedType(null); }, [retirementExists, requestedType]);
   const template = goalTemplates.find((tmpl) => tmpl.type === selectedType);
   const isRetirement = selectedType === "retirement";
   const baseCurrency = settings?.baseCurrency ?? "USD";
@@ -180,7 +184,7 @@ export default function GoalNewPage() {
     if (!nextTemplate) return;
     setSelectedType(type);
     setPlannerMode("traditional");
-    setTitle(nextTemplate.title);
+    setTitle(purpose || nextTemplate.title);
     setDescription(nextTemplate.description);
     setTargetAmount(nextTemplate.defaultTarget);
     setTargetDate("");

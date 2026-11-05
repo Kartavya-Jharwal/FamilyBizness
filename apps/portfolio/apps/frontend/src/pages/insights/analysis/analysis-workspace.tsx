@@ -78,7 +78,8 @@ function Failure({ retry }: { retry: () => void }) {
   );
 }
 
-export function InvestmentReviewPage() {
+export interface MandateReview { equityPercent: number; equityLimit?: number; feePercent: number; policyRevision?: number; }
+export function InvestmentReviewPage({ mandateReview }: { mandateReview?: MandateReview } = {}) {
   const { model, currency, isLoading, isError, refetch } =
     useAnalysisHoldings();
   const [preferences, setPreferences] =
@@ -104,7 +105,7 @@ export function InvestmentReviewPage() {
           <h1 className="text-2xl font-semibold tracking-tight">
             Portfolio X-ray
           </h1>
-          <Badge variant="outline">Preview</Badge>
+          {!mandateReview && <Badge variant="outline">Preview</Badge>}
         </div>
         <p className="text-muted-foreground text-sm">
           Review investment questions and understand the data behind your
@@ -117,11 +118,7 @@ export function InvestmentReviewPage() {
           <TabsTrigger value="returns">Return detail</TabsTrigger>
         </TabsList>
         <TabsContent value="review" className="mt-5 space-y-5">
-          <Notice>
-            Fictional sample portfolio · Rules are not evaluated. Enabling a rule
-            saves your review preference; it does not assess your investments.
-            Data Health remains a separate workspace.
-          </Notice>
+          <Notice>{mandateReview ? <>Family mandate revision {mandateReview.policyRevision ?? "not adopted"}. Concentration is checked against the active investment limit; fees remain an observation unless the family adopts a fee ceiling. Holdings below retain their reported valuation scope.</> : <>Fictional sample portfolio · Rules are not evaluated. Enabling a rule saves your review preference; it does not assess your investments. Data Health remains a separate workspace.</>}</Notice>
           {!model.positions.length ? (
             <Notice>
               No eligible holdings in this scope. Choose another account to
@@ -178,6 +175,9 @@ export function InvestmentReviewPage() {
           <section aria-label="Investment review rules" className="space-y-3">
             {REVIEW_RULES.map((rule) => {
               const active = ruleEnabled(preferences, rule.id);
+              const equity = mandateReview && rule.id === "equity-concentration" && mandateReview.equityLimit !== undefined;
+              const breached = equity && mandateReview.equityPercent > mandateReview.equityLimit!;
+              const observed = mandateReview && rule.id === "fee-ratio";
               return (
                 <Card key={rule.id}>
                   <CardHeader>
@@ -186,8 +186,8 @@ export function InvestmentReviewPage() {
                         <CardTitle className="text-base">
                           {rule.title}
                         </CardTitle>
-                        <Badge variant={active ? "info-subtle" : "outline"}>
-                          {active ? "Not evaluated" : "Disabled"}
+                        <Badge variant={!active ? "outline" : breached ? "destructive" : equity ? "success-subtle" : "info-subtle"}>
+                          {!active ? "Disabled" : equity ? breached ? "Outside mandate" : "Within mandate" : observed ? "Fee observed" : "Not evaluated"}
                         </Badge>
                       </div>
                       <Switch
@@ -203,12 +203,8 @@ export function InvestmentReviewPage() {
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-3 text-sm">
-                    <p className="text-muted-foreground">{rule.requirement}</p>
-                    <p>
-                      {active
-                        ? "Evaluation is unavailable for this rule. No outcome or threshold has been assumed."
-                        : "Excluded from review coverage. Re-enable to include it in your review list."}
-                    </p>
+                    <p className="text-muted-foreground">{equity ? `Current equity ${mandateReview.equityPercent.toFixed(1)}% · adopted ceiling ${mandateReview.equityLimit}%` : observed ? `Weighted annual investment fee ${mandateReview.feePercent.toFixed(2)}%` : rule.requirement}</p>
+                    <p>{!active ? "Excluded from review coverage. Re-enable to include it in your review list." : equity ? "Evaluated using the same active mandate as the portfolio optimiser." : observed ? "No fee ceiling has been adopted; this observation is not a compliance pass." : "Evaluation is unavailable for this rule. No outcome or threshold has been assumed."}</p>
                   </CardContent>
                 </Card>
               );

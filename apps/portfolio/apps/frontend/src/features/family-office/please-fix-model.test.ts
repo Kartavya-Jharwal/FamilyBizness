@@ -11,7 +11,7 @@ it("routes one literal request into the existing operations register and enforce
  const sent=sendPleaseFix(localStorage,id,"office-role-0","FO-INSTRUMENTS","Associate","");
  expect(repairRequests(localStorage,id).find(row=>row.id===sent.actionId)?.title).toBe("please fix");
  expect(sendPleaseFix(localStorage,id,"office-role-0","FO-INSTRUMENTS","Associate","").actionId).toBe(sent.actionId);
- expect(()=>updatePleaseFix(localStorage,id,"office-role-6",sent.actionId,"accept","")).toThrow(/assigned/);
+ expect(()=>updatePleaseFix(localStorage,id,"office-role-5",sent.actionId,"accept","")).toThrow(/assigned/);
  updatePleaseFix(localStorage,id,"office-role-4",sent.actionId,"accept","");
  expect(()=>updatePleaseFix(localStorage,id,"office-role-4",sent.actionId,"resolve","")).toThrow(/evidence/);
  updatePleaseFix(localStorage,id,"office-role-4",sent.actionId,"resolve","English-law instrument cross-reference reviewed and corrected in instrument schedule.");
@@ -19,8 +19,8 @@ it("routes one literal request into the existing operations register and enforce
  updatePleaseFix(localStorage,id,"office-role-0",sent.actionId,"reopen","");
  expect(repairRequests(localStorage,id).find(row=>row.id===sent.actionId)?.status).toBe("Open");
  assignPleaseFix(localStorage,id,"office-role-0",sent.actionId,"Family technician");
- expect(repairRequests(localStorage,id).find(row=>row.id===sent.actionId)?.owner).toBe("Family technician");
- expect(()=>updatePleaseFix(localStorage,id,"office-role-4",sent.actionId,"accept","")).toThrow(/assigned/);
+ expect(repairRequests(localStorage,id).find(row=>row.id===sent.actionId)?.owner).toBe("Associate / family technician");
+ expect(()=>updatePleaseFix(localStorage,id,"office-role-5",sent.actionId,"accept","")).toThrow(/assigned/);
 });
 it("blocks closing an out-of-date clause snapshot until the current clause is reviewed again",()=>{
  const id=familyOfficeCaseId,sent=sendPleaseFix(localStorage,id,"office-role-0","FO-INSTRUMENTS","Family technician","");

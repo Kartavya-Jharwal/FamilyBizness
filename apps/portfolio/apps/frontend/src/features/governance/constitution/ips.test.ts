@@ -13,7 +13,7 @@ function clear() { localStorage.removeItem(ipsKey(profile())); localStorage.remo
 beforeEach(clear); afterEach(clear);
 function activate(content = text) {
   const saved = saveWorkspace(localStorage, workspaceKey(profile()), { ...freshRecord(), content });
-  return activateIps(localStorage, profile(), saved, "USD", true);
+  return activateIps(localStorage, profile(), saved, "GBP", true);
 }
 describe("IPS financial mutation enforcement", () => {
   it("evaluates all four working examples and enforces their saved revision", async () => {
@@ -52,9 +52,9 @@ describe("IPS financial mutation enforcement", () => {
   });
   it("requires review of an exact saved revision and retains active revision across draft edits", () => {
     const saved = saveWorkspace(localStorage, workspaceKey(profile()), { ...freshRecord(), content: text });
-    expect(() => activateIps(localStorage, profile(), saved, "USD", false)).toThrow("review");
-    expect(() => activateIps(localStorage, profile(), { ...saved, content: "# Different" }, "USD", true)).toThrow("exact revision");
-    activateIps(localStorage, profile(), saved, "USD", true);
+    expect(() => activateIps(localStorage, profile(), saved, "GBP", false)).toThrow("review");
+    expect(() => activateIps(localStorage, profile(), { ...saved, content: "# Different" }, "GBP", true)).toThrow("exact revision");
+    activateIps(localStorage, profile(), saved, "GBP", true);
     saveWorkspace(localStorage, workspaceKey(profile()), { ...saved, content: text.replace("55%", "90%") });
     expect(readActiveIps(localStorage, profile())?.revision).toBe(1);
     expect(readActiveIps(localStorage, "another-profile")).toBeNull();
@@ -67,13 +67,13 @@ describe("IPS financial mutation enforcement", () => {
   });
   it("blocks financial metadata changes without post-change valuation but permits a rename", async () => {
     activate();
-    await expect(invoke("update_settings", { settingsUpdate: { baseCurrency: "GBP" } })).rejects.toThrow("needs review");
-    expect(getDemoStore().settings.baseCurrency).toBe("USD");
+    await expect(invoke("update_settings", { settingsUpdate: { baseCurrency: "EUR" } })).rejects.toThrow("needs review");
+    expect(getDemoStore().settings.baseCurrency).toBe("GBP");
     await expect(invoke("update_account", { accountUpdate: { id: "acc-cash", name: "Local name" } })).resolves.toBeTruthy();
   });
   it("fails closed for currency/scope corruption and empty coverage", async () => {
     const active = activate();
-    expect(assessIps(active, { ...demoIpsFacts(), currency: "GBP" })[0].status).toBe("not_configured");
+    expect(assessIps(active, { ...demoIpsFacts(), currency: "EUR" })[0].status).toBe("not_configured");
     expect(assessIps(active, { ...demoIpsFacts(), accounts: [] })[0].status).toBe("not_configured");
     localStorage.setItem(ipsKey(profile()), JSON.stringify({ ...active, profileId: "wrong" }));
     await expect(invoke("delete_account", { accountId: "acc-education" })).rejects.toThrow("profile scope");
@@ -95,7 +95,7 @@ describe("IPS financial mutation enforcement", () => {
     activate(); await invoke("delete_account", { accountId: "acc-education" });
     const current = loadWorkspace(localStorage, workspaceKey(profile()));
     const next = saveWorkspace(localStorage, workspaceKey(profile()), { ...current, content: text.replace("55%", "51%") });
-    activateIps(localStorage, profile(), next, "USD", true);
+    activateIps(localStorage, profile(), next, "GBP", true);
     expect(() => resetDemoStore()).toThrow("IPS revision 2");
     expect(getDemoStore().accounts.some((account) => account.id === "acc-education")).toBe(false);
   });

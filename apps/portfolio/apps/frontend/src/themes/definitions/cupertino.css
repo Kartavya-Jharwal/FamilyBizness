@@ -3,19 +3,19 @@
 :root {
   /* Geometry follows iOS 26.5: 26pt grouped corners, capsule controls, 44pt
      touch targets, and nested radii kept concentric with their containers. */
-  --radius: 1.125rem;
-  --button-radius: 9999px;
-  --control-radius: 0.875rem;
+  --radius: var(--design-cupertino-radius);
+  --button-radius: var(--design-radius-button);
+  --control-radius: var(--design-cupertino-control-radius);
   --control-height: 2.75rem;
   /* Grouped cells: no outline, a hairline and a short ambient shadow. */
-  --card-radius: 1.625rem;
+  --card-radius: var(--design-cupertino-card-radius);
   --card-border: transparent;
   --card-shadow:
     0 0 0 0.5px rgb(0 0 0 / 0.04), 0 1px 2px rgb(0 0 0 / 0.04), 0 6px 20px -10px rgb(0 0 0 / 0.1);
-  --popup-radius: 1.375rem;
-  --dialog-radius: 2.25rem;
-  --badge-radius: 9999px;
-  --segmented-radius: 9999px;
+  --popup-radius: var(--design-cupertino-popup-radius);
+  --dialog-radius: var(--design-cupertino-dialog-radius);
+  --badge-radius: var(--design-radius-badge);
+  --segmented-radius: var(--design-radius-segmented);
   /* Apple's system faces for each role. Choosing the theme suggests Sans (SF
      Pro); the Font setting still decides the role. "Rubik Arabic" covers Arabic
      letters only (unicode-range), so it comes first without changing Latin text. */

@@ -5,10 +5,13 @@
 
 @theme inline {
   /* Radius scale derived from host --radius */
-  --radius-sm: calc(var(--radius) - 0.25rem);
-  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-sm: calc(var(--radius) - var(--design-radius-offset-large));
+  --radius-md: calc(var(--radius) - var(--design-radius-offset-small));
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 0.25rem);
+  --radius-xl: calc(var(--radius) + var(--design-radius-offset-large));
+  --radius-2xl: var(--design-radius-2xl);
+  --radius-3xl: var(--design-radius-3xl);
+  --radius-4xl: var(--design-radius-navigation);
 
   /* Map semantic colors to host variables */
   --color-background: var(--background);

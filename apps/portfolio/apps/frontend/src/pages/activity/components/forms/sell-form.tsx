@@ -1,3 +1,4 @@
+import { RollingNumberInput } from "@fb/ui";
 import { useHoldings } from "@/hooks/use-holdings";
 import { useSettings } from "@/hooks/use-settings";
 import { ACTIVITY_SUBTYPES, ActivityType, QuoteMode } from "@/lib/constants";
@@ -631,7 +632,7 @@ export function SellForm({
                     })}
                   </span>
                   <span>·</span>
-                  <input
+                  <RollingNumberInput
                     type="number"
                     {...form.register("contractMultiplier", { valueAsNumber: true })}
                     readOnly={isEditing}

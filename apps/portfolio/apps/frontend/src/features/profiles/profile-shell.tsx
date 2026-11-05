@@ -57,7 +57,7 @@ export function ProfileShell({ children }: { children: ReactNode }) {
   const tile = (row: ProfileSummary) => <article key={row.id} className={`${cardSurfaceClassName} flex flex-col items-center gap-3 p-5 text-center`}>
     <ProfileAvatar id={avatar(row)} className="size-20" animated={false}/>
     <h2 className="text-base font-semibold">{row.name}</h2>
-    <DitherButton color="green" variant="dotted" bloom="off" className={buttonVariants({ variant: "outline", className: "mt-auto" })} disabled={saving || row.lockEnabled} onClick={() => void selectProfile(row.id)}>Open {row.name}</DitherButton>
+    <DitherButton aria-label={`Open ${row.name}`} color="green" variant="dotted" bloom="off" className={buttonVariants({ variant: "outline", className: "mt-auto" })} disabled={saving || row.lockEnabled} onClick={() => void selectProfile(row.id)}>Open profile</DitherButton>
     {row.lockEnabled && <p className="text-xs text-muted-foreground">Open this protected profile in its original host.</p>}
   </article>;
   if (choosing) return <main className="relative isolate mx-auto max-w-4xl space-y-6 p-6 text-foreground">

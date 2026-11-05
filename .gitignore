@@ -51,3 +51,6 @@ apps/portfolio/.dependency-cache-before-type-repair/
 
 # Recoverable retired sprite sources; active avatar IDs remain in source.
 artifacts/retired-profile-art/
+
+# Legacy local preview captures (current captures live in apps/portfolio/artifacts)
+artifacts/finance-addons/

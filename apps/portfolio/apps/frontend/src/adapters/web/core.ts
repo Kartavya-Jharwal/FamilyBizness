@@ -1,10 +1,12 @@
 // Static demo adapter core — invoke serves fixtures / localStorage (no HTTP).
 import type { Logger } from "../types";
+import { readPreparedOfficePortfolio } from "../prepared-office-portfolio";
 import { selectedProfileId } from "@/features/profiles/session";
 import { readActiveIps } from "@/features/governance/constitution/ips";
 import type { Account, AccountScope, Goal, NewGoal, NewTaxonomyCategory, Settings, TaxonomyCategory } from "@/lib/types";
-import { SAMPLE_CURRENCY, SAMPLE_ACCOUNTS, SAMPLE_MONTHLY_SPENDING, SAMPLE_POSITIONS, SAMPLE_SPENDING_CATEGORIES } from "../demo-family";
+import { SAMPLE_CURRENCY, SAMPLE_MONTHLY_SPENDING, SAMPLE_SPENDING_CATEGORIES } from "../demo-family";
 import {
+  samplePositions,
   demoAiProviders,
   demoAllocations,
   demoAppInfo,
@@ -176,6 +178,8 @@ export const invoke = async <T>(
       return s.settings as T;
     case "update_settings": {
       const patch = asPartialSettings(p.settingsUpdate ?? p);
+      const prepared = readPreparedOfficePortfolio();
+      if (prepared && patch.baseCurrency && patch.baseCurrency !== prepared.currency) throw Error("The prepared office reporting currency is owned by its Financial Book. Update its reporting currency and FX rates together in Capital & liquidity.");
       mutateDemoStore((st) => {
         st.settings = { ...st.settings, ...patch };
       });
@@ -211,13 +215,17 @@ export const invoke = async <T>(
         accountId?: string;
       };
       const id = input.id ?? input.accountId;
+      const projected = readPreparedOfficePortfolio()?.accounts.find(row => row.id === id);
+      if (projected && ["balance", "currency", "isArchived", "isActive", "trackingMode", "accountType"].some(key => key in input && input[key as keyof Account] !== projected[key as keyof Account])) throw Error("This account is valued from the Financial Book. Edit its financial records in Capital & liquidity.");
       mutateDemoStore((st) => {
         const i = st.accounts.findIndex((a) => a.id === id);
         if (i >= 0) st.accounts[i] = { ...st.accounts[i], ...input, updatedAt: new Date() };
+        else if (projected) st.accounts.push({ ...projected, ...input, updatedAt: new Date() });
       });
       return getDemoStore().accounts.find((a) => a.id === id) as T;
     }
     case "delete_account": {
+      if (readPreparedOfficePortfolio()?.accounts.some(row => row.id === p.accountId || row.id === p.id)) throw Error("This account belongs to the Financial Book. Remove or transfer its owning balance there before changing the reporting perimeter.");
       mutateDemoStore((st) => {
         st.accounts = st.accounts.filter((a) => a.id !== p.accountId && a.id !== p.id);
       });
@@ -240,10 +248,11 @@ export const invoke = async <T>(
       return demoHoldings().filter((holding) => holding.instrument?.id === p.assetId) as T;
     case "get_assets":
     case "get_asset_profile": {
-      const assets = SAMPLE_POSITIONS.filter((position) => position.kind !== "cash").map((position) => ({
+      const assets = samplePositions().filter((position) => position.kind !== "cash").map((position) => ({
         id: `asset-${position.id}`, kind: position.kind === "private" ? "PRIVATE_EQUITY" : "INVESTMENT",
-        name: position.name, displayCode: position.symbol, isActive: true, quoteMode: "MANUAL", quoteCcy: SAMPLE_CURRENCY,
-        instrumentType: "FUND", instrumentSymbol: position.symbol, createdAt: "2025-01-01", updatedAt: "2025-01-01",
+        name: position.name, displayCode: position.symbol, isActive: true, quoteMode: "MANUAL", quoteCcy: position.currency,
+        metadata: { allocation: position.allocation, financialBookRecordId: position.sourceRecordId, entityId: position.entity, sector: position.sector },
+        instrumentType: position.kind === "private" ? "EQUITY" : "FUND", instrumentSymbol: position.symbol, createdAt: "2025-01-01", updatedAt: "2025-01-01",
       }));
       return (command === "get_assets" ? assets : assets.find((asset) => asset.id === p.assetId) ?? null) as T;
     }
@@ -269,7 +278,10 @@ export const invoke = async <T>(
       const accountIds = scopedAccountIds(p.filter as AccountScope | undefined);
       const startDate = p.startDate as string | undefined;
       const endDate = p.endDate as string | undefined;
-      const rows = demoValuationHistory().filter((row) => accountIds.includes(row.accountId) &&
+      const prepared = readPreparedOfficePortfolio();
+      const history = demoValuationHistory();
+      if (prepared && prepared.accounts.every(account => accountIds.includes(account.id))) return history.filter(row => row.accountId === "TOTAL" && (!startDate || row.valuationDate >= startDate) && (!endDate || row.valuationDate <= endDate)) as T;
+      const rows = history.filter((row) => accountIds.includes(row.accountId) &&
         (!startDate || row.valuationDate >= startDate) && (!endDate || row.valuationDate <= endDate));
       const totals = new Map<string, (typeof rows)[number]>();
       for (const row of rows) {
@@ -284,7 +296,7 @@ export const invoke = async <T>(
       return [...totals.values()] as T;
     }
     case "get_latest_valuations": {
-      const ids = (p.accountIds as string[] | undefined) ?? SAMPLE_ACCOUNTS.map((account) => account.id);
+      const ids = (p.accountIds as string[] | undefined) ?? s.accounts.map((account) => account.id);
       const history = demoValuationHistory();
       return ids
         .map((id) => [...history].reverse().find((v) => v.accountId === id))
@@ -300,9 +312,9 @@ export const invoke = async <T>(
       return { ...valuation, accounts, summary: { ...valuation.summary,
         scopeId: ids.join(","), cashBalanceBase: cash, investmentMarketValueBase: invested,
         totalValueBase: total, accountCount: accounts.length,
-        holdingsCount: SAMPLE_POSITIONS.filter((position) => ids.includes(position.accountId)).length,
-        currencySplit: [{ currency: SAMPLE_CURRENCY, valueBase: total, percentage: total ? 100 : 0 }],
-        cashCurrencySplit: [{ currency: SAMPLE_CURRENCY, valueBase: cash, percentage: cash ? 100 : 0 }],
+        holdingsCount: samplePositions().filter((position) => ids.includes(position.accountId)).length,
+        currencySplit: [...new Set(demoHoldings().filter(row => ids.includes(row.accountId)).map(row => row.localCurrency))].map(currency => { const valueBase = demoHoldings().filter(row => ids.includes(row.accountId) && row.localCurrency === currency).reduce((sum, row) => sum + row.marketValue.base, 0); return { currency, valueBase, percentage: total ? valueBase / total * 100 : 0 }; }),
+        cashCurrencySplit: [...new Set(demoHoldings().filter(row => ids.includes(row.accountId) && row.holdingType === "cash").map(row => row.localCurrency))].map(currency => { const valueBase = demoHoldings().filter(row => ids.includes(row.accountId) && row.localCurrency === currency && row.holdingType === "cash").reduce((sum, row) => sum + row.marketValue.base, 0); return { currency, valueBase, percentage: cash ? valueBase / cash * 100 : 0 }; }),
       } } as T;
     }
     case "get_app_info":
@@ -366,7 +378,13 @@ export const invoke = async <T>(
           status: "POSTED", date, quantity: null, unitPrice: null, fee: null, needsReview: false,
           comment: "", createdAt: date, updatedAt: date }));
       }).flat();
-      const rows = [...incomeRows, ...spendingRows].filter((row) =>
+      const prepared = readPreparedOfficePortfolio();
+      const bookRows = prepared?.book.movements.filter(row => prepared.book.wealthOwnerIds.includes(row.entity)).map(row => {
+        const accountId = prepared.positions.find(position => position.entity === row.entity && position.kind === "cash")?.accountId ?? "acc-cash";
+        const amount = row.amount * prepared.book.fx.find(rate => rate.currency === row.currency)!.average, date = new Date(`${prepared.asOf}T00:00:00Z`);
+        return { id: `book-movement-${row.id}`, accountId, accountName: s.accounts.find(account => account.id === accountId)?.name ?? "Family treasury", accountCurrency: prepared.currency, assetId: "", assetSymbol: "", assetName: row.account, activityType: amount < 0 ? "WITHDRAWAL" : "DEPOSIT", amount: String(Math.abs(amount)), currency: prepared.currency, status: "POSTED", date, quantity: null, unitPrice: null, fee: null, needsReview: false, comment: `Financial-book period cash movement reported at ${prepared.asOf}; source ${row.id}`, createdAt: date, updatedAt: date };
+      });
+      const rows = (bookRows ?? [...incomeRows, ...spendingRows]).filter((row) =>
         (!accountIds?.length || accountIds.includes(row.accountId)) && (!types?.length || types.includes(row.activityType)) &&
         (p.needsReviewFilter === undefined || row.needsReview === p.needsReviewFilter) &&
         (!keyword || `${row.assetName} ${row.assetSymbol}`.toLowerCase().includes(keyword)) &&
@@ -420,12 +438,12 @@ export const invoke = async <T>(
       const end = history.at(-1)?.totalValueBase ?? 0;
       const valueReturn = start ? (end - start) / start : null;
       return {
-        scope: { id: String(p.itemId ?? "demo"), currency: SAMPLE_CURRENCY },
+        scope: { id: String(p.itemId ?? "demo"), currency: readPreparedOfficePortfolio()?.currency ?? SAMPLE_CURRENCY },
         period: { startDate: history[0]?.valuationDate, endDate: history.at(-1)?.valuationDate },
         mode: valueReturn === null ? "notApplicable" : "valueReturn",
         returns: { twr: null, irr: null, valueReturn, annualizedValueReturn: null },
         risk: {}, attribution: {},
-        dataQuality: { status: valueReturn === null ? "noData" : "partial", warnings: [], notApplicableReasons: [] },
+        dataQuality: { status: valueReturn === null ? "noData" : "partial", warnings: readPreparedOfficePortfolio() ? ["Recorded AUM changes are value changes, not TWR. Historical account/cash splits and acquisition bases are not recorded."] : [], notApplicableReasons: [] },
         summary: valueReturn === null ? undefined : { amount: end - start, percent: valueReturn, method: "valueReturn",
           basis: "marketValue", quality: "partial", amountStatus: "complete", percentStatus: "complete", basisStatus: "complete", reasons: [] },
         series: start ? history.map((row) => ({ date: row.valuationDate, value: (row.totalValueBase - start) / start })) : [],
@@ -433,14 +451,16 @@ export const invoke = async <T>(
     }
     case "calculate_performance_summary":
       return {
-        scope: { id: String(p.itemId ?? "demo"), currency: SAMPLE_CURRENCY },
+        scope: { id: String(p.itemId ?? "demo"), currency: readPreparedOfficePortfolio()?.currency ?? SAMPLE_CURRENCY },
         summary: null,
         series: [],
       } as T;
     case "get_performance_summaries":
       return {} as T;
     case "get_exchange_rates":
-    case "get_latest_exchange_rates":
+    case "get_latest_exchange_rates": {
+      const prepared = readPreparedOfficePortfolio();
+      if (prepared) return prepared.book.fx.map(row => ({ id: `${row.currency}-${prepared.currency}`, fromCurrency: row.currency, toCurrency: prepared.currency, rate: row.closing, source: prepared.book.source, timestamp: `${prepared.asOf}T00:00:00Z` })) as T;
       return [
         {
           id: "usd-usd",
@@ -451,6 +471,7 @@ export const invoke = async <T>(
           timestamp: new Date().toISOString(),
         },
       ] as T;
+    }
     case "get_exchange_rates_for_dates":
       return [] as T;
     case "list_installed_addons":

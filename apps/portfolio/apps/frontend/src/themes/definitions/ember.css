@@ -2,17 +2,17 @@
 :root {
   /* Geometry, elevation and surfaces are Claude +'s: generous radii, compact
      controls, two-layer soft shadows, warm paper canvas. */
-  --radius: 1rem;
+  --radius: var(--design-ember-radius);
   /* Generous radii, compact controls (36px on a mouse), two-layer soft shadow. */
-  --button-radius: 0.875rem;
-  --control-radius: 0.875rem;
+  --button-radius: var(--design-ember-button-radius);
+  --control-radius: var(--design-ember-control-radius);
   --control-height: 2.25rem;
-  --card-radius: 1rem;
+  --card-radius: var(--design-ember-card-radius);
   --card-shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --popup-radius: 0.875rem;
-  --dialog-radius: 1rem;
-  --badge-radius: 0.875rem;
-  --segmented-radius: 0.875rem;
+  --popup-radius: var(--design-ember-popup-radius);
+  --dialog-radius: var(--design-ember-dialog-radius);
+  --badge-radius: var(--design-ember-badge-radius);
+  --segmented-radius: var(--design-ember-segmented-radius);
   --background: oklch(0.993 0 0);
   --foreground: oklch(0.3438 0.0269 95.7226);
   --card: oklch(0.9665 0.0067 97.3521);

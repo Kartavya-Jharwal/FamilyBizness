@@ -8,9 +8,9 @@
 
   /* Geometry the shared components read (packages/ui). Each is the value the
      component had before themes, so Classic looks the same. */
-  --button-radius: var(--design-radius-pill);
+  --button-radius: var(--design-radius-button);
   /* Fields, select triggers and toggles (rounded-md). */
-  --control-radius: calc(var(--radius) - 0.125rem);
+  --control-radius: var(--design-radius-control);
   /* Field and default button height. Touch screens never go below 2.75rem
      (globals.css, --control-size). */
   --control-height: var(--design-control-height);
@@ -19,12 +19,12 @@
   --card-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   /* Select lists, menus, popovers, hover cards, the command palette; their rows
      are 0.125rem less round (rounded-xl). */
-  --popup-radius: 1rem;
+  --popup-radius: var(--design-radius-popup);
   /* Dialogs and alert dialogs on wider screens. */
   --dialog-radius: var(--radius);
-  --badge-radius: var(--design-radius-pill);
+  --badge-radius: var(--design-radius-badge);
   /* Segmented controls (AnimatedToggleGroup) and their thumb. */
-  --segmented-radius: var(--design-radius-pill);
+  --segmented-radius: var(--design-radius-segmented);
 
   /* Component surfaces the shared components read (packages/ui). Themes change a
      component's look here, never with rules, so a call site's own classes still

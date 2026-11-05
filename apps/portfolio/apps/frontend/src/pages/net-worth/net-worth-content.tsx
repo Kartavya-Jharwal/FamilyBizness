@@ -395,6 +395,7 @@ export function NetWorthContent() {
             <div className="space-y-6 lg:col-span-1">
               {velocity && (
                 <VelocityCard
+                  driversAvailable={netWorthData?.changeAttributionAvailable !== false}
                   velocity={velocity}
                   trailingYearMonthly={trailingYearMonthly}
                   currency={currency}

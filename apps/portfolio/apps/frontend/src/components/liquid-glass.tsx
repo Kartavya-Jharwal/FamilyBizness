@@ -29,7 +29,7 @@ export function LiquidGlass({
       case "panel":
         return `${baseClasses} p-8 rounded-2xl`;
       case "floating":
-        return `${baseClasses} p-2 rounded-full shadow-2xl`;
+        return `${baseClasses} p-2 rounded-(--design-radius-navigation) shadow-2xl`;
       default:
         return baseClasses;
     }

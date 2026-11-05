@@ -2,12 +2,15 @@ import type { ProfileState, ProfileSummary } from "./api";
 import { goldenBirdSource } from "@/features/family-office/golden-bird-source";
 import { workspaceForProfile } from "./profile-workspace";
 type Store = Pick<Storage, "getItem" | "setItem" | "removeItem">;
-export const localProfileKeys = { registry: "familybizness:demo-profiles", selected: "familybizness:selected-demo-profile", entrySeen: "familybizness:composite-entry-seen:v1" };
+export const localProfileKeys = { registry: "familybizness:demo-profiles", selected: "familybizness:selected-demo-profile", entrySeen: "familybizness:composite-entry-seen:v1", roleBackup: "familybizness:profiles-before-role-consolidation" };
 export const sourceExampleProfileId = goldenBirdSource.identity.profileId;
 const avatars = ["line-silver-animated", "line-curls-animated", "line-beard-animated", "line-wave-animated", "line-freckles-animated", "line-bun-animated", "line-bob-animated"];
-export const localRoleProfiles: ProfileSummary[] = ["Patriarch", "Family board", "Managing director", "CEO", "Associate", "Legal counsel", "Family technician"].map((name, i) => ({ id: `office-role-${i}`, name, avatarId: avatars[i], lockEnabled: false }));
+export const canonicalRoleId = (id: string | null): string | null => id === "office-role-3" ? "office-role-2" : id === "office-role-6" ? "office-role-4" : id;
+export const localRoleProfiles: ProfileSummary[] = [[0, "Patriarch"], [1, "Family board"], [2, "Managing director / CEO"], [4, "Associate / family technician"], [5, "Legal counsel"]].map(([i, name]) => ({ id: `office-role-${i}`, name: String(name), avatarId: avatars[Number(i)], lockEnabled: false }));
 const defaults = [...localRoleProfiles, { id: sourceExampleProfileId, name: "Project Golden Bird", avatarId: "default", lockEnabled: false }];
 function write(store: Store, changes: Map<string, string | null>) {
+    const registry = store.getItem(localProfileKeys.registry);
+    if (changes.has(localProfileKeys.registry) && registry && !store.getItem(localProfileKeys.roleBackup) && /office-role-(3|6)/.test(registry)) changes.set(localProfileKeys.roleBackup, registry);
     const before = new Map([...changes.keys()].map(key => [key, store.getItem(key)]));
     try {
         for (const [key, value] of changes)
@@ -27,13 +30,16 @@ export function readLocalProfileState(store: Store = localStorage): ProfileState
         if (!Array.isArray(saved) || !saved.length || saved.some(row => !row || typeof row.id !== "string" || typeof row.name !== "string" || typeof row.avatarId !== "string" || (row.lockEnabled !== undefined && typeof row.lockEnabled !== "boolean")) || new Set(saved.map(row => row.id)).size !== saved.length)
             throw Error("Saved profiles need recovery; existing records have been retained.");
         const retained = saved.map(row => ({ ...row, lockEnabled: row.lockEnabled === true }));
-        profiles = [...defaults.map(row => retained.find(item => item.id === row.id) ?? row), ...retained.filter(row => !defaults.some(item => item.id === row.id))];
+        profiles = [...defaults.map(row => {
+            const previous = retained.find(item => item.id === row.id) ?? retained.find(item => canonicalRoleId(item.id) === row.id);
+            return previous ? { ...previous, id: row.id, ...(["office-role-2", "office-role-4"].includes(row.id) ? { name: row.name } : {}) } : row;
+        }), ...retained.filter(row => !defaults.some(item => item.id === canonicalRoleId(row.id)))];
     }
-    const selected = store.getItem(localProfileKeys.selected);
+    const selected = canonicalRoleId(store.getItem(localProfileKeys.selected));
     const current = profiles.find(row => row.id === selected);
     return { profiles, session: current && !current.lockEnabled ? { profileId: workspaceForProfile(current.id), scopeId: `demo-static-${current.id}` } : null, starting: false };
 }
-export function selectedLocalPersona(store: Store = localStorage): string | null { return store.getItem(localProfileKeys.selected); }
+export function selectedLocalPersona(store: Store = localStorage): string | null { return canonicalRoleId(store.getItem(localProfileKeys.selected)); }
 export function hasSeenOfficeEntry(store: Store = localStorage): boolean { return store.getItem(localProfileKeys.entrySeen) !== null; }
 /** The static adapter uses the same command boundary as profile entry and management. */
 export function localProfileCommand(command: string, payload: Record<string, unknown> = {}, store: Store = localStorage): unknown {
@@ -45,7 +51,8 @@ export function localProfileCommand(command: string, payload: Record<string, unk
     if (command === "profile_activity")
         return null;
     const input = payload.input && typeof payload.input === "object" ? payload.input as Record<string, unknown> : payload;
-    const id = input.profileId ?? input.profile_id ?? input.id;
+    const suppliedId = input.profileId ?? input.profile_id ?? input.id;
+    const id = typeof suppliedId === "string" ? canonicalRoleId(suppliedId) : suppliedId;
     if (command === "unlock_profile") {
         const profile = state.profiles.find(row => row.id === id);
         if (!profile)

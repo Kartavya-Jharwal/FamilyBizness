@@ -31,7 +31,8 @@ const modKey = isAppleDevice() ? "⌘" : "Ctrl";
 
 export function AppSidebar({ navigation }: AppSidebarProps) {
   const { t } = useTranslation();
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
+  const { pathname } = useLocation();
   const { logout, requiresAuth } = useAuth();
   const addonMenuItems = navigation?.addonMenuItems ?? navigation?.addons ?? [];
 
@@ -132,7 +133,13 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
                 </Button>
 
                 {navigation?.primary?.map((item) => (
-                  <NavItem key={item.title} item={item} collapsed={collapsed} />
+                  <div key={item.title}>
+                    <NavItem item={item} collapsed={collapsed} />
+                    {item.children && <details key={item.children.some(child => isPathActive(pathname, child.href)) ? "active-finance" : "secondary-finance"} open={item.children.some(child => isPathActive(pathname, child.href))} className={collapsed ? "sr-only" : "ms-4 border-s ps-2"}>
+                      <summary className="cursor-pointer px-2 py-2 text-xs font-semibold text-muted-foreground">Planning & finance</summary>
+                      {item.children.map(child => <NavItem key={child.href} item={child} collapsed={false} className="h-auto min-h-9 whitespace-normal py-2 text-xs" />)}
+                    </details>}
+                  </div>
                 ))}
 
                 {navigation?.pinnedAddons?.map((item) => (
@@ -287,7 +294,7 @@ function NavItem({ item, collapsed, className, ...props }: NavItemProps) {
       className={cn(
         buttonVariants({ variant: isActive ? "secondary" : "ghost" }),
         cn(
-          "text-foreground [&_svg]:size-5! mb-1 h-12 rounded-md transition-all duration-300",
+          "text-foreground [&_svg]:size-5! mb-1 min-h-12 h-auto whitespace-normal rounded-md py-3 transition-all duration-300",
           // The selected item is a flat fill, not a raised button.
           isActive &&
             "bg-secondary hover:bg-secondary/80 border-transparent bg-none shadow-none",

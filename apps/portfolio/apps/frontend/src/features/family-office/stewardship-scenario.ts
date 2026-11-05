@@ -1,4 +1,5 @@
-import { financeBookSchema, consolidateBook, fairValueWealth, type FinanceBook } from "./finance-book-model";
+import { preparedBookClassifications, preparedSecurityClassifications, withPreparedClassifications } from "./allocation-metadata";
+import { financeBookSchema, financeBookDefaults, consolidateBook, fairValueWealth, type FinanceBook } from "./finance-book-model";
 import { investmentSchema, type InvestmentInput } from "./investment-model";
 import { ihtSchema, type IhtInput } from "./estate-iht-model";
 import type { DistributionInput } from "./golden-bird-rules";
@@ -25,9 +26,12 @@ export function stewardshipScenario(base: {
     const factors = [.83, .85, .87, .88, .86, .84, .89, .9, .92, .91, .94, .95, .97, .96, .98, 1];
     b.wealthHistory = factors.map((factor, i) => ({ asOf: new Date(Date.UTC(2025, 7 + i, 1)).toISOString().slice(0, 10), grossAum: wealth.grossAum * factor, netWealth: wealth.grossAum * factor - 1000000, externalFlow: i === 8 ? 100000 : 0, source: "Monthly family capital report" }));
     b.wealthHistory[b.wealthHistory.length - 1].asOf = b.asOf;
-    const investments = investmentSchema.parse({ ...base.investments, source: "Family investment mandate", initial: 8000000, spend: 876000, reserve: 800000, paths: 300, target: 5, riskMax: 12, equityMax: 65, securities: base.investments.securities.map(s => ({ ...s, currency: "GBP" })), eventCost: 1200000 });
+    const investments = investmentSchema.parse({ ...base.investments, source: "Family investment mandate", initial: 8000000, spend: 876000, reserve: 800000, paths: 300, target: 5, riskMax: 12, equityMax: 65, securities: base.investments.securities.map(s => ({ ...s, currency: s.id === "EQ-ENERGY" ? "USD" : s.id === "BOND" ? "EUR" : "GBP" })), eventCost: 1200000 });
     const estate = ihtSchema.parse({ ...base["statutory-estate"], source: "Family estate funding plan", assets: base["statutory-estate"].assets.map(a => ({ ...a, value: a.id === "business" ? wealth.fairValue : a.id === "home" ? 1200000 : a.id === "cash" ? 350000 : a.value })), openingFunding: 350000, funding: [{ id: "insurance", label: "Succession insurance", month: 3, amount: 2000000, source: "Trust-held policy" }] });
     const distribution = { ...base["constitution-distribution"], unrestrictedCash: 4000000, unfundedDebtAndStatutory: 450000, monthlyFixedCosts: 80000, approvedDignityReserve: 150000, distributableProfitCapacity: 1200000 };
+    for (const currency of new Set(investments.securities.map(s=>s.currency))) if(!b.fx.some(row=>row.currency===currency)){const rate=financeBookDefaults.fx.find(row=>row.currency===currency);if(rate)b.fx.push({...rate});}
+    b.balances = withPreparedClassifications(b.balances,preparedBookClassifications);
+    investments.securities = withPreparedClassifications(investments.securities,preparedSecurityClassifications);
     const checked = financeBookSchema.parse(b);
     const errors = consolidateBook(checked).errors;
     if (errors.length)

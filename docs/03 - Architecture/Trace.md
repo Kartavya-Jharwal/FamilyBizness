@@ -57,3 +57,14 @@ Calendar ports Cal DateValues, EmptyCell and EventList structures into the exist
 `please-fix-model.ts` reuses office-review actions and operations records. Admitted persona scope controls issue/assign/accept/resolve/reopen transitions; evidence and current clause fingerprints govern resolution. Generic ERP mutations cannot bypass the workflow. No parallel ticket database is introduced.
 
 Dither Kit's installed local source supplies daily financial charts via `office-charts.tsx`; range bands retain their true floors and ceilings, and the median remains a line. Existing specialised Wealthfolio charts retain privacy, activity markers and axes while using the same installed painter for fill masks. Registry provenance/update guidance: [Dither Kit integration](Dither%20Kit%20-%20Source%20Integration.md).
+
+## Goals and finance add-on navigation
+
+Family purposes → existing goals owner (`/goals`) → budget (`/spending/budget`), IPS (`/office/policy`) and responsibility register (`/office/business`). Fees and trading previews are finance children; connections/imports belong to Settings → Data, not a Swingfolio product category. Scope and provenance: [Architecture](Architecture.md#restored-goals-and-finance-add-on-shells).
+
+
+## Portfolio restoration trace
+
+Adopted IPS → `policyDashboardSignals` → six status cards on the actual Wealthfolio overview. Saved FinanceBook and investment input → `projectPreparedOffice` → donor account/holding/history APIs and the same allocation/FIRE analysis perimeter. Book entities, FX and eliminations → `buildFinancialSheets` → native three-statement summary/detail tables. Saved investment input → existing seeded `projectSecurities` → FIRE, liquidity/stress and sensitivity outputs. Return methods reuse saved performance observations and the existing metric definitions.
+
+Numeric fields → shared `Input`, MoneyInput, QuantityInput and RollingNumberInput → existing form handlers and record owners. The supplied rolling-counter reference is credited in the [responsive control specification](../04%20-%20Design/Responsive%20Breakpoints%20And%20Numeric%20Controls.md). No Reactive CSS runtime is distributed.

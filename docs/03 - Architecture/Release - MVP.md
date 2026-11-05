@@ -43,3 +43,20 @@ The packaged connected journey passes public CTA → profile selection → valua
 The Dither CLI's Windows runner failure and successful Bun/shadcn source install are recorded accurately in [Dither Kit integration](Dither%20Kit%20-%20Source%20Integration.md). Existing source-map, circular-chunk and bundle-size build warnings remain; they are not represented as new functional failures.
 
 Fresh Wealthfolio static seeds now share one GBP currency constant and en-GB/Europe-London defaults; existing saved preferences remain user-owned. Decorative Dither overlays are excluded by the shared legend renderer, preventing repeated series labels. These are changes to the existing seed/legend owners, not page-only label substitutions.
+
+
+## Portfolio restoration and finance previews
+
+The current local MVP restores the actual Wealthfolio overview and adds the requested financial summary/detail sheets, allocation lenses, family FIRE, policy traffic lights and Ghostfolio X-ray/stress/sensitivity entry points. The [readthrough contract](Portfolio%20-%20Financial%20Book%20Readthrough.md) replaces independent donor balances with saved financial-book values. [Analysis architecture](Analysis%20-%20Family%20Portfolio%20Views.md) records the reused engines and classification assumptions.
+
+Five consolidated built-in roles retain legacy-ID admission and recoverable profiles. Numeric fields share the adapted rolling counter with native form semantics, decimal/large-value support, hold/drag controls and retained Pavel Troshkin citation. Finite corner tokens reduce by 30%; circular artwork masks remain circular. [Responsive specification](../04%20-%20Design/Responsive%20Breakpoints%20And%20Numeric%20Controls.md) records the host breakpoints and control fallback.
+
+Additional approved previews are included: connections/imports under Settings → Data, investment fees and trading analytics within finance, and family-purpose shortcuts into the existing saved goal form. These are visible UI previews; broker connections, PDF parsing and matched-trade ingestion do not execute. The saved capital curve uses the existing book. No live connection or new server is implied.
+
+Focused verification: 47 tests passed across ten numeric/profile/policy/repair/statement/allocation/adapter/IPS files; eight velocity-display tests passed, including withholding investment-gain attribution when flow detail is absent; seven categorized Settings tests passed. Frontend and node-config type checks passed. The static build and seven-donor/Dither source checks passed, retaining the known source-map, circular-chunk and bundle-size warnings.
+
+`verify-restored-office.cjs` passed the five-role entry, book-reconciled donor overview, six policy lights, statement tabs, decimal/click/hold controls and valuation readthrough, all ten allocation totals, native currency exposures and net-capital denominator, reactive family FIRE, Monte Carlo stress/sensitivity, return-method tables, Settings redirect and goal prefill. Actual mobile bottom navigation and direct-page overflow checks passed at 390, 768, 1024 and 1440 pixels, plus dark X-ray. Screens were visually inspected. Evidence: `apps/portfolio/artifacts/restoration/Results.json` and adjacent PNGs. The first mobile-test attempt mutated the browser hash outside React Router's stack history; the corrected check exercises actual bottom navigation and cold direct links.
+
+The previous publishing block above remains unresolved. Current local build/package must not be represented as the public deployment.
+
+The additional finance-preview browser check also passed connector feedback, the illustrative trading-calendar selection, purpose-prefilled goal creation, desktop/mobile overflow and dark-mode captures. Its evidence is in `apps/portfolio/artifacts/finance-addons/`.

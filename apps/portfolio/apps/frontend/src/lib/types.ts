@@ -1684,6 +1684,8 @@ export interface LiabilitiesSection {
  * Response containing net worth calculation - structured as a balance sheet
  */
 export interface NetWorthResponse {
+  /** False when saved valuation history cannot separate flows from investment gains. */
+  changeAttributionAvailable?: boolean;
   /** As-of date for the calculation (ISO format) */
   date: string;
   /** Assets section with total and breakdown */

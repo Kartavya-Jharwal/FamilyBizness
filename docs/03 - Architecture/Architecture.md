@@ -71,3 +71,20 @@ Dither Kit's installed local source supplies daily financial charts via `office-
 | `.git`, `.cache`, `node_modules`, `.cursor` | Repository/tool/dependency metadata, excluded from the static runtime |
 
 The retired Portfolio contender remains a reference; active financial pages continue using the existing book, policy, optimiser and operations owners. No Cal provider runtime, Frappe backend, donor Git history or duplicate server is introduced.
+
+## Restored goals and finance add-on shells
+
+The existing `/goals` owner is visible under Capital & liquidity, alongside restored spending/budget routes. Family-purpose links prefill the existing goal form; budget, IPS and responsibility links support the daily planning flow without a parallel goal store or automatic enforcement.
+
+`finance-addon-workspaces.tsx` owns UI previews at `/office/fees`, `/office/trading` and `/settings/connections` (the old office URL redirects). Trading reads the prepared-office projection and refreshes on existing record updates. Its illustrative calendar is explicitly synthetic and never written to the book. No donor sample balances are merged. Fees remain unavailable until fee records are connected. Connector, PDF, storage and export actions display a not-implemented toast. Existing manual activity import is linked separately.
+
+References: [Wealthfolio add-ons](https://github.com/wealthfolio/wealthfolio-addons/tree/main) and [Broker Importer](https://github.com/waldonso2/wealthfolio-importer-addon). Local ZIP sources under `donor/wealthfolio-addons-main` were inspected as UI references; no add-on runtime, parser or financial engine is installed.
+
+
+## Restored portfolio and financial record integration
+
+The daily Stewardship route mounts the existing Wealthfolio PortfolioPage, including the full-width history surface, period selector, account groups, holdings and original investment/family-capital/spending tabs. `/dashboard` redirects to this home. Six compact policy signals use the saved adopted mandate and existing rule evaluator; proximity amber is an early-warning display, not a second policy rule.
+
+The [financial-book readthrough](Portfolio%20-%20Financial%20Book%20Readthrough.md) connects donor account, holding, valuation and family-capital APIs to the existing book. Book/investment changes invalidate the existing query cache. Missing transaction cost basis and flow attribution stay unavailable; a capital increase is not invented investment profit. No second database, portfolio engine or synchronization service is introduced.
+
+[Financial statement sheets](../04%20-%20Design/Financials%20-%20Statement%20Sheets.md) provide native summary, balance, income and cash-flow tables over the book's existing consolidation owner. [Family analysis views](Analysis%20-%20Family%20Portfolio%20Views.md) cover allocations, FIRE, X-ray, sensitivity and return methods through one visible tab set. The merged profile and repair role contract is in [entry flow](../05%20-%20Requirements/Auth%20Flow.md).

@@ -1,0 +1,13 @@
+Rolling Counter — Reactive CSS reference adaptation
+
+Original supplied by the user: Pavel Troshkin, Rolling Counter (click/hold, drag dial, forms).
+https://reactivecss.com
+https://github.com/troshkinpavel/reactivecss
+https://x.com/troshkin_pavel
+
+Original example runtime reference: @reactivecss/core@0.9.1, loaded by the supplied standalone HTML from unpkg.
+FamilyBizness adapts its registered-number transition, digit reels (0–9 plus carry zero), modulo/carry geometry, edge mask, motion blur and reduced-motion pattern.
+
+The host React form/input architecture implements click, hold/cancel, keyboard, drag, min/max/step and disabled semantics. The actual existing input remains the form field; refs, locale formatters and validation are retained. The external Reactive CSS runtime, global body/theme styles, tutorial panels and external handwriting font are not loaded into the application.
+
+The user-supplied example did not include a separate license or copyright notice. This notice retains the supplied citation; it does not invent missing license terms or claim that the Reactive CSS runtime was distributed.

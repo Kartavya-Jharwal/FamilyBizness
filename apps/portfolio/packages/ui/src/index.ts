@@ -82,3 +82,5 @@ export * from "./components/financial";
 
 // Export common components
 export * from "./components/common";
+
+export * from "./components/ui/rolling-number-input";

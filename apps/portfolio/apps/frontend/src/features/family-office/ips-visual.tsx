@@ -1,3 +1,4 @@
+import { investmentPolicyFacts } from "./policy-dashboard";
 import { cardSurfaceClassName } from "@fb/ui";
 import { IpsAdoptionPanel } from "./ips-adoption-panel";
 import { PolicyWorkspace } from "./policy-page";
@@ -25,7 +26,7 @@ export function IpsVisual() {
         message = String(e);
     }
     const raw = localStorage.getItem(`profile:${id}:family-office:investment:1`), p = raw ? investmentSchema.parse(JSON.parse(raw)) : investmentDefaults;
-    const facts = { currency: p.currency, cashPercent: p.securities.filter(s => s.kind === "cash").reduce((n, s) => n + s.current, 0), equityPercent: p.securities.filter(s => s.kind === "equity").reduce((n, s) => n + s.current, 0), illiquidPercent: p.securities.filter(s => !s.liquid).reduce((n, s) => n + s.current, 0), reserveAmount: p.reserve, sectors: p.securities.filter(s => s.current > 0).map(s => s.sector) };
+    const facts = investmentPolicyFacts(p);
     const findings = evaluateRules(policy, facts, ["cash-minimum", "equity-maximum", "illiquid-maximum", "reserve-minimum", "excluded-sector"]);
     const labels: Record<string, string> = { "cash-minimum": "Keep investment cash available", "equity-maximum": "Limit public-equity exposure", "illiquid-maximum": "Cap illiquid commitments", "reserve-minimum": "Protect succession liquidity", "excluded-sector": "Apply the values screen", "approval-threshold": "Obtain independent approval" };
     const donor = loadWorkspace(localStorage, workspaceKey(id)), parsed = parseConstitution(donor.content);

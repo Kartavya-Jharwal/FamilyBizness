@@ -1,3 +1,4 @@
+import { RollingNumberInput } from "@fb/ui";
 import React, { useState, useEffect } from "react";
 import { useEffectOnChange } from "@/hooks/use-effect-on-change";
 import {
@@ -1133,7 +1134,7 @@ function TargetEditor({
                   {t("allocation:editor.minTradeAmount")}
                 </div>
                 <div className="border-input bg-background focus-within:ring-ring flex h-9 items-center rounded-md border px-3 focus-within:ring-2">
-                  <input
+                  <RollingNumberInput
                     type="number"
                     min="0"
                     step="1"
@@ -1157,7 +1158,7 @@ function TargetEditor({
                   {t("allocation:editor.maxTurnover")}
                 </div>
                 <div className="border-input bg-background focus-within:ring-ring flex h-9 items-center rounded-md border px-3 focus-within:ring-2">
-                  <input
+                  <RollingNumberInput
                     type="number"
                     min="0"
                     max="100"

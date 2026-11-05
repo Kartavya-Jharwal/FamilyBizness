@@ -1,4 +1,4 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { useEffect } from "react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -31,6 +31,7 @@ function renderAt(path: string, width: number) {
         <Route path="/settings" element={<SettingsLayout />}>
           <Route index element={<CountingPage />} />
           <Route path="connect" element={<CountingPage />} />
+          <Route path="connections" element={<CountingPage />} />
         </Route>
       </Routes>
     </MemoryRouter>,
@@ -69,11 +70,14 @@ describe("SettingsLayout", () => {
     expect(mounts).toBe(1);
   });
 
-  it("shows the settings list instead of the index page on phones", () => {
+  it("keeps categorized settings and their content together on phones", () => {
     renderAt("/settings", 390);
 
-    expect(screen.queryByTestId("settings-page")).not.toBeInTheDocument();
-    expect(mounts).toBe(0);
+    expect(screen.getByTestId("settings-page")).toBeInTheDocument();
+    expect(mounts).toBe(1);
+    fireEvent.click(screen.getByRole("tab", { name: "Data", exact: true }));
+    expect(screen.getByRole("link", { name: "Connections & imports" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByTestId("settings-page")).toBeInTheDocument();
   });
 
   // The static host exposes neither provider credentials nor an agent server.

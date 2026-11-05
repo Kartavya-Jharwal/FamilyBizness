@@ -5,6 +5,8 @@ import { Input } from "../ui/input";
 import { useNumberFormatting } from "../formatting-provider";
 
 export interface QuantityInputProps {
+  /** Compact control for inline table and lever editors. */
+  compact?: boolean;
   /** Current numeric value */
   value?: number | string | null;
   /**
@@ -50,6 +52,7 @@ const QuantityInput = React.forwardRef<HTMLInputElement, QuantityInputProps>(
   (
     {
       value,
+      compact = false,
       onValueChange,
       onChange,
       maxDecimalPlaces = 8,
@@ -94,6 +97,7 @@ const QuantityInput = React.forwardRef<HTMLInputElement, QuantityInputProps>(
         aria-invalid={ariaInvalid}
         data-testid={testId}
         onKeyDown={onKeyDown}
+        min={allowNegative ? undefined : 0}
         allowNegative={allowNegative}
         decimalScale={maxDecimalPlaces}
         thousandSeparator={formatting.groupSeparator}
@@ -116,6 +120,10 @@ const QuantityInput = React.forwardRef<HTMLInputElement, QuantityInputProps>(
           }
         }}
         inputMode="decimal"
+        step="any"
+        data-rolling-compact={compact || undefined}
+        data-number-value={numericValue}
+        data-number-decimal-separator={formatting.decimalSeparator}
         onPaste={(event) => {
           const clipboardValue = event.clipboardData.getData("text");
           const input = event.currentTarget;

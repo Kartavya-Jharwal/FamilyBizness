@@ -62,6 +62,7 @@ export default function SettingsLayout() {
       {
         title: t("settings:nav.sections.data"),
         items: [
+          { title: "Connections & imports", href: "connections", subtitle: "Broker and document import previews", icon: <Icons.Download className="size-5" /> },
           { title: "Sources & review", href: "sources", subtitle: "Source records and review evidence", icon: <Icons.Activity className="size-5" /> },
           {
             title: t("settings:nav.items.securities"),

@@ -24,6 +24,8 @@ import { selectedProfileId } from "@/features/profiles/session";
 import { enforceIps, readActiveIps, type IpsFacts } from "@/features/governance/constitution/ips";
 import { SAMPLE_CURRENCY, SAMPLE_ACCOUNTS, SAMPLE_GOALS, SAMPLE_POSITIONS, SAMPLE_SPENDING_CATEGORIES } from "./demo-family";
 
+import { readPreparedOfficePortfolio, type PreparedPosition } from "./prepared-office-portfolio";
+
 const STORAGE_KEY = "fb-demo-store-v2";
 
 export type DemoAccount = Account;
@@ -133,7 +135,17 @@ function save(store: DemoStore) {
 let store = typeof localStorage !== "undefined" ? load() : seed();
 
 export function getDemoStore() {
-  return store;
+  const prepared = readPreparedOfficePortfolio();
+  if (!prepared) return store;
+  const ids = new Set(prepared.accounts.map(row => row.id));
+  const metadata = prepared.accounts.map(account => {
+    const saved = store.accounts.find(row => row.id === account.id);
+    const seed = SAMPLE_ACCOUNTS.find(row => row.id === account.id);
+    return { ...account, ...(saved && (!seed || saved.name !== seed.name) ? { name: saved.name } : {}), ...(saved?.group && (!seed || saved.group !== seed.group) ? { group: saved.group } : {}) };
+  });
+  const custom = store.accounts.filter(account => !ids.has(account.id) && !SAMPLE_ACCOUNTS.some(seed => seed.id === account.id));
+  const portfolios = prepared.portfolios.map(portfolio => { const saved = store.portfolios.find(row => row.id === portfolio.id); return { ...portfolio, ...(saved && !["Family Office", "Long-term Family Capital"].includes(saved.name) ? { name: saved.name } : {}) }; });
+  return { ...store, settings: { ...store.settings, baseCurrency: prepared.currency }, accounts: [...metadata, ...custom], portfolios: [...portfolios, ...store.portfolios.filter(row => !["pf-main", "pf-long-term", "pf-next-generation"].includes(row.id))] };
 }
 
 export function mutateDemoStore(mutator: (s: DemoStore) => void) {
@@ -156,15 +168,20 @@ export function resetDemoStore() {
   mutateDemoStore((candidate) => Object.assign(candidate, seed()));
 }
 
-function sampleAccounts() {
+export function sampleAccounts() {
+  const prepared = readPreparedOfficePortfolio();
+  const displayed = getDemoStore().accounts;
+  if (prepared) return prepared.accounts.map(account => ({ id: account.id, name: displayed.find(row => row.id === account.id)?.name ?? account.name, group: displayed.find(row => row.id === account.id)?.group ?? account.group, kind: account.accountType, value: prepared.positions.filter(row => row.accountId === account.id).reduce((sum, row) => sum + row.value, 0) }));
   return store.accounts.map(account => {
     const original = SAMPLE_ACCOUNTS.find(sample => sample.id === account.id);
     return { id: account.id, name: account.name, group: account.group, kind: account.accountType, value: original?.value ?? 0 };
   });
 }
-function samplePositions() {
+export function samplePositions(): PreparedPosition[] {
+  const prepared = readPreparedOfficePortfolio();
+  if (prepared) return prepared.positions;
   const ids = new Set(store.accounts.map(account => account.id));
-  return SAMPLE_POSITIONS.filter(position => ids.has(position.accountId));
+  return SAMPLE_POSITIONS.filter(position => ids.has(position.accountId)).map(position => ({ ...position, localValue: position.value, currency: SAMPLE_CURRENCY, fx: 1, hasBasis: true, sourceRecordId: position.id, entity: "", sector: position.kind }));
 }
 
 /** Positions and summaries are derived from the same sample dataset. */
@@ -176,12 +193,12 @@ export function demoHoldings(): Holding[] {
     return {
       id: `h-${p.id}`, holdingType: isCash ? HoldingType.CASH : HoldingType.SECURITY,
       assetKind: p.kind === "private" ? "PRIVATE_EQUITY" : "INVESTMENT", accountId: p.accountId,
-      instrument: { id: `asset-${p.id}`, symbol: p.symbol, name: p.name, currency: SAMPLE_CURRENCY, quoteMode: "MANUAL", instrumentType: isCash ? undefined : "FUND" },
-      quantity: 1, localCurrency: SAMPLE_CURRENCY, baseCurrency: SAMPLE_CURRENCY, fxRate: 1,
-      marketValue: monetary(p.value), costBasis: monetary(p.cost), price: p.value,
-      unrealizedGain: monetary(gain), unrealizedGainPct: gain / p.cost,
-      totalGain: monetary(gain), totalGainPct: gain / p.cost,
-      weight: p.value / total, asOfDate: AS_OF,
+      instrument: { id: `asset-${p.id}`, symbol: p.symbol, name: p.name, currency: p.currency, quoteMode: "MANUAL", instrumentType: isCash ? undefined : p.kind === "private" ? "EQUITY" : "FUND" },
+      quantity: 1, localCurrency: p.currency, baseCurrency: readPreparedOfficePortfolio()?.currency ?? SAMPLE_CURRENCY, fxRate: p.fx,
+      marketValue: monetary(p.localValue, p.value), costBasis: p.hasBasis ? monetary(p.cost) : null, price: p.localValue,
+      unrealizedGain: p.hasBasis ? monetary(gain) : null, unrealizedGainPct: p.hasBasis && p.cost ? gain / p.cost : null,
+      totalGain: p.hasBasis ? monetary(gain) : null, totalGainPct: p.hasBasis && p.cost ? gain / p.cost : null,
+      weight: total ? p.value / total : 0, asOfDate: readPreparedOfficePortfolio()?.asOf ?? AS_OF,
     };
   });
 }
@@ -223,6 +240,15 @@ function valuationPoint(
 
 /** Monthly sample history; the latest observation matches the sample positions. */
 export function demoValuationHistory(): AccountValuation[] {
+  const prepared = readPreparedOfficePortfolio();
+  if (prepared) {
+    const points: AccountValuation[] = prepared.history.map(row => ({ ...valuationPoint("TOTAL", row.asOf, row.grossAum, 0), baseCurrency: prepared.currency, accountCurrency: prepared.currency, externalInflowBase: Math.max(0, row.externalFlow), externalOutflowBase: Math.max(0, -row.externalFlow), externalFlowSource: "STORED_GROSS" as const, basisStatus: "unknown" as const }));
+    for (const account of prepared.accounts) {
+      const cash = prepared.positions.filter(row => row.accountId === account.id && row.kind === "cash").reduce((sum, row) => sum + row.value, 0), total = Number(account.balance ?? 0);
+      points.push({ ...valuationPoint(account.id, prepared.asOf, total, 0), accountCurrency: prepared.currency, baseCurrency: prepared.currency, cashBalance: cash, cashBalanceBase: cash, investmentMarketValue: total - cash, investmentMarketValueBase: total - cash, basisStatus: "unknown", externalFlowSource: "UNKNOWN" });
+    }
+    return points;
+  }
   const today = new Date();
   const points: AccountValuation[] = [];
   for (let i = 0; i < 24; i++) {
@@ -241,25 +267,28 @@ export function demoValuationHistory(): AccountValuation[] {
 }
 
 export function demoCurrentValuation(): CurrentValuationResponse {
+  const prepared = readPreparedOfficePortfolio();
   const total = sampleAccounts().reduce((sum, account) => sum + account.value, 0);
-  const cash = sampleAccounts().filter(a => a.kind === "CASH").reduce((sum, a) => sum + a.value, 0);
+  const cash = samplePositions().filter(row => row.kind === "cash").reduce((sum, row) => sum + row.value, 0);
+  const cashOf = (id: string) => samplePositions().filter(row => row.accountId === id && row.kind === "cash").reduce((sum, row) => sum + row.value, 0);
+  const currency = prepared?.currency ?? SAMPLE_CURRENCY;
   return {
     summary: {
-      scopeId: "all", baseCurrency: SAMPLE_CURRENCY, cashBalanceBase: cash,
+      scopeId: "all", baseCurrency: currency, cashBalanceBase: cash,
       investmentMarketValueBase: total - cash, totalValueBase: total,
       holdingsCount: samplePositions().length, accountCount: sampleAccounts().length,
-      currencySplit: [{ currency: SAMPLE_CURRENCY, valueBase: total, percentage: 100 }],
-      cashCurrencySplit: [{ currency: SAMPLE_CURRENCY, valueBase: cash, percentage: 100 }],
-      sourceDataAsOf: AS_OF, calculatedAt: NOW, warnings: [],
+      currencySplit: [...new Set(samplePositions().map(row => row.currency))].map(currency => { const valueBase = samplePositions().filter(row => row.currency === currency).reduce((sum, row) => sum + row.value, 0); return { currency, valueBase, percentage: total ? valueBase / total * 100 : 0 }; }),
+      cashCurrencySplit: [...new Set(samplePositions().filter(row => row.kind === "cash").map(row => row.currency))].map(currency => { const valueBase = samplePositions().filter(row => row.kind === "cash" && row.currency === currency).reduce((sum, row) => sum + row.value, 0); return { currency, valueBase, percentage: cash ? valueBase / cash * 100 : 0 }; }),
+      sourceDataAsOf: prepared?.asOf ?? AS_OF, calculatedAt: NOW, warnings: getDemoStore().accounts.some(row => !sampleAccounts().some(account => account.id === row.id)) ? ["Unlinked custom accounts are retained but are outside the financial-book valuation perimeter."] : [],
     },
     accounts: sampleAccounts().map((a) => ({
       accountId: a.id, accountName: a.name, accountType: a.kind, accountGroup: a.group,
-      accountCurrency: SAMPLE_CURRENCY, cashBalance: a.kind === "CASH" ? a.value : 0,
-      investmentMarketValue: a.kind === "CASH" ? 0 : a.value, totalValue: a.value,
-      cashBalanceBase: a.kind === "CASH" ? a.value : 0,
-      investmentMarketValueBase: a.kind === "CASH" ? 0 : a.value, totalValueBase: a.value,
-      fxRateToBase: 1, baseCurrency: SAMPLE_CURRENCY, holdingsCount: samplePositions().filter(p => p.accountId === a.id).length,
-      sourceDataAsOf: AS_OF, calculatedAt: NOW, warnings: [],
+      accountCurrency: currency, cashBalance: cashOf(a.id),
+      investmentMarketValue: a.value - cashOf(a.id), totalValue: a.value,
+      cashBalanceBase: cashOf(a.id),
+      investmentMarketValueBase: a.value - cashOf(a.id), totalValueBase: a.value,
+      fxRateToBase: 1, baseCurrency: currency, holdingsCount: samplePositions().filter(p => p.accountId === a.id).length,
+      sourceDataAsOf: prepared?.asOf ?? AS_OF, calculatedAt: NOW, warnings: [],
     })),
   };
 }
@@ -271,7 +300,9 @@ export function demoAllocations(accountIds: string[] = sampleAccounts().map((acc
     { id: "equity", name: "Public equities", kinds: ["equity"], color: "var(--color-sea)" },
     { id: "fixed", name: "Fixed income", kinds: ["fixed"], color: "var(--color-brass)" },
     { id: "private", name: "Private business investments", kinds: ["private"], color: "var(--color-ink-muted)" },
-    { id: "cash", name: "Cash", kinds: ["cash"], color: "var(--color-mist)" },
+    { id: "cash", name: "Cash", kinds: ["cash"], color: "var(--chart-1)" },
+    { id: "listed", name: "Listed investments — classification pending", kinds: ["listed"], color: "var(--chart-8)" },
+    { id: "other", name: "Other recorded assets", kinds: ["other"], color: "var(--chart-9)" },
   ];
   return {
     assetClasses: { taxonomyId: "asset_class", taxonomyName: "Asset class", color: "var(--color-sea)",
@@ -286,6 +317,18 @@ export function demoAllocations(accountIds: string[] = sampleAccounts().map((acc
 }
 
 export function demoIncomeSummary(accountIds: string[]): IncomeSummary[] {
+  const prepared = readPreparedOfficePortfolio();
+  if (prepared) {
+    const fullScope = prepared.accounts.every(account => accountIds.includes(account.id));
+    const source = fullScope ? prepared.book.income.filter(row => prepared.book.wealthOwnerIds.includes(row.entity) && row.kind === "income") : [];
+    const total = source.reduce((sum, row) => sum + row.amount * prepared.book.fx.find(rate => rate.currency === row.currency)!.average, 0);
+    const sourceYear = Number(prepared.asOf.slice(0, 4)), year = new Date().getUTCFullYear();
+    return ["ALL", "YTD", "LAST_YEAR", "TWO_YEARS_AGO"].map((period): IncomeSummary => {
+      const includes = period === "ALL" || sourceYear === year - (period === "YTD" ? 0 : period === "LAST_YEAR" ? 1 : 2);
+      const totalIncome = includes ? total : 0;
+      return { period, byMonth: totalIncome ? { [prepared.asOf.slice(0, 7)]: totalIncome } : {}, byType: totalIncome ? { OTHER: totalIncome } : {}, byAsset: {}, byCurrency: { [prepared.currency]: totalIncome }, byCurrencyBase: { [prepared.currency]: totalIncome }, byAccount: {}, totalIncome, currency: prepared.currency, monthlyAverage: totalIncome, yoyGrowth: null, unconvertedCurrencies: [] };
+    });
+  }
   const year = new Date().getUTCFullYear();
   const currentMonth = new Date().getUTCMonth() + 1;
   const streams = [
@@ -326,6 +369,7 @@ export function demoIncomeSummary(accountIds: string[]): IncomeSummary[] {
 export function demoSimplePerformance(): SimplePerformanceResult[] {
   const total = sampleAccounts().reduce((sum, a) => sum + a.value, 0);
   return sampleAccounts().map((account) => {
+    if (readPreparedOfficePortfolio()) return { accountId: account.id, totalValue: account.value, accountCurrency: readPreparedOfficePortfolio()!.currency, baseCurrency: readPreparedOfficePortfolio()!.currency, fxRateToBase: 1, totalGainLossAmount: null, cumulativeReturnPercent: null, portfolioWeight: total ? account.value / total : 0 };
     const cost = samplePositions().filter(p => p.accountId === account.id).reduce((sum, p) => sum + p.cost, 0);
     return { accountId: account.id, totalValue: account.value, accountCurrency: SAMPLE_CURRENCY, baseCurrency: SAMPLE_CURRENCY, fxRateToBase: 1,
       totalGainLossAmount: account.value - cost, cumulativeReturnPercent: cost ? (account.value - cost) / cost : 0,
@@ -334,6 +378,8 @@ export function demoSimplePerformance(): SimplePerformanceResult[] {
 }
 
 export function demoNetWorth(): NetWorthResponse {
+  const prepared = readPreparedOfficePortfolio();
+  if (prepared) return { changeAttributionAvailable: false, date: prepared.asOf, assets: { total: prepared.wealth.grossAum, breakdown: prepared.accounts.map(account => ({ category: account.id, name: account.name, value: Number(account.balance ?? 0) })) }, liabilities: { total: prepared.liabilities, breakdown: [{ category: "book-liabilities", name: "Family perimeter liabilities", value: prepared.liabilities }] }, netWorth: prepared.wealth.fairValue, currency: prepared.currency, oldestValuationDate: prepared.history[0]?.asOf ?? prepared.asOf, staleAssets: [] };
   const total = sampleAccounts().reduce((sum, a) => sum + a.value, 0);
   const cash = sampleAccounts().filter(a => a.kind === "CASH").reduce((sum, a) => sum + a.value, 0);
   return { date: AS_OF, assets: { total, breakdown: [
@@ -343,6 +389,8 @@ export function demoNetWorth(): NetWorthResponse {
 }
 
 export function demoNetWorthHistory(): NetWorthHistoryPoint[] {
+  const prepared = readPreparedOfficePortfolio();
+  if (prepared) return prepared.history.map(row => ({ date: row.asOf, portfolioValue: row.grossAum, alternativeAssetsValue: 0, totalLiabilities: row.grossAum - row.netWealth, totalAssets: row.grossAum, netWorth: row.netWealth, cumulativeNetContribution: 0, netContribution: row.externalFlow, breakdown: {}, currency: prepared.currency }));
   return demoValuationHistory()
     .filter((v) => v.accountId === "TOTAL")
     .map((v) => ({

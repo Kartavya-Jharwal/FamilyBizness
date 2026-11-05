@@ -1,10 +1,11 @@
 import { z } from "zod";
+import { allocationMetadataSchema } from "./allocation-metadata";
 import { selectedProfileId } from "@/features/profiles/session";
 const signed=z.number().finite().min(-1e13).max(1e13),positive=z.number().finite().min(0).max(1e13);
 const date=z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(s=>{const d=new Date(s+"T00:00:00Z");return Number.isFinite(d.valueOf())&&d.toISOString().slice(0,10)===s;},"Invalid date");
 const currency=z.enum(["GBP","USD","EUR"]);
 export const financeBookSchema=z.object({source:z.string().min(1),asOf:date,currency,wealthHistory:z.array(z.object({asOf:date,grossAum:positive,netWealth:signed,externalFlow:signed,source:z.string().min(1)})).max(240).default([]),wealthOwnerIds:z.array(z.string()).default(["holding"]),valuationAccountId:z.string().default("H-SUB"),fx:z.array(z.object({currency,opening:z.number().positive(),closing:z.number().positive(),average:z.number().positive()})).min(1),entities:z.array(z.object({id:z.string().min(1),name:z.string().min(1),restrictedCash:z.boolean(),openingCash:positive,openingEquity:signed,capitalContributions:positive,distributions:positive,currency})).min(1).max(20),
- balances:z.array(z.object({id:z.string().min(1),entity:z.string().min(1),account:z.string().min(1),kind:z.enum(["asset","liability","equity"]),category:z.enum(["cash","listed","private","operating","receivable","debt","payable","capital"]),currency,amount:signed,elimination:z.string()})).max(500),
+ balances:z.array(z.object({id:z.string().min(1),entity:z.string().min(1),account:z.string().min(1),kind:z.enum(["asset","liability","equity"]),category:z.enum(["cash","listed","private","operating","receivable","debt","payable","capital"]),currency,amount:signed,elimination:z.string(),allocation:allocationMetadataSchema.optional()})).max(500),
  income:z.array(z.object({id:z.string().min(1),entity:z.string().min(1),account:z.string().min(1),kind:z.enum(["income","expense"]),currency,amount:positive,elimination:z.string()})).max(500),
  movements:z.array(z.object({id:z.string().min(1),entity:z.string().min(1),account:z.string().min(1),category:z.enum(["operating","investing","financing"]),currency,amount:signed,elimination:z.string()})).max(500),
  forecast:z.array(z.object({month:z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/),entity:z.string().min(1),currency,receipts:positive,operating:positive,capex:positive,distributions:positive,philanthropy:positive,ventures:positive,succession:positive,reserve:positive})).max(240),

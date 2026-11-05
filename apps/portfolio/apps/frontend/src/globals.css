@@ -278,10 +278,13 @@
   /* Field height (h-input-height), from --input-height */
   --spacing-input-height: var(--input-height);
 
-  --radius-sm: calc(var(--radius) - 0.25rem);
-  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-sm: calc(var(--radius) - var(--design-radius-offset-large));
+  --radius-md: calc(var(--radius) - var(--design-radius-offset-small));
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 0.25rem);
+  --radius-xl: calc(var(--radius) + var(--design-radius-offset-large));
+  --radius-2xl: var(--design-radius-2xl);
+  --radius-3xl: var(--design-radius-3xl);
+  --radius-4xl: var(--design-radius-navigation);
 
   /* Semantic colors */
   --color-background: var(--background);

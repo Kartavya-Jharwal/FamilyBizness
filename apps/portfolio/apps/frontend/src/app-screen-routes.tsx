@@ -1,4 +1,5 @@
 import PhilanthropyPage from "@/features/family-office/philanthropy-page";
+import FinanceAddonWorkspaces from "@/features/family-office/finance-addon-workspaces";
 import { lazy, memo, Suspense, useEffect, useState } from "react";
 import { Navigate, Route, Routes, type Location } from "react-router-dom";
 
@@ -12,7 +13,6 @@ import ActivityManagerPage from "@/pages/activity/activity-manager-page";
 import ActivityPage from "@/pages/activity/activity-page";
 import ActivityImportPage from "@/pages/activity/import/activity-import-page";
 import AssetsPage from "@/pages/asset/assets-page";
-import PortfolioPage from "@/pages/dashboard/portfolio-page";
 import HoldingsPage from "@/pages/holdings/holdings-page";
 import PortfolioInsightsPage from "@/pages/insights/portfolio-insights";
 import AnalysisAttributionPage from "@/pages/insights/analysis/attribution-page";
@@ -109,7 +109,7 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
       <Route path="office/sources" element={<Suspense fallback={<p className="p-6">Loading source register…</p>}><SourcesPage /></Suspense>} />
       <Route path="office/constitution" element={<Suspense fallback={<p>Opening family constitution…</p>}><FamilyConstitutionPage/></Suspense>} />
       <Route path="office/policy" element={<Suspense fallback={<p className="p-6">Loading family policy…</p>}><PolicyPage /></Suspense>} />
-      <Route path="dashboard" element={<PortfolioPage />} />
+      <Route path="dashboard" element={<Navigate to="/office/case" replace />} />
       <Route path="activities" element={<ActivityPage />} />
       <Route path="activities/manage" element={<ActivityManagerPage />} />
       <Route path="holdings" element={<HoldingsPage />} />
@@ -134,6 +134,9 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
         element={<Navigate to="/insights?tab=overview" replace />}
       />
       <Route path="goals" element={<GoalsDashboardPage />} />
+      <Route path="office/connections" element={<Navigate to="/settings/connections" replace />} />
+      <Route path="office/fees" element={<FinanceAddonWorkspaces />} />
+      <Route path="office/trading" element={<FinanceAddonWorkspaces />} />
       <Route path="goals/new" element={<GoalNewPage />} />
       <Route path="goals/:goalId/guide" element={<GoalRetirementGuidePage />} />
       <Route path="goals/:goalId" element={<GoalDetailPage />} />
@@ -148,6 +151,7 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
         />
       ))}
       <Route path="settings" element={<SettingsLayout />}>
+        <Route path="connections" element={<FinanceAddonWorkspaces embedded />} />
         <Route index element={<Navigate to="/settings/general" replace />} />
         <Route path="office" element={<Suspense fallback={<p>Opening office settings…</p>}><OfficeSettingsPage/></Suspense>} />
         <Route path="records" element={<Suspense fallback={<p>Opening family records…</p>}><CaseAdministration/></Suspense>} />

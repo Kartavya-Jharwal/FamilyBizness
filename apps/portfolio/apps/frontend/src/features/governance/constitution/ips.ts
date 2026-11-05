@@ -38,7 +38,7 @@ function assessSource(content: string, revision: number, currency: string, facts
   const ids = new Set(facts.accounts.map((account) => account.id));
   const positions = facts.positions.filter((position) => ids.has(position.accountId));
   const total = positions.reduce((sum, position) => sum + position.value, 0);
-  const valid = facts.currency === currency && facts.currency === "USD" &&
+  const valid = facts.currency === currency && /^[A-Z]{3}$/.test(facts.currency) &&
     facts.accounts.every((account) => account.currency === currency && account.balance === positions.filter((position) => position.accountId === account.id).reduce((sum, position) => sum + position.value, 0)) &&
     positions.every((position) => Number.isFinite(position.value) && position.value >= 0 && ["equity", "fixed", "cash", "private"].includes(position.kind)) &&
     total > 0 && /^\d{4}-\d{2}-\d{2}$/.test(facts.asOf);

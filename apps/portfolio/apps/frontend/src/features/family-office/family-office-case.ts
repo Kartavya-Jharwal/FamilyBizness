@@ -1,3 +1,6 @@
+import { preparedBookClassifications, preparedSecurityClassifications, withPreparedClassifications } from "./allocation-metadata";
+import { financeBookSchema } from "./finance-book-model";
+import { investmentSchema } from "./investment-model";
 import { stewardshipScenario } from "./stewardship-scenario";
 import { officeIpsText,officeIpsRules } from "./office-ips";
 import { activatePolicy } from "./policy-engine";
@@ -77,7 +80,7 @@ export function familyOfficeModules() {
 /** Shared office personas use one existing case store. Earlier unrelated workspaces are untouched. */
 export function ensureFamilyOfficeCase(store: Pick<Storage, "getItem" | "setItem" | "removeItem">) {
   const marker = `profile:${familyOfficeCaseId}:visual-stewardship:v1`;
-  if (store.getItem(marker)) return;
+  if (store.getItem(marker)) { ensureAllocationClassifications(store); return; }
   const all=familyOfficeModules();
   const before=new Map(caseModules.map(m=>[m.key(familyOfficeCaseId),store.getItem(m.key(familyOfficeCaseId))]));
   const policyKey=`profile:${familyOfficeCaseId}:office-effective-policy:v1`, donorKey=workspaceKey(familyOfficeCaseId);
@@ -89,6 +92,18 @@ export function ensureFamilyOfficeCase(store: Pick<Storage, "getItem" | "setItem
     importCase(JSON.stringify({schema:1,exportedAt:new Date().toISOString(),modules:all,policy:null}),store,familyOfficeCaseId);
     saveWorkspace(store,donorKey,{...loadWorkspace(store,donorKey),content:officeIpsText});
     activatePolicy(store,familyOfficeCaseId,{currency:"GBP",rules:officeIpsRules()},"Family Board");
+    ensureAllocationClassifications(store);
     store.setItem(marker,"ready");
   } catch(error){for(const [key,value]of before)value===null?store.removeItem(key):store.setItem(key,value);throw error;}
+}
+
+/** Upgrade metadata only; no balance, weight, amount or user classification is replaced. */
+function ensureAllocationClassifications(store: Pick<Storage,"getItem"|"setItem"|"removeItem">){
+ const marker=`profile:${familyOfficeCaseId}:allocation-classifications:v1`;
+ if(store.getItem(marker))return;
+ const bookKey=caseModules.find(row=>row.id==="book")!.key(familyOfficeCaseId),investmentKey=caseModules.find(row=>row.id==="investments")!.key(familyOfficeCaseId),rawBook=store.getItem(bookKey),rawInvestment=store.getItem(investmentKey);
+ if(!rawBook||!rawInvestment)return;
+ const book=financeBookSchema.parse(JSON.parse(rawBook)),investment=investmentSchema.parse(JSON.parse(rawInvestment));
+ const nextBook=financeBookSchema.parse({...book,balances:withPreparedClassifications(book.balances,preparedBookClassifications)}),nextInvestment=investmentSchema.parse({...investment,securities:withPreparedClassifications(investment.securities,preparedSecurityClassifications)});
+ try{store.setItem(bookKey,JSON.stringify(nextBook));store.setItem(investmentKey,JSON.stringify(nextInvestment));store.setItem(marker,"ready");}catch(error){store.setItem(bookKey,rawBook);store.setItem(investmentKey,rawInvestment);store.removeItem(marker);throw error;}
 }

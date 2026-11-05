@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { getAddonNavPinKey, useAddonNavigationPins } from "./addon-navigation-pins";
 
 export interface NavLink {
+  children?: NavLink[];
   id?: string;
   title: string;
   href: string;
@@ -26,7 +27,7 @@ function buildStaticNavigation(): NavigationProps {
     primary: [
       { icon: <Icons.Dashboard className="size-6" />, title: "Stewardship", href: "/office/case", keywords: ["family office", "responsibilities", "board"] },
       { icon: <Icons.Holdings className="size-6" />, title: "Capital & liquidity", href: "/office/finance", keywords: ["AUM", "consolidated capital", "cash flow", "estate", "valuation", "DCF"] },
-      { icon: <Icons.Insight className="size-6" />, title: "Portfolio & scenarios", href: "/office/simulation", keywords: ["allocation", "risk", "Monte Carlo", "holdings", "performance"] },
+      { icon: <Icons.Insight className="size-6" />, title: "Portfolio & scenarios", href: "/office/simulation", keywords: ["allocation", "risk", "Monte Carlo", "holdings", "performance", "FIRE", "X-ray", "sector", "ETF provider", "return methods"] },
       { icon: <Icons.Goals className="size-6" />, title: "Family business", href: "/office/business", keywords: ["ERPNext", "governance", "succession", "operations", "tasks"] },
       { icon: <Icons.Activity className="size-6" />, title: "Calendar", href: "/office" },
       { icon: <Icons.Insight className="size-6" />, title: "Investment policy statement", href: "/office/policy", keywords: ["IPS", "mandate", "limits"] },
@@ -64,7 +65,13 @@ export function useNavigation() {
 
   // Spending lives entirely on the dashboard tab (and its deep-linked pages);
   // no top-level nav entry. Combine static navigation items with addons.
-  const primary = [...staticNavigation.primary];
+  const primary = staticNavigation.primary.map(item => item.href === "/office/finance" ? { ...item, children: [
+    { title: "Family goals", href: "/goals" },
+    { title: "Budget & expenditure", href: "/spending/budget" },
+    { title: "Spending insights", href: "/spending/insights" },
+    { title: "Investment fees", href: "/office/fees" },
+    { title: "Trading analytics", href: "/office/trading" },
+  ] } : item);
   const addons = useMemo(() => dynamicItems ?? [], [dynamicItems]);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { MoneyInput } from "@fb/ui";
+import { MoneyInput, RollingNumberInput } from "@fb/ui";
 import type { ReactNode } from "react";
 import { useId, useRef, useState } from "react";
 
@@ -156,8 +156,14 @@ export function GoalLeverRow({
               className="text-foreground dark:bg-input/0 h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 text-end text-sm tabular-nums shadow-none ring-0 outline-none focus-visible:outline-none"
             />
           ) : (
-            <input
+            <RollingNumberInput
               type="text"
+              data-rolling-compact
+              data-number-value={parseFloat(displayValue.replace(",", "."))}
+              data-number-decimal-separator={displayValue.includes(",") ? "," : "."}
+              min={min * inputScale}
+              max={inputUpperBound * inputScale}
+              step={step * inputScale}
               aria-labelledby={labelId}
               inputMode={suffix === "%" ? "decimal" : "numeric"}
               value={displayValue}
