@@ -45,3 +45,5 @@ FO-IPS-MANDATE contains the Board-adopted concise investment instructions. The d
 `capital-workspace.tsx` renders the existing book/valuation/liquidity engines directly, with live WACC/multiple inputs. `portfolio-visual.tsx` renders current/optimal weights and the existing seeded projection quantiles. The same saved record key updates both visual summaries and opened detail editors. No second financial ledger or optimiser is introduced.
 
 The local profile command engine now serves both entry and the existing profile API. Persona sessions retain immutable scope while shared office records resolve to one prepared case. Calendar and ERP remain views of the existing operations register; calendar view preference is persisted locally.
+
+The Wealthfolio visual pass reuses shared card components and exported card surfaces for daily financial workspaces. Composition CSS reads canonical dimensions and host semantic roles; calendar fields/sheets use existing field/overlay roles. The focused `scripts/verify-wealthfolio-art-direction.cjs` checks computed surface geometry and responsive light/dark rendering.

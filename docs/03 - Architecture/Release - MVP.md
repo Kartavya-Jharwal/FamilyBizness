@@ -1,6 +1,6 @@
 # MVP Release
 
-Current source revision: `64ae3e4175bc70fe42e024407d4c31b2a81bfdc5` (visual stewardship). Current source and local package implement the [requested priorities](../05%20-%20Requirements/Audit%20-%20Remaining%20Assignment%20Work.md). The previous public deployment remains separate until hosting is unblocked.
+Current source includes the Wealthfolio art direction pass on the visual stewardship baseline `64ae3e4175bc70fe42e024407d4c31b2a81bfdc5`. Current source and local package implement the [requested priorities](../05%20-%20Requirements/Audit%20-%20Remaining%20Assignment%20Work.md). The previous public deployment remains separate until hosting is unblocked.
 
 ## Delivered locally
 
@@ -11,7 +11,7 @@ Current source revision: `64ae3e4175bc70fe42e024407d4c31b2a81bfdc5` (visual stew
 - Donated ERP task masks and calendar week/agenda structures, with a side-panel family-meeting scheduler.
 - Existing profile API and immutable session admission now use one local command engine. Browser entry uses donor avatars and makes no profile-server requests.
 
-Local demo: `http://localhost:4178/FamilyBizness/` while the preview process is running. Handover: `artifacts/submission/FamilyBizness - MVP.zip`, containing the verified local static artifact, corresponding source archive, current docs and targeted browser evidence.
+Local demo: `http://localhost:4178/FamilyBizness/` while the preview process is running. The existing handover `artifacts/submission/FamilyBizness - MVP.zip` contains the visual stewardship baseline. The current local dist additionally contains the Wealthfolio art direction pass; its render evidence is under `apps/portfolio/artifacts/wealthfolio-art-direction/`.
 
 ## Verification scope
 
@@ -28,3 +28,7 @@ The build passed. The final frontend and node-configuration type checks passed f
 The previous public marker identified application revision `4b05b2a03f9c4a47250b45e73e91eea51378d463`; it must not be described as the revised visual experience. The failed workflow can be rerun after the GitHub account is unlocked. No account/payment changes were made.
 
 Detailed donor provenance: [frontend ledger](Donors%20-%20Frontend%20Contribution%20Ledger.md). Policy and scenario decisions: [combined charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md). Prior release evidence remains in Git history.
+
+## Wealthfolio art direction verification
+
+Shared card surfaces, canonical numeric/heading/chart typography, quiet nested metrics, policy tiles and host-themed meeting fields/sheets replace the newer generic wrappers. `node scripts/verify-wealthfolio-art-direction.cjs` verifies computed card radius/shadow, viewport containment and error-free rendering across daily views, desktop/mobile and light/dark. Screenshots are inspected locally. This styling revision changes no financial calculations or profile commands. Hosting remains blocked as recorded above.

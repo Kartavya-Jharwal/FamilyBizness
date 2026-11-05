@@ -33,3 +33,9 @@ Daily views lead with decisions, numbers, charts and the next action. Constituti
 ## Visual stewardship revision
 
 Lead with AUM, treasury liquidity, operating-business concentration and cash headroom. Capital charts show allocation, history, DCF versus multiple value, sensitivity and succession funding. Portfolio charts show current/proposed weights and a seeded Monte Carlo percentile fan. IPS cards pair concise instructions with numerical limits and observations. Calendar defaults to meetings in a week grid, with agenda retained and a side-panel editor. ERP uses the donated task masks in its own daily tab. Detailed methods, source records and JSON editors are expandable; infrequent constitution/configuration work is in Administration. Shared semantic surfaces, text and chart roles come from tokens.css; calendar day width is a canonical layout token.
+
+## Wealthfolio surface and art direction pass
+
+Financial workspaces use the shared Wealthfolio Card, CardHeader, CardTitle and CardContent contract. Non-div surfaces (policy articles, disclosure panels and route tiles) use the exported cardSurfaceClassName, so active theme radius, border and shadow remain authoritative. Calendar/task fields and the editor sheet read the host field and overlay roles. No additional palette or font stack is introduced.
+
+The composition uses a ruled page heading, compact tabular metrics, quiet embedded ledgers, restrained chart axes and explicit numerical policy limits. Canonical metric, heading and chart-label dimensions live in tokens.css. Secondary links and closed disclosures stay subdued; keyboard focus is explicit. Preserve chart legends, units and readable labels in light, dark and narrow layouts.

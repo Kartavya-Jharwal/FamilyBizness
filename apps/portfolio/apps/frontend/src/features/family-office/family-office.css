@@ -1,0 +1,28 @@
+/* Composition only: canonical dimensions + active Wealthfolio component roles. */
+.fo-workspace { font-variant-numeric: tabular-nums lining-nums; }
+.fo-workspace-heading { padding-block-end: var(--space-4); border-bottom: 1px solid var(--border); }
+.fo-workspace-heading h1 { font-size: var(--design-workspace-title-size); letter-spacing: var(--design-workspace-title-tracking); line-height: var(--line-height-tight); font-weight: 600; }
+.fo-panel-header { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.fo-panel-action { color: var(--muted-foreground); font-size: var(--font-size-small); text-underline-offset: var(--space-1); }
+.fo-panel-action:hover { color: var(--foreground); text-decoration: underline; }
+.fo-metric { padding: var(--space-4); }
+.fo-metric-label { color: var(--muted-foreground); font-size: var(--font-size-small); line-height: var(--line-height-body); }
+.fo-metric-value { margin-block-start: var(--space-2); font-size: var(--design-metric-size); font-weight: 600; letter-spacing: var(--design-metric-tracking); line-height: var(--line-height-tight); overflow-wrap: anywhere; }
+.fo-metric-detail { margin-block-start: var(--space-2); font-size: var(--design-chart-label-size); color: var(--muted-foreground); }
+/* Embedded metrics are a quiet ledger, rather than another layer of raised cards. */
+.fo-panel .fo-metric { background: transparent; border-color: var(--border); box-shadow: none; }
+.fo-disclosure { padding: var(--space-4); }
+.fo-disclosure > summary { color: var(--muted-foreground); }
+.fo-disclosure[open] > summary { color: var(--foreground); }
+.fo-workspace a:focus-visible, .fo-workspace summary:focus-visible { outline: 2px solid var(--ring); outline-offset: var(--space-1); border-radius: var(--control-radius); }
+.fo-workspace .recharts-cartesian-axis-line, .fo-workspace .recharts-cartesian-axis-tick-line { stroke: var(--border); }
+.fo-workspace .recharts-legend-wrapper { font-size: var(--design-chart-label-size); }
+.fo-policy-card { padding: var(--space-5); }
+.fo-policy-card h3 { font-size: var(--design-metric-size); letter-spacing: var(--design-metric-tracking); }
+.fo-route-tile { padding: var(--space-5); transition: border-color 150ms ease; }
+.fo-route-tile:hover { border-color: var(--muted-foreground); }
+
+.fo-field { border: 1px solid var(--field-border); border-radius: var(--control-radius); background: var(--input-bg); box-shadow: var(--field-shadow); min-height: var(--control-height); }
+.fo-editor-sheet { background: var(--sheet-bg); border-color: var(--overlay-border); box-shadow: var(--overlay-shadow); }
+
+.fo-workspace .recharts-cartesian-axis-tick-value { font-size: var(--design-chart-label-size); }

@@ -35,6 +35,13 @@
   --design-font-sans: "Inter Variable", "Inter", "Rubik Arabic", ui-sans-serif, system-ui, sans-serif;
   --design-font-serif: "Merriweather", "Rubik Arabic", ui-serif, Georgia, serif;
   --design-font-mono: "JetBrains Mono", "Rubik Arabic", ui-monospace, monospace;
+  /* Financial workspace composition. Surfaces still read the active host theme. */
+  --design-metric-size: clamp(1.375rem, 2.1vw, 1.875rem);
+  --design-metric-tracking: -0.035em;
+  --design-chart-edge-space: 24; /* SVG plot padding in CSS pixels. */
+  --design-chart-label-size: 0.75rem;
+  --design-workspace-title-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  --design-workspace-title-tracking: -0.04em;
   --design-radius-card: 0.625rem;
   --design-radius-control: 0.5rem;
   --design-radius-pill: 9999px;
