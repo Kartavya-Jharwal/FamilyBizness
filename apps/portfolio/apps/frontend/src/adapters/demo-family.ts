@@ -1,6 +1,8 @@
 /** Illustrative family-office data used by the static donor, not real family facts. */
 import type { Goal } from "@/lib/types";
 
+export const SAMPLE_CURRENCY = "GBP";
+
 export const SAMPLE_ACCOUNTS = [
   { id: "acc-public", name: "Long-term Family Capital", group: "Investments", kind: "SECURITIES", value: 4200000 },
   { id: "acc-income", name: "Income and Reserves", group: "Investments", kind: "SECURITIES", value: 1350000 },
@@ -21,7 +23,7 @@ export const SAMPLE_POSITIONS = [
 const goal = (id: string, title: string, goalType: Goal["goalType"], description: string, targetAmount: number, current: number, targetDate: string): Goal => ({
   id, title, goalType, description, targetAmount, summaryTargetAmount: targetAmount,
   summaryCurrentValue: current, summaryProgress: current / targetAmount,
-  currency: "USD", statusLifecycle: "active", statusHealth: "not_applicable", priority: 1,
+  currency: SAMPLE_CURRENCY, statusLifecycle: "active", statusHealth: "not_applicable", priority: 1,
   startDate: "2025-01-01", targetDate, createdAt: "2025-01-01T00:00:00Z", updatedAt: "2025-01-01T00:00:00Z",
 });
 

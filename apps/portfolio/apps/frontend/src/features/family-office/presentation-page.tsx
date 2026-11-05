@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, animate, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, CirclePause, Expand, GitBranch, Landmark, Play, RotateCcw, ShieldCheck, X } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "@/components/office-charts";
 import { selectedProfileId } from "@/features/profiles/session";
 import { financials } from "./finance-model";
 import { successionScenario } from "./governance-model";

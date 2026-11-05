@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { DitherChartMask } from "@/components/dither-chart-mask";
+import { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { parseISO, startOfYear, subYears } from "date-fns";
 import {
@@ -85,6 +86,7 @@ export function LoanTimeline({
   onEditTerms,
   className,
 }: LoanTimelineProps) {
+  const ditherId = useId();
   const { t } = useTranslation();
   const { isBalanceHidden } = useBalancePrivacy();
   const formatting = useNumberFormatting();
@@ -333,7 +335,7 @@ export function LoanTimeline({
                 margin={{ top: 24, right: 0, left: 0, bottom: 48 }}
                 accessibilityLayer
               >
-                <defs>
+                <defs><DitherChartMask id={ditherId}/>
                   <linearGradient id="loanHistoryFill" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="var(--success)" stopOpacity={0.2} />
                     <stop offset="70%" stopColor="var(--success)" stopOpacity={0.12} />
@@ -355,7 +357,7 @@ export function LoanTimeline({
                       : null
                   }
                 />
-                <Area
+                <Area mask={`url(#${ditherId})`}
                   type="linear"
                   dataKey="history"
                   stroke="var(--success)"
@@ -367,7 +369,7 @@ export function LoanTimeline({
                   )}
                   isAnimationActive={false}
                 />
-                <Area
+                <Area mask={`url(#${ditherId})`}
                   type="linear"
                   dataKey="forecast"
                   stroke="var(--success)"

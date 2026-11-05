@@ -40,8 +40,9 @@ jobs:
       - name: Stewardship priority checks
         run: |
           bun run donor:type-check
-          bun run --cwd apps/portfolio/apps/frontend test src/features/family-office/stewardship-priorities.test.ts
+          bun run --cwd apps/portfolio/apps/frontend test src/adapters/static-demo.test.ts src/features/family-office/stewardship-priorities.test.ts src/features/family-office/please-fix-model.test.ts src/features/family-office/donor-frontend.test.tsx src/components/dither-kit/financial-bands.test.ts src/features/profiles/profile-avatar.test.tsx src/features/profiles/profile-avatar-picker.test.tsx
           node scripts/verify-donor-frontend.mjs --built
+          node scripts/verify-dither-kit.mjs
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

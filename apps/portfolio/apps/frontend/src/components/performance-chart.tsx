@@ -1,3 +1,5 @@
+import { useId } from "react";
+import { DitherChartMask } from "./dither-chart-mask";
 import { PERFORMANCE_CHART_COLORS } from "@/components/performance-chart-colors";
 import { ReturnData } from "@/lib/types";
 import { useDateFormatting, useNumberFormatting } from "@fb/ui";
@@ -10,7 +12,7 @@ import {
   ChartTooltipContent,
 } from "@fb/ui/components/ui/chart";
 import { differenceInDays, differenceInMonths, parseISO } from "date-fns";
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { Area, CartesianGrid, Line, ComposedChart as LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 
 // Recharts computes vertical grid positions even with `vertical={false}`. On a
@@ -28,6 +30,7 @@ interface PerformanceChartProps {
 }
 
 export function PerformanceChart({ data }: PerformanceChartProps) {
+  const ditherId = useId();
   const numberFormatting = useNumberFormatting();
   const dateFormatting = useDateFormatting();
 
@@ -105,6 +108,7 @@ export function PerformanceChart({ data }: PerformanceChartProps) {
       <ChartContainer config={chartConfig} className="h-full w-full">
         <ResponsiveContainer width="100%" height="100%" aspect={undefined}>
           <LineChart data={formattedData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <defs><DitherChartMask id={ditherId}/></defs>
             <CartesianGrid vertical={false} verticalCoordinatesGenerator={noVerticalGridPoints} />
             <XAxis
               dataKey="date"
@@ -131,6 +135,7 @@ export function PerformanceChart({ data }: PerformanceChartProps) {
               }
             />
             <ChartLegend content={<ChartLegendContent payload={[]} />} />
+            {data.map((series, seriesIndex) => <Area key={`dither-${series.id}`} dataKey={series.id} stroke="none" fill={PERFORMANCE_CHART_COLORS[seriesIndex % PERFORMANCE_CHART_COLORS.length]} fillOpacity={0.14} mask={`url(#${ditherId})`} connectNulls isAnimationActive={false} legendType="none" tooltipType="none" />)}
             {data.map((series, seriesIndex) => (
               <Line
                 isAnimationActive={true}

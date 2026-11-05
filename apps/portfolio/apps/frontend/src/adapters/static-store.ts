@@ -22,7 +22,7 @@ import { HoldingType } from "@/lib/constants";
 import { DEFAULT_LOCALE } from "@/i18n/locales";
 import { selectedProfileId } from "@/features/profiles/session";
 import { enforceIps, readActiveIps, type IpsFacts } from "@/features/governance/constitution/ips";
-import { SAMPLE_ACCOUNTS, SAMPLE_GOALS, SAMPLE_POSITIONS, SAMPLE_SPENDING_CATEGORIES } from "./demo-family";
+import { SAMPLE_CURRENCY, SAMPLE_ACCOUNTS, SAMPLE_GOALS, SAMPLE_POSITIONS, SAMPLE_SPENDING_CATEGORIES } from "./demo-family";
 
 const STORAGE_KEY = "fb-demo-store-v2";
 
@@ -54,10 +54,10 @@ function seedSettings(): Settings {
     themeId: "classic",
     font: "font-sans",
     language: DEFAULT_LOCALE,
-    formattingRegion: "system",
-    baseCurrency: "USD",
+    formattingRegion: "en-GB",
+    baseCurrency: SAMPLE_CURRENCY,
     defaultReturnMetric: "twr",
-    timezone: "UTC",
+    timezone: "Europe/London",
     onboardingCompleted: true,
     autoUpdateCheckEnabled: false,
     menuBarVisible: true,
@@ -68,7 +68,7 @@ function seedSettings(): Settings {
 function seedAccounts(): DemoAccount[] {
   return SAMPLE_ACCOUNTS.map((account, index) => ({
     id: account.id, name: account.name, accountType: account.kind, group: account.group,
-    balance: account.value, currency: "USD", isDefault: index === 0, isActive: true,
+    balance: account.value, currency: SAMPLE_CURRENCY, isDefault: index === 0, isActive: true,
     isArchived: false, trackingMode: "HOLDINGS", createdAt: new Date(NOW), updatedAt: new Date(NOW),
   }));
 }
@@ -176,8 +176,8 @@ export function demoHoldings(): Holding[] {
     return {
       id: `h-${p.id}`, holdingType: isCash ? HoldingType.CASH : HoldingType.SECURITY,
       assetKind: p.kind === "private" ? "PRIVATE_EQUITY" : "INVESTMENT", accountId: p.accountId,
-      instrument: { id: `asset-${p.id}`, symbol: p.symbol, name: p.name, currency: "USD", quoteMode: "MANUAL", instrumentType: isCash ? undefined : "FUND" },
-      quantity: 1, localCurrency: "USD", baseCurrency: "USD", fxRate: 1,
+      instrument: { id: `asset-${p.id}`, symbol: p.symbol, name: p.name, currency: SAMPLE_CURRENCY, quoteMode: "MANUAL", instrumentType: isCash ? undefined : "FUND" },
+      quantity: 1, localCurrency: SAMPLE_CURRENCY, baseCurrency: SAMPLE_CURRENCY, fxRate: 1,
       marketValue: monetary(p.value), costBasis: monetary(p.cost), price: p.value,
       unrealizedGain: monetary(gain), unrealizedGainPct: gain / p.cost,
       totalGain: monetary(gain), totalGainPct: gain / p.cost,
@@ -196,8 +196,8 @@ function valuationPoint(
     id: `val-${accountId}-${date}`,
     accountId,
     valuationDate: date,
-    accountCurrency: "USD",
-    baseCurrency: "USD",
+    accountCurrency: SAMPLE_CURRENCY,
+    baseCurrency: SAMPLE_CURRENCY,
     fxRateToBase: 1,
     cashBalance: accountId === "acc-cash" ? totalValue : 0,
     investmentMarketValue: accountId !== "acc-cash" ? totalValue : 0,
@@ -245,20 +245,20 @@ export function demoCurrentValuation(): CurrentValuationResponse {
   const cash = sampleAccounts().filter(a => a.kind === "CASH").reduce((sum, a) => sum + a.value, 0);
   return {
     summary: {
-      scopeId: "all", baseCurrency: "USD", cashBalanceBase: cash,
+      scopeId: "all", baseCurrency: SAMPLE_CURRENCY, cashBalanceBase: cash,
       investmentMarketValueBase: total - cash, totalValueBase: total,
       holdingsCount: samplePositions().length, accountCount: sampleAccounts().length,
-      currencySplit: [{ currency: "USD", valueBase: total, percentage: 100 }],
-      cashCurrencySplit: [{ currency: "USD", valueBase: cash, percentage: 100 }],
+      currencySplit: [{ currency: SAMPLE_CURRENCY, valueBase: total, percentage: 100 }],
+      cashCurrencySplit: [{ currency: SAMPLE_CURRENCY, valueBase: cash, percentage: 100 }],
       sourceDataAsOf: AS_OF, calculatedAt: NOW, warnings: [],
     },
     accounts: sampleAccounts().map((a) => ({
       accountId: a.id, accountName: a.name, accountType: a.kind, accountGroup: a.group,
-      accountCurrency: "USD", cashBalance: a.kind === "CASH" ? a.value : 0,
+      accountCurrency: SAMPLE_CURRENCY, cashBalance: a.kind === "CASH" ? a.value : 0,
       investmentMarketValue: a.kind === "CASH" ? 0 : a.value, totalValue: a.value,
       cashBalanceBase: a.kind === "CASH" ? a.value : 0,
       investmentMarketValueBase: a.kind === "CASH" ? 0 : a.value, totalValueBase: a.value,
-      fxRateToBase: 1, baseCurrency: "USD", holdingsCount: samplePositions().filter(p => p.accountId === a.id).length,
+      fxRateToBase: 1, baseCurrency: SAMPLE_CURRENCY, holdingsCount: samplePositions().filter(p => p.accountId === a.id).length,
       sourceDataAsOf: AS_OF, calculatedAt: NOW, warnings: [],
     })),
   };
@@ -317,8 +317,8 @@ export function demoIncomeSummary(accountIds: string[]): IncomeSummary[] {
       accountId: stream.accountId, accountName: sampleAccounts().find((account) => account.id === stream.accountId)?.name ?? stream.accountId,
       byMonth: Object.fromEntries(months.map((month) => [month, stream.amount])), total: stream.amount * months.length,
     }]));
-    return { period, byMonth, byType, byAsset, byCurrency: { USD: totalIncome }, byCurrencyBase: { USD: totalIncome },
-      byAccount, totalIncome, currency: "USD", monthlyAverage: months.length ? totalIncome / months.length : 0,
+    return { period, byMonth, byType, byAsset, byCurrency: { [SAMPLE_CURRENCY]: totalIncome }, byCurrencyBase: { [SAMPLE_CURRENCY]: totalIncome },
+      byAccount, totalIncome, currency: SAMPLE_CURRENCY, monthlyAverage: months.length ? totalIncome / months.length : 0,
       yoyGrowth: null, unconvertedCurrencies: [] };
   });
 }
@@ -327,7 +327,7 @@ export function demoSimplePerformance(): SimplePerformanceResult[] {
   const total = sampleAccounts().reduce((sum, a) => sum + a.value, 0);
   return sampleAccounts().map((account) => {
     const cost = samplePositions().filter(p => p.accountId === account.id).reduce((sum, p) => sum + p.cost, 0);
-    return { accountId: account.id, totalValue: account.value, accountCurrency: "USD", baseCurrency: "USD", fxRateToBase: 1,
+    return { accountId: account.id, totalValue: account.value, accountCurrency: SAMPLE_CURRENCY, baseCurrency: SAMPLE_CURRENCY, fxRateToBase: 1,
       totalGainLossAmount: account.value - cost, cumulativeReturnPercent: cost ? (account.value - cost) / cost : 0,
       portfolioWeight: account.value / total };
   });
@@ -339,7 +339,7 @@ export function demoNetWorth(): NetWorthResponse {
   return { date: AS_OF, assets: { total, breakdown: [
     { category: "investments", name: "Investments", value: total - cash },
     { category: "cash", name: "Cash", value: cash },
-  ] }, liabilities: { total: 0, breakdown: [] }, netWorth: total, currency: "USD", oldestValuationDate: "2024-01-01", staleAssets: [] };
+  ] }, liabilities: { total: 0, breakdown: [] }, netWorth: total, currency: SAMPLE_CURRENCY, oldestValuationDate: "2024-01-01", staleAssets: [] };
 }
 
 export function demoNetWorthHistory(): NetWorthHistoryPoint[] {
@@ -355,7 +355,7 @@ export function demoNetWorthHistory(): NetWorthHistoryPoint[] {
       cumulativeNetContribution: v.netContributionBase,
       netContribution: v.netContributionBase,
       breakdown: {},
-      currency: "USD",
+      currency: SAMPLE_CURRENCY,
     }));
 }
 

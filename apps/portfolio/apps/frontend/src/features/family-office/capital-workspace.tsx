@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from "react";
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "@/components/office-charts";
 import { Button } from "@fb/ui";
 import { useScenario, NumberField } from "./finance-ui";
 import { financeBookKey, financeBookSchema, financeBookDefaults, consolidateBook, fairValueWealth, dcfValue, cashForecast, type FinanceBook } from "./finance-book-model";

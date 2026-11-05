@@ -1,9 +1,10 @@
 import { ErpTaskFields, ErpTaskList } from "./erpnext-task-workspace";
-import { CalCalendarToolbar, CalCalendarSwitch, CalWeekAgenda } from "./cal-calendar-frontend";
+import { CalCalendarToolbar, CalCalendarSwitch, CalWeekAgenda, CalSchedulerSidebar } from "./cal-calendar-frontend";
 import { readGovernance } from "./governance-model";
 import { FamilyOfficeShell } from "./family-office-shell";
 import { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { guardPleaseFixChanges } from "./please-fix-model";
 import { Button, cardSurfaceClassName, Card, CardContent, CardHeader, CardTitle } from "@fb/ui";
 import { selectedProfileId } from "@/features/profiles/session";
 import { dateOnly, decodeOperations, initialOperations, sampleFamilyMeetings, monday, operationsKey, shiftDate, validateObligation, weekRows, scheduleOccurrences, cancelFutureOccurrences, type Obligation, type OperationsData } from "./operations-model";
@@ -13,10 +14,21 @@ import { fullBoardReport, linkedWorkflowObligations } from "./operations-report"
 const field = "fo-field w-full px-3 py-2 text-foreground";
 function download(name: string, content: string, type: string) { const url = URL.createObjectURL(new Blob([content], { type })); const a = document.createElement("a"); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 0); }
 export function OperationsWorkspace({ business = false }: { business?: boolean }) {
+  const navigate = useNavigate();
   const key = operationsKey(selectedProfileId() ?? "static-demo");
   const [message, setMessage] = useState("");
   const [data, setData] = useState<OperationsData>(() => { try { const saved = localStorage.getItem(key); return saved ? decodeOperations(saved) : { version: 1, obligations: [...initialOperations().obligations, ...sampleFamilyMeetings()] }; } catch { return { version: 1, obligations: [] }; } });
   const [loadError, setLoadError] = useState(() => { try { const saved = localStorage.getItem(key); if (saved) decodeOperations(saved); return ""; } catch { return "Saved operations data could not be read. Export/recover your stored data before resetting; no sample records have replaced it."; } });
+  useEffect(() => {
+    const refresh = (event?: Event) => {
+      if (event && event.type === "familybizness:record-updated" && (event as CustomEvent).detail?.key !== key) return;
+      if (event instanceof StorageEvent && event.key !== key) return;
+      try { const raw = localStorage.getItem(key); if (raw) { setData(decodeOperations(raw)); setLoadError(""); } }
+      catch { setLoadError("Saved operations data could not be read. Recover the record before editing."); }
+    };
+    refresh(); window.addEventListener("familybizness:record-updated", refresh); window.addEventListener("storage", refresh);
+    return () => { window.removeEventListener("familybizness:record-updated", refresh); window.removeEventListener("storage", refresh); };
+  }, [key]);
   const [week, setWeek] = useState(monday(dateOnly()));
   const [horizon, setHorizon] = useState(shiftDate(dateOnly(), 90));
   const [view, setView] = useState<"Agenda" | "Week">(()=>localStorage.getItem("familybizness:calendar-view")==="Agenda"?"Agenda":"Week");
@@ -32,14 +44,18 @@ export function OperationsWorkspace({ business = false }: { business?: boolean }
   const today = dateOnly();
   const filtered = data.obligations.filter(row => (business?!row.meeting:calendarScope==="all"||!!row.meeting) && (member === "All" || !!row.meeting?.attendees.includes(member)) && (owner === "All" || row.owner === owner) && (entity === "All" || row.entity === entity) && (showScenarios || !row.scenario));
   const visible = weekRows(filtered, week);
-  const persist = (next: OperationsData, recover = false) => { try { if (loadError && !recover) throw new Error("Recover by importing valid data or explicitly resetting before saving."); decodeOperations(JSON.stringify(next)); localStorage.setItem(key, JSON.stringify(next)); setData(next); setLoadError(""); setMessage("Saved to the family office."); return true; } catch (error) { setMessage(error instanceof Error ? error.message : "Could not save."); return false; } };
-  const edit = (row: Obligation) => { setDraft({ ...row }); setMessage(""); requestAnimationFrame(()=>document.getElementById("work-editor")?.scrollIntoView({block:"start",behavior:"smooth"})); };
+  const persist = (next: OperationsData, recover = false) => { try { if (loadError && !recover) throw new Error("Recover by importing valid data or explicitly resetting before saving."); decodeOperations(JSON.stringify(next)); guardPleaseFixChanges(decodeOperations(localStorage.getItem(key) ?? JSON.stringify(data)), next); localStorage.setItem(key, JSON.stringify(next)); setData(next); setLoadError(""); setMessage("Saved to the family office."); window.dispatchEvent(new CustomEvent("familybizness:record-updated", { detail: { key } })); return true; } catch (error) { setMessage(error instanceof Error ? error.message : "Could not save."); return false; } };
+  const edit = (row: Obligation) => { if (row.title === "please fix") { navigate("/office/constitution?tab=fix"); return; } setDraft({ ...row }); setMessage(""); requestAnimationFrame(()=>document.getElementById("work-editor")?.scrollIntoView({block:"start",behavior:"smooth"})); };
   const add = () => edit({ id: crypto.randomUUID(), title: "", due: today, owner: "", entity: "", category: business ? "Business operations" : "Manual reminder", status: "Open", source: "Manual draft — source pending", sourceRoute: "", recurrence: "One-off", notes: "", evidence: "", scenario: false });
-  const rowButton = (row: Obligation) => row.meeting ? <button key={row.id} className="w-full rounded-lg border border-l-2 border-l-primary bg-card p-3 text-left hover:bg-muted" onClick={()=>edit(row)}><span className="text-xs font-medium text-muted-foreground">{view==="Agenda"?`${row.due.slice(5)} | `:""}{row.meeting.start}-{row.meeting.end}</span><span className="my-2 block text-sm font-semibold">{row.title}</span><div className="flex items-center justify-between"><span className="text-xs text-muted-foreground">{row.meeting.location}</span><span className="rounded-full bg-muted px-2 py-1 text-xs">{row.meeting.attendees.length} {row.meeting.attendees.length===1?"member":"members"}</span></div></button> : <button key={row.id} className="w-full rounded-md border border-border bg-card p-3 text-left text-card-foreground hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring" onClick={() => edit(row)}><span className="block break-words font-medium">{row.title}</span><span className="mt-1 block text-sm">{row.due} · {row.owner} · {row.entity}</span><span className="mt-1 block text-xs text-muted-foreground">All-day responsibility</span><span className="mt-1 block text-sm font-medium">{row.scenario ? "Scenario only · " : ""}{row.status === "Open" && row.due < today ? "Overdue · " : ""}{row.status}</span></button>;
+  const addMeeting = (day = today, start = "10:00") => {
+    const [hour, minute] = start.split(":").map(Number), endMinutes = Math.min(1439, hour * 60 + minute + 60);
+    edit({id:crypto.randomUUID(),title:"",due:day,owner:"Family Council secretary",entity:"Family",category:"Family meeting",status:"Open",source:"FO-GOVERNANCE",sourceRoute:"/office/governance",recurrence:"One-off",notes:"",evidence:"",scenario:false,meeting:{start,end:`${String(Math.floor(endMinutes / 60)).padStart(2,"0")}:${String(endMinutes % 60).padStart(2,"0")}`,timeZone:"Europe/London",attendees:member === "All" ? [] : [member],location:"Family office",agenda:""}});
+  };
+  const rowButton = (row: Obligation) => row.meeting ? <button key={row.id} className="w-full rounded-lg border border-l-2 border-l-primary bg-card p-3 text-left hover:bg-muted" onClick={()=>edit(row)} title={`${row.title} · ${row.due} ${row.meeting.start}–${row.meeting.end} · ${row.meeting.timeZone} · ${row.meeting.location}`}><span className="text-xs font-medium text-muted-foreground">{view==="Agenda"?`${row.due.slice(5)} | `:""}{view === "Agenda" ? `${row.meeting.start}–${row.meeting.end}` : row.meeting.start}</span><span className="my-2 block text-sm font-semibold">{row.title}</span><div className="flex items-center justify-between"><span className="text-xs text-muted-foreground">{row.meeting.location}</span><span className="rounded-full bg-muted px-2 py-1 text-xs">{row.meeting.attendees.length} {row.meeting.attendees.length===1?"member":"members"}</span></div></button> : <button key={row.id} className="w-full rounded-md border border-border bg-card p-3 text-left text-card-foreground hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring" onClick={() => edit(row)}><span className="block break-words font-medium">{row.title}</span><span className="mt-1 block text-sm">{row.due} · {row.owner} · {row.entity}</span><span className="mt-1 block text-xs text-muted-foreground">All-day responsibility</span><span className="mt-1 block text-sm font-medium">{row.scenario ? "Scenario only · " : ""}{row.status === "Open" && row.due < today ? "Overdue · " : ""}{row.status}</span></button>;
   return <div className="space-y-6">
     {loadError && <p role="alert" className="rounded-md border border-destructive p-3">{loadError}</p>}
     {message && <p role="status" className="rounded-md border p-3">{message}</p>}
-    <div className="flex flex-wrap items-center justify-between gap-3">{business?<Button onClick={add}>Add task</Button>:<><div className="flex gap-2"><Button variant={calendarScope==="meetings"?"default":"outline"} onClick={()=>setCalendarScope("meetings")}>Family meetings</Button><Button variant={calendarScope==="all"?"default":"outline"} onClick={()=>setCalendarScope("all")}>All responsibilities</Button></div><Button onClick={()=>edit({id:crypto.randomUUID(),title:"",due:today,owner:"Family Council secretary",entity:"Family",category:"Family meeting",status:"Open",source:"FO-GOVERNANCE",sourceRoute:"/office/governance",recurrence:"One-off",notes:"",evidence:"",scenario:false,meeting:{start:"10:00",end:"11:00",timeZone:"Europe/London",attendees:[],location:"Family office",agenda:""}})}>Schedule family meeting</Button></>}<Link to="/office/admin" className="text-sm text-muted-foreground underline">Administration</Link></div>
+    <div className="flex flex-wrap items-center justify-between gap-3">{business?<Button onClick={add}>Add task</Button>:<><div className="flex gap-2"><Button variant={calendarScope==="meetings"?"default":"outline"} onClick={()=>setCalendarScope("meetings")}>Family meetings</Button><Button variant={calendarScope==="all"?"default":"outline"} onClick={()=>setCalendarScope("all")}>All responsibilities</Button></div><Button onClick={()=>addMeeting()}>Schedule family meeting</Button></>}<Link to="/settings/general" className="text-sm text-muted-foreground underline">Settings</Link></div>
 
     {confirmReset && <div className="rounded-md border p-4"><p>Replace this profile’s operations records with fresh fictional examples? Other modules are unaffected.</p><div className="mt-2 flex gap-2"><Button onClick={() => { if (persist(initialOperations(), true)) { setConfirmReset(false); setDraft(null); } }}>Replace operations records</Button><Button variant="outline" onClick={() => setConfirmReset(false)}>Cancel</Button></div></div>}
     {business ? <ErpTaskList rows={filtered} today={today} onEdit={edit} onBulkStatus={(ids,status,evidence)=>{
@@ -50,7 +66,7 @@ export function OperationsWorkspace({ business = false }: { business?: boolean }
       <div className="max-w-sm text-sm"><label htmlFor="calendar-member">Family member</label><select id="calendar-member" className={field} value={member} onChange={e=>setMember(e.target.value)}><option>All</option>{family.people.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select></div>
       </details>
       <CalCalendarToolbar week={week} view={view} onWeekChange={setWeek} onViewChange={next=>{setView(next);localStorage.setItem("familybizness:calendar-view",next);}}/>
-      <CalWeekAgenda rows={visible} week={week} view={view} renderEvent={rowButton}/>
+      <div className="cal-scheduler-layout"><CalSchedulerSidebar week={week} onWeekChange={setWeek} people={family.people} member={member} onMemberChange={setMember} rows={weekRows(data.obligations,week)}/><div className="min-w-0 flex-1 p-3"><CalWeekAgenda rows={visible} week={week} view={view} renderEvent={rowButton} onSelectSlot={addMeeting}/></div></div>
     </CardContent></Card>}
     {business && <details className="rounded-md border p-4"><summary className="cursor-pointer font-medium">Office providers & cost assumptions</summary><div className="mt-4"><ServicesPanel /></div></details>}
 

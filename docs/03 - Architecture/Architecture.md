@@ -40,10 +40,34 @@ Detailed routes, supported calculations and release verification: [Integration](
 
 ## Visual stewardship and local command boundary
 
-Daily entry points render saved AUM/liquidity, DCF/multiple/sensitivity, portfolio allocation/projection and the calendar directly. Detailed editors mount on demand; source-record update events keep open visual summaries and editors synchronized. The host navigation is rendered once. Administration owns office/profile, constitution/IPS, source, appearance and backup controls.
+Daily entry points render saved AUM/liquidity, DCF/multiple/sensitivity, portfolio allocation/projection and the calendar directly. Detailed editors mount on demand; source-record update events keep open visual summaries and editors synchronized. The host navigation is rendered once. Dedicated IPS and Family constitution routes own mandate adoption and charter review. The existing Wealthfolio Settings routes own office/profile, source, appearance and backup controls.
 
 The static profile API dispatches to one local command engine, used by ProfileShell. It persists list/create/update/unlock/lock commands and admits the existing immutable session scope. Native/server transports are unchanged outside the static adapter. No profile HTTP request is needed for this build.
 
 Prepared-office population now uses `stewardship-scenario.ts` to fill the existing book, historical statement records, dated AUM and investment/estate assumptions. The upgrade retains a local recovery snapshot before one-time replacement. Subsequent visits preserve saved edits. The numerical IPS statement is stored in the donated document workspace and activated in the existing typed rule owner; adoption updates source, document, mandate and rule snapshots transactionally.
 
 The Wealthfolio visual pass reuses shared card components and exported card surfaces for daily financial workspaces. Composition CSS reads canonical dimensions and host semantic roles; calendar fields/sheets use existing field/overlay roles. The focused `scripts/verify-wealthfolio-art-direction.cjs` checks computed surface geometry and responsive light/dark rendering.
+
+## Connected donor and brand integration
+
+The public landing owns the family legacy narrative, founder/current/next-generation image slots, six tailored office capabilities and student/AI submission credits. Its single login CTA requests the existing profile chooser, including on a returning visit. Circular profile artwork is supplied through one image manifest and one renderer.
+
+Calendar ports Cal DateValues, EmptyCell and EventList structures into the existing meeting register: mini-month/member rail, timed week, collision lanes, agenda and click-to-schedule. ERP ports Projects Workspace metadata, summary/list/board and project-to-Task drilldown over the same obligations. The contribution manifest records seven software sources including installed Dither Kit.
+
+`please-fix-model.ts` reuses office-review actions and operations records. Admitted persona scope controls issue/assign/accept/resolve/reopen transitions; evidence and current clause fingerprints govern resolution. Generic ERP mutations cannot bypass the workflow. No parallel ticket database is introduced.
+
+Dither Kit's installed local source supplies daily financial charts via `office-charts.tsx`; range bands retain their true floors and ceilings, and the median remains a line. Existing specialised Wealthfolio charts retain privacy, activity markers and axes while using the same installed painter for fill masks. Registry provenance/update guidance: [Dither Kit integration](Dither%20Kit%20-%20Source%20Integration.md).
+
+## Root source ownership audit
+
+| Root | Role in this integration |
+|---|---|
+| `apps/web`, `apps/portfolio` | Public family narrative and the adapted Wealthfolio application; both packaged by the root build |
+| `packages`, `docs` | Canonical token primitives and product/source/architecture decisions |
+| `.local-references/contenders`, `donor` | Inspected local upstream sources and intake placeholders; excluded from shipped source/runtime |
+| `upstream` | Extracted provenance and registry fingerprints; not a second execution layer |
+| `scripts`, `.github` | Bun packaging, source audits, focused checks and hosting workflow |
+| `dist`, `artifacts` | Generated static product and local verification/handover evidence |
+| `.git`, `.cache`, `node_modules`, `.cursor` | Repository/tool/dependency metadata, excluded from the static runtime |
+
+The retired Portfolio contender remains a reference; active financial pages continue using the existing book, policy, optimiser and operations owners. No Cal provider runtime, Frappe backend, donor Git history or duplicate server is introduced.

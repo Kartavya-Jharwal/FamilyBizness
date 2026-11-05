@@ -257,6 +257,7 @@ ChartTooltipContent.displayName = "ChartTooltip";
 const ChartLegend = RechartsPrimitive.Legend;
 
 interface LegendItem {
+  type?: string;
   dataKey?: string | number;
   color?: string;
   value?: string | number;
@@ -273,7 +274,7 @@ interface ChartLegendContentProps extends React.ComponentProps<"div"> {
 const ChartLegendContent = React.forwardRef<HTMLDivElement, ChartLegendContentProps>(
   ({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }, ref) => {
     const { config } = useChart();
-    const resolvedPayload = Array.isArray(payload) ? payload : [];
+    const resolvedPayload = Array.isArray(payload) ? payload.filter(item => item.type !== "none" && item.payload?.legendType !== "none") : [];
 
     if (resolvedPayload.length === 0) {
       return null;

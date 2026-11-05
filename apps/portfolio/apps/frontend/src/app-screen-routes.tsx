@@ -52,6 +52,9 @@ const SimulationPage = lazy(() => import("./features/family-office/portfolio-vis
 const SourcesPage = lazy(() => import("./features/family-office/sources-page"));
 const PolicyPage = lazy(() => import("./features/family-office/ips-visual"));
 const CapitalPage=lazy(()=>import("./features/family-office/capital-workspace"));
+const FamilyConstitutionPage=lazy(()=>import("./features/family-office/family-constitution-page"));
+const OfficeSettingsPage=lazy(()=>import("./features/family-office/office-settings-page"));
+const CaseAdministration=lazy(()=>import("./features/family-office/case-administration"));
 const AdministrationPage=lazy(()=>import("./features/family-office/administration-page"));
 const CasePage = lazy(() => import("./features/family-office/case-page"));
 const PresentationPage = lazy(() => import("./features/family-office/presentation-page"));
@@ -104,6 +107,7 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
       <Route path="office/finance" element={<Suspense fallback={<p className="p-6">Loading financials…</p>}><CapitalPage/></Suspense>} />
       <Route path="office/simulation" element={<Suspense fallback={<p className="p-6">Loading scenarios…</p>}><SimulationPage /></Suspense>} />
       <Route path="office/sources" element={<Suspense fallback={<p className="p-6">Loading source register…</p>}><SourcesPage /></Suspense>} />
+      <Route path="office/constitution" element={<Suspense fallback={<p>Opening family constitution…</p>}><FamilyConstitutionPage/></Suspense>} />
       <Route path="office/policy" element={<Suspense fallback={<p className="p-6">Loading family policy…</p>}><PolicyPage /></Suspense>} />
       <Route path="dashboard" element={<PortfolioPage />} />
       <Route path="activities" element={<ActivityPage />} />
@@ -144,7 +148,9 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
         />
       ))}
       <Route path="settings" element={<SettingsLayout />}>
-        <Route index element={<GeneralSettingsPage />} />
+        <Route index element={<Navigate to="/settings/general" replace />} />
+        <Route path="office" element={<Suspense fallback={<p>Opening office settings…</p>}><OfficeSettingsPage/></Suspense>} />
+        <Route path="records" element={<Suspense fallback={<p>Opening family records…</p>}><CaseAdministration/></Suspense>} />
         <Route path="sources" element={<Suspense fallback={<p>Opening source administration...</p>}><OfficeReviewWorkspace /></Suspense>} />
         <Route path="general" element={<GeneralSettingsPage />} />
         <Route path="accounts" element={<SettingsAccountsPage />} />

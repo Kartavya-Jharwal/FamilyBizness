@@ -1,3 +1,4 @@
+import { DitherChartMask } from "@/components/dither-chart-mask";
 import { useHapticFeedback } from "@/hooks";
 import { useBalancePrivacy } from "@/hooks/use-balance-privacy";
 import { useIsMobileViewport } from "@/hooks/use-platform";
@@ -197,7 +198,7 @@ export function NetWorthChart({ data, isLoading }: NetWorthChartProps) {
         onTouchMove={maybeTriggerScrubHaptic}
         onTouchEnd={resetTouchScrubState}
       >
-        <defs>
+        <defs><DitherChartMask id={`${id}-dither`}/>
           <linearGradient id={fillGradientId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={THEME_COLOR} stopOpacity={0.2} />
             <stop offset="70%" stopColor={THEME_COLOR} stopOpacity={0.12} />
@@ -225,7 +226,7 @@ export function NetWorthChart({ data, isLoading }: NetWorthChartProps) {
         />
 
         {/* Net Worth (main filled area) */}
-        <Area
+        <Area mask={`url(#${id}-dither)`}
           isAnimationActive={true}
           animationDuration={300}
           animationEasing="ease-out"

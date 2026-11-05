@@ -29,9 +29,11 @@ function buildStaticNavigation(): NavigationProps {
       { icon: <Icons.Insight className="size-6" />, title: "Portfolio & scenarios", href: "/office/simulation", keywords: ["allocation", "risk", "Monte Carlo", "holdings", "performance"] },
       { icon: <Icons.Goals className="size-6" />, title: "Family business", href: "/office/business", keywords: ["ERPNext", "governance", "succession", "operations", "tasks"] },
       { icon: <Icons.Activity className="size-6" />, title: "Calendar", href: "/office" },
+      { icon: <Icons.Insight className="size-6" />, title: "Investment policy statement", href: "/office/policy", keywords: ["IPS", "mandate", "limits"] },
+      { icon: <Icons.Folder className="size-6" />, title: "Family constitution", href: "/office/constitution", keywords: ["charter", "clauses", "please fix", "legal"] },
     ],
     secondary: [
-      { icon: <Icons.Settings className="size-6" />, title: "Administration", href: "/office/admin", keywords: ["settings", "constitution", "investment policy", "sources", "currency", "accounts", "configuration"] },
+      { icon: <Icons.Settings className="size-6" />, title: "Settings", href: "/settings/general", keywords: ["preferences", "profiles", "sources", "currency", "accounts", "configuration"] },
     ],
   };
 }
@@ -122,7 +124,8 @@ export function isPathActive(pathname: string, href: string): boolean {
   if (normalizedHref === "/office/finance" && normalizedPath === "/office/estate") return true;
   if (normalizedHref === "/office/simulation" && ["/", "/dashboard", "/net-worth", "/holdings", "/activities", "/insights"].some(path => normalizedPath === path || (path !== "/" && normalizedPath.startsWith(path + "/")))) return true;
   if (normalizedHref === "/office/business" && ["/office/governance", "/office/philanthropy"].includes(normalizedPath)) return true;
-  if (normalizedHref === "/office/admin" && ["/settings", "/office/policy", "/office/sources", "/governance/constitution"].some(path => normalizedPath === path || normalizedPath.startsWith(path + "/"))) return true;
+  if (normalizedHref === "/settings/general" && normalizedPath.startsWith("/settings")) return true;
+  if (normalizedHref === "/office/constitution" && ["/office/sources", "/governance/constitution"].includes(normalizedPath)) return true;
 
   return normalizedPath === normalizedHref || normalizedPath.startsWith(`${normalizedHref}/`);
 }

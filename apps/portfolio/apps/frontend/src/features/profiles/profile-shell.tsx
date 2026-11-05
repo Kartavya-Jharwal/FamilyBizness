@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect, useState } from "react";
-import { Button } from "@fb/ui";
+import { DitherButton, DitherGradient } from "@/components/dither-kit";
+import { Button, buttonVariants, cardSurfaceClassName } from "@fb/ui";
 import { ProfileContext } from "./profile-context";
 import { profileCommand, type ProfileState, type ProfileSummary } from "./api";
 import { installProfileSession } from "./session";
@@ -15,7 +16,7 @@ export function ProfileShell({ children }: { children: ReactNode }) {
   const [initial] = useState(() => { try { return { state: readLocalProfileState(), error: "" }; } catch (error) { return { state: { profiles: [], session: null, starting: false } as ProfileState, error: String(error) }; } });
   const [profiles, setProfiles] = useState(initial.state.profiles);
   const profile = profiles.find(row => row.id === selected);
-  const [choosing, setChoosing] = useState(!profile || !initial.state.session || (!!selected && !isOfficePersona(selected) && !hasSeenOfficeEntry()));
+  const [choosing, setChoosing] = useState(new URLSearchParams(window.location.search).has("choose-profile") || !profile || !initial.state.session || (!!selected && !isOfficePersona(selected) && !hasSeenOfficeEntry()));
   const [editing, setEditing] = useState<"add" | "edit" | null>(null);
   const [name, setName] = useState("");
   const [saving, setSaving] = useState(false);
@@ -39,6 +40,7 @@ export function ProfileShell({ children }: { children: ReactNode }) {
     setSaving(true); setError("");
     try {
       await profileCommand<ProfileState>("unlock_profile", { profileId: id });
+      const entryUrl = new URL(window.location.href); entryUrl.searchParams.delete("choose-profile"); window.history.replaceState(null, "", entryUrl);
       if (isOfficePersona(id)) window.location.hash = "/office/case";
       window.location.reload();
     } catch (error) { setError(error instanceof Error ? error.message : "Profile could not be opened."); setSaving(false); }
@@ -52,13 +54,14 @@ export function ProfileShell({ children }: { children: ReactNode }) {
     manageProfile: () => { setChoosing(true); setEditing("edit"); setName(profile?.name ?? ""); },
     lockProfile: () => { void lockProfile(); }, switchProfile: () => setChoosing(true), selectProfile: (id: string) => { void selectProfile(id); } };
   const avatar = (row: ProfileSummary) => row.avatarId === "default" ? localRoleProfiles.find(role => role.id === row.id)?.avatarId ?? row.avatarId : row.avatarId;
-  const tile = (row: ProfileSummary) => <article key={row.id} className="flex flex-col items-center gap-3 rounded-xl border bg-card p-5 text-center text-card-foreground">
+  const tile = (row: ProfileSummary) => <article key={row.id} className={`${cardSurfaceClassName} flex flex-col items-center gap-3 p-5 text-center`}>
     <ProfileAvatar id={avatar(row)} className="size-20" animated={false}/>
     <h2 className="text-base font-semibold">{row.name}</h2>
-    <Button className="mt-auto" disabled={saving || row.lockEnabled} onClick={() => void selectProfile(row.id)}>Open {row.name}</Button>
+    <DitherButton color="green" variant="dotted" bloom="off" className={buttonVariants({ variant: "outline", className: "mt-auto" })} disabled={saving || row.lockEnabled} onClick={() => void selectProfile(row.id)}>Open {row.name}</DitherButton>
     {row.lockEnabled && <p className="text-xs text-muted-foreground">Open this protected profile in its original host.</p>}
   </article>;
-  if (choosing) return <main className="mx-auto max-w-4xl space-y-6 p-6 text-foreground">
+  if (choosing) return <main className="relative isolate mx-auto max-w-4xl space-y-6 p-6 text-foreground">
+    <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 overflow-hidden" aria-hidden="true"><DitherGradient from="green" direction="down" opacity={0.1} className="size-full" /></div>
     <header className="space-y-2"><p className="text-sm text-muted-foreground">FamilyBizness</p><h1 className="text-3xl font-semibold">Who is visiting the family office?</h1><p className="text-sm text-muted-foreground">Choose your profile to open the shared family office.</p></header>
     {error && <p role="alert" className="rounded-md border p-3 text-sm text-destructive">{error}</p>}
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{profiles.filter(row => isOfficePersona(row.id)).map(tile)}</div>

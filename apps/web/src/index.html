@@ -1,99 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FamilyBizness</title>
-    <meta
-      name="description"
-      content="Wealth management for the single-family office — estate planning and family business affairs across generations."
-    />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/tokens/tokens.css" />
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand-mark" href="/">FamilyBizness</a>
-      <nav class="header-nav" aria-label="Primary">
-        <a class="hide-sm" href="/#pillars">Pillars</a>
-        <a href="/legacy.html">Legacy</a><a href="/report.html">Project report</a>
-        <a href="/login.html">Enter office</a>
-      </nav>
-    </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FamilyBizness — A legacy in motion</title>
+  <meta name="description" content="A family enterprise, a shared legacy and one family office supporting stewardship across generations.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/tokens/tokens.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="family-landing">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand-mark" href="/" aria-label="FamilyBizness home"><span class="brand-roundel" aria-hidden="true">FB</span>FamilyBizness</a>
+    <nav class="header-nav" aria-label="Primary">
+      <a href="#legacy">Our story</a>
+      <a class="hide-sm" href="#family-office">The family office</a>
+      <a href="#team">Team</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero family-hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Family · Enterprise · Continuity</p>
+        <h1 class="hero-brand" id="hero-title">A family enterprise.<br>A legacy in motion.</h1>
+        <p class="hero-line">What our founding fathers began, each generation carries forward. One family, a shared purpose, and the responsibility to leave something stronger.</p>
+        <div class="hero-cta"><a class="btn btn-primary" href="/portfolio/?choose-profile=1#/office/case">Let's log in <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <figure class="family-hero-portrait" data-photo-slot="family-hero">
+        <div class="portrait-orbit" aria-hidden="true"><span>F</span></div>
+        <figcaption><span class="photo-slot-label">Family portrait</span><span>Your family photograph will live here</span></figcaption>
+      </figure>
+      <div class="hero-footnote"><span>Built by those before us.</span><span>Held for those after us.</span></div>
+    </section>
 
-    <main>
-      <section class="hero" aria-label="Brand">
-        <div class="hero-inner">
-          <h1 class="hero-brand">FamilyBizness</h1>
-          <p class="hero-line">
-            Estate planning and financial stewardship for the single-family
-            office — returns shaped for this generation and the next.
-          </p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="/legacy.html">Across generations</a>
-            <a class="btn btn-ghost" href="/login.html">Choose profile</a>
-            <a class="btn btn-ghost" href="/portfolio/#/office/case">Open the family office →</a>
-          </div>
-        </div>
-      </section>
+    <section class="section legacy-introduction" id="legacy" aria-labelledby="legacy-title">
+      <p class="section-label">Across generations</p>
+      <div class="section-heading-grid"><h2 id="legacy-title">More than what we own.<br>What we stand for.</h2><p class="lede">Our legacy lives in the enterprise we steward, the people we support and the decisions we make together. The family office keeps that purpose connected to the work of every generation.</p></div>
+      <div class="generation-grid">
+        <article class="generation-card">
+          <figure class="generation-photo" data-photo-slot="founding-fathers"><span class="photo-monogram" aria-hidden="true">I</span><figcaption>Founding fathers <span>Portrait to follow</span></figcaption></figure>
+          <p class="section-label">01 / The foundations</p><h3>The courage to begin.</h3><p>Our founding fathers set the direction: build with purpose, honour commitments and think beyond an individual lifetime. Their story belongs at the heart of the family enterprise.</p>
+        </article>
+        <article class="generation-card">
+          <figure class="generation-photo" data-photo-slot="current-generation"><span class="photo-monogram" aria-hidden="true">II</span><figcaption>Current generation <span>Portrait to follow</span></figcaption></figure>
+          <p class="section-label">02 / The responsibility</p><h3>The care to carry it forward.</h3><p>Today's generation holds a shared responsibility for the business and the family capital around it. Clear decisions, thoughtful reinvestment and a common charter make continuity an everyday practice.</p>
+        </article>
+        <article class="generation-card">
+          <figure class="generation-photo" data-photo-slot="next-generation"><span class="photo-monogram" aria-hidden="true">III</span><figcaption>Next generation <span>Portrait to follow</span></figcaption></figure>
+          <p class="section-label">03 / The possibility</p><h3>The space to shape what comes next.</h3><p>Learning, mentoring and the opportunity to contribute prepare the next generation for stewardship. The aim is to pass on judgement and purpose alongside ownership and wealth.</p>
+        </article>
+      </div>
+    </section>
 
-      <section class="section" id="pillars">
-        <p class="section-label">Platform pillars</p>
-        <h2>What the office runs on</h2>
-        <p class="lede">
-          Six capabilities supporting the family office across generations.
-        </p>
-        <ul class="pillar-list">
-          <li>
-            <a href="/portfolio/#/office/governance">
-              <span class="pillar-num">01</span>
-              <span class="pillar-name">Governance &amp; succession</span>
-              <span class="pillar-hint">Board, heirs, continuity</span>
-            </a>
-          </li>
-          <li>
-            <a href="/portfolio/#/office/business?tab=constitution">
-              <span class="pillar-num">02</span>
-              <span class="pillar-name">Constitution linkage</span>
-              <span class="pillar-hint">Traceable family rules</span>
-            </a>
-          </li>
-          <li>
-            <a href="/portfolio/#/office/estate">
-              <span class="pillar-num">03</span>
-              <span class="pillar-name">Estate &amp; wealth structuring</span>
-              <span class="pillar-hint">English law baseline</span>
-            </a>
-          </li>
-          <li>
-            <a href="/portfolio/#/office/simulation">
-              <span class="pillar-num">04</span>
-              <span class="pillar-name">Portfolio selection &amp; optimisation</span>
-              <span class="pillar-hint">Capital allocation</span>
-            </a>
-          </li>
-          <li>
-            <a href="/portfolio/#/office/finance">
-              <span class="pillar-num">05</span>
-              <span class="pillar-name">Financial modelling &amp; analytics</span>
-              <span class="pillar-hint">AUM, returns, use of capital</span>
-            </a>
-          </li>
-          <li>
-            <a href="/portfolio/#/office">
-              <span class="pillar-num">06</span>
-              <span class="pillar-name">SFO / MFO operating model</span>
-              <span class="pillar-hint">How the office runs</span>
-            </a>
-          </li>
-        </ul>
-      </section>
-    </main>
+    <section class="continuity-band" aria-labelledby="continuity-title"><p class="section-label">Our shared promise</p><h2 id="continuity-title">Build with care.<br>Decide together.<br>Think in generations.</h2><p>The enterprise may evolve. Our commitment to responsible ownership, family continuity and the communities around us stays at the centre.</p></section>
 
-    <footer class="site-footer">
-      <span>FamilyBizness — functional prototype / MVP</span>
-      <a href="/legacy.html">Family narrative</a>
-    </footer>
-  </body>
+    <section class="section family-office-section" id="family-office" aria-labelledby="office-title">
+      <p class="section-label">One family. One connected office.</p>
+      <div class="section-heading-grid"><h2 id="office-title">The work behind<br>an enduring legacy.</h2><p class="lede">FamilyBizness is tailored to this family's operating charter, ownership and priorities. These six capabilities support the family office across generations — turning shared commitments into clear decisions and coordinated work.</p></div>
+      <ul class="capability-grid">
+        <li><a href="/portfolio/#/office/governance"><span class="pillar-num">01</span><h3>Governance &amp; succession</h3><p>Who decides, who follows and how responsibility passes on.</p><span class="capability-link">Decision rights &amp; continuity <span aria-hidden="true">↗</span></span></a></li>
+        <li><a href="/portfolio/#/office/constitution"><span class="pillar-num">02</span><h3>Our constitution in practice</h3><p>The family's values and agreements connected to the rules of the office.</p><span class="capability-link">Charter &amp; investment mandate <span aria-hidden="true">↗</span></span></a></li>
+        <li><a href="/portfolio/#/office/estate"><span class="pillar-num">03</span><h3>Estate &amp; wealth continuity</h3><p>Ownership, trusts and the liquidity needed for a considered handover.</p><span class="capability-link">Estate &amp; succession funding <span aria-hidden="true">↗</span></span></a></li>
+        <li><a href="/portfolio/#/office/simulation"><span class="pillar-num">04</span><h3>Portfolio stewardship</h3><p>Capital allocation shaped by the family's objectives and boundaries.</p><span class="capability-link">Allocation &amp; scenarios <span aria-hidden="true">↗</span></span></a></li>
+        <li><a href="/portfolio/#/office/finance"><span class="pillar-num">05</span><h3>Financial perspective</h3><p>Family capital, business value and cash headroom brought into view.</p><span class="capability-link">AUM, liquidity &amp; valuation <span aria-hidden="true">↗</span></span></a></li>
+        <li><a href="/portfolio/#/office"><span class="pillar-num">06</span><h3>The office, every day</h3><p>Council meetings, family responsibilities and business work kept together.</p><span class="capability-link">Calendar &amp; operations <span aria-hidden="true">↗</span></span></a></li>
+      </ul>
+    </section>
+
+    <section class="section academic-section" id="team" aria-labelledby="team-title">
+      <div><p class="section-label">The student team</p><h2 id="team-title">An academic project.<br>A practical exploration.</h2><p>This family-office experience was developed as an academic project. AI was used extensively in research support, coding, integration and documentation; the implementation record describes that process and its limits.</p><details class="team-details"><summary>Team &amp; individual contributions</summary><p class="pending-credit">Student names and individual contribution credits are awaiting the team's final submission details.</p></details></div>
+      <div class="project-materials" aria-label="Project supporting materials">
+        <a href="https://github.com/Kartavya-Jharwal/FamilyBizness/blob/main/docs/01%20-%20Notes/AI%20-%20Implementation%20Record.md">AI usage &amp; implementation record <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/Kartavya-Jharwal/FamilyBizness/blob/main/docs/07%20-%20Submission/Report%20-%20Platform%20Design%20And%20Evaluation.md">Supporting report <span aria-hidden="true">↗</span></a>
+        <a href="/report.html">Platform methods &amp; workspaces <span aria-hidden="true">↗</span></a>
+        <div class="material-pending"><span>Supporting video</span><span>Awaiting team upload</span></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer narrative-footer">
+    <div class="footer-story"><a class="footer-brand" href="/">FamilyBizness</a><p>A shared purpose, carried forward.<br>For the family, the enterprise and the generations to come.</p></div>
+    <nav aria-label="Footer"><a href="#legacy">Our story</a><a href="#family-office">The family office</a><a href="#team">Team &amp; project materials</a><a href="/portfolio/#/open-source">Open-source credits</a></nav>
+    <p class="footer-disclosure">Academic proof of work · Illustrative family narrative and planning scenario. Family photographs and marks will be supplied by the project team.</p>
+  </footer>
+</body>
 </html>

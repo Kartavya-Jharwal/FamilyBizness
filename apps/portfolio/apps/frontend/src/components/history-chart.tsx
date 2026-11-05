@@ -1,3 +1,4 @@
+import { DitherChartMask } from "./dither-chart-mask";
 import { useHapticFeedback } from "@/hooks";
 import { useBalancePrivacy } from "@/hooks/use-balance-privacy";
 import { useIsMobileViewport } from "@/hooks/use-platform";
@@ -309,7 +310,7 @@ export function HistoryChart({
           resetTouchScrubState();
         }}
       >
-        <defs>
+        <defs><DitherChartMask id={`${id}-dither`}/>
           <linearGradient id={fillGradientId} x1="0" y1="0" x2="0" y2="1">
             {allNegative ? (
               <>
@@ -364,7 +365,7 @@ export function HistoryChart({
           scale={scaleConfig.scale === "log" ? "log" : "auto"}
           domain={scaleConfig.domain}
         />
-        <Area
+        <Area mask={`url(#${id}-dither)`}
           isAnimationActive={true}
           animationDuration={300}
           animationEasing="ease-out"
@@ -382,7 +383,7 @@ export function HistoryChart({
           style={{ pointerEvents: "none" }}
         />
         {scaleConfig.showNetContribution && (
-          <Area
+          <Area mask={`url(#${id}-dither)`}
             isAnimationActive={true}
             animationDuration={300}
             animationEasing="ease-out"

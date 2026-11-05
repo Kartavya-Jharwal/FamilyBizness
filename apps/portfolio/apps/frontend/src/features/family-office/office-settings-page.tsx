@@ -1,0 +1,6 @@
+import { Button, Card, CardContent, CardHeader, CardTitle } from "@fb/ui";
+import { useProfile } from "@/features/profiles/profile-context";
+export default function OfficeSettingsPage() {
+ const profiles=useProfile();
+ return <Card><CardHeader><CardTitle>Office & profiles</CardTitle></CardHeader><CardContent className="space-y-5"><dl className="grid gap-4 sm:grid-cols-2">{[["Reporting currency","GBP"],["Legal baseline","English law"],["Constitution review","Every three years and after material events"],["Current visitor",profiles?.profile?.name??"Family office"]].map(([label,value])=><div key={label}><dt className="text-sm text-muted-foreground">{label}</dt><dd className="mt-1 font-medium">{value}</dd></div>)}</dl><div className="flex flex-wrap gap-3"><Button variant="outline" onClick={()=>profiles?.switchProfile()}>Switch profile</Button><Button variant="outline" onClick={()=>profiles?.addProfile()}>Add profile</Button><Button variant="outline" onClick={()=>profiles?.manageProfile()}>Manage profile</Button></div><p className="text-sm text-muted-foreground">Visitor profiles share the prepared office. Saved preferences and records remain in this browser; portable recovery is under Data → Family records & recovery.</p></CardContent></Card>;
+}

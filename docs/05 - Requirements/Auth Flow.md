@@ -4,9 +4,9 @@ The public entry and continuity narrative lead to profile selection inside Portf
 
 A cold visitor chooses Patriarch, Family board, Managing director, CEO, Associate, Legal counsel or Family technician. These personas share one charter, calendar, financial/estate inputs and operational evidence. **Add profile** adds a visitor to this office; it does not create a new family business or ask for a constitution. Each application load retains its immutable session scope while the planning storage resolves to the prepared office ID.
 
-A returning visitor resumes their profile. A browser last used with an earlier independent workspace is shown the revised office entry once; the original data is retained. Earlier workspaces and the Golden Bird source example are secondary, expandable recovery choices. No source case is overwritten by composite population.
+A returning visitor normally resumes their profile; the public “Let’s log in” CTA explicitly requests the chooser, so the family can select who is visiting on every public-entry visit. A browser last used with an earlier independent workspace is shown the revised office entry once; the original data is retained. Earlier workspaces and the Golden Bird source example are secondary, expandable recovery choices. No source case is overwritten by composite population.
 
-Constitution revisions, case identity, saved-data inspection and portable import/export are administrative tools. They remain available but do not lead the daily flow. Persona selection is local navigation, not real authentication, MFA or server access control.
+The Family constitution and Investment policy statement are dedicated navigation destinations. Their revision controls remain expandable. Case identity, saved-data inspection, portable import/export and profile preferences are categorical pages within the existing Settings workspace. Persona selection is local navigation, not real authentication, MFA or server access control.
 
 Product form and audiences: [Identity](../00%20-%20Canonical/Identity.md).
 

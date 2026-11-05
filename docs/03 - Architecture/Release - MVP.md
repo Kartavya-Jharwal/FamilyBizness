@@ -1,17 +1,20 @@
 # MVP Release
 
-Current source includes the Wealthfolio art direction pass on the visual stewardship baseline `64ae3e4175bc70fe42e024407d4c31b2a81bfdc5`. Current source and local package implement the [requested priorities](../05%20-%20Requirements/Audit%20-%20Remaining%20Assignment%20Work.md). The previous public deployment remains separate until hosting is unblocked.
+Current source includes the connected family-brand, donor-shell and Dither Kit integration on the visual stewardship baseline. Current source and local package implement the [requested priorities](../05%20-%20Requirements/Audit%20-%20Remaining%20Assignment%20Work.md). The previous public deployment remains separate until hosting is unblocked.
 
 ## Delivered locally
 
-- One daily navigation and one Administration panel; SFO terminology uses assets under stewardship and consolidated family capital.
+- Dedicated IPS and Family constitution navigation, with office/configuration controls inside the existing categorized Wealthfolio Settings; SFO terminology uses assets under stewardship and consolidated family capital.
 - Natural-language IPS instructions compile through the donated parser into hard limits. Reviewed adoption updates the document, sources, mandate and rule snapshots transactionally.
 - Populated, reconciled financial records and dated AUM; visible capital allocation, treasury runway, succession funding, DCF/multiple values and a sensitivity heatmap.
 - Current/optimal portfolio weights and Monte Carlo percentile fan, with spending and reserve controls.
-- Donated ERP task masks and calendar week/agenda structures, with a side-panel family-meeting scheduler.
-- Existing profile API and immutable session admission now use one local command engine. Browser entry uses donor avatars and makes no profile-server requests.
+- Donated ERP Projects Workspace, project summary and Task list/board; Cal timed week, mini-month/member rail, grouped agenda and empty-slot scheduling through the existing editor.
+- Existing profile API and immutable session admission use one local command engine. Circular Dither placeholders and an explicit image manifest replace broken sprite crops; unused atlas artwork and renderers are retired from the bundle; the landing CTA opens selection even for returning visitors.
+- Family legacy landing with founder/current/next-generation photo slots, one login CTA, Team/AI/report credits and narrative footer. Names/video await supplied submission assets.
+- Actual installed local Dither Kit source supplies primary graphs, avatar/button/gradient components and retained donor chart fill masks. Host palette and components retain precedence.
+- Literal please fix requests reuse existing review/operations records, with admitted-role transitions, clause freshness, evidence and protection against generic ERP completion.
 
-Local demo: `http://localhost:4178/FamilyBizness/` while the preview process is running. The existing handover `artifacts/submission/FamilyBizness - MVP.zip` contains the visual stewardship baseline. The current local dist additionally contains the Wealthfolio art direction pass; its render evidence is under `apps/portfolio/artifacts/wealthfolio-art-direction/`.
+Local demo: `http://localhost:4178/FamilyBizness/` while the preview process is running. Current render evidence: `apps/portfolio/artifacts/connected-family-office/`; token-contract evidence: `apps/portfolio/artifacts/wealthfolio-art-direction/`. The local handover is `artifacts/submission/FamilyBizness - MVP.zip`.
 
 ## Verification scope
 
@@ -19,7 +22,7 @@ Only the user's priorities were tested. Six focused model checks passed: stateme
 
 The packaged priority browser journey passed with no page errors and no profile API requests: profile entry, one navigation, reactive DCF/sensitivity, reviewed IPS change, constrained portfolio, Monte Carlo, ERP task creation, council meeting save/reload, agenda/week persistence, responsive capital/portfolio/calendar and dark-mode tokens. The resulting screens were visually inspected. Canonical chart/axis/legend colours and the calendar layout token are reused; no new palette is embedded.
 
-The build passed. The final frontend and node-configuration type checks passed for the committed source. The six-donor source/mount/license audit passed. The broader historical smoke suite was deliberately not rerun; the workflow now invokes the focused priority file instead.
+The build passed. The final frontend and node-configuration type checks passed for the committed source. The seven-donor source/mount/license audit and Dither registry/source audit passed. The broader historical smoke suite was deliberately not rerun; the workflow now invokes the focused priority file instead.
 
 ## Publishing block
 
@@ -32,3 +35,11 @@ Detailed donor provenance: [frontend ledger](Donors%20-%20Frontend%20Contributio
 ## Wealthfolio art direction verification
 
 Shared card surfaces, canonical numeric/heading/chart typography, quiet nested metrics, policy tiles and host-themed meeting fields/sheets replace the newer generic wrappers. `node scripts/verify-wealthfolio-art-direction.cjs` verifies computed card radius/shadow, viewport containment and error-free rendering across daily views, desktop/mobile and light/dark. Screenshots are inspected locally. This styling revision changes no financial calculations or profile commands. Hosting remains blocked as recorded above.
+
+## Connected integration verification
+
+The packaged connected journey passes public CTA → profile selection → valuation → IPS → Patriarch request → technician resolution with evidence → ERP workspace → timed calendar/editor/agenda → categorized Settings → Monte Carlo/dark → mobile constitution navigation. Screenshots are inspected; no page errors or avatar/profile transport failures were recorded. Thirty focused model/component checks pass across stewardship priorities, static GBP data, percentile composition, repair transitions, donor shells and profile compatibility. These checks cover percentile bounds plus mixed median/area composition, assigned repair transitions and ERP bypass rejection, Cal half-hour scheduling, ERP project drilldown, avatar-ID compatibility and image fallback. Six stewardship financial/profile priority checks also pass.
+
+The Dither CLI's Windows runner failure and successful Bun/shadcn source install are recorded accurately in [Dither Kit integration](Dither%20Kit%20-%20Source%20Integration.md). Existing source-map, circular-chunk and bundle-size build warnings remain; they are not represented as new functional failures.
+
+Fresh Wealthfolio static seeds now share one GBP currency constant and en-GB/Europe-London defaults; existing saved preferences remain user-owned. Decorative Dither overlays are excluded by the shared legend renderer, preventing repeated series labels. These are changes to the existing seed/legend owners, not page-only label substitutions.

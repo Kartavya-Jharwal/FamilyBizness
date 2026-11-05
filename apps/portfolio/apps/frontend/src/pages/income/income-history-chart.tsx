@@ -1,3 +1,4 @@
+import { DitherChartMask } from "@/components/dither-chart-mask";
 import type { IncomeByAccount } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { AnimatedToggleGroup, useAmountFormatting, useDateFormatting } from "@fb/ui";
@@ -23,7 +24,7 @@ import {
   EmptyDescription,
 } from "@fb/ui/components/ui/empty";
 import { Icons } from "@fb/ui/components/ui/icons";
-import React, { useMemo, useState } from "react";
+import React, { useId, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 
@@ -74,6 +75,7 @@ export const IncomeHistoryChart: React.FC<IncomeHistoryChartProps> = ({
   isBalanceHidden,
   byAccount,
 }) => {
+  const ditherId = useId();
   const amountFormatting = useAmountFormatting();
   const dateFormatting = useDateFormatting();
 
@@ -276,6 +278,7 @@ export const IncomeHistoryChart: React.FC<IncomeHistoryChartProps> = ({
                 bottom: 4,
               }}
             >
+              <defs><DitherChartMask id={ditherId} variant="hatched"/></defs>
               <CartesianGrid vertical={false} strokeDasharray="3 3" opacity={0.3} />
               <XAxis {...xAxisProps} />
               <YAxis {...yAxisProps} />
@@ -316,7 +319,7 @@ export const IncomeHistoryChart: React.FC<IncomeHistoryChartProps> = ({
               />
               {!isMobile && <ChartLegend content={<ChartLegendContent />} />}
               {accounts.map((acc, i) => (
-                <Bar
+                <Bar mask={`url(#${ditherId})`}
                   key={acc.accountId}
                   dataKey={acc.accountId}
                   stackId="income"
@@ -356,6 +359,7 @@ export const IncomeHistoryChart: React.FC<IncomeHistoryChartProps> = ({
                 bottom: 4,
               }}
             >
+              <defs><DitherChartMask id={ditherId} variant="hatched"/></defs>
               <CartesianGrid vertical={false} strokeDasharray="3 3" opacity={0.3} />
               <XAxis {...xAxisProps} />
               <YAxis yAxisId="left" {...yAxisProps} />
@@ -425,7 +429,7 @@ export const IncomeHistoryChart: React.FC<IncomeHistoryChartProps> = ({
               {/* Cumulative — a single Area drawn first so its fill sits behind the
                   bars as background context, with its own stroke acting as the line.
                   One element means exactly one legend/tooltip entry. */}
-              <Area
+              <Area mask={`url(#${ditherId})`}
                 yAxisId="right"
                 type="monotone"
                 dataKey="cumulative"
@@ -436,14 +440,14 @@ export const IncomeHistoryChart: React.FC<IncomeHistoryChartProps> = ({
               />
               {/* Prior vs. current period as grouped bars (prior on the left).
                   Prior period is the calmer neutral so the current reads as primary. */}
-              <Bar
+              <Bar mask={`url(#${ditherId})`}
                 yAxisId="left"
                 dataKey="previousIncome"
                 fill="var(--color-previousIncome)"
                 radius={[isMobile ? 3 : 4, isMobile ? 3 : 4, 0, 0]}
                 barSize={isMobile ? 11 : 18}
               />
-              <Bar
+              <Bar mask={`url(#${ditherId})`}
                 yAxisId="left"
                 dataKey="income"
                 fill="var(--color-income)"

@@ -1,3 +1,5 @@
+import { useId } from "react";
+import { DitherChartMask } from "@/components/dither-chart-mask";
 import type { DriftRow } from "@/lib/types";
 import { useAmountFormatting } from "@fb/ui";
 import { useTranslation } from "react-i18next";
@@ -29,6 +31,7 @@ export function AllocationDonut({
   hoveredId,
   onHoverChange,
 }: AllocationDonutProps) {
+  const ditherId = useId();
   const formatting = useAmountFormatting();
   const { t } = useTranslation();
   const thickness = Math.round(size * 0.11);
@@ -70,13 +73,14 @@ export function AllocationDonut({
         viewBox={`0 0 ${size} ${size}`}
         style={{ overflow: "visible" }}
       >
+        <defs><DitherChartMask id={ditherId} variant="hatched"/></defs>
         {segments.map((s) => {
           const isHovered = hoveredId === s.categoryId;
           const dimmed = hoveredId !== null && !isHovered;
           const tx = isHovered ? (popDist * Math.cos(s.midRad)).toFixed(2) : "0";
           const ty = isHovered ? (popDist * Math.sin(s.midRad)).toFixed(2) : "0";
           return (
-            <Sector
+            <Sector mask={`url(#${ditherId})`}
               key={s.categoryId}
               cx={cx}
               cy={cy}

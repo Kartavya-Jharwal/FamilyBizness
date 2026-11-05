@@ -1,3 +1,4 @@
+import { DitherChartMask } from "@/components/dither-chart-mask";
 import { Area, AreaChart, ResponsiveContainer, YAxis } from "recharts";
 import { useId } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,14 +26,14 @@ export function CategoryTrendChart({ data, color }: CategoryTrendChartProps) {
     <div className="h-32 w-full">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={data} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
-          <defs>
+          <defs><DitherChartMask id={`${gradientId}-dither`}/>
             <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={color} stopOpacity={0.22} />
               <stop offset="100%" stopColor={color} stopOpacity={0} />
             </linearGradient>
           </defs>
           <YAxis hide domain={["dataMin", "dataMax"]} />
-          <Area
+          <Area mask={`url(#${gradientId}-dither)`}
             type="monotone"
             dataKey="value"
             stroke={color}

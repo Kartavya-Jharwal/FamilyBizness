@@ -2,7 +2,7 @@
  * simulation-lab/src/main.ts donor. Host components/charts replace DOM/uPlot. */
 import { useState } from "react";
 import { Button } from "@fb/ui";
-import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "@/components/office-charts";
 import { defaults, simulate, type Parameters, type Run } from "./simulation-donor";
 import { DataTable, exportScenario, Metrics, NumberField, Section } from "./finance-ui";
 

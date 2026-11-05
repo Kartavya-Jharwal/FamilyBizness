@@ -1,3 +1,4 @@
+import { DitherChartMask } from "@/components/dither-chart-mask";
 import { getIncomeSummary } from "@/adapters";
 import { Badge } from "@fb/ui/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@fb/ui/components/ui/card";
@@ -29,7 +30,7 @@ import {
   PrivacyAmount,
   useAmountFormatting,
 } from "@fb/ui";
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Cell, Pie, PieChart } from "recharts";
 import { IncomeHistoryChart } from "./income-history-chart";
@@ -80,6 +81,7 @@ const IncomePeriodSelector: React.FC<{
 };
 
 export default function IncomePage() {
+  const ditherId = useId();
   const { t } = useTranslation();
   const [selectedPeriod, setSelectedPeriod] = useState<IncomePeriod>("ALL");
   const { isBalanceHidden } = useBalancePrivacy();
@@ -292,7 +294,7 @@ export default function IncomePage() {
                     )}
                     className="mx-auto aspect-square max-h-15.5"
                   >
-                    <PieChart>
+                    <PieChart><defs><DitherChartMask id={ditherId} variant="hatched"/></defs>
                       <ChartTooltip
                         cursor={false}
                         content={
@@ -339,7 +341,7 @@ export default function IncomePage() {
                         paddingAngle={4}
                       >
                         {currencyData.map((_entry, index) => (
-                          <Cell key={`cell-${index}`} fill={`var(--chart-${index + 2})`} />
+                          <Cell mask={`url(#${ditherId})`} key={`cell-${index}`} fill={`var(--chart-${index + 2})`} />
                         ))}
                       </Pie>
                     </PieChart>

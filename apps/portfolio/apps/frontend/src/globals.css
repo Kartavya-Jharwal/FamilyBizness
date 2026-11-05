@@ -1026,3 +1026,10 @@ summary {
     opacity: 1;
   }
 }
+
+/* Dither Kit's actual Bayer painter supplies every remaining donor fill.
+   Existing marker, reference-line, dual-axis and gain/loss semantics are retained. */
+.app-shell .recharts-area-area:not([mask]),
+.app-shell .recharts-bar-rectangle path:not([mask]),
+.app-shell .recharts-pie-sector path:not([mask]),
+.app-shell .recharts-treemap rect:not([mask]) { mask: url(#host-chart-dither); }

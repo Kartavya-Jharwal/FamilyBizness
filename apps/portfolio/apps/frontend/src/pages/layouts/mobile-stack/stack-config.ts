@@ -26,7 +26,8 @@ const OFFICE_ALIASES:Record<string,string[]>={
   "/office/finance":["/office/estate"],
   "/office/simulation":["/dashboard","/net-worth","/holdings","/activities","/insights"],
   "/office/business":["/office/governance","/office/philanthropy"],
-  "/office/admin":["/settings","/office/policy","/office/sources","/governance/constitution"],
+  "/office/constitution":["/office/sources","/governance/constitution"],
+  "/settings/general":["/settings","/office/admin"],
 };
 export function stackTabsFor(hrefs:readonly string[]):StackTab[]{
   return hrefs.filter(href=>!UNSTACKED_DESTINATIONS.has(href)).map(href=>({id:href.replace(/^\//,""),rootPath:href,...(OFFICE_ALIASES[href]?{aliases:OFFICE_ALIASES[href]}:{})}));

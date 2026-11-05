@@ -1,3 +1,4 @@
+import { DitherChartMask } from "@/components/dither-chart-mask";
 import { AppScreenRoutes } from "@/app-screen-routes";
 import AppLauncher from "@/components/app-launcher";
 import { MobileLoadingIndicator } from "@/components/mobile-loading-indicator";
@@ -89,6 +90,7 @@ const AppLayoutContent = () => {
           ...(titleBarNudge ? { ["--titlebar-nudge" as string]: titleBarNudge } : {}),
         }}
       >
+        <svg aria-hidden="true" width="0" height="0" className="pointer-events-none absolute"><defs><DitherChartMask id="host-chart-dither" variant="dotted" objectSpace /></defs></svg>
         {/* Mobile sync loading indicator */}
         {shouldUseMobileNavigation && <MobileLoadingIndicator />}
 

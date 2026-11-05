@@ -38,6 +38,8 @@
   /* Financial workspace composition. Surfaces still read the active host theme. */
   --design-metric-size: clamp(1.375rem, 2.1vw, 1.875rem);
   --design-metric-tracking: -0.035em;
+  --design-chart-tick-gap: 112; /* Minimum labelled interval in CSS pixels. */
+  --design-chart-line-glow: 3; /* CSS pixels before canvas backing scaling. */
   --design-chart-edge-space: 24; /* SVG plot padding in CSS pixels. */
   --design-chart-label-size: 0.75rem;
   --design-workspace-title-size: clamp(1.75rem, 2.5vw, 2.25rem);
@@ -45,7 +47,12 @@
   --design-radius-card: 0.625rem;
   --design-radius-control: 0.5rem;
   --design-radius-pill: 9999px;
-  --design-calendar-day-width: 9.5rem;
+  --design-avatar-inset: 15%;
+  --design-calendar-hour-height: 6rem;
+  --design-calendar-time-width: 3.5rem;
+  --design-calendar-sidebar-width: 13rem;
+  --design-erp-board-column-width: 16rem;
+  --design-calendar-day-width: 7rem;
   --design-control-height: 2.75rem;
   --design-chart-light-1: #659892;
   --design-chart-light-2: #83925b;

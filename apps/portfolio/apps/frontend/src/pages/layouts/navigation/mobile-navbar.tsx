@@ -104,23 +104,13 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
   const directPinnedAddonItems = pinnedAddonItems.slice(0, 1);
   const overflowPinnedAddonItems = pinnedAddonItems.slice(1);
 
-  const searchItem = {
-    title: t("common:search"),
-    href: "#search",
-    icon: <Icons.Search2 className="size-6" />,
-  };
-
-  // Landscape has room to keep Holdings directly accessible alongside Dashboard and Insights.
-  const visiblePrimaryCount = isLandscape ? 3 : 2;
-  const visibleItems = [
-    ...primaryItems.slice(0, visiblePrimaryCount),
-    ...directPinnedAddonItems,
-    searchItem,
-  ].filter(Boolean);
-
-  const addonItems = [...overflowPinnedAddonItems, ...addonMenuItems];
+  // Policy and constitution are direct phone tabs, alongside the two capital entry points.
+  const directPaths = new Set(["/office/case", "/office/finance", "/office/policy", "/office/constitution"]);
+  if (isLandscape) directPaths.add("/office/simulation");
+  const visibleItems = primaryItems.filter(item => directPaths.has(item.href));
+  const addonItems = [...directPinnedAddonItems, ...overflowPinnedAddonItems, ...addonMenuItems];
   const standardMenuItems: NavLink[] = [
-    ...primaryItems.slice(visiblePrimaryCount),
+    ...primaryItems.filter(item => !directPaths.has(item.href)),
     ...secondaryItems,
   ];
   const moreItems = [...standardMenuItems, ...addonItems];

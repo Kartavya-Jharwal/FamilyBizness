@@ -47,3 +47,13 @@ FO-IPS-MANDATE contains the Board-adopted concise investment instructions. The d
 The local profile command engine now serves both entry and the existing profile API. Persona sessions retain immutable scope while shared office records resolve to one prepared case. Calendar and ERP remain views of the existing operations register; calendar view preference is persisted locally.
 
 The Wealthfolio visual pass reuses shared card components and exported card surfaces for daily financial workspaces. Composition CSS reads canonical dimensions and host semantic roles; calendar fields/sheets use existing field/overlay roles. The focused `scripts/verify-wealthfolio-art-direction.cjs` checks computed surface geometry and responsive light/dark rendering.
+
+## Connected donor and brand integration
+
+The public landing owns the family legacy narrative, founder/current/next-generation image slots, six tailored office capabilities and student/AI submission credits. Its single login CTA requests the existing profile chooser, including on a returning visit. Circular profile artwork is supplied through one image manifest and one renderer.
+
+Calendar ports Cal DateValues, EmptyCell and EventList structures into the existing meeting register: mini-month/member rail, timed week, collision lanes, agenda and click-to-schedule. ERP ports Projects Workspace metadata, summary/list/board and project-to-Task drilldown over the same obligations. The contribution manifest records seven software sources including installed Dither Kit.
+
+`please-fix-model.ts` reuses office-review actions and operations records. Admitted persona scope controls issue/assign/accept/resolve/reopen transitions; evidence and current clause fingerprints govern resolution. Generic ERP mutations cannot bypass the workflow. No parallel ticket database is introduced.
+
+Dither Kit's installed local source supplies daily financial charts via `office-charts.tsx`; range bands retain their true floors and ceilings, and the median remains a line. Existing specialised Wealthfolio charts retain privacy, activity markers and axes while using the same installed painter for fill masks. Registry provenance/update guidance: [Dither Kit integration](Dither%20Kit%20-%20Source%20Integration.md).

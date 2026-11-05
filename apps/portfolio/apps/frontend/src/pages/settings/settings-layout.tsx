@@ -1,11 +1,9 @@
-import { ApplicationShell } from "@fb/ui";
+import { ApplicationShell, Tabs, TabsList, TabsTrigger, buttonVariants } from "@fb/ui";
 import { Icons } from "@fb/ui/components/ui/icons";
-import { Separator } from "@fb/ui/components/ui/separator";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useIsCompactTableViewport } from "@/hooks/use-platform";
-import { SidebarNav } from "./sidebar-nav";
+import { Link } from "react-router-dom";
 
 export default function SettingsLayout() {
   const { t } = useTranslation();
@@ -17,6 +15,7 @@ export default function SettingsLayout() {
       {
         title: t("settings:nav.sections.preferences"),
         items: [
+          { title: "Office & profiles", href: "office", subtitle: "Reporting perimeter and visitor profiles", icon: <Icons.Folder className="size-5" /> },
           {
             title: t("settings:nav.items.general"),
             href: "general",
@@ -63,7 +62,7 @@ export default function SettingsLayout() {
       {
         title: t("settings:nav.sections.data"),
         items: [
-          { title: "Sources & stewardship", href: "sources", subtitle: "Sample data sources, review evidence and corrective actions", icon: <Icons.Activity className="size-5" /> },
+          { title: "Sources & review", href: "sources", subtitle: "Source records and review evidence", icon: <Icons.Activity className="size-5" /> },
           {
             title: t("settings:nav.items.securities"),
             href: "securities",
@@ -76,6 +75,7 @@ export default function SettingsLayout() {
             subtitle: t("settings:nav.subtitles.classifications"),
             icon: <Icons.Blocks className="size-5" />,
           },
+          { title: "Family records & recovery", href: "records", subtitle: "Case identity, saved records and portable recovery", icon: <Icons.Folder className="size-5" /> },
           {
             title: t("settings:nav.items.backup_export"),
             href: "exports",
@@ -99,100 +99,17 @@ export default function SettingsLayout() {
     [t],
   );
 
-  // Check if we're on the main settings page (mobile) or a specific setting page
-  const isMainSettingsPage =
-    location.pathname === "/settings" || location.pathname === "/settings/";
-
-  // One tree and one <Outlet />: a CSS-hidden second copy of a page would still
-  // run its effects and open portaled dialogs. Only the phone settings list
-  // needs the viewport, because it replaces the index page. Same 1024px
-  // breakpoint as `lg`.
-  const isCompact = useIsCompactTableViewport();
-
-  if (isCompact && isMainSettingsPage) {
-    return (
-      <ApplicationShell className="settings-root app-shell h-screen overflow-x-hidden">
-        {/* Mobile Settings List View (carded list with dividers) */}
-        <div className="scan-hide-target w-full max-w-full overflow-x-hidden">
-          <div className="bg-background/95 supports-backdrop-filter:bg-background/60 pt-safe sticky top-0 z-10 border-b backdrop-blur">
-            <div className="flex min-h-15 items-center justify-center px-4">
-              <h1 className="text-lg font-semibold">{t("settings:title")}</h1>
-            </div>
-          </div>
-          <div className="space-y-6 p-3 pb-[var(--mobile-nav-total-offset)]">
-            {sections.map((section) => (
-              <div key={section.title} className="space-y-3">
-                <div className="text-muted-foreground px-2 text-xs font-semibold tracking-widest uppercase">
-                  {section.title}
-                </div>
-                <div className="divide-border bg-card divide-y overflow-hidden rounded-2xl border shadow-sm">
-                  {section.items.map((item) => (
-                    <button
-                      key={item.href}
-                      onClick={() => navigate(item.href)}
-                      className="hover:bg-muted/40 flex w-full items-center justify-between gap-3 px-4 py-4 text-start transition-colors active:opacity-90"
-                      aria-label={item.title}
-                    >
-                      <div className="flex min-w-0 flex-1 items-center gap-3">
-                        <div className="text-muted-foreground shrink-0">{item.icon}</div>
-                        <div className="min-w-0">
-                          <div className="text-foreground truncate text-base font-medium">
-                            {item.title}
-                          </div>
-                          {item?.subtitle && (
-                            <div className="text-muted-foreground truncate text-sm">
-                              {item.subtitle}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <Icons.ChevronRight className="text-muted-foreground h-4 w-4 shrink-0 rtl:rotate-180" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </ApplicationShell>
-    );
-  }
-
-  return (
-    <ApplicationShell className="settings-root app-shell h-screen overflow-x-hidden">
-      <div className="scan-hide-target pt-safe w-full max-w-full overflow-x-hidden scroll-smooth lg:flex lg:justify-start lg:pt-0">
-        {/* At exactly 1024px the global `.flex { overflow-x: hidden }` rule still applies and
-            would make this padded box the sidebar's sticky container, pinning the sidebar
-            32px lower than its height cap allows. */}
-        <div className="flex w-full max-w-full flex-col p-2 pb-[var(--mobile-nav-total-offset)] lg:max-w-6xl lg:!overflow-visible lg:px-2 lg:py-8">
-          <div className="hidden lg:block">
-            <div className="space-y-0.5">
-              <h2 className="text-2xl font-bold tracking-tight">{t("settings:title")}</h2>
-            </div>
-            <Separator className="my-6" />
-          </div>
-          <div className="lg:flex lg:gap-10">
-            {/* Uncapped, the sidebar makes the page scroll past short content, taking a
-                self-scrolling table's header out of view (Securities). Fit it below its
-                sticky offset and let it scroll instead. */}
-            <aside className="hidden w-60 shrink-0 lg:sticky lg:top-24 lg:flex lg:max-h-[calc(100dvh-6rem)] lg:flex-col lg:self-start lg:overflow-y-auto">
-              <div className="space-y-6">
-                {sections.map((section) => (
-                  <div key={section.title} className="space-y-2">
-                    <div className="text-muted-foreground ps-2 text-sm font-light tracking-widest uppercase">
-                      {section.title}
-                    </div>
-                    <SidebarNav items={section.items} />
-                  </div>
-                ))}
-              </div>
-            </aside>
-            <div className="min-w-0 lg:mb-8 lg:flex-1">
-              <Outlet />
-            </div>
-          </div>
-        </div>
-      </div>
-    </ApplicationShell>
-  );
+  const activePath = location.pathname.split("/")[2] || "general";
+  const categoryIndex = Math.max(0, sections.findIndex(section => section.items.some(item => item.href === activePath)));
+  const category = sections[categoryIndex];
+  return <ApplicationShell className="settings-root app-shell min-h-screen overflow-x-hidden">
+    <main className="mx-auto w-full max-w-6xl space-y-5 p-4 pb-[var(--mobile-nav-total-offset)] md:p-6">
+      <header><h1 className="text-3xl font-semibold tracking-tight">{t("settings:title")}</h1><p className="mt-2 text-sm text-muted-foreground">Office preferences, data and records in one place.</p></header>
+      <Tabs value={String(categoryIndex)} onValueChange={value => navigate(`/settings/${sections[Number(value)].items[0].href}`)}>
+        <TabsList className="h-auto flex-wrap" aria-label="Settings categories">{sections.map((section,index) => <TabsTrigger key={section.title} value={String(index)}>{section.title}</TabsTrigger>)}</TabsList>
+      </Tabs>
+      <nav className="flex flex-wrap gap-2" aria-label={`${category.title} settings`}>{category.items.map(item => <Link key={item.href} className={buttonVariants({variant:activePath===item.href?"secondary":"ghost"})} to={`/settings/${item.href}`} aria-current={activePath===item.href?"page":undefined}>{item.title}</Link>)}</nav>
+      <div className="min-w-0"><Outlet /></div>
+    </main>
+  </ApplicationShell>;
 }

@@ -48,3 +48,6 @@ artifacts/submission/
 # Local visual verification output (release evidence is recorded in docs)
 apps/portfolio/artifacts/
 apps/portfolio/.dependency-cache-before-type-repair/
+
+# Recoverable retired sprite sources; active avatar IDs remain in source.
+artifacts/retired-profile-art/

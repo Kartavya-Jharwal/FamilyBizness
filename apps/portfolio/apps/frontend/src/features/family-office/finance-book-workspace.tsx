@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@fb/ui";
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "@/components/office-charts";
 import { selectedProfileId } from "@/features/profiles/session";
 import { cashForecast, consolidateBook, dcfValue, fairValueWealth, forecastPolicyFacts, financeBookDefaults, financeBookKey, financeBookSchema, type FinanceBook } from "./finance-book-model";
 import { InputTable } from "./finance-input-table";

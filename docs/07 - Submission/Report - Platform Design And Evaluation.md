@@ -16,7 +16,7 @@ This design makes a succession plan operational: an incomplete prerequisite rema
 
 Each source record retains an exact excerpt, assignment reference, section, interpretation, assumption basis and reviewer. Executable rules are typed rather than inferred from unrestricted prose. Activation freezes source snapshots and a revision. Editing or removing a source invalidates the active rule set. The same policy governs allocation limits/screens, forecast checks and capital/governance approval thresholds.
 
-This separates a family principle from an operational choice. For example, a principle to preserve liquidity does not itself establish a numerical cash floor; the floor must be recorded as an interpretation or modelling assumption and reviewed. The final actual clause mapping remains a population task in the [canonical trace](../03%20-%20Architecture/Trace.md).
+This separates a family principle from an operational choice. For example, a principle to preserve liquidity does not itself establish a numerical cash floor; the floor must be recorded as an interpretation or modelling assumption and reviewed. The adopted numerical mandate and selected clauses are mapped in the [canonical trace](../03%20-%20Architecture/Trace.md).
 
 ## Estate and wealth structures
 
@@ -56,4 +56,10 @@ Use the application's exported board pack after final population as the numerica
 
 ## Submission handover
 
-The platform source and static build accompany this report. The public HTML report links to actual workspaces. Before VLE submission, populate the selected case, review the source-to-rule trace, export its board pack and input snapshot, attach authentic AI evidence and team contributions, and confirm the submitted file/URL is the final build. Deployment and VLE submission are not claimed merely because local packaging succeeds.
+The platform source and static build accompany this report. The public HTML report links to actual workspaces. The prepared office is populated. Before VLE submission, review the source-to-rule trace, export its board pack and input snapshot, attach authentic team contributions/video and confirm the submitted file/URL is the final build. Deployment and VLE submission are not claimed merely because local packaging succeeds.
+
+## Integrated frontend and continuity narrative
+
+The public landing presents the family's legacy, founding fathers and successive generations before the six tailored office capabilities. Image slots are explicit replacement boundaries; the footer connects the academic team, substantial AI usage record, report and supporting-video slot. One login action enters the existing profile engine.
+
+The actual Cal and ERP frontend source structures are integrated into the host scheduler and Projects/Task workspace over one operations register. Constitution and IPS have primary navigation entries; infrequent preferences use categorized host Settings. A literal please fix request links the Patriarch, an assigned Associate/technician, the clause snapshot and evidence-backed resolution. Dither Kit is installed as editable source, uses canonical colours and preserves quantile/median semantics; specialised Wealthfolio charts retain their original financial interactions. Current verification and hosting status remain owned by the release record.

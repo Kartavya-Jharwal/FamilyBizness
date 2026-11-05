@@ -24,7 +24,7 @@ Unreadable text, overlapping chart labels, viewport overflow, inaccessible contr
 
 ## SFO taxonomy and daily navigation
 
-Daily navigation has five destinations: Stewardship, Capital & liquidity, Portfolio & scenarios, Family business, and Calendar. Administration is the single secondary home for constitution/IPS revisions, configuration, profiles, data and provider controls. A workspace title does not repeat the global navigation or the project disclosure.
+Primary navigation has Stewardship, Capital & liquidity, Portfolio & scenarios, Family business, Calendar, Investment policy statement and Family constitution. Settings opens the existing host settings page directly, with category tabs for preferences, finance, data and about. IPS revisions and constitution review live in their own primary workspaces. A workspace title does not repeat the global navigation or the project disclosure.
 
 Use **AUM** for gross assets overseen by the office, **consolidated family capital** for the family-owned asset perimeter after liabilities, **available liquidity** for cash accessible to the relevant entity, and **business concentration** for the operating-company exposure. These are distinct measures. Personal donor terms such as “your net worth” are removed from visible English copy; existing data/API keys remain compatible. A reporting perimeter and date belong beside capital metrics, not in a repeated introductory essay.
 
@@ -32,10 +32,16 @@ Daily views lead with decisions, numbers, charts and the next action. Constituti
 
 ## Visual stewardship revision
 
-Lead with AUM, treasury liquidity, operating-business concentration and cash headroom. Capital charts show allocation, history, DCF versus multiple value, sensitivity and succession funding. Portfolio charts show current/proposed weights and a seeded Monte Carlo percentile fan. IPS cards pair concise instructions with numerical limits and observations. Calendar defaults to meetings in a week grid, with agenda retained and a side-panel editor. ERP uses the donated task masks in its own daily tab. Detailed methods, source records and JSON editors are expandable; infrequent constitution/configuration work is in Administration. Shared semantic surfaces, text and chart roles come from tokens.css; calendar day width is a canonical layout token.
+Lead with AUM, treasury liquidity, operating-business concentration and cash headroom. Capital charts show allocation, history, DCF versus multiple value, sensitivity and succession funding. Portfolio charts show current/proposed weights and a seeded Monte Carlo percentile fan. IPS cards pair concise instructions with numerical limits and observations. Calendar defaults to the Cal timed week with date/time rails and selectable half-hour slots, with agenda retained and a side-panel editor. ERP uses the donated task masks in its own daily tab. Detailed methods, source records and JSON editors are expandable; infrequent constitution/configuration work is in Settings. Shared semantic surfaces, text and chart roles come from tokens.css; calendar day width is a canonical layout token.
 
 ## Wealthfolio surface and art direction pass
 
 Financial workspaces use the shared Wealthfolio Card, CardHeader, CardTitle and CardContent contract. Non-div surfaces (policy articles, disclosure panels and route tiles) use the exported cardSurfaceClassName, so active theme radius, border and shadow remain authoritative. Calendar/task fields and the editor sheet read the host field and overlay roles. No additional palette or font stack is introduced.
 
 The composition uses a ruled page heading, compact tabular metrics, quiet embedded ledgers, restrained chart axes and explicit numerical policy limits. Canonical metric, heading and chart-label dimensions live in tokens.css. Secondary links and closed disclosures stay subdued; keyboard focus is explicit. Preserve chart legends, units and readable labels in light, dark and narrow layouts.
+
+## Public family brand and visual donor integration
+
+The main landing is the public family story: founding fathers, present stewardship and the next generation. Four explicit photo slots await supplied imagery. A single “Let's log in” action opens profile selection. Team, substantial AI usage, report and pending video credits sit before the narrative footer. Missing student names/video are not fabricated.
+
+All profile image slots share a circular mask and actual Dither placeholder, including at small sidebar sizes. The image manifest is the replacement boundary. Daily graphs use the local Dither chart engine with host semantic colours and canonical label sizes; specialised donor charts retain their existing interactions with real Dither paint masks. The kit does not introduce another palette or font stack. IPS, charter and settings categories are separate navigation concepts.

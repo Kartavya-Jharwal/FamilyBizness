@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@fb/ui";
 import { selectedProfileId } from "@/features/profiles/session";
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "@/components/office-charts";
 import { DataTable, exportScenario, Metrics, NumberField, ScenarioControls, Section, useScenario } from "./finance-ui";
 import { RecordEditor } from "./finance-record-editor";
 import { investmentDefaults, investmentSchema, optimiseSecurities, bindInvestmentPolicy, portfolioStats, projectSecurities, type InvestmentInput } from "./investment-model";

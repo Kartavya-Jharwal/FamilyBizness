@@ -1,8 +1,9 @@
+import { DitherChartMask } from "./dither-chart-mask";
 import { TimePeriod } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 import { useAmountFormatting, useDateFormatting, useNumberFormatting } from "@fb/ui";
 import type { TFunction } from "i18next";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Area,
@@ -76,6 +77,7 @@ export default function HistoryChart({
   onActivityMarkerClick?: (marker: HistoryChartActivityMarker) => void;
   averageCost?: number;
 }) {
+  const ditherId = useId();
   const amountFormatting = useAmountFormatting();
   const [hoveredMarker, setHoveredMarker] = useState(false);
   const markerByTimestamp = useMemo(() => {
@@ -121,7 +123,7 @@ export default function HistoryChart({
               }
             }}
           >
-            <defs>
+            <defs><DitherChartMask id={ditherId}/>
               <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="var(--success)" stopOpacity={0.2} />
                 <stop offset="95%" stopColor="var(--success)" stopOpacity={0.1} />
@@ -135,7 +137,7 @@ export default function HistoryChart({
               <YAxis hide={true} type="number" domain={["auto", "auto"]} />
             ) : null}
             <XAxis hide dataKey="timestamp" type="category" />
-            <Area
+            <Area mask={`url(#${ditherId})`}
               isAnimationActive={true}
               animationDuration={300}
               animationEasing="ease-out"

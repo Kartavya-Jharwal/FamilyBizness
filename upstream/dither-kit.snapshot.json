@@ -1,0 +1,216 @@
+{
+  "schema": 1,
+  "project": "Dither Kit",
+  "repository": "https://github.com/Boring-Software-Inc/dither-kit",
+  "repositoryRevision": "1e7faee9aa252e499651e6736ed65f7a07d9a6bd",
+  "registry": "https://tripwire.sh/r",
+  "registryItemVersion": "0.1.0",
+  "installer": {
+    "command": "bunx shadcn@latest add https://tripwire.sh/r/dither-kit.json",
+    "ditherCliVersionInspected": "0.1.1",
+    "ditherCliAddStatus": "spawn npx ENOENT before delegation; not completed",
+    "baselineCapture": "Official registry content hashes captured after successful shadcn source installation. Lock file paths rebased to actual src/ alias; component checksums retain original registry targets."
+  },
+  "license": {
+    "declaration": "MIT",
+    "source": "https://github.com/Boring-Software-Inc/dither-kit/blob/1e7faee9aa252e499651e6736ed65f7a07d9a6bd/package.json",
+    "licenseFile": "Upstream repository exposes no LICENSE file at this revision; no copyright holder or license text has been invented."
+  },
+  "files": [
+    {
+      "registryTarget": "components/dither-kit/block-legend.tsx",
+      "localPath": "src/components/dither-kit/block-legend.tsx",
+      "upstreamHash": "sha256:4ddf215c6187ac0ca2640501c0342699bc210b33c1cec1d3e138ee3d38f77433"
+    },
+    {
+      "registryTarget": "components/dither-kit/cartesian-root.tsx",
+      "localPath": "src/components/dither-kit/cartesian-root.tsx",
+      "upstreamHash": "sha256:6b5297d75de22ae5a0fc1960bef0419a4984b54ff493e7acd527aa0ccb150098"
+    },
+    {
+      "registryTarget": "components/dither-kit/chart-context.tsx",
+      "localPath": "src/components/dither-kit/chart-context.tsx",
+      "upstreamHash": "sha256:955657f21fdbf7e04b80917be52b7c3839eb535b8d07f15053c06d9320683d8f"
+    },
+    {
+      "registryTarget": "components/dither-kit/common-context.tsx",
+      "localPath": "src/components/dither-kit/common-context.tsx",
+      "upstreamHash": "sha256:aafb26404977148144a3d81da81a678d5956e14024f394ccdc7ae881dd07e52a"
+    },
+    {
+      "registryTarget": "components/dither-kit/dither-paint.ts",
+      "localPath": "src/components/dither-kit/dither-paint.ts",
+      "upstreamHash": "sha256:1bcd3d7de3ae3091caf63ed4c2c862d80d1899c9b55a70078acb12f7b44e51c7"
+    },
+    {
+      "registryTarget": "components/dither-kit/dot.tsx",
+      "localPath": "src/components/dither-kit/dot.tsx",
+      "upstreamHash": "sha256:207bf90662237064940d14a4d8411135d75027b97a9582c0e61c8af74ea5d65a"
+    },
+    {
+      "registryTarget": "components/dither-kit/grid.tsx",
+      "localPath": "src/components/dither-kit/grid.tsx",
+      "upstreamHash": "sha256:ad09d80b3898a4d3f588ff1f2f4f82984864c3918cb09d31350be6ac18d2446f"
+    },
+    {
+      "registryTarget": "components/dither-kit/legend.tsx",
+      "localPath": "src/components/dither-kit/legend.tsx",
+      "upstreamHash": "sha256:2a067ebdc484c7bd9efb2afc4e8a0aa6718a14ec44ccd7bb94c871d192e501e6"
+    },
+    {
+      "registryTarget": "components/dither-kit/lib.ts",
+      "localPath": "src/components/dither-kit/lib.ts",
+      "upstreamHash": "sha256:41493601eb53a70f7629f6e50bad233f7185eaad42ba2397ca56ac1afcf1bb5f"
+    },
+    {
+      "registryTarget": "components/dither-kit/palette.ts",
+      "localPath": "src/components/dither-kit/palette.ts",
+      "upstreamHash": "sha256:fd020c230ad818a5d9d6dfdfcb6ef50b0dba012c77f44f1a61449fc9a65947f7"
+    },
+    {
+      "registryTarget": "components/dither-kit/polar-context.tsx",
+      "localPath": "src/components/dither-kit/polar-context.tsx",
+      "upstreamHash": "sha256:514ac9a4984b036598a14ecd7acc29ee121e9259c8a85309d7ed3c1e22af6831"
+    },
+    {
+      "registryTarget": "components/dither-kit/polar-root.tsx",
+      "localPath": "src/components/dither-kit/polar-root.tsx",
+      "upstreamHash": "sha256:63cecb6193ce3cd296b93b018e2441ccdefcc055cdc31bf131c808f0cf0c0c52"
+    },
+    {
+      "registryTarget": "components/dither-kit/polar.ts",
+      "localPath": "src/components/dither-kit/polar.ts",
+      "upstreamHash": "sha256:3ad3f99bac2ee21e6580abd6903720af11cedcb8d8c69a06c40690be6229672c"
+    },
+    {
+      "registryTarget": "components/dither-kit/reference-line.tsx",
+      "localPath": "src/components/dither-kit/reference-line.tsx",
+      "upstreamHash": "sha256:b0df8cf1144ab56fcce577bac4a39e06d9215a1fdf81bb112a4190a0445b138b"
+    },
+    {
+      "registryTarget": "components/dither-kit/scales.ts",
+      "localPath": "src/components/dither-kit/scales.ts",
+      "upstreamHash": "sha256:62ec74acdd3e335b959423a228b47edd70c14f07a468a385d039f5c6b66ebc2b"
+    },
+    {
+      "registryTarget": "components/dither-kit/series-context.tsx",
+      "localPath": "src/components/dither-kit/series-context.tsx",
+      "upstreamHash": "sha256:1802f1f488cc46542294f533c55fae03a4b067feca0761df75ce21de8a6a429a"
+    },
+    {
+      "registryTarget": "components/dither-kit/tooltip.tsx",
+      "localPath": "src/components/dither-kit/tooltip.tsx",
+      "upstreamHash": "sha256:d053ac2135c6f29d011cb0a83be29a797f8954ccbb02916402d2d3c2a52b17f2"
+    },
+    {
+      "registryTarget": "components/dither-kit/use-chart-dimensions.ts",
+      "localPath": "src/components/dither-kit/use-chart-dimensions.ts",
+      "upstreamHash": "sha256:74b7f2a08cce5b891348eed845fc8c218ed16fce362ef4f35587ec4cc864c834"
+    },
+    {
+      "registryTarget": "components/dither-kit/x-axis.tsx",
+      "localPath": "src/components/dither-kit/x-axis.tsx",
+      "upstreamHash": "sha256:7997bd96c341816a0f1cc6f966ad386fedc78be39e51201fa368dab1fd943d62"
+    },
+    {
+      "registryTarget": "components/dither-kit/y-axis.tsx",
+      "localPath": "src/components/dither-kit/y-axis.tsx",
+      "upstreamHash": "sha256:96d8cad3d7ca87a2a6f092399a60ba2f32612413a190f2885da67854229cdeff"
+    },
+    {
+      "registryTarget": "components/dither-kit/area-chart.tsx",
+      "localPath": "src/components/dither-kit/area-chart.tsx",
+      "upstreamHash": "sha256:307883b537e005386a8090499eaf3ea636767a10235271181cb089c3477eab1e"
+    },
+    {
+      "registryTarget": "components/dither-kit/area.tsx",
+      "localPath": "src/components/dither-kit/area.tsx",
+      "upstreamHash": "sha256:ecfb990f9083dd4c813eb431e3674822b7272076294de4ae038e81552d678532"
+    },
+    {
+      "registryTarget": "components/dither-kit/cartesian-canvas.tsx",
+      "localPath": "src/components/dither-kit/cartesian-canvas.tsx",
+      "upstreamHash": "sha256:180a1525cbe10ec35bc79f689bd018cfdf115ebb4e1e6b1ff31d4bd37ecc6f09"
+    },
+    {
+      "registryTarget": "components/dither-kit/sparkline.tsx",
+      "localPath": "src/components/dither-kit/sparkline.tsx",
+      "upstreamHash": "sha256:b5dab0b68af7ebc976ec51a74776761ac26d79f4aacd9c453a6e79c49e8d11ff"
+    },
+    {
+      "registryTarget": "components/dither-kit/bar-canvas.tsx",
+      "localPath": "src/components/dither-kit/bar-canvas.tsx",
+      "upstreamHash": "sha256:80ed40b87eb3dbf3d9f768cf42b3b55f4f738db8b193c1a616f7abf525d83f87"
+    },
+    {
+      "registryTarget": "components/dither-kit/bar-chart.tsx",
+      "localPath": "src/components/dither-kit/bar-chart.tsx",
+      "upstreamHash": "sha256:e19ce3540f15756aba615eb19072aeec81d8ac71e51219691cc1d0be004c18bb"
+    },
+    {
+      "registryTarget": "components/dither-kit/bar.tsx",
+      "localPath": "src/components/dither-kit/bar.tsx",
+      "upstreamHash": "sha256:2904ff1b0813ae20b976f5a78d57a314729ea3e890b18ba762bbb46d2f550057"
+    },
+    {
+      "registryTarget": "components/dither-kit/pie-canvas.tsx",
+      "localPath": "src/components/dither-kit/pie-canvas.tsx",
+      "upstreamHash": "sha256:bcf6f1d8024448b55a3a198afad0ee5db002b2748c5282bb27679422c6a6c2bf"
+    },
+    {
+      "registryTarget": "components/dither-kit/pie-chart.tsx",
+      "localPath": "src/components/dither-kit/pie-chart.tsx",
+      "upstreamHash": "sha256:2dae2f8e6193e0bca31164ba7d7b829cc5295533cdb207783d6bdb4e346d2c13"
+    },
+    {
+      "registryTarget": "components/dither-kit/pie.tsx",
+      "localPath": "src/components/dither-kit/pie.tsx",
+      "upstreamHash": "sha256:1e44525a3119913b042b660be50c9c2c0e34a265ee8ed0aa32c65ce4ce9fd655"
+    },
+    {
+      "registryTarget": "components/dither-kit/radar-canvas.tsx",
+      "localPath": "src/components/dither-kit/radar-canvas.tsx",
+      "upstreamHash": "sha256:be08e9d801c1dc866a3d8eb74fe70208c888a1f6857b584e5f9de631863535ae"
+    },
+    {
+      "registryTarget": "components/dither-kit/radar-chart.tsx",
+      "localPath": "src/components/dither-kit/radar-chart.tsx",
+      "upstreamHash": "sha256:b62686351465de7d14cf4d919938e005691e8363d45ac8e625cb863a4ad421db"
+    },
+    {
+      "registryTarget": "components/dither-kit/radar-frame.tsx",
+      "localPath": "src/components/dither-kit/radar-frame.tsx",
+      "upstreamHash": "sha256:a516ed03eb4f5e864532df1f49f265498f1d2c89a676eb93251fad73a6914a67"
+    },
+    {
+      "registryTarget": "components/dither-kit/radar.tsx",
+      "localPath": "src/components/dither-kit/radar.tsx",
+      "upstreamHash": "sha256:f55dae75073cef3eab55ede93a5fa394711a9c5736046236ebd11623d02849e9"
+    },
+    {
+      "registryTarget": "components/dither-kit/avatar.tsx",
+      "localPath": "src/components/dither-kit/avatar.tsx",
+      "upstreamHash": "sha256:bf9736b474a5e050b19b23fb4d858924758d6df1d0a1006eed95f1fc42b84cb5"
+    },
+    {
+      "registryTarget": "components/dither-kit/pixel.ts",
+      "localPath": "src/components/dither-kit/pixel.ts",
+      "upstreamHash": "sha256:eea1493d54a86d164b40d69c95956238777331ded7a556f099230dab161ab5a7"
+    },
+    {
+      "registryTarget": "components/dither-kit/button.tsx",
+      "localPath": "src/components/dither-kit/button.tsx",
+      "upstreamHash": "sha256:fd2e5a37b581ce5d8c8adba291da7ccecce3ed79e331ec7a0dda25687eb170ad"
+    },
+    {
+      "registryTarget": "components/dither-kit/gradient.tsx",
+      "localPath": "src/components/dither-kit/gradient.tsx",
+      "upstreamHash": "sha256:c5cfeaff9b5cfe88cf963109c679dc8202d2543d277e11c346f8d02c2a67dfcd"
+    },
+    {
+      "registryTarget": "components/dither-kit/index.ts",
+      "localPath": "src/components/dither-kit/index.ts",
+      "upstreamHash": "sha256:139ea729bb0b21e79e1e85587361fbc178f245fc46ff2b79b7fe0475911546ca"
+    }
+  ]
+}

@@ -34,7 +34,7 @@ The application is one prepared family-office experience. Its [combined operatin
 
 ## Cold-visit flow
 
-Public introduction and continuity narrative lead to visitor-profile selection inside Portfolio. Patriarch, family board and professional profiles enter the same prepared office and saved records. Add profile adds a visitor. Existing earlier workspaces remain recoverable as a secondary option. Current contract: [Entry and profile flow](../05%20-%20Requirements/Auth%20Flow.md).
+The main public landing presents the family brand, founding legacy, current and next generations, photo slots and six tailored office capabilities. Its single “Let’s log in” action opens visitor-profile selection inside Portfolio, including on returning visits. Patriarch, family board and professional profiles enter the same prepared office and saved records. Add profile adds a visitor. Existing earlier workspaces remain recoverable as a secondary option. Current contract: [Entry and profile flow](../05%20-%20Requirements/Auth%20Flow.md).
 
 ## Link-outs
 

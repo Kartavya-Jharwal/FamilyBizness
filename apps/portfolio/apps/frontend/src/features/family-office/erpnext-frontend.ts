@@ -99,3 +99,16 @@ export const erpTaskListFields = ["project", "status", "priority", "exp_start_da
 export const erpTaskBulkActions = [
   {label:"Set as Open",status:"Open"}, {label:"Set as Completed",status:"Complete"},
 ] as const;
+
+/** Runtime subset of Projects Workspace content/number_cards and Project Reports links.
+ * Source: erpnext/projects/workspace/projects/projects.json at the revision above.
+ * Timesheet Working Hours is intentionally omitted because the host has no time ledger. */
+export const erpProjectWorkspaceMask = {
+  title: "Projects",
+  numberCards: [
+    { label: "Open Projects", key: "projects" },
+    { label: "Non Completed Tasks", key: "open" },
+  ],
+  reports: ["Project Summary", "Delayed Tasks Summary"],
+  views: ["List", "Board", "Projects"],
+} as const;

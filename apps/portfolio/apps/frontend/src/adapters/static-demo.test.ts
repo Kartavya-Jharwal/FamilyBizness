@@ -70,3 +70,13 @@ describe("family-office sample data", () => {
     expect(review.meta.totalRowCount).toBe(0);
   });
 });
+
+it("uses one GBP reporting basis across host settings, holdings, valuation and income", async () => {
+  const settings = await invoke<{ baseCurrency: string; formattingRegion: string; timezone: string }>("get_settings");
+  expect(settings).toMatchObject({ baseCurrency: "GBP", formattingRegion: "en-GB", timezone: "Europe/London" });
+  expect(demoHoldings().every(row => row.baseCurrency === settings.baseCurrency && row.localCurrency === settings.baseCurrency)).toBe(true);
+  expect(demoCurrentValuation().summary.baseCurrency).toBe(settings.baseCurrency);
+  const income = demoIncomeSummary(SAMPLE_ACCOUNTS.map(account => account.id))[0];
+  expect(income.currency).toBe(settings.baseCurrency);
+  expect(Object.keys(income.byCurrency)).toEqual([settings.baseCurrency]);
+});

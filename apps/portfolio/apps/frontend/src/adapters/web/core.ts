@@ -3,7 +3,7 @@ import type { Logger } from "../types";
 import { selectedProfileId } from "@/features/profiles/session";
 import { readActiveIps } from "@/features/governance/constitution/ips";
 import type { Account, AccountScope, Goal, NewGoal, NewTaxonomyCategory, Settings, TaxonomyCategory } from "@/lib/types";
-import { SAMPLE_ACCOUNTS, SAMPLE_MONTHLY_SPENDING, SAMPLE_POSITIONS, SAMPLE_SPENDING_CATEGORIES } from "../demo-family";
+import { SAMPLE_CURRENCY, SAMPLE_ACCOUNTS, SAMPLE_MONTHLY_SPENDING, SAMPLE_POSITIONS, SAMPLE_SPENDING_CATEGORIES } from "../demo-family";
 import {
   demoAiProviders,
   demoAllocations,
@@ -68,7 +68,7 @@ function sampleCashActivities() {
     const date = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - monthOffset, 5)).toISOString();
     return SAMPLE_SPENDING_CATEGORIES.map((name, index) => ({
       id: `expense-${monthOffset}-${index}`, accountId: "acc-cash", activityType: "WITHDRAWAL", status: "POSTED",
-      activityDate: date, createdAt: date, updatedAt: date, currency: "USD", amount: String(SAMPLE_MONTHLY_SPENDING[index]),
+      activityDate: date, createdAt: date, updatedAt: date, currency: SAMPLE_CURRENCY, amount: String(SAMPLE_MONTHLY_SPENDING[index]),
       notes: name, isUserModified: false, needsReview: false, sourceSystem: "MANUAL", netAmount: -SAMPLE_MONTHLY_SPENDING[index],
       netAmountBase: -SAMPLE_MONTHLY_SPENDING[index], visibleSpendingAmount: SAMPLE_MONTHLY_SPENDING[index],
       cashFlowBucket: "spending", splits: [],
@@ -90,7 +90,7 @@ function sampleBudget(periodKey?: string) {
   }));
   const actual = SAMPLE_MONTHLY_SPENDING.reduce((sum, amount) => sum + amount, 0);
   return { state: { groups: [], groupAssignments: [], targets: [], rolloverSettings: [] },
-    computed: { currency: "USD", periodKey: periodKey ?? new Date().toISOString().slice(0, 7), fxAsOf: null,
+    computed: { currency: SAMPLE_CURRENCY, periodKey: periodKey ?? new Date().toISOString().slice(0, 7), fxAsOf: null,
       groupRows: [], ungroupedRows: rows, incomeRows: [], totals: { spendingPlanned: actual * 1.2,
         spendingActual: actual, spendingRemaining: actual * 0.2, incomePlanned: 0, incomeActual: 0,
         groupBuffer: 0, rolloverIn: 0, rolloverOut: 0, overspentCount: 0 } } };
@@ -108,7 +108,7 @@ function sampleSpendingReport(request: { startDate?: string; endDate?: string; a
       amount: matching.reduce((sum, row) => sum + row.visibleSpendingAmount, 0), count: matching.length };
   }).filter((category) => category.count);
   const days = [...new Set(rows.map((row) => row.activityDate.slice(0, 10)))];
-  return { baseCurrency: "USD", current: { income: 0, outflow, saved: 0, net: -outflow, count: rows.length },
+  return { baseCurrency: SAMPLE_CURRENCY, current: { income: 0, outflow, saved: 0, net: -outflow, count: rows.length },
     prior: { income: 0, outflow: 0, saved: 0, net: 0, count: 0 }, spendingBreakdown,
     incomeBreakdown: [], savingsBreakdown: [], byDay: days.map((date) => ({ date, income: 0,
       outflow: rows.filter((row) => row.activityDate.startsWith(date)).reduce((sum, row) => sum + row.visibleSpendingAmount, 0) })),
@@ -141,7 +141,7 @@ function sampleSpendingInsight(request: { startDate?: string; endDate?: string; 
     icon: null, sortOrder: 0, isSystem: false, createdAt: start, updatedAt: end };
   const priorSpent = priorReport.current.outflow;
   return { period: { start, end, months, dayCount: days },
-    prior: { start: priorStart, end: priorEnd, months: [...new Set(priorReport.byDay.map((day) => day.date.slice(0, 7)))], dayCount: days }, currency: "USD", foreignCurrencies: [], nativeOutflowByCurrency: {},
+    prior: { start: priorStart, end: priorEnd, months: [...new Set(priorReport.byDay.map((day) => day.date.slice(0, 7)))], dayCount: days }, currency: SAMPLE_CURRENCY, foreignCurrencies: [], nativeOutflowByCurrency: {},
     headline: { spent, income: 0, saved: 0, netCashflow: -spent, budget: planned, remaining: planned - spent,
       priorSpent, deltaVsPriorPct: priorSpent ? (spent - priorSpent) / priorSpent : null, pace: { dailyAvg: 0, daysElapsed: 0, daysRemaining: 0,
         projectedSpend: spent, expectedSpendToDate: 0 }, status: "on_track" },
@@ -192,7 +192,7 @@ export const invoke = async <T>(
         accountType: (input.accountType as Account["accountType"]) ?? "SECURITIES",
         group: input.group,
         balance: 0,
-        currency: String(input.currency ?? "USD"),
+        currency: String(input.currency ?? SAMPLE_CURRENCY),
         isDefault: false,
         isActive: true,
         isArchived: false,
@@ -242,7 +242,7 @@ export const invoke = async <T>(
     case "get_asset_profile": {
       const assets = SAMPLE_POSITIONS.filter((position) => position.kind !== "cash").map((position) => ({
         id: `asset-${position.id}`, kind: position.kind === "private" ? "PRIVATE_EQUITY" : "INVESTMENT",
-        name: position.name, displayCode: position.symbol, isActive: true, quoteMode: "MANUAL", quoteCcy: "USD",
+        name: position.name, displayCode: position.symbol, isActive: true, quoteMode: "MANUAL", quoteCcy: SAMPLE_CURRENCY,
         instrumentType: "FUND", instrumentSymbol: position.symbol, createdAt: "2025-01-01", updatedAt: "2025-01-01",
       }));
       return (command === "get_assets" ? assets : assets.find((asset) => asset.id === p.assetId) ?? null) as T;
@@ -301,8 +301,8 @@ export const invoke = async <T>(
         scopeId: ids.join(","), cashBalanceBase: cash, investmentMarketValueBase: invested,
         totalValueBase: total, accountCount: accounts.length,
         holdingsCount: SAMPLE_POSITIONS.filter((position) => ids.includes(position.accountId)).length,
-        currencySplit: [{ currency: "USD", valueBase: total, percentage: total ? 100 : 0 }],
-        cashCurrencySplit: [{ currency: "USD", valueBase: cash, percentage: cash ? 100 : 0 }],
+        currencySplit: [{ currency: SAMPLE_CURRENCY, valueBase: total, percentage: total ? 100 : 0 }],
+        cashCurrencySplit: [{ currency: SAMPLE_CURRENCY, valueBase: cash, percentage: cash ? 100 : 0 }],
       } } as T;
     }
     case "get_app_info":
@@ -352,7 +352,7 @@ export const invoke = async <T>(
       const types = p.activityTypeFilter as string[] | undefined;
       const keyword = String(p.assetIdKeyword ?? "").toLowerCase();
       const spendingRows = sampleCashActivities().map((row) => ({ id: row.id, accountId: row.accountId, accountName: "Family Office Operating Cash",
-          accountCurrency: "USD", assetId: "", assetSymbol: "", assetName: row.notes,
+          accountCurrency: SAMPLE_CURRENCY, assetId: "", assetSymbol: "", assetName: row.notes,
           activityType: row.activityType, status: row.status, date: new Date(row.activityDate),
           amount: row.amount, currency: row.currency, quantity: null, unitPrice: null, fee: null,
           needsReview: false, comment: row.notes, createdAt: new Date(row.createdAt), updatedAt: new Date(row.updatedAt) }));
@@ -362,7 +362,7 @@ export const invoke = async <T>(
         return [
           { accountId: "acc-public", accountName: "Long-term Family Capital", assetId: "asset-global-equity", assetSymbol: "GLOBAL", assetName: "Global Equity Fund", activityType: "DIVIDEND", amount: "7200" },
           { accountId: "acc-income", accountName: "Income and Reserves", assetId: "asset-income", assetSymbol: "INCOME", assetName: "Diversified Income Fund", activityType: "INTEREST", amount: "4800" },
-        ].map((row, index) => ({ ...row, id: `income-${offset}-${index}`, accountCurrency: "USD", currency: "USD",
+        ].map((row, index) => ({ ...row, id: `income-${offset}-${index}`, accountCurrency: SAMPLE_CURRENCY, currency: SAMPLE_CURRENCY,
           status: "POSTED", date, quantity: null, unitPrice: null, fee: null, needsReview: false,
           comment: "", createdAt: date, updatedAt: date }));
       }).flat();
@@ -420,7 +420,7 @@ export const invoke = async <T>(
       const end = history.at(-1)?.totalValueBase ?? 0;
       const valueReturn = start ? (end - start) / start : null;
       return {
-        scope: { id: String(p.itemId ?? "demo"), currency: "USD" },
+        scope: { id: String(p.itemId ?? "demo"), currency: SAMPLE_CURRENCY },
         period: { startDate: history[0]?.valuationDate, endDate: history.at(-1)?.valuationDate },
         mode: valueReturn === null ? "notApplicable" : "valueReturn",
         returns: { twr: null, irr: null, valueReturn, annualizedValueReturn: null },
@@ -433,7 +433,7 @@ export const invoke = async <T>(
     }
     case "calculate_performance_summary":
       return {
-        scope: { id: String(p.itemId ?? "demo"), currency: "USD" },
+        scope: { id: String(p.itemId ?? "demo"), currency: SAMPLE_CURRENCY },
         summary: null,
         series: [],
       } as T;
@@ -444,8 +444,8 @@ export const invoke = async <T>(
       return [
         {
           id: "usd-usd",
-          fromCurrency: "USD",
-          toCurrency: "USD",
+          fromCurrency: SAMPLE_CURRENCY,
+          toCurrency: SAMPLE_CURRENCY,
           rate: 1,
           source: "demo",
           timestamp: new Date().toISOString(),
