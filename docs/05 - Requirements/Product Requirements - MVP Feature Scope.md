@@ -33,3 +33,9 @@ Unknown external fund constituents, unauthenticated legal approvals and unsuppor
 The [whole-brief contract](Acceptance%20-%20Whole%20Brief.md) defines functional acceptance. The release gate combines source/type/model checks, production static packaging, donor provenance, and desktop/mobile/keyboard/contrast checks on the packaged artifact. A successful local build alone is not a public deployment; the release record states the deployed URL and revision separately.
 
 The selected operating model and conflict resolutions are owned by the [combined charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md), which supersedes the earlier primary constitution-creation flow.
+
+## Visual stewardship priorities
+
+Daily screens lead with computed AUM/liquidity, cash runway, visible DCF/multiple/sensitivity and allocation/Monte Carlo outputs. The existing financial records are populated. Natural-language IPS instructions compile to numeric rules and are reviewed in one Administration panel. Council meetings use donated calendar week/agenda controls and a side-panel scheduler; business work uses ERP task masks. Navigation appears once; occasional configuration and method/source detail are secondary. SFO terminology refers to assets under stewardship and consolidated family capital.
+
+For this revision, verification is explicitly limited to these user priorities and the shared profile-command entry. The previous broad smoke suite is not rerun by the deployment workflow.

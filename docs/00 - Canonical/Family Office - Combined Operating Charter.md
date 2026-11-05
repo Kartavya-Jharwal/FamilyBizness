@@ -1,6 +1,6 @@
 # Family Office — Combined Operating Charter
 
-This is the selected fictional operating charter for the application, assembled from four supplied constitutions. It is one prepared family office, not a constitution-creation service or a consolidation of the four source businesses. English law and GBP remain the application baseline. The [product identity](Identity.md) owns the product facts; the [existing GBP numerical case](Golden%20Bird%20-%20English%20Law%20Case.md) supplies the retained illustrative financial/ownership inputs.
+This is the selected fictional operating charter for the application, assembled from four supplied constitutions. It is one prepared family office, not a constitution-creation service or a consolidation of the four source businesses. English law and GBP remain the application baseline. The [product identity](Identity.md) owns the product facts. The existing module schemas and ownership register are populated with a GBP management-account scenario owned by `stewardship-scenario.ts`.
 
 ## Source selection
 
@@ -31,7 +31,7 @@ The selected reserved-decision check requires 75% of eligible disinterested owne
 
 Retain Golden Bird's explicit cash basis: fund twelve-month debt/statutory obligations, the approved family reserve and six months' fixed operating costs before discretionary distributions. Check solvency, covenants, the selected flagship compliance gate and profits lawfully available for dividends.
 
-Allocate remaining distributable cash 50% to core reinvestment/reserves, 30% to permitted dividends and 20% to ring-fenced growth. The existing £50,000 family-reserve scenario remains an approved input, not a universal entitlement. Applying the budget updates the existing financial forecast and saved multi-generation spending scenario atomically.
+Allocate remaining distributable cash 50% to core reinvestment/reserves, 30% to permitted dividends and 20% to ring-fenced growth. The operating scenario funds a GBP 150,000 family-support reserve; the investment mandate separately protects GBP 800,000 of succession liquidity. Applying the budget updates the existing financial forecast and saved multi-generation spending scenario atomically.
 
 Calcot's resilience-before-payout principle reinforces this choice. Sandoval's 25–40% and Vasnani's 30–40% **profit** payout bands are not additional cash percentages and are not converted into AUM withdrawal caps. Vasnani's 5% continuity contribution and 1% giving budget are not silently added to the selected allocation.
 
@@ -73,7 +73,7 @@ Meeting records, papers/minutes tasks, recurring reviews and owners use the exis
 
 Select education/apprenticeships, community wellbeing, responsible business and sustainability review. Populate two illustrative draft grant requests with explicit pending diligence/approval. The £5,000 and £3,000 request amounts are modelling assumptions, not constitutional entitlements, approved commitments or tax-deductibility claims.
 
-Do not combine incompatible philanthropy percentages or infer a blanket alcohol exclusion from a distillery constitution. The existing source-linked investment-policy mechanism remains the owner of any expressly adopted numerical limit or sector screen. The composite does not invent an ESG exclusion list.
+The Board adopts the application investment mandate: at least 10% investment cash, at most 65% public equities and 25% illiquid investments, a GBP 800,000 succession reserve, no controversial-weapons investments and two independent approvals for commitments above GBP 250,000. Target annual net return is 5% within 12% annual volatility. These are the composite Board's implementation decisions for this hypothetical office, traced to FO-IPS-MANDATE, rather than quotations attributed to the original four source families. The donated policy parser compiles the exposure sentences; the existing hard-rule engine enforces the resulting limits. Natural-language revisions are reviewed and activated through one transactional administration action.
 
 ## 12. Review and “please fix”
 
@@ -84,3 +84,11 @@ The patriarch's literal **please fix** message remains a small corrective action
 ## 13. User experience
 
 The main entry opens a prepared office by visitor profile. **Add profile** adds a visitor to that office. **Family business → Constitution linkage → Family charter** explains the selected operating model and links each priority to its existing tool. Cash/voting checks remain directly accessible. Revision/library controls, case identity, saved-data inspection and JSON backups are secondary administration, not the daily starting experience. All surfaces use Portfolio components and canonical tokens.
+
+## Visual operating experience
+
+Daily navigation is Stewardship, Capital & liquidity, Portfolio & scenarios, Family business and Calendar. Administration owns configuration, constitution/IPS revisions, profile setup, source connections, appearance and backups. The host shell supplies navigation once. Financial and investment pages lead with computed visual outputs; record editors and methods are progressive detail.
+
+The management accounts include GBP 4m holding cash, GBP 7.2m liquid investments and GBP 0.8m private investments, a GBP 12m carrying investment in the operating subsidiary, GBP 1m holding debt and GBP 23m holding capital/reserves. The wholly owned subsidiary has GBP 14m assets, GBP 2m debt and GBP 12m equity. DCF replaces the carrying investment in AUM; subsidiary assets are eliminated rather than added twice. Consolidated period income is GBP 1.4m, with reconciled opening/closing cash and equity and sixteen dated capital observations. WACC, growth, EBITDA and multiples are editable in the visible valuation view.
+
+The prepared-office upgrade makes an automatic local recovery snapshot, then populates the revised scenario once. Ordinary subsequent visits preserve edits. Profiles use one local command engine behind the existing profile API and immutable session admission; no provider login or backend is required.

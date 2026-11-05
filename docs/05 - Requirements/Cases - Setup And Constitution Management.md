@@ -21,3 +21,7 @@ Adopted revisions validate allocation totals, reviewed sources and parameters. S
 Case identity, saved-data readiness and portable JSON backups are expandable office administration on the stewardship home. Daily work starts with cash, overdue responsibilities, estate funding, continuity and the action queue. The calendar and ERP frontend read the same operations records.
 
 Verification and publication evidence: [MVP release](../03%20-%20Architecture/Release%20-%20MVP.md).
+
+## Daily experience and administration
+
+The daily home now shows capital, liquidity, concentration, upcoming meetings and responsibilities. Capital & liquidity opens visible DCF/multiple/sensitivity and funding views. Portfolio & scenarios opens allocation and Monte Carlo; Family business defaults to ERP tasks. Constitution/IPS maintenance is under Administration, where natural-language review compiles and activates the hard limits. The read-only mandate remains linked from stewardship for daily decisions. Revised prepared-office data are populated once with a recovery snapshot; routine visits do not require setup.

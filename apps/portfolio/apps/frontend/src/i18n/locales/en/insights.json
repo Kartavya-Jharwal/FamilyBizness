@@ -76,9 +76,9 @@
       "update_balance": "Update balance",
       "link_property": "Link a property to {{name}}",
       "add_property": "Add a property for {{name}}",
-      "link_explanation": "Linking an existing property does not change your net worth."
+      "link_explanation": "Linking an existing property does not change consolidated family capital."
     },
-    "failed_to_load": "Failed to load net worth",
+    "failed_to_load": "Failed to load family capital",
     "stale_valuations_tooltip": "Stale valuations (90+ days):",
     "days_ago": "{{count}}d ago",
     "no_history_data": "No history data available",
@@ -87,8 +87,8 @@
     "add_first_asset": "Add your first asset",
     "not_updated_over_90_days": "Not updated in over 90 days.",
     "chart": {
-      "net_worth": "Net Worth",
-      "net_worth_label": "Net Worth:",
+      "net_worth": "Consolidated family capital",
+      "net_worth_label": "Consolidated family capital:",
       "assets_label": "Assets:",
       "liabilities_label": "Liabilities:"
     },
@@ -100,7 +100,7 @@
       "delta_period": "Δ {{period}}",
       "new": "New",
       "liabilities": "Liabilities",
-      "net_worth": "Net Worth"
+      "net_worth": "Consolidated family capital"
     },
     "category_sheet": {
       "over_period": "over {{period}}",

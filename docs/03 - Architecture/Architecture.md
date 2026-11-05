@@ -37,3 +37,11 @@ The [contribution ledger](Donors%20-%20Frontend%20Contribution%20Ledger.md) iden
 This is the deliberately browser-local functional MVP. It does not execute financial/legal transactions or implement production authentication, live service synchronization, delivery of invitations/messages or a shared server database. These excluded services are not outstanding donor-integration tasks. User-authored cases can be exported for retention and transfer.
 
 Detailed routes, supported calculations and release verification: [Integration](Integration%20-%20Family%20Office%20Workspaces.md).
+
+## Visual stewardship and local command boundary
+
+Daily entry points render saved AUM/liquidity, DCF/multiple/sensitivity, portfolio allocation/projection and the calendar directly. Detailed editors mount on demand; source-record update events keep open visual summaries and editors synchronized. The host navigation is rendered once. Administration owns office/profile, constitution/IPS, source, appearance and backup controls.
+
+The static profile API dispatches to one local command engine, used by ProfileShell. It persists list/create/update/unlock/lock commands and admits the existing immutable session scope. Native/server transports are unchanged outside the static adapter. No profile HTTP request is needed for this build.
+
+Prepared-office population now uses `stewardship-scenario.ts` to fill the existing book, historical statement records, dated AUM and investment/estate assumptions. The upgrade retains a local recovery snapshot before one-time replacement. Subsequent visits preserve saved edits. The numerical IPS statement is stored in the donated document workspace and activated in the existing typed rule owner; adoption updates source, document, mandate and rule snapshots transactionally.

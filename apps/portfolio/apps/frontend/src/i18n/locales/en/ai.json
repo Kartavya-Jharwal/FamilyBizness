@@ -538,7 +538,7 @@
       "accountsLabel": "Accounts",
       "accountsDescription": "Account details, portfolios, and cash balances",
       "holdingsLabel": "Holdings",
-      "holdingsDescription": "Positions, their values, and net worth",
+      "holdingsDescription": "Positions, their values, and family capital",
       "transactionsLabel": "Transactions",
       "transactionsDescription": "View, draft, import, and categorize activities",
       "performanceLabel": "Performance",

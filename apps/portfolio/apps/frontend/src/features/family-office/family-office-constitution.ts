@@ -1,3 +1,4 @@
+import { officeIpsSource } from "./office-ips";
 import { constitutionPackSchema } from "./constitution-pack-model";
 import { goldenBirdEnglishCase } from "./golden-bird-adaptation";
 import type { SourceRecord } from "./source-model";
@@ -14,7 +15,7 @@ function clause(id: string, assignment: string, section: string, excerpt: string
   return { id, assignment, section, excerpt, interpretation, target, parameter, basis, status: "reviewed", reviewer: "Fictional composite application specification" };
 }
 const gb = (id: string) => goldenBirdEnglishCase.clauses.find(s => s.id === id)!;
-export const familyOfficeSources: SourceRecord[] = [
+export const familyOfficeSources: SourceRecord[] = [officeIpsSource,
   clause("FO-CASH", "Golden Bird; Calcot §6; Sandoval distributions; Vasnani distributions", "Adopted cash and distribution policy", gb("GB-ART7-DISTRIBUTIONS").excerpt,
     "Select Golden Bird's 50/30/20 remaining-cash allocation after its twelve-month obligations, six-month operating reserve and approved family reserve. Calcot reinforces resilience before payouts. Sandoval's 25–40% and Vasnani's 30–40% profit bands are alternatives, not additional cash percentages. No profit-band or AUM withdrawal rule is inferred.", "finance", "funding safeguards and 50/30/20 cash allocation"),
   clause("FO-VOTES", "Golden Bird; Calcot §4", "Adopted reserved decision authority", gb("GB-ART5-DECISIONS").excerpt,

@@ -556,7 +556,7 @@
   "quickAdd": {
     "add_new_asset": "Add New Asset",
     "select_type_subtitle": "Select the type of asset you want to add",
-    "liability_subtitle": "Add a liability to track against your net worth",
+    "liability_subtitle": "Add a liability to track against consolidated family capital",
     "asset_details_subtitle": "Enter the details for your asset",
     "current_balance": "Current Balance",
     "current_balance_hint": "Leave empty to estimate it from payments.",

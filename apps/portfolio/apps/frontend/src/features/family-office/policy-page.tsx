@@ -22,9 +22,9 @@ export function PolicyWorkspace(){
     <p>Turn selected constitutional principles into explicit operating rules. Each rule retains its reviewed source excerpt and interpretation. Activation freezes that source revision; changing it blocks dependent actions until the rules are reviewed again.</p>
     {error&&<p role="alert" className="break-words rounded border p-3 text-destructive">{error}</p>}{message&&<p role="status">{message}</p>}
     <Card><CardHeader><CardTitle>{active?`Active policy · revision ${active.revision}`:"No family policy activated"}</CardTitle></CardHeader><CardContent className="space-y-3">
-      <p>{active?`${active.rules.length} rules · reviewed by ${active.reviewer} · ${active.activatedAt}`:"Add and review your selected excerpts in the source register, then bind rules below. No Assignment 1 clauses are fabricated."}</p>
+      <p>{active?`${active.rules.length} rules · reviewed by ${active.reviewer} · ${active.activatedAt}`:"Add and review your selected excerpts in the source register, then bind rules below. Choose an adopted source to compile its rules."}</p>
       <Link className="underline" to="/office/sources">Manage source excerpts and review</Link>
-      <p className="text-sm text-muted-foreground">These rules govern the family-office planning workspaces. The legacy portfolio-account IPS has its own explicit activation. Recorded reviewers and approvers are local workflow evidence, not authenticated identities.</p>
+      <p className="text-sm text-muted-foreground">Rules retain their source revision and apply to the family investment planner.</p>
     </CardContent></Card>
     <Card><CardHeader><CardTitle>Rule editor</CardTitle></CardHeader><CardContent className="space-y-4">
       <label className="block">Policy currency<select className={field} value={currency} onChange={e=>{setCurrency(e.target.value as typeof currency);setChecked(false);}}>{["GBP","USD","EUR"].map(c=><option key={c}>{c}</option>)}</select></label>

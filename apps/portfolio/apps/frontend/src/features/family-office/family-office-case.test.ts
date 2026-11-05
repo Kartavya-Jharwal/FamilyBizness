@@ -57,12 +57,12 @@ it("routes the three added constitutions into actual operations, continuity and 
 it("invalidates the selected operating check when its source changes", () => {
   const store = storage(); ensureFamilyOfficeCase(store);
   const key = caseModules.find(m => m.id === "sources")!.key(familyOfficeCaseId);
-  const source = JSON.parse(store.getItem(key)!); source.sources[0].excerpt += " Unreviewed change.";
+  const source = JSON.parse(store.getItem(key)!); source.sources.find((s:{id:string})=>s.id==="FO-CASH").excerpt += " Unreviewed change.";
   store.setItem(key, JSON.stringify(source));
   expect(constitutionTraceCurrent(store, familyOfficeCaseId, "FO-CASH")).toBe(false);
 });
 it("rolls back population when storage refuses the completion marker", () => {
-  const store = storage(); const failing = { ...store, setItem: (key: string, value: string) => { if (key.includes("composite-populated")) throw Error("Storage full"); store.setItem(key, value); } };
+  const store = storage(); const failing = { ...store, setItem: (key: string, value: string) => { if (key.includes("visual-stewardship")) throw Error("Storage full"); store.setItem(key, value); } };
   expect(() => ensureFamilyOfficeCase(failing)).toThrow("Storage full");
   expect(caseModules.every(m => store.getItem(m.key(familyOfficeCaseId)) === null)).toBe(true);
 });

@@ -1,3 +1,4 @@
+import { GovernanceSummary } from "./governance-summary";
 import { useState } from "react";
 import { GovernancePlanning } from "./governance-planning";
 import { readEffectivePolicy, enforcePolicy } from "./policy-engine";
@@ -54,4 +55,4 @@ setData(next); state.setError(""); } catch (e) { state.setError(String(e)); } }}
   </div>;
 }
 
-export default function GovernancePage() { return <FamilyOfficeShell title="Governance & succession"><GovernanceWorkspace /></FamilyOfficeShell>; }
+export default function GovernancePage() { return <FamilyOfficeShell title="Governance & succession"><GovernanceSummary><GovernanceWorkspace /></GovernanceSummary></FamilyOfficeShell>; }

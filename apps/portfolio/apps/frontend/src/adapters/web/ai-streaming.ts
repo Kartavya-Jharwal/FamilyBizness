@@ -13,7 +13,7 @@ export const FAUX_AI_ERROR =
 export const FAUX_AI_OPTIONS = [
   {
     id: "net-worth",
-    label: "Summarise net worth",
+    label: "Summarise family capital",
     prompt: "Summarise this sample portfolio.",
   },
   {

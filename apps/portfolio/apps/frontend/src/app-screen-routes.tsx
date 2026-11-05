@@ -48,9 +48,11 @@ const OfficeReviewWorkspace = lazy(() => import("./features/family-office/office
 const OperationsPage = lazy(() => import("./features/family-office/operations-page"));
 const GovernancePage = lazy(() => import("./features/family-office/governance-page"));
 const BusinessPage = lazy(() => import("./features/family-office/business-page"));
-const SimulationPage = lazy(() => import("./features/family-office/simulation-page"));
+const SimulationPage = lazy(() => import("./features/family-office/portfolio-visual"));
 const SourcesPage = lazy(() => import("./features/family-office/sources-page"));
-const PolicyPage = lazy(() => import("./features/family-office/policy-page"));
+const PolicyPage = lazy(() => import("./features/family-office/ips-visual"));
+const CapitalPage=lazy(()=>import("./features/family-office/capital-workspace"));
+const AdministrationPage=lazy(()=>import("./features/family-office/administration-page"));
 const CasePage = lazy(() => import("./features/family-office/case-page"));
 const PresentationPage = lazy(() => import("./features/family-office/presentation-page"));
 
@@ -90,6 +92,7 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
   return (
     <Routes location={location}>
       <Route index element={<Navigate to="/office/case" replace />} />
+      <Route path="office/admin" element={<Suspense fallback={<p>Opening administration...</p>}><AdministrationPage/></Suspense>} />
       <Route path="office/case" element={<Suspense fallback={<p className="p-6">Loading family case…</p>}><CasePage /></Suspense>} />
       <Route path="office/philanthropy" element={<PhilanthropyPage />} />
       <Route path="office/overview" element={<Suspense fallback={<p className="p-6">Loading stewardship studio…</p>}><PresentationPage /></Suspense>} />
@@ -98,7 +101,7 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
       <Route path="office" element={<Suspense fallback={<p className="p-6">Loading family office…</p>}><OperationsPage /></Suspense>} />
       <Route path="office/governance" element={<Suspense fallback={<p className="p-6">Loading governance…</p>}><GovernancePage /></Suspense>} />
       <Route path="office/estate" element={<Suspense fallback={<p className="p-6">Loading estate scenario…</p>}><Navigate to="/office/business?tab=estate" replace /></Suspense>} />
-      <Route path="office/finance" element={<Suspense fallback={<p className="p-6">Loading financials…</p>}><Navigate to="/office/business?tab=financials" replace /></Suspense>} />
+      <Route path="office/finance" element={<Suspense fallback={<p className="p-6">Loading financials…</p>}><CapitalPage/></Suspense>} />
       <Route path="office/simulation" element={<Suspense fallback={<p className="p-6">Loading scenarios…</p>}><SimulationPage /></Suspense>} />
       <Route path="office/sources" element={<Suspense fallback={<p className="p-6">Loading source register…</p>}><SourcesPage /></Suspense>} />
       <Route path="office/policy" element={<Suspense fallback={<p className="p-6">Loading family policy…</p>}><PolicyPage /></Suspense>} />

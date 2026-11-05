@@ -27,6 +27,9 @@ export const isTauri = false;
 /** True when running in the web environment */
 export const isWeb = true;
 
+/** This adapter persists its data locally and has no profile HTTP service. */
+export const isStaticHost = true;
+
 export const API_PREFIX = "/api/v1";
 export const EVENTS_ENDPOINT = `${API_PREFIX}/events/stream`;
 export const AI_CHAT_STREAM_ENDPOINT = `${API_PREFIX}/ai/chat/stream`;

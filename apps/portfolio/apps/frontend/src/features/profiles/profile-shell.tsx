@@ -1,80 +1,80 @@
 import { type ReactNode, useEffect, useState } from "react";
-import { Button, Card, CardContent, CardHeader, CardTitle } from "@fb/ui";
+import { Button } from "@fb/ui";
 import { ProfileContext } from "./profile-context";
-import type { ProfileSummary } from "./api";
+import { profileCommand, type ProfileState, type ProfileSummary } from "./api";
 import { installProfileSession } from "./session";
-import { isOfficePersona, workspaceForProfile } from "./profile-workspace";
-import { goldenBirdSource } from "@/features/family-office/golden-bird-source";
+import { isOfficePersona } from "./profile-workspace";
+import { ProfileAvatar } from "./profile-avatar";
+import { hasSeenOfficeEntry, localRoleProfiles, readLocalProfileState, selectedLocalPersona, sourceExampleProfileId } from "./local-engine";
 
-const key = "familybizness:demo-profiles";
-const selectedKey = "familybizness:selected-demo-profile";
-const goldenBirdProfile: ProfileSummary = { id: goldenBirdSource.identity.profileId, name: "Project Golden Bird", avatarId: "default", lockEnabled: false };
-const defaults: ProfileSummary[] = [
-  ...["Patriarch", "Family board", "Managing director", "CEO", "Associate", "Legal counsel", "Family technician"].map((name, i) => ({ id: `office-role-${i}`, name, avatarId: "default", lockEnabled: false })),
-  goldenBirdProfile,
-];
-function readProfiles(): ProfileSummary[] {
-  const raw = localStorage.getItem(key);
-  if (!raw) return defaults;
-  const rows: unknown = JSON.parse(raw);
-  if (!Array.isArray(rows) || !rows.length || rows.some(p => !p || typeof p.id !== "string" || typeof p.name !== "string" || typeof p.avatarId !== "string") || new Set(rows.map(p=>p.id)).size !== rows.length) throw new Error("Saved profiles need recovery; they have not been replaced.");
-  return [...defaults.map(p=>rows.find(row=>row.id===p.id)??p), ...rows.filter(row=>!defaults.some(p=>p.id===row.id))];
-}
-const selected = localStorage.getItem(selectedKey);
-if (selected) installProfileSession({ profileId: workspaceForProfile(selected), scopeId: `demo-static-${selected}` });
+const selected = selectedLocalPersona();
+try { const session = readLocalProfileState().session; if (session) installProfileSession(session); } catch { /* Recovery stays inside profile entry. */ }
 
-/** Local static admission uses the host context and immutable per-load session. */
+/** Profile entry and management use the host's local command engine. */
 export function ProfileShell({ children }: { children: ReactNode }) {
-  const [initial] = useState(() => { try { return { profiles: readProfiles(), error: "" }; } catch (e) { return { profiles: [] as ProfileSummary[], error: String(e) }; } });
-  const [profiles, setProfiles] = useState(initial.profiles);
-  const profile = profiles.find(p => p.id === selected);
-  const [choosing, setChoosing] = useState(!profile || (!!selected && !isOfficePersona(selected) && !localStorage.getItem("familybizness:composite-entry-seen:v1")));
+  const [initial] = useState(() => { try { return { state: readLocalProfileState(), error: "" }; } catch (error) { return { state: { profiles: [], session: null, starting: false } as ProfileState, error: String(error) }; } });
+  const [profiles, setProfiles] = useState(initial.state.profiles);
+  const profile = profiles.find(row => row.id === selected);
+  const [choosing, setChoosing] = useState(!profile || !initial.state.session || (!!selected && !isOfficePersona(selected) && !hasSeenOfficeEntry()));
   const [editing, setEditing] = useState<"add" | "edit" | null>(null);
   const [name, setName] = useState("");
-  const [saving,setSaving]=useState(false);
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState(initial.error);
-  const [sampleReady, setSampleReady] = useState(!selected || (!isOfficePersona(selected) && selected !== goldenBirdProfile.id));
-  const [sampleError, setSampleError] = useState("");
+  const [ready, setReady] = useState(!selected || (!isOfficePersona(selected) && selected !== sourceExampleProfileId));
+  const [openingError, setOpeningError] = useState("");
   useEffect(() => {
-    if (!profile) return;
-    if (isOfficePersona(profile.id)) {
-      let disposed = false;
-      import("@/features/family-office/family-office-case").then(({ensureFamilyOfficeCase})=>{ensureFamilyOfficeCase(localStorage);if(!disposed)setSampleReady(true);}).catch(e=>{if(!disposed)setSampleError(String(e));});
-      return ()=>{disposed=true;};
-    }
-    if (profile.id !== goldenBirdProfile.id) return;
+    if (!profile || choosing) return;
     let disposed = false;
-    import("@/features/family-office/golden-bird-case").then(({ ensureGoldenBirdCase }) => {
-      ensureGoldenBirdCase(localStorage, goldenBirdProfile.id);
-      if (!disposed) setSampleReady(true);
-    }).catch(e => { if (!disposed) setSampleError(String(e)); });
+    const populate = isOfficePersona(profile.id)
+      ? import("@/features/family-office/family-office-case").then(({ ensureFamilyOfficeCase }) => ensureFamilyOfficeCase(localStorage))
+      : profile.id === sourceExampleProfileId
+        ? import("@/features/family-office/golden-bird-case").then(({ ensureGoldenBirdCase }) => ensureGoldenBirdCase(localStorage, profile.id))
+        : Promise.resolve();
+    populate.then(() => { if (!disposed) setReady(true); }).catch(error => { if (!disposed) setOpeningError(String(error)); });
     return () => { disposed = true; };
-  }, [profile?.id]);
-  function selectProfile(id: string) {
-    try { localStorage.setItem(key, JSON.stringify(profiles)); localStorage.setItem(selectedKey, id); localStorage.setItem("familybizness:composite-entry-seen:v1","seen"); if(isOfficePersona(id))window.location.hash="/office/case"; window.location.reload(); } catch { setError("Profile selection could not be saved."); }
+  }, [profile?.id, choosing]);
+
+  async function selectProfile(id: string) {
+    if (saving) return;
+    setSaving(true); setError("");
+    try {
+      await profileCommand<ProfileState>("unlock_profile", { profileId: id });
+      if (isOfficePersona(id)) window.location.hash = "/office/case";
+      window.location.reload();
+    } catch (error) { setError(error instanceof Error ? error.message : "Profile could not be opened."); setSaving(false); }
+  }
+  async function lockProfile() {
+    try { await profileCommand<ProfileState>("lock_profile"); window.location.reload(); }
+    catch (error) { setError(String(error)); setChoosing(true); }
   }
   const value = { profile, profiles, profileCount: profiles.length,
     addProfile: () => { setChoosing(true); setEditing("add"); setName(""); },
     manageProfile: () => { setChoosing(true); setEditing("edit"); setName(profile?.name ?? ""); },
-    lockProfile: () => setChoosing(true), switchProfile: () => setChoosing(true), selectProfile };
-  if (choosing) return <main style={{ fontFamily: "var(--design-font-sans)" }} className="mx-auto max-w-3xl space-y-6 p-6 text-foreground">
-    <header><p className="text-sm text-muted-foreground">FamilyBizness</p><h1 className="text-3xl font-semibold">Who is visiting the family office?</h1><p>One prepared office for the family, owners, Board and professional team. Choose your profile to continue. The operating charter brings together selected provisions from four constitutions.</p></header>
-    {error && <p role="alert">{error}</p>}
-    <Button variant="outline" onClick={value.addProfile}>Add profile</Button>
-    <div className="grid gap-4 sm:grid-cols-2">{profiles.filter(p=>isOfficePersona(p.id)).map(p => <Card key={p.id}><CardHeader><CardTitle>{p.name}</CardTitle></CardHeader><CardContent><Button onClick={()=>selectProfile(p.id)}>Open {p.name}</Button></CardContent></Card>)}</div>
-    <details className="rounded-md border p-4"><summary className="cursor-pointer text-sm font-medium">Earlier saved workspaces and source example</summary><p className="my-3 text-sm text-muted-foreground">Retained records are available here. The prepared family office above is the main workspace.</p><div className="grid gap-3 sm:grid-cols-2">{profiles.filter(p=>!isOfficePersona(p.id)).map(p=><Card key={p.id}><CardHeader><CardTitle>{p.name}</CardTitle></CardHeader><CardContent><Button variant="outline" onClick={()=>selectProfile(p.id)}>Open {p.name}</Button></CardContent></Card>)}</div></details>
-    {editing && <form className="space-y-3 rounded-md border bg-card p-4" onSubmit={async e=>{
-      e.preventDefault();const clean=name.trim();if(!clean||saving)return;setSaving(true);
-      try{
-        if(editing==="edit"&&profile){const next=profiles.map(p=>p.id===profile.id?{...p,name:clean}:p);localStorage.setItem(key,JSON.stringify(next));setProfiles(next);}
-        else{const id=`office-member-${crypto.randomUUID()}`;const next=[...profiles,{id,name:clean,avatarId:"default",lockEnabled:false}];localStorage.setItem(key,JSON.stringify(next));setProfiles(next);}
-        setEditing(null);setError("");
-      }catch(e){setError(e instanceof Error?e.message:"Profile could not be saved.");}finally{setSaving(false);}
-    }}><label className="block">Profile name<input maxLength={60} required className="block w-full rounded-md border bg-background p-2" value={name} onChange={e=>setName(e.target.value)}/></label>
-    {editing==="add"&&<p className="text-sm text-muted-foreground">This adds a visitor profile to the prepared family office. Everyone uses the same charter, calendar and planning records.</p>}
-    <Button disabled={saving} type="submit">{saving?"Saving profile...":"Save profile"}</Button></form>}
-    {profile && <Button variant="outline" onClick={()=>setChoosing(false)}>Return to {profile.name}</Button>}
+    lockProfile: () => { void lockProfile(); }, switchProfile: () => setChoosing(true), selectProfile: (id: string) => { void selectProfile(id); } };
+  const avatar = (row: ProfileSummary) => row.avatarId === "default" ? localRoleProfiles.find(role => role.id === row.id)?.avatarId ?? row.avatarId : row.avatarId;
+  const tile = (row: ProfileSummary) => <article key={row.id} className="flex flex-col items-center gap-3 rounded-xl border bg-card p-5 text-center text-card-foreground">
+    <ProfileAvatar id={avatar(row)} className="size-20" animated={false}/>
+    <h2 className="text-base font-semibold">{row.name}</h2>
+    <Button className="mt-auto" disabled={saving || row.lockEnabled} onClick={() => void selectProfile(row.id)}>Open {row.name}</Button>
+    {row.lockEnabled && <p className="text-xs text-muted-foreground">Open this protected profile in its original host.</p>}
+  </article>;
+  if (choosing) return <main className="mx-auto max-w-4xl space-y-6 p-6 text-foreground">
+    <header className="space-y-2"><p className="text-sm text-muted-foreground">FamilyBizness</p><h1 className="text-3xl font-semibold">Who is visiting the family office?</h1><p className="text-sm text-muted-foreground">Choose your profile to open the shared family office.</p></header>
+    {error && <p role="alert" className="rounded-md border p-3 text-sm text-destructive">{error}</p>}
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{profiles.filter(row => isOfficePersona(row.id)).map(tile)}</div>
+    <details className="rounded-lg border p-4" open={editing !== null || undefined}>
+      <summary className="cursor-pointer text-sm font-medium">Profile setup and recovery</summary>
+      <div className="mt-4 space-y-4">
+        <div className="flex flex-wrap gap-3"><Button variant="outline" onClick={value.addProfile}>Add profile</Button>{profile && <Button variant="outline" onClick={value.manageProfile}>Edit profile</Button>}<Button variant="outline" onClick={async () => { try { const state = await profileCommand<ProfileState>("get_profile_state"); setProfiles(state.profiles); setError(""); } catch (error) { setError(String(error)); } }}>Reload saved profiles</Button></div>
+        {editing && <form className="space-y-3 rounded-md border bg-card p-4" onSubmit={async event => {
+          event.preventDefault(); if (!name.trim() || saving) return; setSaving(true);
+          try { const state = await profileCommand<ProfileState>(editing === "edit" ? "update_profile" : "create_profile", { name, ...(editing === "edit" && profile ? { profileId: profile.id } : {}) }); setProfiles(state.profiles); setEditing(null); setError(""); }
+          catch (error) { setError(error instanceof Error ? error.message : "Profile could not be saved."); } finally { setSaving(false); }
+        }}><label className="block text-sm">Profile name<input maxLength={60} required className="mt-1 block w-full rounded-md border bg-background p-2" value={name} onChange={event => setName(event.target.value)}/></label><div className="flex gap-3"><Button disabled={saving} type="submit">{saving ? "Saving profile..." : "Save profile"}</Button><Button type="button" variant="outline" onClick={() => setEditing(null)}>Cancel</Button></div></form>}
+        <details><summary className="cursor-pointer text-sm text-muted-foreground">Earlier saved workspaces</summary><div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{profiles.filter(row => !isOfficePersona(row.id)).map(tile)}</div></details>
+      </div>
+    </details>
   </main>;
-  if (!sampleReady) return <main className="mx-auto max-w-3xl space-y-4 p-6 text-foreground"><h1 className="text-2xl font-semibold">Opening the family office</h1>{sampleError ? <><p role="alert">{sampleError}</p><Button variant="outline" onClick={()=>setChoosing(true)}>Choose another profile</Button></> : <p role="status">Preparing the family case...</p>}</main>;
+  if (!ready) return <main className="mx-auto max-w-3xl space-y-4 p-6 text-foreground"><h1 className="text-2xl font-semibold">Opening the family office</h1>{openingError ? <><p role="alert">{openingError}</p><Button variant="outline" onClick={() => setChoosing(true)}>Choose another profile</Button></> : <p role="status">Preparing your workspace...</p>}</main>;
   return <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>;
 }

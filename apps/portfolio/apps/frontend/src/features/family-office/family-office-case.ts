@@ -1,3 +1,7 @@
+import { stewardshipScenario } from "./stewardship-scenario";
+import { officeIpsText,officeIpsRules } from "./office-ips";
+import { activatePolicy } from "./policy-engine";
+import { saveWorkspace,loadWorkspace,workspaceKey } from "@/features/governance/constitution/workspace";
 import { goldenBirdModules } from "./golden-bird-case";
 import { familyOfficeCaseId, familyOfficeConstitution, familyOfficeSources } from "./family-office-constitution";
 import { caseModules, importCase } from "./case-model";
@@ -51,9 +55,9 @@ export function familyOfficeModules() {
     task("fo-community", "Review apprenticeship and community grant requests", "A1", 28, "FO-LEGACY", "/office/philanthropy", "Diligence and actual approved capacity precede commitments. Do not add incompatible source profit percentages or assume a tax deduction.", "Quarterly"),
   ].map(row => row.id === "gb-board" ? { ...row, due: shiftDate(today, 7) } : row) }));
   modules.governance = governanceSchema.parse({ ...modules.governance,
-    source: "Four-constitution operating charter Â· FO-GOVERNANCE / FO-VOTES",
+    source: "Four-constitution operating charter - FO-GOVERNANCE / FO-VOTES",
     rules: [...modules.governance.rules,
-      { id: "exit-readiness", title: "Sale-or-retain readiness review", responsible: "ceo", accountable: "independent-chair", consulted: "Owners, trustees, valuation and legal advisers", informed: "Family Council and employees through authorised channels", source: "FO-EXIT Â· preparation only; owner sale authority remains separate", approvers: ["independent-chair", "independent-director"], minimumApprovals: 2, continuityRequired: true },
+      { id: "exit-readiness", title: "Sale-or-retain readiness review", responsible: "ceo", accountable: "independent-chair", consulted: "Owners, trustees, valuation and legal advisers", informed: "Family Council and employees through authorised channels", source: "FO-EXIT - preparation only; owner sale authority remains separate", approvers: ["independent-chair", "independent-director"], minimumApprovals: 2, continuityRequired: true },
       { id: "family-employment", title: "Independent family employment assessment", responsible: "ceo", accountable: "independent-director", consulted: "Non-family assessor and Family Council", informed: "Applicant and hiring manager", source: "FO-EMPLOYMENT", approvers: ["independent-director"], minimumApprovals: 1, continuityRequired: false },
       { id: "community-request", title: "Community and apprenticeship commitment", responsible: "ceo", accountable: "independent-chair", consulted: "Family Council and recipient diligence adviser", informed: "Owners", source: "FO-LEGACY", approvers: ["independent-chair", "independent-director"], minimumApprovals: 2, continuityRequired: false },
     ],
@@ -65,24 +69,26 @@ export function familyOfficeModules() {
   modules.capital = capitalSchema.parse({ ...modules.capital, records: [
     { id: "fo-apprenticeships", title: "Next-generation and community apprenticeships", requested: 5000, recipient: "Illustrative apprenticeship provider", purpose: "Ownership education and local skills; recipient due diligence and budget approval pending." },
     { id: "fo-community-grant", title: "Community wellbeing programme", requested: 3000, recipient: "Illustrative community organisation", purpose: "Responsible business and community benefit; recipient due diligence and budget approval pending." },
-  ].map(row => ({ ...row, kind: "Grant", year: Number(today.slice(0, 4)), owner: "ceo", source: "FO-LEGACY Â· fictional request amounts, not constitutional entitlements", diligence: "", status: "Draft", decisionId: "", ruleId: "", history: [] })) });
+  ].map(row => ({ ...row, kind: "Grant", year: Number(today.slice(0, 4)), owner: "ceo", source: "FO-LEGACY - fictional request amounts, not constitutional entitlements", diligence: "", status: "Draft", decisionId: "", ruleId: "", history: [] })) });
+  Object.assign(modules,stewardshipScenario(modules));
   return modules;
 }
 
 /** Shared office personas use one existing case store. Earlier unrelated workspaces are untouched. */
 export function ensureFamilyOfficeCase(store: Pick<Storage, "getItem" | "setItem" | "removeItem">) {
-  const marker = `profile:${familyOfficeCaseId}:composite-populated:v1`;
+  const marker = `profile:${familyOfficeCaseId}:visual-stewardship:v1`;
   if (store.getItem(marker)) return;
-  const modules = Object.fromEntries(Object.entries(familyOfficeModules()).filter(([id]) => {
-    const module = caseModules.find(m => m.id === id);
-    return module && store.getItem(module.key(familyOfficeCaseId)) === null;
-  }));
-  const before = new Map(caseModules.map(m => [m.key(familyOfficeCaseId), store.getItem(m.key(familyOfficeCaseId))]));
+  const all=familyOfficeModules();
+  const before=new Map(caseModules.map(m=>[m.key(familyOfficeCaseId),store.getItem(m.key(familyOfficeCaseId))]));
+  const policyKey=`profile:${familyOfficeCaseId}:office-effective-policy:v1`, donorKey=workspaceKey(familyOfficeCaseId);
+  before.set(policyKey,store.getItem(policyKey));before.set(donorKey,store.getItem(donorKey));
   try {
-    importCase(JSON.stringify({ schema: 1, exportedAt: new Date().toISOString(), modules, policy: null }), store, familyOfficeCaseId);
-    store.setItem(marker, "populated");
-  } catch (error) {
-    for (const [key, value] of before) value === null ? store.removeItem(key) : store.setItem(key, value);
-    throw error;
-  }
+    // Retain an automatic recovery pack before upgrading the prepared office.
+    const prior=Object.fromEntries([...before].filter(([,value])=>value!==null));
+    if(Object.keys(prior).length)store.setItem(`profile:${familyOfficeCaseId}:before-visual-upgrade`,JSON.stringify(prior));
+    importCase(JSON.stringify({schema:1,exportedAt:new Date().toISOString(),modules:all,policy:null}),store,familyOfficeCaseId);
+    saveWorkspace(store,donorKey,{...loadWorkspace(store,donorKey),content:officeIpsText});
+    activatePolicy(store,familyOfficeCaseId,{currency:"GBP",rules:officeIpsRules()},"Family Board");
+    store.setItem(marker,"ready");
+  } catch(error){for(const [key,value]of before)value===null?store.removeItem(key):store.setItem(key,value);throw error;}
 }

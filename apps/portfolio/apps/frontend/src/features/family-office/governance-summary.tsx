@@ -1,0 +1,7 @@
+import type { ReactNode } from "react";
+import { selectedProfileId } from "@/features/profiles/session";
+import { readGovernance } from "./governance-model";
+import { VisualPanel, DetailPanel } from "./visual-primitives";
+export function GovernanceSummary({ children }: {
+    children: ReactNode;
+}) { const data = readGovernance(localStorage, selectedProfileId() ?? "static-demo"); return <div className="space-y-5"><div className="grid gap-5 lg:grid-cols-2"><VisualPanel title="Ownership and decision rights"><div className="space-y-5">{data.people.filter(p => p.ownership > 0).map((p, i) => <div key={p.id}><div className="mb-2 flex justify-between text-sm"><span>{p.name}</span><strong>{p.ownership}% economic / {p.voting}% votes</strong></div><div className="h-3 rounded-full bg-muted"><div className="h-3 rounded-full" style={{ width: `${p.ownership}%`, background: `var(--chart-${i + 1})` }}/></div></div>)}</div></VisualPanel><VisualPanel title="Continuity milestones"><ol className="space-y-3">{data.continuity.slice(0, 5).map((a, i) => <li key={a.id} className="flex gap-3 rounded-lg border p-3"><span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs">{a.status === "complete" ? "Done" : i + 1}</span><div><h3 className="text-sm font-medium">{a.title}</h3><p className="mt-1 text-xs text-muted-foreground">{a.dueDate} - {a.status}</p></div></li>)}</ol></VisualPanel></div><DetailPanel title="Decision approvals, ownership transfers and succession records">{children}</DetailPanel></div>; }

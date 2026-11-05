@@ -54,7 +54,7 @@ const DOMAINS: DomainSpec[] = [
     summary: "Consolidated family wealth, including the operating business and its concentrated risk.",
     recommended: [
       { key: "operating_business_value", label: "Operating business valuation", unit: "currency", note: "Latest independent or management valuation, with date and method." },
-      { key: "concentration_single_company", label: "Single-company concentration", unit: "% of net worth", note: "Share of total family wealth represented by the operating business." },
+      { key: "concentration_single_company", label: "Single-company concentration", unit: "% of consolidated family capital", note: "Share of total family wealth represented by the operating business." },
     ],
   },
   {
@@ -187,7 +187,7 @@ const DOMAINS: DomainSpec[] = [
       { key: "testamentary_instruments", label: "Wills & testamentary instruments", unit: "text", note: "Governing wills, their jurisdictions, and date last reviewed." },
       { key: "beneficiary_schedule", label: "Beneficiary schedule", unit: "text", note: "Named beneficiaries and their entitlement basis per entity." },
       { key: "incapacity_provisions", label: "Incapacity provisions", unit: "text", note: "Powers of attorney and successor decision-makers." },
-      { key: "probate_exposure", label: "Probate-exposed assets", unit: "% of net worth", note: "Share of wealth that would pass through probate rather than a structure." },
+      { key: "probate_exposure", label: "Probate-exposed assets", unit: "% of consolidated family capital", note: "Share of wealth that would pass through probate rather than a structure." },
     ],
   },
   {
@@ -238,7 +238,7 @@ const DOMAINS: DomainSpec[] = [
       { key: "subsidiary_register", label: "Subsidiaries & ownership percentages", unit: "text", note: "Each operating company, its stake and its consolidation treatment." },
       { key: "dividend_policy", label: "Intercompany dividend policy", unit: "text", note: "How cash moves from operating companies up to the holdco." },
       { key: "consolidation_basis", label: "Consolidation basis", unit: "text", note: "Full consolidation, equity method or fair value per holding." },
-      { key: "opco_concentration_limit", label: "Operating-company concentration limit", unit: "% of net worth", note: "Ceiling on single-company exposure before diversification is required." },
+      { key: "opco_concentration_limit", label: "Operating-company concentration limit", unit: "% of consolidated family capital", note: "Ceiling on single-company exposure before diversification is required." },
     ],
   },
   {

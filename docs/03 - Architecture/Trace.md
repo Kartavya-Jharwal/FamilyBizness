@@ -8,7 +8,7 @@ The prepared office uses the [combined operating charter](../00%20-%20Canonical/
 | Governance bodies and decision rights | RACI workflow; constitutional reserved-decision checks | Competent role, eligible/disinterested rights denominator, quorum, Board recommendation, reviewer and history |
 | Dividends and reserves | Constitutional cash waterfall; existing financial forecast and multigeneration spending input | Adopted clause, parameter pack, obligations/reserve/profit-capacity inputs and allocation result |
 | Succession and continuity | Continuity prerequisites, interim readiness, estate funding, calendar and scenario events | Named owner/successor, trigger, date, dependencies and completion evidence |
-| Values-based investing | Typed activated rules, sector screens, investment optimiser and screen counterfactual | Source revision, explicit limits/classifications and observed effects; no invented sector blacklist |
+| Values-based investing | Typed activated rules, sector screens, investment optimiser and screen counterfactual | Source revision, explicit limits/classifications and observed effects; Board-adopted values screen |
 | Estate and holding/trust structure | Estate ownership register, scoped IHT engine, structure comparison and timed liquidity | Asset/legal-owner/beneficiary evidence, legal eligibility inputs, rule-pack date and funding assumptions |
 | Office operations and disputes | Operations action queue and stewardship reviews; literal **please fix** message workflow | Sender/context, assignee, source link, notes, scoring inputs where selected, completion evidence |
 | Reporting and information | Case readiness, board pack, source administration and portable case packs | Saved source state, observation date, missing/invalid inputs and source-linked computed results |
@@ -37,3 +37,11 @@ Original Golden Bird source material and its English-law adaptation remain inter
 ## Donor and release evidence
 
 The [frontend contribution ledger](Donors%20-%20Frontend%20Contribution%20Ledger.md) records actual donor code, masks, UI adaptations and licenses. The [MVP acceptance matrix](../05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md) owns completion evidence; [integration](Integration%20-%20Family%20Office%20Workspaces.md) owns route/data boundaries. Historical donor intake documents are provenance and planning history, not current completion status.
+
+## Natural-language IPS and visual stewardship
+
+FO-IPS-MANDATE contains the Board-adopted concise investment instructions. The donated parser compiles cash, public-equity and illiquidity clauses. `office-ips.ts` maps those gates and explicit reserve/sector/approval instructions to the existing typed policy engine. `ips-adoption.ts` transactionally updates the donor document, reviewed source snapshot, charter revision, investment target/risk settings and active rules. Invalid text preserves the prior revision.
+
+`capital-workspace.tsx` renders the existing book/valuation/liquidity engines directly, with live WACC/multiple inputs. `portfolio-visual.tsx` renders current/optimal weights and the existing seeded projection quantiles. The same saved record key updates both visual summaries and opened detail editors. No second financial ledger or optimiser is introduced.
+
+The local profile command engine now serves both entry and the existing profile API. Persona sessions retain immutable scope while shared office records resolve to one prepared case. Calendar and ERP remain views of the existing operations register; calendar view preference is persisted locally.

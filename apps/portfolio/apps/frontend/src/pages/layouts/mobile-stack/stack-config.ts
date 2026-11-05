@@ -1,7 +1,7 @@
 import type { StackTab } from "./stack-model";
 
 /** Tab that a link straight to a page outside every tab opens in. */
-export const HOME_TAB = "dashboard";
+export const HOME_TAB = "office/case";
 
 /**
  * Paths that stay outside every tab: add-on pages, which run in iframes that
@@ -21,12 +21,13 @@ const UNSTACKED_DESTINATIONS = new Set(["/assistant"]);
  * The phone layout's stacked tabs: one per destination of the app's
  * navigation, each keeping its own stack of screens.
  */
-export function stackTabsFor(hrefs: readonly string[]): StackTab[] {
-  return hrefs
-    .filter((href) => !UNSTACKED_DESTINATIONS.has(href))
-    .map((href) => ({
-      id: href.replace(/^\//, ""),
-      rootPath: href,
-      ...(href === "/dashboard" && { aliases: ["/"] }),
-    }));
+const OFFICE_ALIASES:Record<string,string[]>={
+  "/office/case":["/"],
+  "/office/finance":["/office/estate"],
+  "/office/simulation":["/dashboard","/net-worth","/holdings","/activities","/insights"],
+  "/office/business":["/office/governance","/office/philanthropy"],
+  "/office/admin":["/settings","/office/policy","/office/sources","/governance/constitution"],
+};
+export function stackTabsFor(hrefs:readonly string[]):StackTab[]{
+  return hrefs.filter(href=>!UNSTACKED_DESTINATIONS.has(href)).map(href=>({id:href.replace(/^\//,""),rootPath:href,...(OFFICE_ALIASES[href]?{aliases:OFFICE_ALIASES[href]}:{})}));
 }

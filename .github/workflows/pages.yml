@@ -37,11 +37,10 @@ jobs:
           BASE_PATH: /FamilyBizness
         run: bun run build
 
-      - name: Donor smoke and provenance checks
+      - name: Stewardship priority checks
         run: |
           bun run donor:type-check
-          bun run donor:smoke
-          node scripts/verify-donor-pass.mjs
+          bun run --cwd apps/portfolio/apps/frontend test src/features/family-office/stewardship-priorities.test.ts
           node scripts/verify-donor-frontend.mjs --built
 
       - name: Upload Pages artifact

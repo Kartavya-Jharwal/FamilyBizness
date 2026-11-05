@@ -584,7 +584,7 @@
     "operations_archive": "Archive",
     "operations_restore": "Restore",
     "archive_title": "Archive this account?",
-    "archive_description": "Archiving will remove this account from your Total Portfolio history and net worth calculations. Historical charts will be recalculated without this account's data. You can restore it later.",
+    "archive_description": "Archiving will remove this account from your Total Portfolio history and family capital calculations. Historical charts will be recalculated without this account's data. You can restore it later.",
     "form_identity": "Identity",
     "form_cash_classification_label": "Cash Classification",
     "form_cash_classification_description": "How this cash is counted in allocation reports",

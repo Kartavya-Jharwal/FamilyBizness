@@ -9,3 +9,7 @@ A returning visitor resumes their profile. A browser last used with an earlier i
 Constitution revisions, case identity, saved-data inspection and portable import/export are administrative tools. They remain available but do not lead the daily flow. Persona selection is local navigation, not real authentication, MFA or server access control.
 
 Product form and audiences: [Identity](../00%20-%20Canonical/Identity.md).
+
+## Profile engine integration
+
+The static adapter dispatches profile state/create/update/unlock/lock commands to `local-engine.ts` through the existing profile API. ProfileShell consumes that command boundary and uses the donor avatar/session components. Entry has no separate storage mutation implementation. Choosing a profile reloads into its immutable scope; locking revokes it and returns to entry. Local storage errors retain recovery state. Setup, renaming and earlier-workspace recovery are secondary controls.

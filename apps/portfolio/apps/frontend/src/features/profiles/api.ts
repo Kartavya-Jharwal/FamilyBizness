@@ -1,6 +1,8 @@
+import * as platform from "#platform";
+import { localProfileCommand } from "./local-engine";
 import { classifyAuthResponse, notifyUnauthorized } from "@/lib/auth-token";
 import { isWeb } from "@/adapters";
-import { profileScope } from "./session";
+import { profileScope, revokeProfileSession } from "./session";
 import type { ProfileSession } from "./session";
 import { profileErrorCode } from "./error-messages";
 
@@ -67,6 +69,13 @@ export async function profileCommand<T>(
   if (!isWeb) {
     const { invoke } = await import("@tauri-apps/api/core");
     return invoke<T>(command, { ...payload, ...(scoped ? { scopeId: profileScope() } : {}) });
+  }
+  if ("isStaticHost" in platform && platform.isStaticHost === true) {
+    if (scoped) profileScope();
+    const result = localProfileCommand(command, payload) as T;
+    if (command === "lock_profile") revokeProfileSession();
+    if (PROFILE_MUTATIONS.has(command)) profileChangesChannel?.postMessage("changed");
+    return result;
   }
   // Bound state reads so startup Retry remains usable if the server is unreachable.
   // Bound web locking too, so its existing retry screen remains usable offline.

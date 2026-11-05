@@ -24,17 +24,14 @@ export interface NavigationProps {
 function buildStaticNavigation(): NavigationProps {
   return {
     primary: [
-      { icon: <Icons.Dashboard className="size-6" />, title: "Family workspace", href: "/office/case" },
-      { icon: <Icons.Holdings className="size-6" />, title: "Portfolio", href: "/dashboard" },
-      { icon: <Icons.Goals className="size-6" />, title: "Family business", href: "/office/business", keywords: ["ERPNext", "estate planning", "operations", "tasks", "financial reports"] },
-      { icon: <Icons.Activity className="size-6" />, title: "Constitution & IPS", href: "/governance/constitution" },
-      { icon: <Icons.Insight className="size-6" />, title: "Investment policy", href: "/office/policy" },
+      { icon: <Icons.Dashboard className="size-6" />, title: "Stewardship", href: "/office/case", keywords: ["family office", "responsibilities", "board"] },
+      { icon: <Icons.Holdings className="size-6" />, title: "Capital & liquidity", href: "/office/finance", keywords: ["AUM", "consolidated capital", "cash flow", "estate", "valuation", "DCF"] },
+      { icon: <Icons.Insight className="size-6" />, title: "Portfolio & scenarios", href: "/office/simulation", keywords: ["allocation", "risk", "Monte Carlo", "holdings", "performance"] },
+      { icon: <Icons.Goals className="size-6" />, title: "Family business", href: "/office/business", keywords: ["ERPNext", "governance", "succession", "operations", "tasks"] },
       { icon: <Icons.Activity className="size-6" />, title: "Calendar", href: "/office" },
     ],
     secondary: [
-      { icon: <Icons.Activity className="size-6" />, title: "Stewardship review", href: "/office/review", keywords: ["warnings", "risk", "FMEA", "please fix", "sources"] },
-      { icon: <Icons.Insight className="size-6" />, title: "Insights", href: "/insights" },
-      { icon: <Icons.Settings className="size-6" />, title: "Administration", href: "/settings", keywords: ["settings", "currency", "accounts", "configuration"] },
+      { icon: <Icons.Settings className="size-6" />, title: "Administration", href: "/office/admin", keywords: ["settings", "constitution", "investment policy", "sources", "currency", "accounts", "configuration"] },
     ],
   };
 }
@@ -119,12 +116,13 @@ export function isPathActive(pathname: string, href: string): boolean {
     return normalizedPath === "/";
   }
 
-  // Dashboard and Net Worth are grouped together
-  if (normalizedHref === "/dashboard") {
-    return (
-      normalizedPath === "/" || normalizedPath === "/dashboard" || normalizedPath === "/net-worth"
-    );
-  }
+  // Preserve legacy deep links while keeping one daily destination per topic.
+  if (normalizedHref === "/office") return normalizedPath === "/office";
+  if (normalizedHref === "/office/case" && normalizedPath === "/office/review") return true;
+  if (normalizedHref === "/office/finance" && normalizedPath === "/office/estate") return true;
+  if (normalizedHref === "/office/simulation" && ["/", "/dashboard", "/net-worth", "/holdings", "/activities", "/insights"].some(path => normalizedPath === path || (path !== "/" && normalizedPath.startsWith(path + "/")))) return true;
+  if (normalizedHref === "/office/business" && ["/office/governance", "/office/philanthropy"].includes(normalizedPath)) return true;
+  if (normalizedHref === "/office/admin" && ["/settings", "/office/policy", "/office/sources", "/governance/constitution"].some(path => normalizedPath === path || normalizedPath.startsWith(path + "/"))) return true;
 
   return normalizedPath === normalizedHref || normalizedPath.startsWith(`${normalizedHref}/`);
 }

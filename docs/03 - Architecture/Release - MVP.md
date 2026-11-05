@@ -1,5 +1,10 @@
 # MVP Release
 
+## Visual stewardship revision in preparation
+
+The 5 November revision implements the [requested priorities](../05%20-%20Requirements/Audit%20-%20Remaining%20Assignment%20Work.md): one daily navigation/Administration, Board-adopted natural-language IPS and hard rules, populated financial statements/AUM, visible DCF/multiple/Monte Carlo, ERP/council scheduling and the shared profile command engine. Six targeted model checks passed; the packaged build and frontend type checks passed. The focused packaged browser journey also passed desktop/mobile/dark layouts, natural-language IPS adoption, live DCF, constrained allocation, Monte Carlo, ERP task creation and council meeting persistence. Charts and the scheduler were visually inspected. Public release evidence will replace this candidate note after publication. The earlier deployed revision below is retained only until that publication.
+
+
 This record owns the current deployed browser-local MVP. Scope: [MVP feature contract](../05%20-%20Requirements/Product%20Requirements%20-%20MVP%20Feature%20Scope.md). Acceptance mapping: [release matrix](../05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md).
 
 ## Published application

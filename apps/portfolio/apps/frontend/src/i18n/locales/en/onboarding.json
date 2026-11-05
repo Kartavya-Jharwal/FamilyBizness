@@ -12,7 +12,7 @@
         "subtitle": "Value Tracking",
         "badge": "Best for low-maintenance tracking.",
         "features": {
-          "netWorth": "Net worth & allocation",
+          "netWorth": "Family capital & allocation",
           "unrealizedPnl": "Value & unrealized P&L",
           "priceBased": "Price-based performance",
           "fastSetup": "Fast & lightweight setup"

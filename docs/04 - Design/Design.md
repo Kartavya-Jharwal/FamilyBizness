@@ -21,3 +21,15 @@ Portfolio scenarios show actual computed outputs with units, legends and separat
 ## Release gates
 
 Unreadable text, overlapping chart labels, viewport overflow, inaccessible controls and runtime errors in acceptance journeys block release. Verify relevant desktop/mobile and light/dark states on the packaged artifact. Current evidence is maintained in [MVP acceptance](../05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md) and [integration](../03%20-%20Architecture/Integration%20-%20Family%20Office%20Workspaces.md).
+
+## SFO taxonomy and daily navigation
+
+Daily navigation has five destinations: Stewardship, Capital & liquidity, Portfolio & scenarios, Family business, and Calendar. Administration is the single secondary home for constitution/IPS revisions, configuration, profiles, data and provider controls. A workspace title does not repeat the global navigation or the project disclosure.
+
+Use **AUM** for gross assets overseen by the office, **consolidated family capital** for the family-owned asset perimeter after liabilities, **available liquidity** for cash accessible to the relevant entity, and **business concentration** for the operating-company exposure. These are distinct measures. Personal donor terms such as “your net worth” are removed from visible English copy; existing data/API keys remain compatible. A reporting perimeter and date belong beside capital metrics, not in a repeated introductory essay.
+
+Daily views lead with decisions, numbers, charts and the next action. Constitution provenance, interpretations, editing and model assumptions belong in the relevant detail or Administration panel. Portfolio component roles and the canonical token source continue to own visual styling.
+
+## Visual stewardship revision
+
+Lead with AUM, treasury liquidity, operating-business concentration and cash headroom. Capital charts show allocation, history, DCF versus multiple value, sensitivity and succession funding. Portfolio charts show current/proposed weights and a seeded Monte Carlo percentile fan. IPS cards pair concise instructions with numerical limits and observations. Calendar defaults to meetings in a week grid, with agenda retained and a side-panel editor. ERP uses the donated task masks in its own daily tab. Detailed methods, source records and JSON editors are expandable; infrequent constitution/configuration work is in Administration. Shared semantic surfaces, text and chart roles come from tokens.css; calendar day width is a canonical layout token.
