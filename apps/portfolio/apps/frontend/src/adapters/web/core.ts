@@ -1,9 +1,10 @@
+import { normaliseGoal, previewSavings } from "@/features/goals/goal-ledger";
 // Static demo adapter core â€” invoke serves fixtures / localStorage (no HTTP).
 import type { Logger } from "../types";
 import { readPreparedOfficePortfolio } from "../prepared-office-portfolio";
 import { selectedProfileId } from "@/features/profiles/session";
 import { readActiveIps } from "@/features/governance/constitution/ips";
-import type { Account, AccountScope, Goal, NewGoal, NewTaxonomyCategory, Settings, TaxonomyCategory } from "@/lib/types";
+import type { Account, AccountScope, Goal, GoalPlan, GoalFundingRuleInput, SaveGoalPlan, SaveUpPreviewInputDTO, NewGoal, NewTaxonomyCategory, Settings, TaxonomyCategory } from "@/lib/types";
 import { SAMPLE_CURRENCY, SAMPLE_MONTHLY_SPENDING, SAMPLE_SPENDING_CATEGORIES } from "../demo-family";
 import {
   samplePositions,
@@ -337,12 +338,45 @@ export const invoke = async <T>(
     case "get_goal":
       return (s.goals.find((goal) => goal.id === p.goalId) ?? null) as T;
     case "get_goal_funding":
-      return (p.goalId === "goal-education" ? [{ id: "funding-education", goalId: "goal-education",
-        accountId: "acc-education", sharePercent: 100, createdAt: "2025-01-01", updatedAt: "2025-01-01" }] : []) as T;
+      return (s.goalFunding?.[String(p.goalId)] ?? (p.goalId === "goal-education" ? [{ id: "funding-education", goalId: "goal-education",
+        accountId: "acc-education", sharePercent: 100, createdAt: "2025-01-01", updatedAt: "2025-01-01" }] : [])) as T;
+    case "save_goal_funding": {
+      const goalId = String(p.goalId), rules = p.rules as GoalFundingRuleInput[];
+      if (rules.some(r => !Number.isFinite(r.sharePercent) || r.sharePercent < 0 || r.sharePercent > 100)) throw new Error("Funding shares must be 0–100%.");
+      const rows = rules.map((r,i) => ({...r,goalId,id:`${goalId}:${i}`,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()}));
+      mutateDemoStore(store => {store.goalFunding={...store.goalFunding,[goalId]:rows};});
+      return rows as T;
+    }
+    case "delete_goal_plan":
+      mutateDemoStore(store => {if(store.goalPlans) delete store.goalPlans[String(p.goalId)];});
+      return undefined as T;
     case "get_goal_plan":
+      return (s.goalPlans?.[String(p.goalId)] ?? null) as T;
+    case "save_goal_plan": {
+      const input = p.plan as SaveGoalPlan;
+      JSON.parse(input.settingsJson);
+      const previous = s.goalPlans?.[input.goalId];
+      const plan: GoalPlan = { ...input, summaryJson: input.summaryJson ?? "{}", version: (previous?.version ?? 0)+1, createdAt: previous?.createdAt ?? new Date().toISOString(), updatedAt: new Date().toISOString() };
+      mutateDemoStore(store => { store.goalPlans = { ...store.goalPlans, [input.goalId]: plan }; });
+      return plan as T;
+    }
+    case "preview_save_up_overview": return previewSavings(p.input as SaveUpPreviewInputDTO) as T;
+    case "refresh_goal_summary": {
+      const goal = s.goals.find(g => g.id === p.goalId);
+      if (!goal) throw new Error("Goal not found");
+      const updated = normaliseGoal(goal);
+      mutateDemoStore(store => { store.goals = store.goals.map(g => g.id === updated.id ? updated : g); });
+      return updated as T;
+    }
     case "get_retirement_overview":
-    case "get_save_up_overview":
       return null as T;
+    case "get_save_up_overview": {
+      const goal=s.goals.find(g=>g.id===p.goalId);
+      if(!goal) throw new Error("Goal not found");
+      const saved=s.goalPlans?.[goal.id];
+      const settings=saved ? JSON.parse(saved.settingsJson) as Record<string,unknown> : {};
+      return previewSavings({currentValue:goal.summaryCurrentValue??0,targetAmount:goal.targetAmount??goal.summaryTargetAmount??0,targetDate:typeof settings.targetDate==="string"?settings.targetDate:goal.targetDate??null,monthlyContribution:Number(settings.monthlyContribution??settings.plannedMonthlyContribution??0),expectedAnnualReturn:Number(settings.expectedAnnualReturn??0)}) as T;
+    }
     case "create_goal": {
       const input = p.goal as NewGoal;
       const goal: Goal = { ...input, id: input.id ?? `goal-${crypto.randomUUID()}`,
@@ -352,7 +386,7 @@ export const invoke = async <T>(
       return goal as T;
     }
     case "update_goal": {
-      const goal = p.goal as Goal;
+      const goal = normaliseGoal(p.goal as Goal);
       mutateDemoStore((store) => { store.goals = store.goals.map((item) => item.id === goal.id ? goal : item); });
       return goal as T;
     }

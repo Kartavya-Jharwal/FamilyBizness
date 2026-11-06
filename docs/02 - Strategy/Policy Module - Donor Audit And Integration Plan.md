@@ -36,7 +36,7 @@ All paths below are relative to the new donor root.
 | `src/components/markdown-editor.tsx` | Sanitized Markdown preview; Next dynamic import; forced light mode | Replace Next loader with host lazy loading; preserve sanitization; support host theme and accessible dialogs |
 | `src/lib/exports.ts`, `public/artifacts/` | Derived document/AST/contract exports, including SQL | Retain Markdown/JSON first; defer SQL export and avoid parallel editable generated truth |
 | `src/app/globals.css`, `layout.tsx` | Separate palette, global selectors, Google font pipeline | Leave donor styling in reference; map to canonical tokens and host UI |
-| `scripts/policy-check.ts` | Script generates artifacts as well as checking seed policy; not wired into package build | Extract meaningful regression assertions into host tests; no writes to source artifacts during ordinary tests |
+| `ci/policy-check.ts` | Script generates artifacts as well as checking seed policy; not wired into package build | Extract meaningful regression assertions into host tests; no writes to source artifacts during ordinary tests |
 
 ## Audit findings and integration treatment
 

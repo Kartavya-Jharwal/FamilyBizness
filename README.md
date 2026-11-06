@@ -1,4 +1,4 @@
-# FamilyBizness
+# familybizness
 
 Wealth management for the single-family office — estate planning and family-business financial affairs across generations.
 
@@ -18,14 +18,11 @@ bun run preview   # combined preview: http://localhost:4173
 
 The browser-local MVP opens one prepared family office with a charter selected from four constitutions, governance/succession, estate and trust planning, financial consolidation, portfolio analytics, a shared office calendar/task register, stewardship reviews and board exports. Golden Bird, Calcot / Stone, Sandoval and Vasnani supply the selected operating provisions; visitor profiles share the office records. No donor server or real financial/authentication service is required.
 
-## Live preview (GitHub Pages)
+## Local verification and static hosting
 
-Deployed via Actions (`pages.yml`):
+Run `npm run ci:local` or `./ci/Run.ps1` for the complete local pipeline. Run `npm run preview:local` to build and preview. GitHub-hosted automation is disabled; deployment examples under `ci/examples/` are inert. Upload `dist/` to a static host. See [local automation](ci/README.md).
 
-- **https://kartavya.tech/FamilyBizness/**
-- Mirror: https://kartavya-jharwal.github.io/FamilyBizness/
-
-Pages source: **GitHub Actions** (already enabled).
+The product display name is derived from the browser-local family surname. Developer-facing repository and package names remain `familybizness`.
 
 ## Layout
 
@@ -37,7 +34,7 @@ Pages source: **GitHub Actions** (already enabled).
 | `upstream/` | Origins and attribution for shared donor-derived foundations |
 | `docs/` | Markdown docs (numbered folders) |
 | `donor/contenders/` | Local contender clones — **not committed** |
-| `.github/workflows/pages.yml` | Deploy `dist/` to Pages |
+| `ci/` | Local verification, prompt import and inert deployment examples |
 
 ## Docs index
 
@@ -52,7 +49,7 @@ Pages source: **GitHub Actions** (already enabled).
 ## Release verification
 
 ```bash
-bun run donor:verify
+bun run ci:local
 ```
 
 - [MVP acceptance](docs/05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md)

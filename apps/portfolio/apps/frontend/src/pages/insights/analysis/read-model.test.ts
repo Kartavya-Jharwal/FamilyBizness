@@ -7,6 +7,7 @@ import {
   returnDetail,
   ruleEnabled,
 } from "./read-model";
+import { SAMPLE_CURRENCY } from "@/adapters/demo-family";
 import { invoke } from "@/adapters/web/core";
 
 const holding = (overrides: Partial<Holding> = {}): Holding =>
@@ -181,7 +182,7 @@ describe("host analysis semantic boundary", () => {
   it("uses real host static reads for account scope and preserves unavailable attribution", async () => {
     const filter = { type: "account", accountId: "acc-public" };
     const positions = await invoke<Holding[]>("get_holdings_list", { filter });
-    const model = analysisHoldings(positions, "USD");
+    const model = analysisHoldings(positions, SAMPLE_CURRENCY);
     expect(model.total).toBe(4200000);
     expect(
       model.positions.every((position) => position.accountId === "acc-public"),
@@ -196,7 +197,7 @@ describe("host analysis semantic boundary", () => {
         endDate: "2026-10-27",
       },
     );
-    const detail = returnDetail(performance, "USD")!;
+    const detail = returnDetail(performance, SAMPLE_CURRENCY)!;
     expect(detail.method).toBe("valueReturn");
     expect(detail.breakdown.every((row) => row.value === null)).toBe(true);
     expect(detail.period.startDate! >= "2026-01-01").toBe(true);

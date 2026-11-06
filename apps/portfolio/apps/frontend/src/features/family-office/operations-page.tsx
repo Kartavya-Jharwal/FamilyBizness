@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { guardPleaseFixChanges } from "./please-fix-model";
 import { Button, cardSurfaceClassName, Card, CardContent, CardHeader, CardTitle } from "@fb/ui";
 import { selectedProfileId } from "@/features/profiles/session";
-import { dateOnly, decodeOperations, initialOperations, sampleFamilyMeetings, monday, operationsKey, shiftDate, validateObligation, weekRows, scheduleOccurrences, cancelFutureOccurrences, type Obligation, type OperationsData } from "./operations-model";
+import { dateOnly, decodeOperations, initialOperations, sampleFamilyMeetings, annualOfficeDiary, monday, operationsKey, shiftDate, validateObligation, weekRows, scheduleOccurrences, cancelFutureOccurrences, type Obligation, type OperationsData } from "./operations-model";
 
 import { ServicesPanel } from "./operations-services";
 import { fullBoardReport, linkedWorkflowObligations } from "./operations-report";
@@ -17,7 +17,7 @@ export function OperationsWorkspace({ business = false }: { business?: boolean }
   const navigate = useNavigate();
   const key = operationsKey(selectedProfileId() ?? "static-demo");
   const [message, setMessage] = useState("");
-  const [data, setData] = useState<OperationsData>(() => { try { const saved = localStorage.getItem(key); return saved ? decodeOperations(saved) : { version: 1, obligations: [...initialOperations().obligations, ...sampleFamilyMeetings()] }; } catch { return { version: 1, obligations: [] }; } });
+  const [data, setData] = useState<OperationsData>(() => { try { const saved = localStorage.getItem(key); return saved ? decodeOperations(saved) : { version: 1, obligations: [...initialOperations().obligations, ...sampleFamilyMeetings(), ...annualOfficeDiary()] }; } catch { return { version: 1, obligations: [] }; } });
   const [loadError, setLoadError] = useState(() => { try { const saved = localStorage.getItem(key); if (saved) decodeOperations(saved); return ""; } catch { return "Saved operations data could not be read. Export/recover your stored data before resetting; no sample records have replaced it."; } });
   useEffect(() => {
     const refresh = (event?: Event) => {

@@ -36,3 +36,9 @@ export function officeIpsRules(content = officeIpsText): ExecutableRule[] {
         { id: "IPS-APPROVAL", sourceId: officeIpsSource.id, kind: "approval-threshold", value: money(/above GBP ([\d,]+)/i), text: String(count) },
     ];
 }
+
+export const cultureMandate = `A family business expenditure and philanthropy may commission art, employ local makers, develop event formats and support a publishing or media venture. Each activity creates a different claim on capital. The hotel can buy decoration as an operating expense; a collection vehicle can acquire a documented work as an investment; a foundation can fund artists without claiming a financial return. Shared family taste is insufficient to classify a transaction.
+
+The family shall create and support culture as well as own financial assets. Painting, sculpture, visual arts, film, music, design, publishing, performance, digital production and architecture are eligible activities.
+
+Art as an asset. Art is evaluated with the discipline appropriate to a costly, heterogeneous and often illiquid asset.`;

@@ -29,8 +29,8 @@ async function walk(dir: string): Promise<string[]> {
 }
 
 /** Prefix root-absolute href/src/action/url(...) with basePath. */
-function withBase(content: string, base: string): string {
-  if (!base) return content;
+function withBase(content: string, base: string, relativeRoot = "./"): string {
+  if (!base) return content.replace(/\b(href|src|action)="\/(?!\/)/g, `$1="${relativeRoot}`).replace(/url\((["']?)\/(?!\/)/g, `url($1${relativeRoot}`).replace(/(content="[^"]*url=)\/(?!\/)/gi, `$1${relativeRoot}`);
   return content
     .replace(/\b(href|src|action)="\/(?!\/)/g, `$1="${base}/`)
     .replace(/(content="[^"]*url=)\/(?!\/)/gi, `$1${base}/`)
@@ -40,7 +40,7 @@ function withBase(content: string, base: string): string {
 async function main() {
   const portfolioBuild = Bun.spawn(["bun", "run", "build"], {
     cwd: portfolioDir,
-    env: { ...process.env, VITE_BASE: `${basePath}/portfolio/` },
+    env: { ...process.env, VITE_BASE: basePath ? `${basePath}/portfolio/` : "./" },
     stdout: "inherit",
     stderr: "inherit",
   });
@@ -49,6 +49,7 @@ async function main() {
   await rm(distDir, { recursive: true, force: true });
   await mkdir(distDir, { recursive: true });
 
+  await cp(join(root, "assets"), join(distDir, "assets"), { recursive: true });
   await mkdir(join(distDir, "tokens"), { recursive: true });
   await cp(tokensSrc, join(distDir, "tokens", "tokens.css"));
 
@@ -71,7 +72,7 @@ async function main() {
     if (content.charCodeAt(0) === 0xfeff) content = content.slice(1);
 
     if (rel.endsWith(".html") || rel.endsWith(".css")) {
-      content = withBase(content, basePath);
+      content = withBase(content, basePath, "../".repeat(rel.split("/").length - 1) || "./");
     }
     await writeFile(out, content);
   }

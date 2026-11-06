@@ -56,3 +56,8 @@ Goals, budget/expenditure, spending insights, investment fees, and trading analy
 The donor PortfolioPage again owns the full-width overview history/fill, period controls, accounts and holdings. Policy status sits below the chart; analysis shortcuts lead directly to allocations, FIRE, X-ray and financial sheets. Financial statements use native tables with entity columns, consolidation adjustments, group totals and local horizontal scrolling.
 
 Canonical finite corner tokens are reduced by 30%; shared theme radius offsets scale with them. Circular profile/logo masks retain their circle geometry. Numeric entry uses one shared rolling control, retaining native typing, form/ref semantics, decimal/locale parsing, bounds and disabled states. Click, press-and-hold and vertical drag update existing fields. Each reel animates a small independent digit position to preserve large-currency cents. Responsive sizes and citation: [breakpoints and numeric controls](Responsive%20Breakpoints%20And%20Numeric%20Controls.md).
+
+
+## November handoff implementation
+
+The current navigation and role contract supersedes older tab/dropdown descriptions above: see [navigation and settings](../design/navigation-and-settings.md). [Goals and simulation data flow](../03%20-%20Architecture/Goals%20And%20Simulation%20-%20Data%20Flow.md) records persistence and seeded model boundaries. [Local CI](../../ci/README.md) replaces hosted workflows. [Asset slots](../../assets/README.md) and [prompt history](../AI_PROMPTS_LOG.md) are maintained locally.

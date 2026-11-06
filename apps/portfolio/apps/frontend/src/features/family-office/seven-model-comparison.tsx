@@ -1,0 +1,18 @@
+import { useMemo } from "react";
+import { useScenario } from "./finance-ui";
+import { financeBookKey,financeBookSchema,financeBookDefaults,fairValueWealth } from "./finance-book-model";
+import { investmentSchema,investmentDefaults } from "./investment-model";
+import { selectedProfileId } from "@/features/profiles/session";
+import { compareSevenModels } from "./seven-model-projection";
+import { LineChart,Line,XAxis,YAxis,Tooltip,Legend,ResponsiveContainer } from "@/components/office-charts";
+import { useBalancePrivacy } from "@/hooks/use-balance-privacy";
+export function SevenModelComparison(){
+ const id=selectedProfileId()??"static-demo";
+ const book=useScenario(financeBookKey(),financeBookSchema,financeBookDefaults);
+ const investment=useScenario(`profile:${id}:family-office:investment:1`,investmentSchema,investmentDefaults);
+ const initial=fairValueWealth(book.value).liquidAssets;
+ const runs=useMemo(()=>compareSevenModels(investment.value,initial),[investment.value,initial]);
+ const {isBalanceHidden}=useBalancePrivacy();
+ const series=runs[0].series.map((row,i)=>({year:row.year,...Object.fromEntries(runs.map(run=>[run.model,run.series[i].median]))}));
+ return <section className="flex flex-col gap-4" aria-label="Seven-model family capital comparison"><h2 className="text-xl font-semibold">Seven-model family capital comparison</h2><p className="text-sm text-muted-foreground">Current financial-book liquid assets: {isBalanceHidden?"Hidden":initial.toLocaleString("en-GB")} {book.value.currency}. Uses saved portfolio weights, covariance volatility, expected returns, fees, expected tax drag, spending, inflation, reserve and dated cash contributions/costs. Same seed across models; up to 500 paths. Lines show median real capital.</p>{book.error&&<p role="alert">{book.error}</p>}{investment.error&&<p role="alert">{investment.error}</p>}{!isBalanceHidden&&<><div className="h-96"><ResponsiveContainer width="100%" height="100%"><LineChart data={series}><XAxis dataKey="year" minTickGap={40}/><YAxis width={72} tickFormatter={v=>`${(Number(v)/1e6).toFixed(1)}m`}/><Tooltip formatter={v=>Number(v).toLocaleString("en-GB",{maximumFractionDigits:0})}/><Legend/>{runs.map((run,i)=><Line key={run.model} dataKey={run.model} name={run.name} stroke={`var(--chart-${i%5+1})`} strokeDasharray={i>4?"5 4":undefined} dot={false} isAnimationActive={false}/>)}</LineChart></ResponsiveContainer></div><div className="overflow-x-auto"><table className="w-full text-sm"><caption className="text-left">Terminal real-capital range and reserve outcomes</caption><thead><tr>{["Model","P10","Median","P90","Reserve met","Depleted"].map(label=><th key={label} className="p-3 text-left">{label}</th>)}</tr></thead><tbody>{runs.map(run=>{const end=run.series.at(-1)!;return <tr key={run.model} className="border-b"><th className="p-3 text-left" scope="row">{run.name}</th>{[end.p10,end.median,end.p90].map((v,i)=><td className="p-3" key={i}>{v.toLocaleString("en-GB",{maximumFractionDigits:0})}</td>)}<td className="p-3">{(run.reserveSuccess*100).toFixed(1)}%</td><td className="p-3">{(run.depletion*100).toFixed(1)}%</td></tr>;})}</tbody></table></div></>}<p className="text-xs text-muted-foreground">Educational aggregate-return comparison. OU is an index-level approximation; negative indices are floored at zero when converted to capital. Private-sale restrictions and security-specific taxes are simplified to aggregate annual drag. Heston, jump, regime and GARCH coefficients and bootstrap residual fixture are illustrative, not market calibrated. Use Scenario Analysis for security-level liquidity sequencing.</p></section>;
+}

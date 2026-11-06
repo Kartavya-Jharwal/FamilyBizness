@@ -34,7 +34,7 @@ Detailed donor provenance: [frontend ledger](Donors%20-%20Frontend%20Contributio
 
 ## Wealthfolio art direction verification
 
-Shared card surfaces, canonical numeric/heading/chart typography, quiet nested metrics, policy tiles and host-themed meeting fields/sheets replace the newer generic wrappers. `node scripts/verify-wealthfolio-art-direction.cjs` verifies computed card radius/shadow, viewport containment and error-free rendering across daily views, desktop/mobile and light/dark. Screenshots are inspected locally. This styling revision changes no financial calculations or profile commands. Hosting remains blocked as recorded above.
+Shared card surfaces, canonical numeric/heading/chart typography, quiet nested metrics, policy tiles and host-themed meeting fields/sheets replace the newer generic wrappers. `node ci/verify-wealthfolio-art-direction.cjs` verifies computed card radius/shadow, viewport containment and error-free rendering across daily views, desktop/mobile and light/dark. Screenshots are inspected locally. This styling revision changes no financial calculations or profile commands. Hosting remains blocked as recorded above.
 
 ## Connected integration verification
 

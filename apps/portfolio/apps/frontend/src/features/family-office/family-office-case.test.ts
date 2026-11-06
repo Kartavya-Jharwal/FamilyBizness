@@ -44,7 +44,10 @@ it("keeps the cash basis and selected voting rule instead of stacking incompatib
 });
 it("routes the three added constitutions into actual operations, continuity and grant records", () => {
   const modules = familyOfficeModules(); const ids = new Set(familyOfficeSources.map(s => s.id));
-  for (const row of modules.operations.obligations) expect(ids.has(row.source)).toBe(true);
+  for (const row of modules.operations.obligations) {
+    if (row.id.startsWith("office-diary-")) expect(row.source).toBe("Illustrative SFO diary; dates require adviser confirmation");
+    else expect(ids.has(row.source)).toBe(true);
+  }
   expect(modules.operations.obligations.find(o => o.id === "fo-papers")!.due).toBe("2026-11-03");
   expect(modules.operations.obligations.find(o => o.id === "gb-board")!.due).toBe("2026-11-10");
   expect(modules.operations.obligations.find(o => o.id === "fo-minutes")!.due).toBe("2026-11-20");

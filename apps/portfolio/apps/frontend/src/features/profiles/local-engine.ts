@@ -6,8 +6,8 @@ export const localProfileKeys = { registry: "familybizness:demo-profiles", selec
 export const sourceExampleProfileId = goldenBirdSource.identity.profileId;
 const avatars = ["line-silver-animated", "line-curls-animated", "line-beard-animated", "line-wave-animated", "line-freckles-animated", "line-bun-animated", "line-bob-animated"];
 export const canonicalRoleId = (id: string | null): string | null => id === "office-role-3" ? "office-role-2" : id === "office-role-6" ? "office-role-4" : id;
-export const localRoleProfiles: ProfileSummary[] = [[0, "Patriarch"], [1, "Family board"], [2, "Managing director / CEO"], [4, "Associate / family technician"], [5, "Legal counsel"]].map(([i, name]) => ({ id: `office-role-${i}`, name: String(name), avatarId: avatars[Number(i)], lockEnabled: false }));
-const defaults = [...localRoleProfiles, { id: sourceExampleProfileId, name: "Project Golden Bird", avatarId: "default", lockEnabled: false }];
+export const localRoleProfiles: ProfileSummary[] = [[0, "Family Patriarch"], [1, "Family Board"], [2, "Managing Director"], [4, "Associate"], [5, "Legal Counsel"]].map(([i, name]) => ({ id: `office-role-${i}`, name: String(name), avatarId: avatars[Number(i)], lockEnabled: false }));
+const defaults = [...localRoleProfiles, { id: sourceExampleProfileId, name: "Source example", avatarId: "default", lockEnabled: false }];
 function write(store: Store, changes: Map<string, string | null>) {
     const registry = store.getItem(localProfileKeys.registry);
     if (changes.has(localProfileKeys.registry) && registry && !store.getItem(localProfileKeys.roleBackup) && /office-role-(3|6)/.test(registry)) changes.set(localProfileKeys.roleBackup, registry);

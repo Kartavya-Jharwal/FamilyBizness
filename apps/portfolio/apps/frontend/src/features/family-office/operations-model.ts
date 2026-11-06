@@ -44,6 +44,31 @@ export function sampleFamilyMeetings(today = dateOnly()): Obligation[] {
   {...base,id:"next-generation-meeting",title:"Next-generation planning conversation",due:shiftDate(today,3),owner:"Managing director",meeting:{start:"14:00",end:"15:00",timeZone:"Europe/London",attendees:["successor","steward"],location:"Family office",agenda:"Discuss stewardship responsibilities and the next family-business review."}},
  ];
 }
+/** Illustrative diary, never statutory filing advice. Includes the coming December and January. */
+export function annualOfficeDiary(today = dateOnly()): Obligation[] {
+ const year = Number(today.slice(0, 4));
+ const topics = [
+  ["Investment committee", "Review allocation, manager performance and uncalled commitments.", "Investment committee"],
+  ["Trustee distribution review", "Confirm beneficiary needs, trust powers and liquidity before approval.", "Trustees"],
+  ["Tax and filing preparation", "Confirm entity-specific deadlines with advisers; reconcile the evidence pack.", "Finance lead"],
+  ["Insurance renewal review", "Review cover, valuations, exclusions and premium funding.", "Managing Director"],
+  ["Family board meeting", "Approve the management accounts and capital priorities.", "Family chair"],
+  ["Philanthropy and cultural grants", "Review restricted grants, artist commissions and impact evidence.", "Family council"],
+  ["Next-generation education milestone", "Review learning objectives and stewardship placements.", "Education lead"],
+  ["Treasury and distribution authorisation", "Check reserve headroom and sequence approved payments.", "Finance lead"]
+ ];
+ return Array.from({length: 14}, (_, month) => {
+  const date = new Date(Date.UTC(year, month, 1));
+  return topics.map(([title, agenda, owner], i): Obligation => ({
+   id: `office-diary-${date.getUTCFullYear()}-${date.getUTCMonth()+1}-${i}`,
+   title, due: `${date.getUTCFullYear()}-${String(date.getUTCMonth()+1).padStart(2,"0")}-${String(3+i*3).padStart(2,"0")}`,
+   owner, entity: "Family", category: i === 2 ? "Compliance preparation" : "Stewardship",
+   status: "Open", source: "Illustrative SFO diary; dates require adviser confirmation", sourceRoute: "/office/governance",
+   recurrence: "Illustrative monthly review", notes: agenda, evidence: "", scenario: false,
+   meeting: {start:"10:00", end:"11:00", timeZone:"Europe/London", attendees:["founder","successor","steward"], location:"Family office", agenda}
+  }));
+ }).flat();
+}
 export function validateObligation(row: Obligation): string | null {
   if (!row.title.trim() || !row.owner.trim() || !row.entity.trim()) return "Title, owner and entity are required.";
   if (!validDate(row.due)) return "Enter a valid due date.";

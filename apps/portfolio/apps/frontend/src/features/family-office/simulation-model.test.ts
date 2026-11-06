@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { allocation, optimise, simulationDefaults, simulationSchema, wealthProjection } from "./simulation-model";
-import { defaults, simulate } from "./simulation-donor";
+import { defaults, simulate, modelNames } from "./simulation-donor";
 
 describe("constrained liquid allocation",()=>{
  it("respects cash, equity, risk and eligibility limits",()=>{ const p={...simulationDefaults,cashMin:20,equityMax:40};const result=optimise(p); expect(result.best).not.toBeNull(); for(const row of result.candidates){expect(row.cash).toBeGreaterThanOrEqual(20); expect(row.equity).toBeLessThanOrEqual(40); expect(row.volatility).toBeLessThanOrEqual(p.riskMax+1e-8);} expect(optimise({...p,excludeEquity:true}).best?.equity).toBe(0); });
@@ -18,3 +18,5 @@ describe("integrated process donor",()=>{
  it("retains exact zero-noise GBM and OU transitions",()=>{const p={...defaults,paths:20,volatility:0};const g=simulate(p);expect(g.summary.mean).toBeCloseTo(p.initial*Math.exp(p.drift*p.years));const o=simulate({...p,model:"ou",longRun:80});expect(o.summary.mean).toBeCloseTo(80+(p.initial-80)*Math.exp(-p.reversion*p.years));});
  it("preserves seeded replay and histogram population",()=>{const a=simulate({...defaults,paths:20});expect(a).toEqual(simulate({...defaults,paths:20}));expect(a.histogram.counts.reduce((sum,n)=>sum+n,0)).toBe(20);});
 });
+
+describe("seven seeded model families",()=>{for(const model of Object.keys(modelNames) as (keyof typeof modelNames)[])it(model+" is finite and reproducible",()=>{const p={...defaults,model,paths:20,steps:12};const a=simulate(p);expect(a).toEqual(simulate(p));expect(a.terminal.every(Number.isFinite)).toBe(true);expect(a.summary.p10).toBeLessThanOrEqual(a.summary.median);expect(a.summary.median).toBeLessThanOrEqual(a.summary.p90);});});

@@ -37,7 +37,7 @@ isProject: false
 - **Parent:** Do not touch FamilyBizness parent. This is silo donor #1 of 6–9.
 - **No git:** Delete `.git` / remotes; record fetch datetime in `NOTICE.md` only.
 - **License/attribution only:** The string **Wealthfolio** may remain in `LICENSE`, `NOTICE.md`, `TRADEMARKS.md` (attribution). It must **not** remain in application code, feature folders, import paths, logo path strings, package names, UI product strings, or identifiers.
-- **Tooling:** **Bun + Vite coexist** — Bun owns install/scripts/test/serve; Vite remains the bundler (enhanced/config cleaned for static-only, no Tauri).
+- **Tooling:** **Bun + Vite coexist** — Bun owns install/ci/test/serve; Vite remains the bundler (enhanced/config cleaned for static-only, no Tauri).
 
 ## Live integrations policy
 

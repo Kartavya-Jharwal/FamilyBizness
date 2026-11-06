@@ -1,0 +1,8 @@
+import { FamilyOfficeShell } from "./family-office-shell";
+import { useOfficeCapital } from "./capital-workspace";
+import { FinancialStatementSheets } from "./financial-statement-sheets";
+import FinanceBookWorkspace from "./finance-book-workspace";
+export default function FinancialStatementsPage() {
+ const state = useOfficeCapital();
+ return <FamilyOfficeShell title="Financial statements"><section className="grid gap-4 rounded-md border p-4"><h2 className="text-xl font-semibold">Planned connection to QuickBooks or equivalent</h2><p>No accounting connection is active. Statements below use the saved illustrative financial book.</p><p>Candidate systems: <a className="underline" href="https://quickbooks.intuit.com/">QuickBooks</a>, <a className="underline" href="https://www.xero.com/">Xero</a>, <a className="underline" href="https://www.sage.com/en-gb/accounting-software/">Sage Accounting / Sage Intacct</a>, <a className="underline" href="https://www.netsuite.com/portal/products/erp/financial-management/finance-accounting.shtml">NetSuite</a>, <a className="underline" href="https://www.zoho.com/books/">Zoho Books</a> and <a className="underline" href="https://www.freshbooks.com/accounting">FreshBooks</a>.</p><p>Planned inputs: entity chart of accounts, reporting period, functional currency, bank reconciliation, intercompany balances and elimination entries. Entity ownership and restricted cash remain explicit.</p></section><FinancialStatementSheets book={state.value}/><section className="grid gap-4"><h2 className="text-xl font-semibold">Financial inputs and reconciliation</h2><FinanceBookWorkspace/></section></FamilyOfficeShell>;
+}

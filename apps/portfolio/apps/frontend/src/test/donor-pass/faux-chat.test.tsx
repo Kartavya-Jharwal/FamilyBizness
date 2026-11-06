@@ -19,7 +19,7 @@ afterEach(() => {
 it("shows a labelled preview, timed progress and the fixed ending in the actual chat", async () => {
   render(<FauxChat />);
   expect(screen.getByText("Scripted preview")).toBeInTheDocument();
-  fireEvent.click(screen.getByRole("button", { name: "Summarise net worth" }));
+  fireEvent.click(screen.getByRole("button", { name: "Summarise family capital" }));
   expect(screen.getByRole("button", { name: "Review cash" })).toBeDisabled();
   expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   await act(() => vi.advanceTimersByTimeAsync(450));

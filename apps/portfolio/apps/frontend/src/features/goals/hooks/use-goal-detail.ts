@@ -21,11 +21,13 @@ import type {
   SaveUpPreviewInputDTO,
 } from "@/lib/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 export function useGoalDetail(goalId: string | undefined) {
+  const client = useQueryClient();
+  useEffect(() => { const refresh = () => { if(goalId) { client.invalidateQueries({queryKey:QueryKeys.goal(goalId)}); client.invalidateQueries({queryKey:QueryKeys.goalPlan(goalId)}); client.invalidateQueries({queryKey:QueryKeys.saveUpOverview(goalId)}); } }; window.addEventListener("familybizness:record-updated",refresh); return () => window.removeEventListener("familybizness:record-updated",refresh); }, [client,goalId]);
   const goal = useQuery<Goal, Error>({
     queryKey: QueryKeys.goal(goalId ?? ""),
     queryFn: () => getGoal(goalId!),

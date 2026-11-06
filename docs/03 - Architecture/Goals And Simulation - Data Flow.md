@@ -1,0 +1,17 @@
+# Goals and simulation data flow
+
+The existing local `DemoStore` is the single home for saved goal records, plans and funding rules. `adapters/web/core.ts` implements commands used by the restored goal manager at `/goals`. The list and detail hooks subscribe to `familybizness:record-updated`; mutations publish after successful persistence only. The save-up preview is a deterministic monthly compound-growth illustration with fixed end-of-month contributions, not a calibrated forecast. Optimistic/pessimistic values are equal because no uncertainty parameter is supplied.
+
+`normaliseGoal` derives target summary and progress from the edited target and funded value. Previously a stale `summaryTargetAmount` could override a new target, and preview/save-plan commands silently returned empty responses. `GoalCommitments` is used by both expenditure budget and spending insights and reads `useGoals`, as does the goals dashboard. Commitments are reserved capital, not spending transactions; they must not inflate expenditure totals. Actual spending remains the existing transaction ledger.
+
+The process lab extends the existing simulation donor with seven seeded model families: GBM, exact OU, full-truncation Euler Heston, compensated Merton jumps, two-state Markov switching, GARCH(1,1), and bootstrap over a static illustrative residual fixture. Heston, jump, regime and GARCH coefficients are explicitly illustrative fixed assumptions in `simulation-donor.ts`. The bootstrap fixture is not represented as observed market history. Paths and percentile results run locally; no API calls. The existing family portfolio scenario continues to own financial-book-linked allocation, cash uses, fees, taxes and reserve tests.
+
+Verification covers reproducibility, finite outputs, percentile ordering, zero-noise exact transitions, target-summary normalization, funded-target savings projection, and adapter edit/persistence/event/consumer agreement. These demonstrations do not implement investment advice or a production model calibration pipeline.
+
+Touch ownership: the legacy swipe layout previously used X travel only, animated vertical scrolls, and sent unknown routes to the first page. It now uses axis dominance, width-scaled distance, single-touch ownership, cancellation cleanup and interactive-control exclusions. Edge-back recognition now uses a 24px edge, 12px activation and 1.5:1 axis dominance; sliders and carousels own their drags.
+
+## Financial-input model comparison
+
+The lab also graphs all seven model medians and terminal P10/P90, reserve success and depletion. It reads the current financial-book liquid asset base and the saved investment scenario return, covariance volatility, fees, expected tax drag, spending, inflation, reserve and dated contributions/costs. At most 500 paths per model keep the static client responsive. Models share the seed and annual cash-flow policy; outcomes are real capital. Each simulated index path is converted into annual gross returns, floored at zero for OU, followed by aggregate fee/tax drag and cash uses. Private-asset sale restrictions remain in the security-level Scenario Analysis. Comparison is an educational aggregate approximation, not a substitute for that liquidity model.
+
+Budget and Expenditure embeds the existing Spending Insights reports, date selector and drill-through sheets below the budget editor. The embedded mode removes the second page header and duplicate commitments banner. The legacy insights URL remains compatible.

@@ -31,6 +31,6 @@ Keep the visible interactive-scenario label and session-only footer in the recor
 
 ## Verification
 
-`scripts/verify-studio-ui.cjs` checks six chapters at desktop/mobile widths, live market/ownership/rule/liquidity/spending responses, auto demonstration, focus-mode exit and unchanged local storage. Screenshots and recorded results live in `apps/portfolio/artifacts/studio/`. The presentation model tests check scoped stress calculation, unchanged source inputs and damaged-data recovery.
+`ci/verify-studio-ui.cjs` checks six chapters at desktop/mobile widths, live market/ownership/rule/liquidity/spending responses, auto demonstration, focus-mode exit and unchanged local storage. Screenshots and recorded results live in `apps/portfolio/artifacts/studio/`. The presentation model tests check scoped stress calculation, unchanged source inputs and damaged-data recovery.
 
 The cash-threshold adjustment in the Constitution chapter also feeds the Portfolio chapter's session-only allocation search. This demonstrates cross-pillar cause and effect without activating or modifying the saved IPS.

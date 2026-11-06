@@ -7,7 +7,7 @@ import { Button } from "@fb/ui";
 import { selectedProfileId } from "@/features/profiles/session";
 import { FamilyOfficeShell } from "./family-office-shell";
 import { governanceKey, governanceSchema, initialGovernance, successionScenario, transitionDecision, type Governance } from "./governance-model";
-import { GovernanceField as Field, GovernancePanel as Panel, GovernancePopulation, fieldClass, useGovernanceDraft } from "./governance-ui";
+import { GovernanceField as Field, GovernancePanel as Panel, fieldClass, useGovernanceDraft } from "./governance-ui";
 
 export function GovernanceWorkspace() {
   const state = useGovernanceDraft(governanceKey(selectedProfileId() ?? "static-demo"), initialGovernance, value => governanceSchema.parse(value));
@@ -52,7 +52,7 @@ setData(next); state.setError(""); } catch (e) { state.setError(String(e)); } }}
       <Button disabled={!scenario || !event.trim()} onClick={() => { try { const checked = governanceSchema.parse(data); if (!scenario) return; setData(governanceSchema.parse({ ...checked, successionEvents: [...checked.successionEvents, { id: crypto.randomUUID(), at: new Date().toISOString(), description: event, from, to, ownership: equity, voting: votes, before: checked.people, after: scenario, source: checked.source }] })); state.setError(""); } catch(e) { state.setError(e instanceof Error ? e.message : "Invalid scenario"); } }}>Record scenario in event log</Button>
       {data.successionEvents.map(item => <article key={item.id} className="rounded-md border p-3 text-sm space-y-2"><strong>{item.description}</strong><p>{item.at} · {item.from} → {item.to}</p><p>{item.ownership} ownership percentage points; {item.voting} voting percentage points</p><p className="break-words">Source: {item.source}</p><details><summary className="cursor-pointer">Recorded ownership snapshot</summary>{item.after.map(p=><p key={p.id}>{p.name}: {item.before.find(b=>b.id===p.id)?.ownership}% → {p.ownership}% equity; {item.before.find(b=>b.id===p.id)?.voting}% → {p.voting}% votes</p>)}</details></article>)}
     </Panel>
-    <GovernancePopulation data={data} initial={initialGovernance} parse={value => governanceSchema.parse(value)} onImport={setData} filename="governance-population.json" />
+
   </div>;
 }
 

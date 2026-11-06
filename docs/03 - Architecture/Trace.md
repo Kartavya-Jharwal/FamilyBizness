@@ -46,7 +46,7 @@ FO-IPS-MANDATE contains the Board-adopted concise investment instructions. The d
 
 The local profile command engine now serves both entry and the existing profile API. Persona sessions retain immutable scope while shared office records resolve to one prepared case. Calendar and ERP remain views of the existing operations register; calendar view preference is persisted locally.
 
-The Wealthfolio visual pass reuses shared card components and exported card surfaces for daily financial workspaces. Composition CSS reads canonical dimensions and host semantic roles; calendar fields/sheets use existing field/overlay roles. The focused `scripts/verify-wealthfolio-art-direction.cjs` checks computed surface geometry and responsive light/dark rendering.
+The Wealthfolio visual pass reuses shared card components and exported card surfaces for daily financial workspaces. Composition CSS reads canonical dimensions and host semantic roles; calendar fields/sheets use existing field/overlay roles. The focused `ci/verify-wealthfolio-art-direction.cjs` checks computed surface geometry and responsive light/dark rendering.
 
 ## Connected donor and brand integration
 
@@ -68,3 +68,12 @@ Family purposes → existing goals owner (`/goals`) → budget (`/spending/budge
 Adopted IPS → `policyDashboardSignals` → six status cards on the actual Wealthfolio overview. Saved FinanceBook and investment input → `projectPreparedOffice` → donor account/holding/history APIs and the same allocation/FIRE analysis perimeter. Book entities, FX and eliminations → `buildFinancialSheets` → native three-statement summary/detail tables. Saved investment input → existing seeded `projectSecurities` → FIRE, liquidity/stress and sensitivity outputs. Return methods reuse saved performance observations and the existing metric definitions.
 
 Numeric fields → shared `Input`, MoneyInput, QuantityInput and RollingNumberInput → existing form handlers and record owners. The supplied rolling-counter reference is credited in the [responsive control specification](../04%20-%20Design/Responsive%20Breakpoints%20And%20Numeric%20Controls.md). No Reactive CSS runtime is distributed.
+
+
+## November handoff implementation
+
+The current navigation and role contract supersedes older tab/dropdown descriptions above: see [navigation and settings](../design/navigation-and-settings.md). [Goals and simulation data flow](../03%20-%20Architecture/Goals%20And%20Simulation%20-%20Data%20Flow.md) records persistence and seeded model boundaries. [Local CI](../../ci/README.md) replaces hosted workflows. [Asset slots](../../assets/README.md) and [prompt history](../AI_PROMPTS_LOG.md) are maintained locally.
+
+## Current content and provenance
+
+Calendar samples and the prepared case now include the same labelled annual SFO review diary, including December and January. Cash-gift examples live in the Estate Planning ledger. Financial Statements has a dedicated route over the shared saved financial book; accounting connections remain planned. IPS art/culture classifications distinguish operating expenses, investments and grants. Source and license details remain in the distributed donor manifest: [content and provenance register](../design/content-and-provenance.md).

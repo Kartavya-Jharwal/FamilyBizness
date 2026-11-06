@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import { useCallback, useId, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { type NavigationProps, isPathActive } from "./app-navigation";
+import { type NavigationProps, isPathActive, flattenNavigation } from "./app-navigation";
 import { resolveNavigationIcon } from "./navigation-icons";
 
 interface FloatingNavigationBarProps {
@@ -37,10 +37,10 @@ export function FloatingNavigationBar({ navigation }: FloatingNavigationBarProps
   const pinnedAddonItems = navigation?.pinnedAddons ?? [];
   const addonMenuItems = navigation?.addonMenuItems ?? navigation?.addons ?? [];
 
-  const baseItems = [...primaryItems, ...pinnedAddonItems, ...secondaryItems];
-  const visibleCount = 15;
-  const visibleItems = baseItems.slice(0, visibleCount);
-  const overflowItems = baseItems.slice(visibleCount);
+  const roots = [...primaryItems, ...pinnedAddonItems, ...secondaryItems];
+  const baseItems = [...new Map(flattenNavigation(roots).map(item=>[item.href,item])).values()];
+  const visibleItems = roots.slice(0, 5);
+  const overflowItems = baseItems.filter(item=>!visibleItems.some(visible=>visible.href===item.href));
   const moreItems = [...overflowItems, ...addonMenuItems];
   const hasMoreItems = moreItems.length > 0;
 
@@ -66,6 +66,7 @@ export function FloatingNavigationBar({ navigation }: FloatingNavigationBarProps
                   key={item.href}
                   to={item.href}
                   onClick={() => handleNavigation(item.href, isActive)}
+                  title={item.title}
                   aria-label={item.title}
                   className={baseButtonClass}
                   aria-current={isActive ? "page" : undefined}

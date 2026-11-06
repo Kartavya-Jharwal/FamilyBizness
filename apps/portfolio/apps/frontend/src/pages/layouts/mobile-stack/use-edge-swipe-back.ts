@@ -1,9 +1,9 @@
 import { useCallback, useRef, type MouseEvent, type PointerEvent } from "react";
 
 /** Width of the band along the leading edge where a back swipe can start. */
-const EDGE_WIDTH = 20;
+const EDGE_WIDTH = 24;
 /** Horizontal travel before the drag counts as a back swipe. */
-const START_DISTANCE = 8;
+const START_DISTANCE = 12;
 /** Vertical travel that turns the touch into a scroll instead. */
 const VERTICAL_CANCEL = 10;
 /** Share of the width past which releasing completes the swipe. */
@@ -16,7 +16,7 @@ const COMMIT_VELOCITY = 0.35;
  */
 const CANCEL_VELOCITY = 0.1;
 /** Elements that drag sideways themselves (charts, sliders), as for the section pager. */
-const OWN_DRAG_SELECTOR = "[data-no-swipe-drag]";
+const OWN_DRAG_SELECTOR = "[data-no-swipe-drag], input, textarea, select, [contenteditable=true], [role=slider], [data-carousel]";
 /** Window the release speed is measured over. */
 const VELOCITY_WINDOW_MS = 100;
 
@@ -92,7 +92,7 @@ export function useEdgeSwipeBack({
       if (target.closest(OWN_DRAG_SELECTOR)) return;
       const rect = event.currentTarget.getBoundingClientRect();
       const fromEdge = direction === "rtl" ? rect.right - event.clientX : event.clientX - rect.left;
-      if (fromEdge < 0 || fromEdge > EDGE_WIDTH) return;
+      if (fromEdge < 0 || fromEdge > EDGE_WIDTH || rect.width <= 0) return;
       // A mouse drag would otherwise select the page's text; a tap still clicks.
       if (event.pointerType === "mouse") event.preventDefault();
       gesture.current = {
@@ -120,7 +120,7 @@ export function useEdgeSwipeBack({
           gesture.current = null;
           return;
         }
-        if (dx < START_DISTANCE) return;
+        if (dx < START_DISTANCE || Math.abs(dx) < Math.abs(dy) * 1.5) return;
         current.dragging = true;
         suppressClick.current = true;
         event.currentTarget.setPointerCapture(event.pointerId);

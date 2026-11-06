@@ -6,12 +6,20 @@
     "packages/tokens"
   ],
   "scripts": {
-    "dev": "bun run scripts/dev-web.ts",
-    "build": "bun run scripts/build-web.ts",
-    "preview": "bun run scripts/preview-web.ts",
+    "dev": "bun run ci/dev-web.ts",
+    "build": "bun run ci/build-web.ts",
+    "preview": "bun run ci/preview-web.ts",
     "donor:smoke": "bun run --cwd apps/portfolio donor:smoke",
-    "donor:verify": "bun run donor:type-check && bun run donor:smoke && bun run build && node scripts/verify-donor-pass.mjs && node scripts/verify-donor-frontend.mjs --built",
-    "donor:type-check": "bun run --cwd apps/portfolio type-check"
+    "donor:verify": "bun run donor:type-check && bun run donor:smoke && bun run build && node ci/verify-donor-pass.mjs && node ci/verify-donor-frontend.mjs --built",
+    "donor:type-check": "bun run --cwd apps/portfolio type-check",
+    "ci:local": "bun run ci/run.ts",
+    "lint": "bun run ci/check.ts lint",
+    "typecheck": "bun run donor:type-check",
+    "test": "bun run --cwd apps/portfolio/apps/frontend test --maxWorkers=2 src/test/donor-pass src/pages/insights/analysis src/adapters/static-demo.test.ts src/adapters/goal-integration.test.ts src/features/governance/constitution src/features/family-office src/features/goals/goal-ledger.test.ts src/pages/layouts/navigation/navigation-policy.test.ts src/pages/layouts/mobile-stack/use-edge-swipe-back.test.tsx src/features/spending/pages/spending-insights-page.test.tsx",
+    "check:links": "bun run ci/check.ts links",
+    "check:assets": "bun run ci/check.ts assets",
+    "preview:local": "bun run build && bun run preview",
+    "prompts:append": "python ci/append-prompts.py"
   },
   "devDependencies": {
     "@types/bun": "latest",

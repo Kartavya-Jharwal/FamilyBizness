@@ -51,7 +51,7 @@ Earlier integration and studio checks are historical, not evidence for this expa
 - Estate/governance work separately reported **24 focused tests passed** before the delegated run later hit its usage limit. This is reported separately rather than presented as a fresh full-suite run.
 - Frontend TypeScript (`tsc --noEmit` and node configuration) passed after fixing literal return types in editable-table factories and a governance test fixture.
 - Production build passed. Existing upstream sourcemap/annotation and large-bundle warnings remain; the bundle-size warning is not a claim of a load-time performance pass.
-- `scripts/verify-whole-brief.cjs`: five focused browser checks passed, covering primary financial rendering/save, saved future-year budgets feeding capital, continuous optimisation/projection, a board pack consuming saved owners, and the mobile financial editor. No page errors or viewport overflow in those checks.
+- `ci/verify-whole-brief.cjs`: five focused browser checks passed, covering primary financial rendering/save, saved future-year budgets feeding capital, continuous optimisation/projection, a board pack consuming saved owners, and the mobile financial editor. No page errors or viewport overflow in those checks.
 - A separate focused render check loaded the statutory estate calculation and final projection without page errors. Desktop financial/estate/calculation screenshots and mobile financial editing were inspected. Analytical chart lines were strengthened and animation disabled for stable complete curves; legend text uses foreground tokens.
 - `verify-donor-pass.mjs` passed the attribution/branding/distributed-license audit (1,871 editable files at that run). `git diff --check` reported no whitespace errors; Git emitted line-ending conversion notices.
 
@@ -75,7 +75,7 @@ Calendar retains the Cal.diy-derived week/agenda structure and adds timed counci
 
 - Ten focused operations/meeting tests passed, including backward-compatible register decoding, chronological week selection, meeting time/zone/participant validation and recurrence retaining meeting details.
 - Frontend TypeScript and production build passed. Existing upstream sourcemap/annotation and bundle-size warnings remain.
-- `scripts/verify-profile-integration.cjs` passed: add a business task and see it in Calendar; save/reload/reopen a timed family meeting; filter participants; navigate mobile Estate/Financial tabs; check viewport overflow and page errors.
+- `ci/verify-profile-integration.cjs` passed: add a business task and see it in Calendar; save/reload/reopen a timed family meeting; filter participants; navigate mobile Estate/Financial tabs; check viewport overflow and page errors.
 - Desktop light/dark and mobile calendar/estate screens were inspected. The estate holding list opens its existing editor. A long valuation-load button was made to wrap within the mobile card. Legacy estate/financial routes redirect to the corresponding Family business tab.
 - This pass changes the local frontend. It does not claim a public deployment.
 
@@ -97,4 +97,4 @@ The calendar shares those operations records, including Council, Board, Assembly
 
 Thirteen focused tests passed across population, model/restore and profile files. They cover reconciled accounts, estate calculation, portable export/restore, preserved edits, transactional rollback, currency conversion, cash allocation/profit capacity, conflict-aware voting and source-binding invalidation. The integration compiler and production build passed with the existing upstream sourcemap/annotation and bundle-size warnings.
 
-`scripts/verify-golden-bird.cjs` passed the populated-profile journey: governance defaults; profit-capacity blocking; cash waterfall into the financial forecast; conflict recusal; decision-review logging; estate ownership/valuation refresh; board export; Council calendar; mobile layout; and persistence after reload. Desktop and mobile screenshots were inspected for readable controls and labels. This is local verification, not a public deployment.
+`ci/verify-golden-bird.cjs` passed the populated-profile journey: governance defaults; profit-capacity blocking; cash waterfall into the financial forecast; conflict recusal; decision-review logging; estate ownership/valuation refresh; board export; Council calendar; mobile layout; and persistence after reload. Desktop and mobile screenshots were inspected for readable controls and labels. This is local verification, not a public deployment.

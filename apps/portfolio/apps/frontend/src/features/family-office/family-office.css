@@ -5,10 +5,10 @@
 .fo-panel-header { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .fo-panel-action { color: var(--muted-foreground); font-size: var(--font-size-small); text-underline-offset: var(--space-1); }
 .fo-panel-action:hover { color: var(--foreground); text-decoration: underline; }
-.fo-metric { padding: var(--space-4); }
+.fo-metric { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-4); }
 .fo-metric-label { color: var(--muted-foreground); font-size: var(--font-size-small); line-height: var(--line-height-body); }
-.fo-metric-value { margin-block-start: var(--space-2); font-size: var(--design-metric-size); font-weight: 600; letter-spacing: var(--design-metric-tracking); line-height: var(--line-height-tight); overflow-wrap: anywhere; }
-.fo-metric-detail { margin-block-start: var(--space-2); font-size: var(--design-chart-label-size); color: var(--muted-foreground); }
+.fo-metric-value { font-size: var(--design-metric-size); font-weight: 600; letter-spacing: var(--design-metric-tracking); line-height: var(--line-height-tight); overflow-wrap: anywhere; }
+.fo-metric-detail { font-size: var(--design-chart-label-size); color: var(--muted-foreground); }
 /* Embedded metrics are a quiet ledger, rather than another layer of raised cards. */
 .fo-panel .fo-metric { background: transparent; border-color: var(--border); box-shadow: none; }
 .fo-disclosure { padding: var(--space-4); }

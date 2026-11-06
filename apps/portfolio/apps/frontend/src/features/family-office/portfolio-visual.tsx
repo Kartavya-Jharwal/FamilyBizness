@@ -1,7 +1,7 @@
 import { useMemo, useState, lazy, Suspense } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FamilyAllocations, FamilyFire, FamilyXray, ReturnMethods } from "./family-analysis-workspaces";
-import { Button, Tabs, TabsList, TabsTrigger, TabsContent } from "@fb/ui";
+import { Button, Tabs, TabsContent } from "@fb/ui";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "@/components/office-charts";
 import { selectedProfileId } from "@/features/profiles/session";
 import { useScenario, NumberField } from "./finance-ui";
@@ -35,5 +35,5 @@ export function PortfolioVisual({ compact = false }: {
 }
 export default function PortfolioPage() {
     const [params,setParams]=useSearchParams(),requested=params.get("tab"),tab=["portfolio","allocation","fire","xray","methods"].includes(requested??"")?requested!:"portfolio";
-    return <FamilyOfficeShell title="Portfolio & scenarios"><Tabs value={tab} onValueChange={value=>setParams({tab:String(value)})}><TabsList className="h-auto flex-wrap" aria-label="Portfolio analysis sections"><TabsTrigger value="portfolio">Portfolio & Monte Carlo</TabsTrigger><TabsTrigger value="allocation">Allocations</TabsTrigger><TabsTrigger value="fire">Family FIRE</TabsTrigger><TabsTrigger value="xray">X-ray & risk</TabsTrigger><TabsTrigger value="methods">Return methods</TabsTrigger></TabsList><TabsContent value="portfolio"><PortfolioVisual/></TabsContent><TabsContent value="allocation"><FamilyAllocations/></TabsContent><TabsContent value="fire"><FamilyFire/></TabsContent><TabsContent value="xray"><FamilyXray/></TabsContent><TabsContent value="methods"><ReturnMethods/></TabsContent></Tabs></FamilyOfficeShell>;
+    return <FamilyOfficeShell title="Portfolio & scenarios"><Tabs value={tab} onValueChange={value=>setParams({tab:String(value)})}><TabsContent value="portfolio"><PortfolioVisual/></TabsContent><TabsContent value="allocation"><FamilyAllocations/></TabsContent><TabsContent value="fire"><FamilyFire/></TabsContent><TabsContent value="xray"><FamilyXray/><ReturnMethods/></TabsContent><TabsContent value="methods"><ReturnMethods/></TabsContent></Tabs></FamilyOfficeShell>;
 }

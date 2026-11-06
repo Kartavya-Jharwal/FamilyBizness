@@ -46,7 +46,7 @@ The static profile API dispatches to one local command engine, used by ProfileSh
 
 Prepared-office population now uses `stewardship-scenario.ts` to fill the existing book, historical statement records, dated AUM and investment/estate assumptions. The upgrade retains a local recovery snapshot before one-time replacement. Subsequent visits preserve saved edits. The numerical IPS statement is stored in the donated document workspace and activated in the existing typed rule owner; adoption updates source, document, mandate and rule snapshots transactionally.
 
-The Wealthfolio visual pass reuses shared card components and exported card surfaces for daily financial workspaces. Composition CSS reads canonical dimensions and host semantic roles; calendar fields/sheets use existing field/overlay roles. The focused `scripts/verify-wealthfolio-art-direction.cjs` checks computed surface geometry and responsive light/dark rendering.
+The Wealthfolio visual pass reuses shared card components and exported card surfaces for daily financial workspaces. Composition CSS reads canonical dimensions and host semantic roles; calendar fields/sheets use existing field/overlay roles. The focused `ci/verify-wealthfolio-art-direction.cjs` checks computed surface geometry and responsive light/dark rendering.
 
 ## Connected donor and brand integration
 
@@ -88,3 +88,8 @@ The daily Stewardship route mounts the existing Wealthfolio PortfolioPage, inclu
 The [financial-book readthrough](Portfolio%20-%20Financial%20Book%20Readthrough.md) connects donor account, holding, valuation and family-capital APIs to the existing book. Book/investment changes invalidate the existing query cache. Missing transaction cost basis and flow attribution stay unavailable; a capital increase is not invented investment profit. No second database, portfolio engine or synchronization service is introduced.
 
 [Financial statement sheets](../04%20-%20Design/Financials%20-%20Statement%20Sheets.md) provide native summary, balance, income and cash-flow tables over the book's existing consolidation owner. [Family analysis views](Analysis%20-%20Family%20Portfolio%20Views.md) cover allocations, FIRE, X-ray, sensitivity and return methods through one visible tab set. The merged profile and repair role contract is in [entry flow](../05%20-%20Requirements/Auth%20Flow.md).
+
+
+## November handoff implementation
+
+The current navigation and role contract supersedes older tab/dropdown descriptions above: see [navigation and settings](../design/navigation-and-settings.md). [Goals and simulation data flow](../03%20-%20Architecture/Goals%20And%20Simulation%20-%20Data%20Flow.md) records persistence and seeded model boundaries. [Local CI](../../ci/README.md) replaces hosted workflows. [Asset slots](../../assets/README.md) and [prompt history](../AI_PROMPTS_LOG.md) are maintained locally.

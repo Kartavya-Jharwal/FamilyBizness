@@ -1,3 +1,4 @@
+import { GoalCommitments } from "@/features/goals/goal-commitments";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
@@ -147,7 +148,7 @@ function previousMonthMatchingRange(range: ReportsRange, timezone?: string | nul
  */
 const VALID_STAGES: InsightsStage[] = ["where", "changed", "when"];
 
-export default function SpendingInsightsPage() {
+export default function SpendingInsightsPage({ embedded = false }: { embedded?: boolean } = {}) {
   const dateFormatting = useDateFormatting();
 
   const { t } = useTranslation();
@@ -541,17 +542,19 @@ export default function SpendingInsightsPage() {
     />
   );
 
+  const Container = embedded ? "section" : Page;
+  const Content = embedded ? "div" : PageContent;
   return (
-    <Page>
-      <PageHeader
+    <Container>
+      {!embedded && <PageHeader
         heading={isMobile ? undefined : t("spending:insightsPage.heading")}
         onBack={() => {
           if (window.history.length > 1) goBack();
           else navigate("/dashboard?tab=spending");
         }}
         actions={periodToggle}
-      />
-      <PageContent className="space-y-5">
+      />}
+      <Content className="flex flex-col gap-5">{embedded ? <><h2 className="text-xl font-semibold">Spending insights</h2>{periodToggle}</> : <GoalCommitments />}
         {(customRange || customMonth) && (
           <p className="text-muted-foreground text-sm" data-testid="spending-selected-range">
             {customRange ? (
@@ -675,7 +678,7 @@ export default function SpendingInsightsPage() {
             onHeatmapCellClick={handleHeatmapCellClick}
           />
         )}
-      </PageContent>
+      </Content>
 
       <CategoryTransactionsSheet
         open={!!activeCategory}
@@ -706,7 +709,7 @@ export default function SpendingInsightsPage() {
         timezone={appTimezone}
         currency={baseCurrency}
       />
-    </Page>
+    </Container>
   );
 }
 

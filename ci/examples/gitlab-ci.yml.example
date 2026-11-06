@@ -1,0 +1,7 @@
+# INERT REFERENCE ONLY; do not place at repository root.
+pages:
+  script:
+    - bun run ci:local
+    - cp -r dist public
+  artifacts:
+    paths: [public]

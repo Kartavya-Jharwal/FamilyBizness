@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createGoal, deleteGoal, getGoals, updateGoal } from "@/adapters";
 import { QueryKeys } from "@/lib/query-keys";
 import type { Goal, NewGoal } from "@/lib/types";
@@ -6,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 export function useGoals() {
+  const queryClient = useQueryClient();
+  useEffect(() => { const refresh = () => { queryClient.invalidateQueries({ queryKey: [QueryKeys.GOALS] }); }; window.addEventListener("familybizness:record-updated",refresh); return () => window.removeEventListener("familybizness:record-updated",refresh); }, [queryClient]);
   const query = useQuery<Goal[], Error>({
     queryKey: [QueryKeys.GOALS],
     queryFn: getGoals,

@@ -1,3 +1,11 @@
+import SettingsGroupPage from "@/features/family-office/settings-group-page";
+import AboutPage from "@/features/family-office/about-page";
+import FinancialStatementsPage from "@/features/family-office/financial-statements-page";
+import {SimulationDonorLab} from "@/features/family-office/simulation-lab-workspace";
+import {PortfolioVisual} from "@/features/family-office/portfolio-visual";
+import {FamilyOfficeShell} from "@/features/family-office/family-office-shell";
+import { routeAllowed } from "@/pages/layouts/navigation/app-navigation";
+import { useLocation } from "react-router-dom";
 import PhilanthropyPage from "@/features/family-office/philanthropy-page";
 import FinanceAddonWorkspaces from "@/features/family-office/finance-addon-workspaces";
 import { lazy, memo, Suspense, useEffect, useState } from "react";
@@ -19,7 +27,6 @@ import AnalysisAttributionPage from "@/pages/insights/analysis/attribution-page"
 import NotFoundPage from "@/pages/not-found";
 import SettingsAccountsPage from "@/pages/settings/accounts/accounts-page";
 import PortfoliosPage from "@/pages/settings/portfolios/portfolios-page";
-import SettingsAppearancePage from "@/pages/settings/appearance/appearance-page";
 import SettingsLayout from "@/pages/settings/settings-layout";
 import AccountPage from "./pages/account/account-page";
 import AiAssistantPage from "./pages/ai-assistant/ai-assistant-page";
@@ -28,7 +35,6 @@ import HealthPage from "./pages/health/health-page";
 import AboutSettingsPage from "./pages/settings/about/about-page";
 import ContributionLimitPage from "./pages/settings/contribution-limits/contribution-limits-page";
 import ExportSettingsPage from "./pages/settings/exports/exports-page";
-import GeneralSettingsPage from "./pages/settings/general/general-page";
 import TaxonomiesPage from "./pages/settings/taxonomies/taxonomies-page";
 import SpendingInsightsPage from "./features/spending/pages/spending-insights-page";
 import SpendingBudgetPage from "./features/spending/pages/spending-budget-page";
@@ -54,7 +60,6 @@ const PolicyPage = lazy(() => import("./features/family-office/ips-visual"));
 const CapitalPage=lazy(()=>import("./features/family-office/capital-workspace"));
 const FamilyConstitutionPage=lazy(()=>import("./features/family-office/family-constitution-page"));
 const OfficeSettingsPage=lazy(()=>import("./features/family-office/office-settings-page"));
-const CaseAdministration=lazy(()=>import("./features/family-office/case-administration"));
 const AdministrationPage=lazy(()=>import("./features/family-office/administration-page"));
 const CasePage = lazy(() => import("./features/family-office/case-page"));
 const PresentationPage = lazy(() => import("./features/family-office/presentation-page"));
@@ -91,10 +96,16 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
   location,
 }: AppScreenRoutesProps) {
   const dynamicRoutes = useDynamicAddonRoutes();
+  const currentLocation=useLocation();
+  if(!routeAllowed((location?.pathname??currentLocation.pathname)))return <main className="p-6"><h1>Page unavailable for this role</h1><a href="#/goals">Family Goals</a></main>;
 
   return (
     <Routes location={location}>
       <Route index element={<Navigate to="/office/case" replace />} />
+      <Route path="about" element={<AboutPage/>} />
+      <Route path="office/statements" element={<FinancialStatementsPage/>} />
+      <Route path="office/stochastic" element={<FamilyOfficeShell title="Stochastic Process Lab"><SimulationDonorLab/></FamilyOfficeShell>} />
+      <Route path="office/scenarios" element={<FamilyOfficeShell title="Scenario Analysis"><PortfolioVisual/></FamilyOfficeShell>} />
       <Route path="office/admin" element={<Suspense fallback={<p>Opening administration...</p>}><AdministrationPage/></Suspense>} />
       <Route path="office/case" element={<Suspense fallback={<p className="p-6">Loading family case…</p>}><CasePage /></Suspense>} />
       <Route path="office/philanthropy" element={<PhilanthropyPage />} />
@@ -151,15 +162,16 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
         />
       ))}
       <Route path="settings" element={<SettingsLayout />}>
-        <Route path="connections" element={<FinanceAddonWorkspaces embedded />} />
-        <Route index element={<Navigate to="/settings/general" replace />} />
+        <Route path="connections" element={<SettingsGroupPage group="Integrations"/>} />
+        <Route index element={<p>Select a settings group.</p>} />
         <Route path="office" element={<Suspense fallback={<p>Opening office settings…</p>}><OfficeSettingsPage/></Suspense>} />
-        <Route path="records" element={<Suspense fallback={<p>Opening family records…</p>}><CaseAdministration/></Suspense>} />
+        <Route path="records" element={<SettingsGroupPage group="Data"/>} />
         <Route path="sources" element={<Suspense fallback={<p>Opening source administration...</p>}><OfficeReviewWorkspace /></Suspense>} />
-        <Route path="general" element={<GeneralSettingsPage />} />
+        <Route path="general" element={<SettingsGroupPage group="General"/>} />
+        <Route path="accessibility" element={<SettingsGroupPage group="Accessibility"/>} />
         <Route path="accounts" element={<SettingsAccountsPage />} />
         <Route path="portfolios" element={<PortfoliosPage />} />
-        <Route path="appearance" element={<SettingsAppearancePage />} />
+        <Route path="appearance" element={<SettingsGroupPage group="Appearance"/>} />
         <Route path="about" element={<AboutSettingsPage />} />
         <Route path="exports" element={<ExportSettingsPage />} />
         <Route path="contribution-limits" element={<ContributionLimitPage />} />

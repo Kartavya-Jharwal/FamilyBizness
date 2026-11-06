@@ -4,6 +4,8 @@ import { MemoryRouter, useLocation } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import SpendingInsightsPage from "./spending-insights-page";
 
+vi.mock("@/features/goals/hooks/use-goals", () => ({ useGoals: () => ({ goals: [], isLoading: false }) }));
+
 const { insightQuery, eventsQuery, cashQuery, testSettings } = vi.hoisted(() => ({
   insightQuery: vi.fn(),
   eventsQuery: vi.fn(),
@@ -197,19 +199,18 @@ describe("custom range in Spending Insights", () => {
     expect(screen.queryByTestId("spending-selected-range")).not.toBeInTheDocument();
   });
 
-  // Opening the date picker twice dominates this test: each Base UI popover open
-  // costs about 0.5 s in jsdom (0.15 s with Radix), so it runs 1.6 s locally and
-  // went over 5 s in CI's full run. In Chrome the picker opens in ~115 ms either way.
+  // This checks date-state transitions. Direct clicks avoid user-event's repeated
+  // pointer/visibility scans over the calendar in jsdom under the full suite.
   it("applies a new range and clears back to the preset", async () => {
-    const user = setup();
-    await user.click(screen.getByRole("button", { name: "Select dates" }));
+    setup();
+    fireEvent.click(screen.getByRole("button", { name: "Select dates" }));
     fireEvent.change(screen.getByLabelText("Start date"), { target: { value: "2025-01-01" } });
     fireEvent.change(screen.getByLabelText("End date"), { target: { value: "2025-12-31" } });
-    await user.click(screen.getByRole("button", { name: "Apply" }));
+    fireEvent.click(screen.getByRole("button", { name: "Apply" }));
     expect(sharedPick()).toEqual({ kind: "range", from: "2025-01-01", to: "2025-12-31" });
     expect(screen.getByTestId("location")).not.toHaveTextContent("spendingFrom");
-    await user.click(screen.getByRole("button", { name: "Select dates" }));
-    await user.click(screen.getByRole("button", { name: "Clear" }));
+    fireEvent.click(screen.getByRole("button", { name: "Select dates" }));
+    fireEvent.click(screen.getByRole("button", { name: "Clear" }));
     expect(sharedPick()).toEqual({ kind: "spending", code: "MTD" });
     expect(screen.getByRole("button", { name: /This month/ })).toHaveAttribute(
       "aria-pressed",
@@ -281,3 +282,5 @@ describe("period shared with the dashboard", () => {
     expect(screen.getByTestId("location")).not.toHaveTextContent("period=");
   });
 });
+
+it("embeds spending reports below the budget without a second page header",()=>{render(<MemoryRouter initialEntries={["/spending/budget?stage=where"]}><SpendingInsightsPage embedded /></MemoryRouter>);expect(screen.getByRole("heading",{name:"Spending insights"})).toBeInTheDocument();expect(screen.queryByText("Family goal commitments")).not.toBeInTheDocument();expect(screen.getByText("Where stage")).toBeInTheDocument();});

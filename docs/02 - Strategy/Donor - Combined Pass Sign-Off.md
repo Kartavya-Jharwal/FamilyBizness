@@ -17,7 +17,7 @@ bun run donor:smoke
 bun run donor:verify
 ```
 
-The first command runs **39 tests across six files**. The second runs that suite, the parent static build, then `scripts/verify-donor-pass.mjs`. The Pages workflow also runs the smoke suite and provenance audit before uploading its artifact. The audit does not require ignored donor clones, so it can run in CI.
+The first command runs **39 tests across six files**. The second runs that suite, the parent static build, then `ci/verify-donor-pass.mjs`. The Pages workflow also runs the smoke suite and provenance audit before uploading its artifact. The audit does not require ignored donor clones, so it can run in CI.
 
 ## What is signed off
 

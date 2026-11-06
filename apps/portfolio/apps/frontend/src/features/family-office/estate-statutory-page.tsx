@@ -9,7 +9,7 @@ import { selectedProfileId } from "@/features/profiles/session";
 import { FamilyOfficeShell } from "./family-office-shell";
 import { EstateStructureComparison } from "./estate-structure-comparison";
 
-import { GovernanceField as Field, GovernancePanel as Panel, GovernancePopulation, fieldClass, useGovernanceDraft } from "./governance-ui";
+import { GovernanceField as Field, GovernancePanel as Panel, fieldClass, useGovernanceDraft } from "./governance-ui";
 
 import { calculateIht, initialIht, ihtKey, ihtSchema, IHT_SOURCES, type IhtInput } from "./estate-iht-model";
 
@@ -87,7 +87,7 @@ export function EstateWorkspace() {
     <EstateStructureComparison input={data} />
     <Panel title="Official rule sources"><p className="text-sm">Checked 2 November 2026. Eligibility is an input requiring evidence. Structure descriptions do not execute transfers. Stored earlier effective-rate scenarios remain separate from this statutory workbench.</p><ul className="list-disc pl-5 space-y-1 text-sm">{IHT_SOURCES.map(([label,href])=><li key={href}><a className="underline" href={href} target="_blank" rel="noreferrer">{label}</a></li>)}</ul></Panel>
 
-    <GovernancePopulation data={data} initial={initialIht} parse={v=>ihtSchema.parse(v)} onImport={setData} filename="estate-iht-population.json"/>
+
 
   </div>;
 

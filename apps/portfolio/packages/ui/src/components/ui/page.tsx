@@ -108,6 +108,7 @@ interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   showBorderOnScroll?: boolean;
   actions?: React.ReactNode;
   dragRegion?: boolean;
+  stackActionsOnMobile?: boolean;
 }
 
 export function PageHeader({
@@ -120,6 +121,7 @@ export function PageHeader({
   showBorderOnScroll = true,
   actions,
   dragRegion = true,
+  stackActionsOnMobile = false,
   ...props
 }: PageHeaderProps) {
   const { t } = useTranslation();
@@ -181,7 +183,7 @@ export function PageHeader({
 
       <div className="p-4">
         <div className="mx-auto">
-          <div className="flex items-center justify-between gap-3">
+          <div className={cn("flex justify-between gap-3", stackActionsOnMobile ? "flex-col items-stretch sm:flex-row sm:items-center" : "items-center")}>
             <div className="flex min-w-0 flex-1 items-center gap-2">
               {onBack && (
                 <Button variant="ghost" size="icon" onClick={onBack} aria-label={t("ui:page.back", "Back")}>

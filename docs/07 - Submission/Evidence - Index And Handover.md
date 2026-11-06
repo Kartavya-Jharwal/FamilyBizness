@@ -15,7 +15,7 @@
 
 The [release record](../03%20-%20Architecture/Release%20-%20MVP.md) owns the final deployed revision, workflow, complete verification results and packaged handover. The [acceptance matrix](../05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md) maps the documented software threads to implementation and executed gates. The [donor ledger](../03%20-%20Architecture/Donors%20-%20Frontend%20Contribution%20Ledger.md) distinguishes actual copied/adapted code and UI masks from workflow inspiration.
 
-The earlier focused results above are supplementary evidence, not the final release test total. `scripts/verify-mvp-release.cjs` covers the combined independent-case, constitution, ERP, estate, review, source, calendar and simulation journeys against either a packaged or public build.
+The earlier focused results above are supplementary evidence, not the final release test total. `ci/verify-mvp-release.cjs` covers the combined independent-case, constitution, ERP, estate, review, source, calendar and simulation journeys against either a packaged or public build.
 
 ## What the team supplies
 

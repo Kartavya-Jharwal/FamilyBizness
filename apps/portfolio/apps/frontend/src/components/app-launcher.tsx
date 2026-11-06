@@ -1,3 +1,4 @@
+import {flattenNavigation,routeAllowed} from "@/pages/layouts/navigation/app-navigation";
 import { useAccounts } from "@/hooks/use-accounts";
 import { useBalancePrivacy } from "@/hooks/use-balance-privacy";
 import {
@@ -396,7 +397,7 @@ export function AppLauncher() {
       ...(navigation.addons ?? []),
     ] as LauncherActionItem[];
 
-    return [...quickActions, ...navItems];
+    return [...quickActions, ...flattenNavigation(navItems)].filter(item=>!item.href||routeAllowed(item.href.split("?")[0]));
   }, [
     isBalanceHidden,
     isLaunchBar,

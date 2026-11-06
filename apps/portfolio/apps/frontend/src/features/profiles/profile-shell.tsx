@@ -1,3 +1,5 @@
+import {useFamilyName,familyTitle} from "@/features/family-office/family-name";
+import "./profile-shell.css";
 import { type ReactNode, useEffect, useState } from "react";
 import { DitherButton, DitherGradient } from "@/components/dither-kit";
 import { Button, buttonVariants, cardSurfaceClassName } from "@fb/ui";
@@ -13,6 +15,7 @@ try { const session = readLocalProfileState().session; if (session) installProfi
 
 /** Profile entry and management use the host's local command engine. */
 export function ProfileShell({ children }: { children: ReactNode }) {
+  useFamilyName();
   const [initial] = useState(() => { try { return { state: readLocalProfileState(), error: "" }; } catch (error) { return { state: { profiles: [], session: null, starting: false } as ProfileState, error: String(error) }; } });
   const [profiles, setProfiles] = useState(initial.state.profiles);
   const profile = profiles.find(row => row.id === selected);
@@ -41,7 +44,7 @@ export function ProfileShell({ children }: { children: ReactNode }) {
     try {
       await profileCommand<ProfileState>("unlock_profile", { profileId: id });
       const entryUrl = new URL(window.location.href); entryUrl.searchParams.delete("choose-profile"); window.history.replaceState(null, "", entryUrl);
-      if (isOfficePersona(id)) window.location.hash = "/office/case";
+      if (isOfficePersona(id)) window.location.hash = id==="office-role-1"?"/goals":id==="office-role-5"?"/office/simulation":"/office/case";
       window.location.reload();
     } catch (error) { setError(error instanceof Error ? error.message : "Profile could not be opened."); setSaving(false); }
   }
@@ -62,9 +65,9 @@ export function ProfileShell({ children }: { children: ReactNode }) {
   </article>;
   if (choosing) return <main className="relative isolate mx-auto max-w-4xl space-y-6 p-6 text-foreground">
     <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 overflow-hidden" aria-hidden="true"><DitherGradient from="green" direction="down" opacity={0.1} className="size-full" /></div>
-    <header className="space-y-2"><p className="text-sm text-muted-foreground">FamilyBizness</p><h1 className="text-3xl font-semibold">Who is visiting the family office?</h1><p className="text-sm text-muted-foreground">Choose your profile to open the shared family office.</p></header>
+    <header className="space-y-2"><p className="text-sm text-muted-foreground">{familyTitle()}</p><h1 className="text-3xl font-semibold">Who is visiting the family office?</h1><p className="text-sm text-muted-foreground">Choose your profile to open the shared family office.</p></header>
     {error && <p role="alert" className="rounded-md border p-3 text-sm text-destructive">{error}</p>}
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{profiles.filter(row => isOfficePersona(row.id)).map(tile)}</div>
+    <div className="profile-role-carousel grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{profiles.filter(row => isOfficePersona(row.id)).map(tile)}</div>
     <details className="rounded-lg border p-4" open={editing !== null || undefined}>
       <summary className="cursor-pointer text-sm font-medium">Profile setup and recovery</summary>
       <div className="mt-4 space-y-4">

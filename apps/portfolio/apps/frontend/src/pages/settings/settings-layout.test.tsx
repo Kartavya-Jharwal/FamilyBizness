@@ -75,7 +75,7 @@ describe("SettingsLayout", () => {
 
     expect(screen.getByTestId("settings-page")).toBeInTheDocument();
     expect(mounts).toBe(1);
-    fireEvent.click(screen.getByRole("tab", { name: "Data", exact: true }));
+    fireEvent.click(screen.getByRole("tab", { name: "Data" }));
     expect(screen.getByRole("link", { name: "Connections & imports" })).toHaveAttribute("aria-current", "page");
     expect(screen.getByTestId("settings-page")).toBeInTheDocument();
   });

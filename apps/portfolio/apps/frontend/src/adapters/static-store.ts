@@ -4,6 +4,8 @@
  */
 
 import type {
+  GoalFundingRule,
+  GoalPlan,
   Account,
   AccountValuation,
   Goal,
@@ -31,6 +33,8 @@ const STORAGE_KEY = "fb-demo-store-v2";
 export type DemoAccount = Account;
 
 type DemoStore = {
+  goalFunding?: Record<string, GoalFundingRule[]>;
+  goalPlans?: Record<string, GoalPlan>;
   accounts: DemoAccount[];
   settings: Settings;
   portfolios: PortfolioWithAccounts[];
@@ -98,6 +102,7 @@ function seedCategories(): TaxonomyCategory[] {
 
 function seed(): DemoStore {
   return {
+    goalPlans: {}, goalFunding: {},
     accounts: seedAccounts(),
     settings: seedSettings(),
     portfolios: seedPortfolios(),
@@ -113,6 +118,8 @@ function load(): DemoStore {
     if (raw) {
       const parsed = JSON.parse(raw) as Partial<DemoStore>;
       return {
+        goalFunding: parsed.goalFunding ?? {},
+        goalPlans: parsed.goalPlans ?? {},
         accounts: Array.isArray(parsed.accounts) ? parsed.accounts : seedAccounts(),
         settings: { ...seedSettings(), ...(parsed.settings ?? {}) },
         portfolios: Array.isArray(parsed.portfolios) ? parsed.portfolios : seedPortfolios(),
@@ -158,6 +165,7 @@ export function mutateDemoStore(mutator: (s: DemoStore) => void) {
   }
   save(candidate);
   store = candidate;
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("familybizness:record-updated"));
 }
 
 export function demoIpsFacts(): IpsFacts {

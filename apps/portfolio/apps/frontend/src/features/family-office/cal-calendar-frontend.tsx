@@ -58,7 +58,7 @@ export function CalCalendarToolbar({ week, view, onWeekChange, onViewChange }: {
 
 /** CalendarSwitch's child/label row, retained for host-owned display preferences. */
 export function CalCalendarSwitch({ id, name, checked, onChange }: { id: string; name: string; checked: boolean; onChange: (checked: boolean) => void }) {
-  return <div className="my-2 flex flex-row items-center"><div className="flex pl-2"><input id={id} type="checkbox" checked={checked} onChange={event => onChange(event.target.checked)} /></div><label className="ml-3 text-sm font-medium leading-5" htmlFor={id}>{name}</label></div>;
+  return <div className="flex flex-row items-center gap-3 py-2"><div className="flex pl-2"><input id={id} type="checkbox" checked={checked} onChange={event => onChange(event.target.checked)} /></div><label className="text-sm font-medium leading-5" htmlFor={id}>{name}</label></div>;
 }
 
 /** Cal DatePicker's compact sidebar contract, using the host DayPicker for keyboard/date semantics. */

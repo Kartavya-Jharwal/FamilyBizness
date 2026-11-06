@@ -198,3 +198,11 @@
   --studio-display: clamp(2.25rem, 4.5vw, 4.5rem);
   --studio-number: clamp(1.75rem, 3vw, 3rem);
 }
+
+:root {
+  --nav-indent-step: var(--space-4);
+  --nav-icon-size: var(--space-5);
+  --touch-target: 2.75rem;
+  --settings-sidebar-width: 15rem;
+  --settings-content-width: 48rem;
+}

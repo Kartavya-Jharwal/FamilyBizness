@@ -1,4 +1,4 @@
-// React adaptation of the Ghostfolio analysis donor; upstream notices accompany this feature.
+// React adaptation of the Investment analytics analysis donor; upstream notices accompany this feature.
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Activity, Layers, Info, ScanLine } from "lucide-react";

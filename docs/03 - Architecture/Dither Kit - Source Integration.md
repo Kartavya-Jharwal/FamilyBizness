@@ -30,7 +30,7 @@ bunx @dither-kit/cli update --dry-run --json --no-input
 `list` recognises all nine registry items; `diff` reports local formatting and host adaptations. `update --dry-run` uses original component hashes to compare the current registry. Because the official CLI's per-file upstream comparison expects unre-based registry paths, use the source snapshot mapping when reviewing an upstream patch; a clean CLI upstream per-file result alone is insufficient. Review updates before overwriting the host palette, axis/label and avatar changes. The source audit command verifies that all source files and the original baselines remain present:
 
 ```powershell
-node scripts/verify-dither-kit.mjs
+node ci/verify-dither-kit.mjs
 ```
 
 ## Profile image replacement

@@ -10,7 +10,7 @@ import { familyOfficeCaseId, familyOfficeConstitution, familyOfficeSources } fro
 import { caseModules, importCase } from "./case-model";
 import { governanceSchema } from "./governance-model";
 import { capitalSchema, type Capital } from "./operations-capital";
-import { decodeOperations, shiftDate, type Obligation } from "./operations-model";
+import { decodeOperations, annualOfficeDiary, shiftDate, type Obligation } from "./operations-model";
 
 export function officeSourceId(id: string): string {
   if (/DISTRIBUTION/.test(id)) return "FO-CASH";
@@ -34,7 +34,7 @@ export function familyOfficeModules() {
     .replaceAll("Golden Bird", "Family office");
   const modules = JSON.parse(neutral) as Omit<ReturnType<typeof goldenBirdModules>, "capital"> & { capital: Capital };
   modules.case = { ...modules.case, family: "Family stewardship office", business: "Family Enterprise Holdings Ltd",
-    basis: "composite-assignment", sourceAssignments: "Golden Bird; Calcot / Stone; Sandoval / Grupo S&S; Vasnani",
+    basis: "composite-assignment", sourceAssignments: "Four source constitutions; provenance is recorded in About and repository documentation",
     description: "One fictional family office, with an operating charter selected from four constitutions. The family, owners, Board and professional team work from the same records: business continuity, orderly ownership liquidity, next-generation stewardship and estate funding.", preparedBy: "Family office" };
   modules.constitutions = { schema: 1, activePackId: familyOfficeConstitution.id, packs: [familyOfficeConstitution] };
   modules.sources = { schema: 1, sources: familyOfficeSources };
@@ -46,7 +46,7 @@ export function familyOfficeModules() {
     ...(recurrence === "One-off" ? {} : { schedule: { frequency: recurrence, until: shiftDate(today, 1095) } }),
   });
   modules.operations = decodeOperations(JSON.stringify({ ...modules.operations, obligations: [
-    ...modules.operations.obligations,
+    ...modules.operations.obligations, ...annualOfficeDiary(today),
     task("fo-exit-pack", "Prepare the 2028-2030 sale-or-retain readiness pack", "Jordan Blake", 30, "FO-EXIT", "/office/governance", "Independent valuation, debt and tax review, employee transition, equal minority information and treatment of trust proceeds. No sale is assumed.", "Quarterly"),
     task("fo-liquidity-window", "Review the 2027 ownership liquidity window", "Sam Ellis", 45, "FO-TRANSFER", "/office/estate", "Up to 5% of issued shares every three years is a review limit, not a commitment. Record affordability, independent valuation and staged first offers."),
     task("fo-employment", "Review family management-entry evidence", "Jordan Blake", 21, "FO-EMPLOYMENT", "/office/governance", "Actual vacancy, relevant qualification, three years' external experience, independent assessment, market pay and no direct close-relative reporting."),

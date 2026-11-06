@@ -98,3 +98,15 @@ describe("where a back swipe can start", () => {
     expect(onRelease).toHaveBeenCalledWith(false, expect.any(Number));
   });
 });
+
+it("does not turn a mostly vertical diagonal drag into back navigation",()=>{
+ const {getByText,onStart}=renderSwipe(<p>Scroll row</p>);
+ const pointer={pointerId:1,isPrimary:true,pointerType:"touch"};
+ fireEvent.pointerDown(getByText("Scroll row"),{...pointer,clientX:5,clientY:400});
+ fireEvent.pointerMove(getByText("Scroll row"),{...pointer,clientX:18,clientY:412});
+ expect(onStart).not.toHaveBeenCalled();
+});
+it("lets range inputs own their horizontal gesture",()=>{
+ const {getByRole,onStart}=renderSwipe(<input type="range" aria-label="Risk"/>);
+ edgeDrag(getByRole("slider"));expect(onStart).not.toHaveBeenCalled();
+});

@@ -8,12 +8,12 @@
     <link rel="icon" type="image/svg+xml" href="/brand-mark.svg" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <title>FamilyBizness</title>
+    <title>Your Family Office</title>
     <!-- Splash styles live in an external file on purpose: an inline <style>
          here makes Tauri nonce the CSP style-src at runtime, which disables
          'unsafe-inline' and breaks runtime-injected styles (NumberFlow, sonner,
@@ -23,6 +23,7 @@
 
   <body class="overflow-x-hidden font-mono">
     <script>
+      try { document.title = (localStorage.getItem("familybizness:family-name") || "Your") + " Family Office"; } catch {}
       // Apply cached theme before first paint to prevent flash on login screen
       (function () {
         try {

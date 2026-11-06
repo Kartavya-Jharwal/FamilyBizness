@@ -1,3 +1,5 @@
+import SpendingInsightsPage from "./spending-insights-page";
+import { GoalCommitments } from "@/features/goals/goal-commitments";
 import { cn } from "@/lib/utils";
 import { useCallback } from "react";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
@@ -64,7 +66,8 @@ export default function SpendingBudgetPage() {
   return (
     <Page>
       <PageHeader
-        heading={t("spending:budgetPage.heading")}
+        stackActionsOnMobile
+        heading="Budget and Expenditure"
         text={t("spending:budgetPage.subheading")}
         onBack={() => {
           if (window.history.length > 1) goBack();
@@ -72,8 +75,8 @@ export default function SpendingBudgetPage() {
         }}
         actions={headerActions}
       />
-      <PageContent className="space-y-5">
-        {settingsLoading ? null : <BudgetEditor mode="monthly" periodKey={monthKey} />}
+      <PageContent className="space-y-5"><GoalCommitments />
+        {settingsLoading ? null : <><BudgetEditor mode="monthly" periodKey={monthKey} /><SpendingInsightsPage embedded /></>}
       </PageContent>
     </Page>
   );

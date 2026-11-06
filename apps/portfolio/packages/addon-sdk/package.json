@@ -70,7 +70,7 @@
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "type-check": "tsc --noEmit",
-    "build:types": "tsc -b tsconfig.json --force",
+    "build:types": "tsc -b tsconfig.json",
     "prepack": "npm run build"
   },
   "peerDependencies": {
