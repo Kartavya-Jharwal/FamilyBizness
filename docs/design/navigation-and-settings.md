@@ -19,3 +19,8 @@ Role visibility is a prototype presentation policy, not real authentication.
 Navigation depth is data assigned while filtering the tree. Every row derives padding-left from its depth and the canonical indent token. Active ancestry uses the same background token as active links with emphasized weight.
 
 Settings and About are available to Managing Director, Family Patriarch and Associate. Board and Counsel retain only the destinations specified in the brief; their profile picker remains available for switching personas.
+
+
+## Navigation glyphs
+
+Navigation destinations, dock/mobile controls, profile-menu actions and the main overview tabs use pinned `reicon@1.2.5` SVG factories via direct per-icon imports. The React adapter uses the official `toSvg()` output with inherited `currentColor`; no CDN or web-component runtime is needed. Link/button labels remain the accessible names and decorative SVGs are hidden from assistive technology. The fixed icon column keeps row alignment stable. [Reicon source](https://github.com/dqev/reicon), [upstream MIT license](https://raw.githubusercontent.com/dqev/reicon/main/LICENSE); the distribution includes that notice on About.

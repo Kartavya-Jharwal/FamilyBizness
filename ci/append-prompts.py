@@ -73,5 +73,5 @@ for stamp,source,digest,prompt in sorted(entries):
     if digest in seen: continue
     seen.add(digest)
     new.append(f'\n<!-- prompt:{digest} -->\n\n## {stamp} — {source}\n\n{prompt}\n')
-OUTPUT.write_text(existing+''.join(new),encoding='utf-8')
+OUTPUT.write_text(existing+''.join(new),encoding='utf-8',newline='\n')
 print(f'Scanned {scanned} project transcripts; appended {len(new)} prompts.')

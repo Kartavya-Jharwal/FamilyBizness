@@ -1,3 +1,7 @@
+import { ReiconGlyph } from "@/components/reicon";
+import ChartLine from "reicon/icons/ChartLine";
+import Wallet from "reicon/icons/Wallet";
+import Receipt from "reicon/icons/Receipt";
 import { HealthStatusIndicator } from "@/components/health-status-icon";
 import { SwipablePage, SwipablePageView } from "@/components/page";
 import { PrivacyToggle } from "@/components/privacy-toggle";
@@ -7,9 +11,6 @@ import { AlternativeAssetKind } from "@/lib/types";
 import SpendingTabContent from "@/features/spending/components/spending-tab-content";
 import { useSpendingSettings } from "@/features/spending/hooks/use-spending-settings";
 import { Button, Icons, type Icon } from "@fb/ui";
-import { HandCoinsIcon } from "@phosphor-icons/react/dist/csr/HandCoins";
-import { TrendUpIcon } from "@phosphor-icons/react/dist/csr/TrendUp";
-import { WalletIcon } from "@phosphor-icons/react/dist/csr/Wallet";
 import { Card, CardContent, CardHeader } from "@fb/ui/components/ui/card";
 import { Skeleton } from "@fb/ui/components/ui/skeleton";
 import { Suspense, type ReactNode, useCallback, useMemo, useState } from "react";
@@ -20,10 +21,10 @@ import { DashboardPortfolioSelector } from "./dashboard-portfolio-selector";
 import { useDashboardPortfolio } from "./use-dashboard-portfolio";
 import { DashboardContent } from "./dashboard-content";
 
-// Tab icons rendered as duotone Phosphor glyphs
-const InvestmentsTabIcon: Icon = (props) => <TrendUpIcon weight="duotone" {...props} />;
-const NetWorthTabIcon: Icon = (props) => <WalletIcon weight="duotone" {...props} />;
-const SpendingTabIcon: Icon = (props) => <HandCoinsIcon weight="duotone" {...props} />;
+// Navigation shares the same Reicon family as the sidebar and dock.
+const InvestmentsTabIcon: Icon = ({className}) => <ReiconGlyph icon={ChartLine} className={className}/>;
+const NetWorthTabIcon: Icon = ({className}) => <ReiconGlyph icon={Wallet} className={className}/>;
+const SpendingTabIcon: Icon = ({className}) => <ReiconGlyph icon={Receipt} className={className}/>;
 
 // Loading skeleton
 const PageLoader = () => (

@@ -1,5 +1,13 @@
 # Design
 
+Reference-family presentation and default surname follow [Canonical Identity](../00%20-%20Canonical/Identity.md#smith-family--hypothetical-reference-family). Landing, supporting pages and workspace naming share that default; browser-local surname overrides remain supported.
+
+## Landing imagery and usability
+
+The app surname field retains raw text during editing so multiword surnames remain typable. Stored values are normalized separately; denied writes explicitly report session-only use. Cross-tab changes update the visible field and document title. The reference-family narrative remains distinct from display-name customization as defined in [Identity](../00%20-%20Canonical/Identity.md).
+
+The existing brand-first landing uses [licensed landscape imagery](Assets%20-%20Landing%20Imagery.md) to illustrate continuity without representing stock subjects as the client's family or property. Solid canonical-token caption surfaces preserve contrast. An in-flow header accommodates long surnames and narrow screens; image dimensions reserve space, the hero loads eagerly, and lower photographs load lazily. Keyboard focus, touch targets and reduced-motion behavior are covered by the [landing UX audit](../07%20-%20Submission/Report%20-%20Landing%20UX.md); measured budgets are in the [performance audit](../07%20-%20Submission/Report%20-%20Landing%20Performance.md).
+
 The shared source for colours, typography, spacing, geometry and chart roles is [tokens.css](../../packages/tokens/tokens.css). Portfolio's semantic UI components and theme take precedence when donor frontend code is adapted. Foundation provenance: [upstream](../../upstream/README.md).
 
 ## Product structure
@@ -61,3 +69,8 @@ Canonical finite corner tokens are reduced by 30%; shared theme radius offsets s
 ## November handoff implementation
 
 The current navigation and role contract supersedes older tab/dropdown descriptions above: see [navigation and settings](../design/navigation-and-settings.md). [Goals and simulation data flow](../03%20-%20Architecture/Goals%20And%20Simulation%20-%20Data%20Flow.md) records persistence and seeded model boundaries. [Local CI](../../ci/README.md) replaces hosted workflows. [Asset slots](../../assets/README.md) and [prompt history](../AI_PROMPTS_LOG.md) are maintained locally.
+
+
+## Main-page chart and profile polish
+
+Main investment and family-capital history fills use canonical `--design-overview-fill-*` opacity tokens for denser colour beneath the existing dither texture. A locally masked Recharts area is exempt from the global fallback mask so its fill is not textured twice. Value scales, amounts, gain/loss colours, labels and privacy controls retain their existing owners. Profile entry has a Reicon family mark and a balanced five-card desktop arrangement; carousel behavior is retained on short screens. [Icon and spacing ownership](../design/spacing-audit.md#navigation-and-profile-icon-polish).

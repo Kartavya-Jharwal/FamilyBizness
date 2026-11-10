@@ -16,7 +16,7 @@ The implementation extends the existing static donor-derived workspace. It adds 
 
 ## Limits
 
-Models are illustrative aggregate approximations with explicit assumptions, not calibrated forecasts. Role filtering is a local prototype policy. Existing saved diaries and financial records are retained; seeded content is used for new/reset records. Accounting connectors remain planned. Image placeholders await licensed family imagery and author credits. Prompt history includes accessible project-scoped JSONL and T3 SQLite user messages; inaccessible or unsupported historical formats are not invented. The importer is idempotent and redacts recognized credential patterns.
+Models are illustrative aggregate approximations with explicit assumptions, not calibrated forecasts. Role filtering is a local prototype policy. Existing saved diaries and financial records are retained; seeded content is used for new/reset records. Accounting connectors remain planned. The landing now uses [licensed illustrative photography](../04%20-%20Design/Assets%20-%20Landing%20Imagery.md); actual family imagery and student contribution credits remain team-supplied. Prompt history includes accessible project-scoped JSONL and T3 SQLite user messages; inaccessible or unsupported historical formats are not invented. The importer is idempotent and redacts recognized credential patterns.
 
 ## Verification
 
@@ -29,3 +29,14 @@ Final local pipeline: **PASS**, `bun run ci:local` (install → lint → typeche
 The build retains upstream source-map, chunk/circular-reexport and bundle-size warnings. These are non-fatal; the production smoke check passed. The initial JS bundle remains large and is a future performance improvement.
 
 The prompt log contains 161 available project user records, with an idempotent redacted importer. Screenshots and build output stay local and are excluded from the commit. No push is performed.
+
+
+## Navigation Icons And Dither Polish
+
+The subsequent landing review has its own [UX evidence](Report%20-%20Landing%20UX.md) and [Lighthouse results](Report%20-%20Landing%20Performance.md). Those reports distinguish current verification from the earlier pipeline results below; they do not claim production deployment or app-wide performance certification.
+
+During that review, attempts to rerun the full TypeScript and focused Vitest suites were stopped because the workstation became severely memory constrained, including a serial TypeScript retry. They did not complete and are not new passing results. The earlier pipeline results below remain historical evidence only. Repeat the broader checks on a machine with sufficient available memory before whole-application sign-off.
+
+The follow-up replaces sidebar, dock/mobile-menu, profile-menu and overview-tab glyphs with pinned Reicon SVGs. Profile entry now has a family header mark and a centred final desktop row instead of an empty sixth grid position. Investment and family-capital history fills use stronger canonical opacity tokens, with the local dither mask applied only once. Amounts, axes, gain/loss semantics and profile commands are unchanged.
+
+Verification: the local CI pipeline passes (266 regression tests, typecheck, static build, links and assets). An additional focused run passes 31 navigation/profile/chart-scale tests. Browser checks cover the main page in both themes at 1440, 768 and 390 pixels, three profile widths, and the collapsed sidebar; SVG paths are populated and no page overflow/errors were found. Production static smoke checks also pass. Local screenshots are under ignored `apps/portfolio/artifacts/reicon-polish/`; reproduce via `ci/verify-reicon-polish.cjs`. Reicon's upstream MIT notice is retained and linked on About. Existing non-fatal upstream bundle/source-map warnings remain.

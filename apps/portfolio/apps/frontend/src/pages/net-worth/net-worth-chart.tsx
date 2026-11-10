@@ -200,9 +200,9 @@ export function NetWorthChart({ data, isLoading }: NetWorthChartProps) {
       >
         <defs><DitherChartMask id={`${id}-dither`}/>
           <linearGradient id={fillGradientId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor={THEME_COLOR} stopOpacity={0.2} />
-            <stop offset="70%" stopColor={THEME_COLOR} stopOpacity={0.12} />
-            <stop offset="100%" stopColor={THEME_COLOR} stopOpacity={0} />
+            <stop offset="5%" stopColor={THEME_COLOR} stopOpacity="var(--design-overview-fill-strong)" />
+            <stop offset="70%" stopColor={THEME_COLOR} stopOpacity="var(--design-overview-fill-mid)" />
+            <stop offset="100%" stopColor={THEME_COLOR} stopOpacity="var(--design-overview-fill-floor)" />
           </linearGradient>
         </defs>
         <Tooltip

@@ -1,7 +1,10 @@
+import Search3 from "reicon/icons/Search3";
+import Grid from "reicon/icons/Grid";
+import { ReiconGlyph } from "@/components/reicon";
 import { LiquidGlass } from "@/components/liquid-glass";
 import { ProfileMenu } from "@/features/profiles/profile-menu";
 import { cn } from "@/lib/utils";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, Icons } from "@fb/ui";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@fb/ui";
 import { motion } from "motion/react";
 import { useCallback, useId, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -115,7 +118,7 @@ export function FloatingNavigationBar({ navigation }: FloatingNavigationBarProps
                 className="relative flex size-7 shrink-0 items-center justify-center outline-none"
                 aria-hidden="true"
               >
-                <Icons.Search2 className="size-6" />
+                <ReiconGlyph icon={Search3} className="size-6" />
               </span>
             </button>
             {hasMoreItems && (
@@ -144,7 +147,7 @@ export function FloatingNavigationBar({ navigation }: FloatingNavigationBarProps
                     className="relative flex size-7 shrink-0 items-center justify-center outline-none"
                     aria-hidden="true"
                   >
-                    <Icons.CirclesFour className="size-6" />
+                    <ReiconGlyph icon={Grid} className="size-6" />
                   </span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent

@@ -1,3 +1,9 @@
+import { ReiconGlyph } from "@/components/reicon";
+import ChevronExpandY from "reicon/icons/ChevronExpandY";
+import User from "reicon/icons/User";
+import Plus from "reicon/icons/Plus";
+import Users from "reicon/icons/Users";
+import Lock from "reicon/icons/Lock";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import {
@@ -9,8 +15,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  Icons,
-} from "@fb/ui";
+  } from "@fb/ui";
 import { ProfileAvatar } from "./profile-avatar";
 import { useProfile } from "./profile-context";
 
@@ -48,7 +53,7 @@ export function ProfileMenu({ collapsed = false }: { collapsed?: boolean }) {
         {!collapsed && (
           <>
             <span className="min-w-0 flex-1 truncate text-start">{profile.name}</span>
-            <Icons.ChevronsUpDown className="text-muted-foreground size-4 shrink-0" />
+            <ReiconGlyph icon={ChevronExpandY} className="text-muted-foreground size-4 shrink-0" />
           </>
         )}
       </DropdownMenuTrigger>
@@ -60,21 +65,21 @@ export function ProfileMenu({ collapsed = false }: { collapsed?: boolean }) {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="h-11 gap-3" onClick={manageProfile}>
-            <Icons.User className="size-4" />
+            <ReiconGlyph icon={User} className="size-4" />
             {t("profiles.settings")}
           </DropdownMenuItem>
           <DropdownMenuItem
             className="h-11 gap-3"
             onClick={singleProfile ? addProfile : switchProfile}
           >
-            {singleProfile ? <Icons.Plus className="size-4" /> : <Icons.Users className="size-4" />}
+            {singleProfile ? <ReiconGlyph icon={Plus} className="size-4" /> : <ReiconGlyph icon={Users} className="size-4" />}
             {t(singleProfile ? "profiles.add" : "profiles.switch")}
           </DropdownMenuItem>
           {profile.lockEnabled && (
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="h-11 gap-3" onClick={lockProfile}>
-                <Icons.Lock className="size-4" />
+                <ReiconGlyph icon={Lock} className="size-4" />
                 {t("profiles.lock")}
               </DropdownMenuItem>
             </>

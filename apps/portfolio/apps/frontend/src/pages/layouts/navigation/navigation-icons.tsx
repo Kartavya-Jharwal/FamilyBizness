@@ -4,6 +4,7 @@ import {
   type AddonIconComponent,
 } from "@fb/ui/components/ui/addon-icons";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 function normalizeIconKey(icon: string) {
   return icon.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -30,7 +31,7 @@ export function resolveNavigationIcon(icon: React.ReactNode, className: string) 
 
   // Native nav items: a React element or component is passed directly.
   if (React.isValidElement<{ className?: string }>(icon)) {
-    return icon.props.className ? icon : React.cloneElement(icon, { className });
+    return React.cloneElement(icon, { className: cn(icon.props.className, className) });
   }
 
   if (typeof icon === "function") {

@@ -1036,3 +1036,6 @@ summary {
 .app-shell .recharts-bar-rectangle path:not([mask]),
 .app-shell .recharts-pie-sector path:not([mask]),
 .app-shell .recharts-treemap rect:not([mask]) { mask: url(#host-chart-dither); }
+
+/* A local SVG group mask already textures its area; avoid masking its child twice. */
+.app-shell .recharts-area[mask] .recharts-area-area { mask: none; }

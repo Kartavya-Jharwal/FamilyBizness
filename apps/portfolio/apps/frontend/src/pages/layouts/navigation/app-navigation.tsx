@@ -1,4 +1,30 @@
-import { Icons } from "@fb/ui/components/ui/icons";
+import Home from "reicon/icons/Home";
+import BookOpen from "reicon/icons/BookOpen";
+import ShieldCheck from "reicon/icons/ShieldCheck";
+import Users from "reicon/icons/Users";
+import Scale from "reicon/icons/Scale";
+import Calendar from "reicon/icons/Calendar";
+import Target from "reicon/icons/Target";
+import Wallet from "reicon/icons/Wallet";
+import ChartPie from "reicon/icons/ChartPie";
+import Receipt from "reicon/icons/Receipt";
+import ChartBar from "reicon/icons/ChartBar";
+import FileText from "reicon/icons/FileText";
+import ChartLine from "reicon/icons/ChartLine";
+import Sparkles from "reicon/icons/Sparkles";
+import Shuffle from "reicon/icons/Shuffle";
+import Flame from "reicon/icons/Flame";
+import Eye from "reicon/icons/Eye";
+import Settings from "reicon/icons/Settings";
+import InfoCircle from "reicon/icons/InfoCircle";
+import User from "reicon/icons/User";
+import Database from "reicon/icons/Database";
+import Link from "reicon/icons/Link";
+import Palette from "reicon/icons/Palette";
+import Accessibility from "reicon/icons/Accessibility";
+import Briefcase from "reicon/icons/Briefcase";
+import { ReiconGlyph } from "@/components/reicon";
+import type { IconFunction } from "reicon/createIcon";
 import type { ReactNode } from "react";
 
 export interface NavLink {
@@ -28,8 +54,40 @@ const leaders:OfficeRole[]=["Managing Director","Family Patriarch"];
 const staff:OfficeRole[]=[...leaders,"Associate"];
 const investments:OfficeRole[]=[...staff,"Legal Counsel"];
 export function currentRole():OfficeRole { const id=localStorage.getItem("familybizness:selected-demo-profile");return ({"office-role-0":"Family Patriarch","office-role-1":"Family Board","office-role-2":"Managing Director","office-role-4":"Associate","office-role-5":"Legal Counsel"} as Record<string,OfficeRole>)[id??""]??"Managing Director"; }
-const sectionIcons:Record<string,typeof Icons.Folder>={Stewardship:Icons.Briefcase,"Family Constitution":Icons.File,"Day-to-day Operations":Icons.Calendar,"Capital and Liquidity":Icons.Coins,"Portfolio and Scenario":Icons.Activity2,Settings:Icons.Settings2,About:Icons.Info};
-const page=(title:string,href:string,allowedRoles:OfficeRole[]=staff):NavLink=>{const Icon=sectionIcons[title]??Icons.File;return {title,href,allowedRoles,icon:<Icon className="size-5"/>};};
+const navigationIcons: Record<string, IconFunction> = {
+  "Stewardship": Home,
+  "Family Constitution": BookOpen,
+  "Charter & adoption": BookOpen,
+  "Investment Policy Statement": ShieldCheck,
+  "Governance & Succession": Users,
+  "Estate Planning": Scale,
+  "Day-to-day Operations": Briefcase,
+  "Calendar": Calendar,
+  "Family Goals": Target,
+  "Capital and Liquidity": Wallet,
+  "Overview": ChartPie,
+  "Budget and Expenditure": Receipt,
+  "Investment Fees": Receipt,
+  "Trading Analytics": ChartBar,
+  "Financial Statements": FileText,
+  "Portfolio and Scenario": ChartLine,
+  "Portfolio": Briefcase,
+  "Stochastic Process Lab": Sparkles,
+  "Scenario Analysis": Shuffle,
+  "Allocations": ChartPie,
+  "Family FIRE": Flame,
+  "X-ray and Risk": Eye,
+  "Settings": Settings,
+  "General": User,
+  "Appearance": Palette,
+  "Data": Database,
+  "Integrations": Link,
+  "Accessibility": Accessibility,
+  "About": InfoCircle,
+};
+const page = (title: string, href: string, allowedRoles: OfficeRole[] = staff): NavLink => ({
+  title, href, allowedRoles, icon: <ReiconGlyph icon={navigationIcons[title] ?? FileText} />,
+});
 export const settingsNavigation:NavLink[]=[page("General","/settings/general",staff),page("Appearance","/settings/appearance",staff),page("Data","/settings/records",staff),page("Integrations","/settings/connections",staff),page("Accessibility","/settings/accessibility",staff)];
 export const officeNavigation:NavigationProps={primary:[
  page("Stewardship","/office/case"),

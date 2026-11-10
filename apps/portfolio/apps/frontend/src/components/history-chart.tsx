@@ -314,22 +314,22 @@ export function HistoryChart({
           <linearGradient id={fillGradientId} x1="0" y1="0" x2="0" y2="1">
             {allNegative ? (
               <>
-                <stop offset="5%" stopColor="var(--destructive)" stopOpacity={0.2} />
-                <stop offset="70%" stopColor="var(--destructive)" stopOpacity={0.12} />
-                <stop offset="100%" stopColor="var(--destructive)" stopOpacity={0} />
+                <stop offset="5%" stopColor="var(--destructive)" stopOpacity="var(--design-overview-fill-strong)" />
+                <stop offset="70%" stopColor="var(--destructive)" stopOpacity="var(--design-overview-fill-mid)" />
+                <stop offset="100%" stopColor="var(--destructive)" stopOpacity="var(--design-overview-fill-floor)" />
               </>
             ) : allPositive ? (
               <>
-                <stop offset="5%" stopColor="var(--success)" stopOpacity={0.2} />
-                <stop offset="70%" stopColor="var(--success)" stopOpacity={0.12} />
-                <stop offset="100%" stopColor="var(--success)" stopOpacity={0} />
+                <stop offset="5%" stopColor="var(--success)" stopOpacity="var(--design-overview-fill-strong)" />
+                <stop offset="70%" stopColor="var(--success)" stopOpacity="var(--design-overview-fill-mid)" />
+                <stop offset="100%" stopColor="var(--success)" stopOpacity="var(--design-overview-fill-floor)" />
               </>
             ) : (
               <>
-                <stop offset="0%" stopColor="var(--success)" stopOpacity={0.2} />
-                <stop offset={zeroPercent} stopColor="var(--success)" stopOpacity={0.05} />
-                <stop offset={zeroPercent} stopColor="var(--destructive)" stopOpacity={0.05} />
-                <stop offset="100%" stopColor="var(--destructive)" stopOpacity={0.2} />
+                <stop offset="0%" stopColor="var(--success)" stopOpacity="var(--design-overview-fill-strong)" />
+                <stop offset={zeroPercent} stopColor="var(--success)" stopOpacity="var(--design-overview-fill-zero)" />
+                <stop offset={zeroPercent} stopColor="var(--destructive)" stopOpacity="var(--design-overview-fill-zero)" />
+                <stop offset="100%" stopColor="var(--destructive)" stopOpacity="var(--design-overview-fill-strong)" />
               </>
             )}
           </linearGradient>

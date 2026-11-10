@@ -435,6 +435,7 @@ img {
 .journey-page .site-header a:hover {color:var(--color-sea)}
 
 /* Public family narrative: canonical foundations, intentional replaceable photo slots. */
+.family-landing { overflow-wrap: anywhere; }
 .family-landing .site-header { gap: var(--space-4); }
 .family-landing .brand-mark { display: inline-flex; align-items: center; gap: var(--space-3); }
 .brand-roundel { display: grid; place-items: center; width: var(--space-7); aspect-ratio: 1; border: 1px solid var(--color-on-hero-muted); border-radius: var(--design-radius-pill); font-size: var(--font-size-small); letter-spacing: normal; }
@@ -503,4 +504,47 @@ img {
 .landing-family-name { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); }
 .landing-family-name input { min-width: 0; width: 8em; padding: var(--space-2); color: var(--text); background: var(--bg); border: 1px solid currentColor; }
 [data-photo-slot] > img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+[data-photo-slot] > picture { position: absolute; inset: 0; }
+[data-photo-slot] > picture img { width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 48rem) { .site-header { flex-wrap: wrap; gap: var(--space-2); } }
+
+/* The header stays in document flow when navigation or a surname wraps. */
+.family-landing .site-header { position: relative; height: auto; min-height: var(--nav-height); display: grid; grid-template-columns: minmax(0, 1fr) auto auto; padding-block: var(--space-4); background: hsl(var(--design-dark-bg)); }
+.family-landing .brand-mark { min-width: 0; overflow-wrap: anywhere; text-transform: none; letter-spacing: normal; }
+.family-landing .brand-roundel { flex-shrink: 0; }
+.family-landing .header-nav { gap: var(--space-5); }
+.family-landing .header-nav a { display: inline-flex; align-items: center; min-height: var(--touch-target); }
+.family-landing .landing-family-name { padding: 0; font-size: var(--font-size-small); color: var(--color-on-hero); }
+.family-landing .landing-family-name input { color: var(--color-on-hero); background: hsl(var(--design-dark-bg-raised)); border: 1px solid var(--color-on-hero-faint); border-radius: var(--radius-sm); min-height: var(--touch-target); font: inherit; }
+.family-landing .landing-family-name input::placeholder { color: var(--color-on-hero-muted); }
+.family-landing .site-header :focus-visible { outline-color: var(--color-on-hero); }
+.family-hero { min-height: calc(100svh - var(--nav-height) - var(--space-6)); grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); padding-top: var(--space-7); row-gap: var(--space-6); }
+.family-hero-portrait { aspect-ratio: 1; min-height: 0; align-self: center; }
+.family-hero-portrait figcaption { inset: auto 0 0; padding: var(--space-4) var(--space-5); background: hsl(var(--design-dark-bg)); color: var(--color-on-hero); }
+.generation-photo { aspect-ratio: 4 / 3; }
+.generation-photo figcaption { position: absolute; inset: auto 0 0; padding: var(--space-3) var(--space-4); background: var(--color-paper); color: var(--color-ink); text-align: left; }
+.generation-photo figcaption span { color: var(--color-ink-muted); }
+.family-landing .capability-grid a:hover { padding-inline: var(--space-5); }
+.family-landing .team-details summary { padding-block: var(--space-3); }
+.family-landing .narrative-footer nav a { padding-block: var(--space-1); }
+.family-landing .footer-brand { overflow-wrap: anywhere; }
+@media (max-width: 1100px) {
+  .family-landing .site-header { grid-template-columns: minmax(0, 1fr) auto; }
+  .family-landing .landing-family-name { grid-column: 1 / -1; justify-self: end; }
+}
+@media (max-width: 900px) {
+  .family-hero { grid-template-columns: minmax(0, 1fr); }
+  .family-hero-portrait { aspect-ratio: 16 / 9; width: 100%; }
+  .generation-photo figcaption { flex-direction: column; }
+}
+@media (max-width: 640px) {
+  .family-landing .site-header { gap: var(--space-3); }
+  .family-landing .header-nav { gap: var(--space-3); }
+  .family-landing .header-nav .hide-sm { display: none; }
+  .family-landing .landing-family-name { justify-self: start; }
+  .family-hero { padding-top: var(--space-6); }
+  .family-hero-portrait { aspect-ratio: 4 / 3; }
+  .generation-photo figcaption { flex-direction: row; }
+  .family-landing .capability-grid a, .family-landing .capability-grid a:hover { padding-inline: var(--space-3); }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

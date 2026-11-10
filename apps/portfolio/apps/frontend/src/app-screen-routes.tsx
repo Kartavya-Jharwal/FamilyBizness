@@ -1,13 +1,6 @@
-import SettingsGroupPage from "@/features/family-office/settings-group-page";
-import AboutPage from "@/features/family-office/about-page";
-import FinancialStatementsPage from "@/features/family-office/financial-statements-page";
-import {SimulationDonorLab} from "@/features/family-office/simulation-lab-workspace";
-import {PortfolioVisual} from "@/features/family-office/portfolio-visual";
 import {FamilyOfficeShell} from "@/features/family-office/family-office-shell";
 import { routeAllowed } from "@/pages/layouts/navigation/app-navigation";
 import { useLocation } from "react-router-dom";
-import PhilanthropyPage from "@/features/family-office/philanthropy-page";
-import FinanceAddonWorkspaces from "@/features/family-office/finance-addon-workspaces";
 import { lazy, memo, Suspense, useEffect, useState } from "react";
 import { Navigate, Route, Routes, type Location } from "react-router-dom";
 
@@ -17,36 +10,49 @@ import {
   type DynamicRouteEntry,
 } from "@/addons/addons-runtime-context";
 import { AddonIframeRoute } from "@/addons/iframe/addon-iframe-route";
-import ActivityManagerPage from "@/pages/activity/activity-manager-page";
-import ActivityPage from "@/pages/activity/activity-page";
-import ActivityImportPage from "@/pages/activity/import/activity-import-page";
-import AssetsPage from "@/pages/asset/assets-page";
-import HoldingsPage from "@/pages/holdings/holdings-page";
-import PortfolioInsightsPage from "@/pages/insights/portfolio-insights";
-import AnalysisAttributionPage from "@/pages/insights/analysis/attribution-page";
 import NotFoundPage from "@/pages/not-found";
-import SettingsAccountsPage from "@/pages/settings/accounts/accounts-page";
-import PortfoliosPage from "@/pages/settings/portfolios/portfolios-page";
 import SettingsLayout from "@/pages/settings/settings-layout";
-import AccountPage from "./pages/account/account-page";
-import AiAssistantPage from "./pages/ai-assistant/ai-assistant-page";
-import AssetProfilePage from "./pages/asset/asset-profile-page";
-import HealthPage from "./pages/health/health-page";
-import AboutSettingsPage from "./pages/settings/about/about-page";
-import ContributionLimitPage from "./pages/settings/contribution-limits/contribution-limits-page";
-import ExportSettingsPage from "./pages/settings/exports/exports-page";
-import TaxonomiesPage from "./pages/settings/taxonomies/taxonomies-page";
-import SpendingInsightsPage from "./features/spending/pages/spending-insights-page";
-import SpendingBudgetPage from "./features/spending/pages/spending-budget-page";
-import SpendingSettingsPage from "./pages/settings/spending/spending-settings-page";
-import SpendingSettingsCategoriesPage from "./pages/settings/spending/categories/spending-categories-page";
-import SpendingSettingsEventsPage from "./pages/settings/spending/events/spending-events-page";
-import SpendingSettingsRulesPage from "./pages/settings/spending/rules/spending-rules-page";
-import SpendingSetupPage from "./pages/settings/spending/setup/spending-setup-page";
-import GoalsDashboardPage from "@/features/goals/pages/goals-dashboard-page";
-import GoalNewPage from "@/features/goals/pages/goal-new-page";
-import GoalDetailPage from "@/features/goals/pages/goal-detail-page";
-import GoalRetirementGuidePage from "@/features/goals/pages/goal-retirement-guide-page";
+
+// Defer route-only workspaces; shell and navigation remain available while a page loads.
+const SettingsGroupPage = lazy(() => import("@/features/family-office/settings-group-page"));
+const AboutPage = lazy(() => import("@/features/family-office/about-page"));
+const FinancialStatementsPage = lazy(() => import("@/features/family-office/financial-statements-page"));
+const PhilanthropyPage = lazy(() => import("@/features/family-office/philanthropy-page"));
+const FinanceAddonWorkspaces = lazy(() => import("@/features/family-office/finance-addon-workspaces"));
+const ActivityManagerPage = lazy(() => import("@/pages/activity/activity-manager-page"));
+const ActivityPage = lazy(() => import("@/pages/activity/activity-page"));
+const ActivityImportPage = lazy(() => import("@/pages/activity/import/activity-import-page"));
+const AssetsPage = lazy(() => import("@/pages/asset/assets-page"));
+const HoldingsPage = lazy(() => import("@/pages/holdings/holdings-page"));
+const PortfolioInsightsPage = lazy(() => import("@/pages/insights/portfolio-insights"));
+const AnalysisAttributionPage = lazy(() => import("@/pages/insights/analysis/attribution-page"));
+const SettingsAccountsPage = lazy(() => import("@/pages/settings/accounts/accounts-page"));
+const PortfoliosPage = lazy(() => import("@/pages/settings/portfolios/portfolios-page"));
+const AccountPage = lazy(() => import("./pages/account/account-page"));
+const AiAssistantPage = lazy(() => import("./pages/ai-assistant/ai-assistant-page"));
+const AssetProfilePage = lazy(() => import("./pages/asset/asset-profile-page"));
+const HealthPage = lazy(() => import("./pages/health/health-page"));
+const AboutSettingsPage = lazy(() => import("./pages/settings/about/about-page"));
+const ContributionLimitPage = lazy(() => import("./pages/settings/contribution-limits/contribution-limits-page"));
+const ExportSettingsPage = lazy(() => import("./pages/settings/exports/exports-page"));
+const TaxonomiesPage = lazy(() => import("./pages/settings/taxonomies/taxonomies-page"));
+const SpendingInsightsPage = lazy(() => import("./features/spending/pages/spending-insights-page"));
+const SpendingBudgetPage = lazy(() => import("./features/spending/pages/spending-budget-page"));
+const SpendingSettingsPage = lazy(() => import("./pages/settings/spending/spending-settings-page"));
+const SpendingSettingsCategoriesPage = lazy(() => import("./pages/settings/spending/categories/spending-categories-page"));
+const SpendingSettingsEventsPage = lazy(() => import("./pages/settings/spending/events/spending-events-page"));
+const SpendingSettingsRulesPage = lazy(() => import("./pages/settings/spending/rules/spending-rules-page"));
+const SpendingSetupPage = lazy(() => import("./pages/settings/spending/setup/spending-setup-page"));
+const GoalsDashboardPage = lazy(() => import("@/features/goals/pages/goals-dashboard-page"));
+const GoalNewPage = lazy(() => import("@/features/goals/pages/goal-new-page"));
+const GoalDetailPage = lazy(() => import("@/features/goals/pages/goal-detail-page"));
+const GoalRetirementGuidePage = lazy(() => import("@/features/goals/pages/goal-retirement-guide-page"));
+const SimulationDonorLab = lazy(() =>
+  import("@/features/family-office/simulation-lab-workspace").then((module) => ({ default: module.SimulationDonorLab })),
+);
+const PortfolioVisual = lazy(() =>
+  import("@/features/family-office/portfolio-visual").then((module) => ({ default: module.PortfolioVisual })),
+);
 
 const ConstitutionPage = lazy(() => import("./features/governance/constitution/constitution-page"));
 const OfficeReviewPage = lazy(() => import("./features/family-office/office-review-workspace"));
@@ -100,6 +106,7 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
   if(!routeAllowed((location?.pathname??currentLocation.pathname)))return <main className="p-6"><h1>Page unavailable for this role</h1><a href="#/goals">Family Goals</a></main>;
 
   return (
+    <Suspense fallback={<p className="p-6" role="status">Opening workspace…</p>}>
     <Routes location={location}>
       <Route index element={<Navigate to="/office/case" replace />} />
       <Route path="about" element={<AboutPage/>} />
@@ -191,5 +198,6 @@ export const AppScreenRoutes = memo(function AppScreenRoutes({
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+    </Suspense>
   );
 });

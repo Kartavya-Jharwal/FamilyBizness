@@ -13,7 +13,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <title>Your Family Office</title>
+    <title>Smith Family Office</title>
     <!-- Splash styles live in an external file on purpose: an inline <style>
          here makes Tauri nonce the CSP style-src at runtime, which disables
          'unsafe-inline' and breaks runtime-injected styles (NumberFlow, sonner,
@@ -23,7 +23,7 @@
 
   <body class="overflow-x-hidden font-mono">
     <script>
-      try { document.title = (localStorage.getItem("familybizness:family-name") || "Your") + " Family Office"; } catch {}
+      try { document.title = (localStorage.getItem("familybizness:family-name")?.trim().slice(0, 60) || "Smith") + " Family Office"; } catch {}
       // Apply cached theme before first paint to prevent flash on login screen
       (function () {
         try {

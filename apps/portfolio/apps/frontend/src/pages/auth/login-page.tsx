@@ -75,7 +75,7 @@ export function LoginPage() {
           <CardHeader className="space-y-4 text-center">
             <div className="flex justify-center">
               <img
-                src="/brand-mark.svg"
+                src={`${import.meta.env.BASE_URL}brand-mark.svg`}
                 alt={t("auth:login.logoAlt")}
                 className="h-16 w-16 sm:h-20 sm:w-20"
               />

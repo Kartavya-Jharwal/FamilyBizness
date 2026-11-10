@@ -6,6 +6,13 @@ const root=path.resolve('apps/portfolio');
 const frontend=path.join(root,'apps/frontend');
 const legalRoot=path.join(frontend,'public/open-source');
 let count=0;
+// Explicit provenance surfaces may name upstream projects without branding the host.
+const provenanceFiles = new Set([
+  'apps/frontend/src/components/dither-kit/palette.ts',
+  'apps/frontend/src/features/family-office/family-office.css',
+  'apps/frontend/src/features/family-office/about-page.tsx',
+  'apps/frontend/src/features/family-office/finance-addon-workspaces.tsx',
+]);
 function audit(folder) {
   for(const entry of fs.readdirSync(folder,{withFileTypes:true})) {
     if(['node_modules','dist','artifacts','open-source','.git'].includes(entry.name))continue;
@@ -14,7 +21,8 @@ function audit(folder) {
     if(entry.isDirectory())audit(file);
     else if(/\.(?:ts|tsx|js|jsx|mjs|json|css|scss|html|md|toml)$/.test(file) && !/^(?:LICENSE|NOTICE|TRADEMARKS)(?:\.|$)/i.test(entry.name) && !file.endsWith('attribution-page.tsx')) {
       count++;
-      assert(!/wealthfolio/i.test(fs.readFileSync(file,'utf8')),'Brand outside original legal attribution: '+file);
+      const relative=path.relative(root,file).replaceAll('\\','/');
+      assert(provenanceFiles.has(relative)||!/wealthfolio/i.test(fs.readFileSync(file,'utf8')),'Brand outside documented upstream attribution: '+file);
     }
   }
 }
@@ -40,5 +48,7 @@ const attribution=fs.readFileSync(path.join(frontend,'src/pages/insights/analysi
 assert(attribution.includes('modified fork of Ghostfolio') && attribution.includes('modified fork of Wealthfolio'),'Both fork attributions must be visible');
 const stream=fs.readFileSync(path.join(frontend,'src/adapters/web/ai-streaming.ts'),'utf8');
 assert(!/\bfetch\s*\(|new\s+(WebSocket|EventSource)|api[_-]?key/i.test(stream),'Faux stream acquired live transport or credentials');
-assert(fs.readFileSync(path.resolve('dist/portfolio/index.html'),'utf8').includes('<title>FamilyBizness</title>'),'Build still has upstream title');
+const sourceTitle=fs.readFileSync(path.join(frontend,'index.html'),'utf8').match(/<title>([^<]+)<\/title>/)?.[1];
+assert(sourceTitle?.endsWith(' Family Office')&&!/wealthfolio/i.test(sourceTitle),'Source title must use the host family-office identity');
+assert(fs.readFileSync(path.resolve('dist/portfolio/index.html'),'utf8').includes(`<title>${sourceTitle}</title>`),'Built title differs from the source identity');
 console.log(`PASS: ${count} editable files scanned; product branding removed, both donors credited, original licenses distributed and faux stream offline.`);

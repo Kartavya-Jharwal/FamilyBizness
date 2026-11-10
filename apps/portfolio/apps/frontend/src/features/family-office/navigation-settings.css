@@ -5,3 +5,5 @@
 .office-nav a{padding-left:calc(var(--space-3) + var(--nav-depth,0) * var(--nav-indent-step))}.office-nav .nav-ancestor{background:var(--secondary);font-weight:600}
 
 @media(max-width:1023px){.office-settings{padding-bottom:calc(var(--touch-target) * 2 + var(--space-6))}}
+
+.office-nav .nav-control { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); min-height: var(--touch-target); border-radius: var(--radius); }

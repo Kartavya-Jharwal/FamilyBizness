@@ -39,6 +39,10 @@
   --design-metric-size: clamp(1.375rem, 2.1vw, 1.875rem);
   --design-metric-tracking: -0.035em;
   --design-chart-tick-gap: 112; /* Minimum labelled interval in CSS pixels. */
+  --design-overview-fill-strong: 0.52;
+  --design-overview-fill-mid: 0.32;
+  --design-overview-fill-floor: 0.12;
+  --design-overview-fill-zero: 0.16;
   --design-chart-line-glow: 3; /* CSS pixels before canvas backing scaling. */
   --design-chart-edge-space: 24; /* SVG plot padding in CSS pixels. */
   --design-chart-label-size: 0.75rem;

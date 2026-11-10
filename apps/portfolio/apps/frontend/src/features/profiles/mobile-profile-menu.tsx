@@ -1,4 +1,8 @@
-import { Icons } from "@fb/ui";
+import { ReiconGlyph } from "@/components/reicon";
+import Check from "reicon/icons/Check";
+import Lock from "reicon/icons/Lock";
+import User from "reicon/icons/User";
+import Plus from "reicon/icons/Plus";
 import { useTranslation } from "react-i18next";
 import { ProfileAvatar } from "./profile-avatar";
 import { useProfile } from "./profile-context";
@@ -35,26 +39,26 @@ export function MobileProfileMenu({ onAction }: MobileProfileMenuProps) {
             <ProfileAvatar id={item.avatarId} className="mx-0 size-9 shrink-0 rounded-full" />
             <span className="min-w-0 flex-1 truncate">{item.name}</span>
             {item.id === profile.id ? (
-              <Icons.Check className="text-primary size-5 shrink-0" />
+              <ReiconGlyph icon={Check} className="text-primary size-5 shrink-0" />
             ) : item.lockEnabled ? (
-              <Icons.Lock className="text-muted-foreground size-5 shrink-0" />
+              <ReiconGlyph icon={Lock} className="text-muted-foreground size-5 shrink-0" />
             ) : null}
           </button>
         ))}
       </div>
       <div className="py-3">
         <button type="button" className={rowClassName} onClick={() => runAction(manageProfile)}>
-          <Icons.User className="size-6 shrink-0" />
+          <ReiconGlyph icon={User} className="size-6 shrink-0" />
           {t("profiles.settings")}
         </button>
         <button type="button" className={rowClassName} onClick={() => runAction(addProfile)}>
-          <Icons.Plus className="size-6 shrink-0" />
+          <ReiconGlyph icon={Plus} className="size-6 shrink-0" />
           {t("profiles.add")}
         </button>
       </div>
       {profile.lockEnabled && (
         <button type="button" className={rowClassName} onClick={() => runAction(lockProfile)}>
-          <Icons.Lock className="size-6 shrink-0" />
+          <ReiconGlyph icon={Lock} className="size-6 shrink-0" />
           {t("profiles.lock")}
         </button>
       )}

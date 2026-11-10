@@ -1,10 +1,15 @@
+import { ReiconGlyph } from "@/components/reicon";
+import Grid from "reicon/icons/Grid";
+import ArrowLeft from "reicon/icons/ArrowLeft";
+import X from "reicon/icons/X";
+import ChevronRight from "reicon/icons/ChevronRight";
 import { LiquidGlass } from "@/components/liquid-glass";
 import { ProfileAvatar } from "@/features/profiles/profile-avatar";
 import { useProfile } from "@/features/profiles/profile-context";
 import { MobileProfileMenu } from "@/features/profiles/mobile-profile-menu";
 import { useHapticFeedback } from "@/hooks/use-haptic-feedback";
 import { cn } from "@/lib/utils";
-import { Icons, Sheet, SheetContent, SheetTitle } from "@fb/ui";
+import { Sheet, SheetContent, SheetTitle } from "@fb/ui";
 import { motion } from "motion/react";
 import {
   useCallback,
@@ -211,7 +216,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
                   className="relative flex size-7 shrink-0 items-center justify-center outline-none"
                   aria-hidden="true"
                 >
-                  <Icons.CirclesFour className="size-6" />
+                  <ReiconGlyph icon={Grid} className="size-6" />
                 </span>
               </button>
             )}
@@ -236,7 +241,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
                   className="hover:bg-muted flex size-11 shrink-0 items-center justify-center rounded-full"
                   aria-label={t("common:back")}
                 >
-                  <Icons.ArrowLeft className="size-5 rtl:rotate-180" />
+                  <ReiconGlyph icon={ArrowLeft} className="size-5 rtl:rotate-180" />
                 </button>
               )}
               <SheetTitle
@@ -251,7 +256,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
               className="bg-muted text-foreground hover:bg-muted/80 flex size-11 items-center justify-center rounded-full transition-colors"
               aria-label={t("common:layout.close_more_menu")}
             >
-              <Icons.Close className="size-5" />
+              <ReiconGlyph icon={X} className="size-5" />
             </button>
           </div>
 
@@ -278,7 +283,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
                       <span className="min-w-0 flex-1 truncate font-semibold">
                         {profileContext.profile.name}
                       </span>
-                      <Icons.ChevronRight className="text-muted-foreground size-5 shrink-0 rtl:rotate-180" />
+                      <ReiconGlyph icon={ChevronRight} className="text-muted-foreground size-5 shrink-0 rtl:rotate-180" />
                     </button>
                   </div>
                 )}
@@ -306,7 +311,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
                         <span className="min-w-0 flex-1 truncate text-lg font-semibold">
                           {item.title}
                         </span>
-                        <Icons.ChevronRight className="text-muted-foreground/50 size-5 shrink-0 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
+                        <ReiconGlyph icon={ChevronRight} className="text-muted-foreground/50 size-5 shrink-0 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
                       </Link>
                     );
                   })}
@@ -341,7 +346,7 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
                             <span className="min-w-0 flex-1 truncate text-lg font-semibold">
                               {item.title}
                             </span>
-                            <Icons.ChevronRight className="text-muted-foreground/50 size-5 shrink-0 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
+                            <ReiconGlyph icon={ChevronRight} className="text-muted-foreground/50 size-5 shrink-0 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
                           </Link>
                         );
                       })}

@@ -1,5 +1,13 @@
 # Architecture
 
+Reference-family presentation and default surname follow [Canonical Identity](../00%20-%20Canonical/Identity.md#smith-family--hypothetical-reference-family). Landing, supporting pages and workspace naming share that default; browser-local surname overrides remain supported.
+
+## Landing release verification
+
+Route-only Portfolio screens load through React lazy imports in `app-screen-routes.tsx`, with an explicit loading status inside the persistent application shell. This defers unused workspaces without changing route permissions, records or models. `ci/verify-project-signoff.cjs` performs a fresh serial route/viewport/theme sweep; `ci/signoff-snapshot.mjs` binds release checks to exact working-tree source hashes while other agents may be editing.
+
+The public landing uses bundled, licensed WebP imagery with explicit dimensions and prioritised hero loading; it makes no runtime image-service request. [Asset provenance](../04%20-%20Design/Assets%20-%20Landing%20Imagery.md) owns source and licence details. Surname editing retains a session fallback when browser storage is unavailable. [UX verification](../07%20-%20Submission/Report%20-%20Landing%20UX.md) and [performance verification](../07%20-%20Submission/Report%20-%20Landing%20Performance.md) record the measured scope and limitations.
+
 Product identity and legal baseline: [Identity](../00%20-%20Canonical/Identity.md). Release acceptance: [MVP matrix](../05%20-%20Requirements/Release%20-%20MVP%20Acceptance%20Matrix.md).
 
 ## Application and delivery
@@ -93,3 +101,6 @@ The [financial-book readthrough](Portfolio%20-%20Financial%20Book%20Readthrough.
 ## November handoff implementation
 
 The current navigation and role contract supersedes older tab/dropdown descriptions above: see [navigation and settings](../design/navigation-and-settings.md). [Goals and simulation data flow](../03%20-%20Architecture/Goals%20And%20Simulation%20-%20Data%20Flow.md) records persistence and seeded model boundaries. [Local CI](../../ci/README.md) replaces hosted workflows. [Asset slots](../../assets/README.md) and [prompt history](../AI_PROMPTS_LOG.md) are maintained locally.
+
+
+Navigation SVGs now come from pinned direct `reicon/icons/*` imports through `components/reicon.tsx`; rendering uses the package's DOM-free `toSvg` API, with bundled trusted markup only. No CDN dependency or runtime fetch is introduced. [Navigation glyphs](../design/navigation-and-settings.md#navigation-glyphs).

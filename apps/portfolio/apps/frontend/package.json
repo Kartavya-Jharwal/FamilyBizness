@@ -53,6 +53,7 @@
     "react-i18next": "^16.0.0",
     "react-router-dom": "^7.18.2",
     "recharts": "^3.7.0",
+    "reicon": "1.2.5",
     "remark-gfm": "^4.0.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",

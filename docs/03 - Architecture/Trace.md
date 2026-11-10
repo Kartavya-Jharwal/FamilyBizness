@@ -1,5 +1,11 @@
 # Constitution to tool trace
 
+Full-project local release evidence is tracked in [Project sign-off](../07%20-%20Submission/Report%20-%20Project%20Sign-Off.md), including source-fingerprint verification so concurrent edits cannot silently inherit older test results. Profile permissions remain enforced by their existing route-policy owner; lazy loading changes delivery only.
+
+Reference-family presentation and default surname follow [Canonical Identity](../00%20-%20Canonical/Identity.md#smith-family--hypothetical-reference-family). Landing, supporting pages and workspace naming share that default; browser-local surname overrides remain supported.
+
+Public-entry release evidence is recorded in the [landing UX audit](../07%20-%20Submission/Report%20-%20Landing%20UX.md) and [landing performance audit](../07%20-%20Submission/Report%20-%20Landing%20Performance.md). Decorative photography has [separate provenance](../04%20-%20Design/Assets%20-%20Landing%20Imagery.md) and is not evidence of family identity, ownership or charter facts.
+
 The prepared office uses the [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md), selecting from all four source constitutions. Visitor personas share the same existing records. Current lifecycle: [Office profiles](../05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md).
 
 | Constitutional topic | Runtime owner and dependent behavior | Evidence retained |
@@ -77,3 +83,6 @@ The current navigation and role contract supersedes older tab/dropdown descripti
 ## Current content and provenance
 
 Calendar samples and the prepared case now include the same labelled annual SFO review diary, including December and January. Cash-gift examples live in the Estate Planning ledger. Financial Statements has a dedicated route over the shared saved financial book; accounting connections remain planned. IPS art/culture classifications distinguish operating expenses, investments and grants. Source and license details remain in the distributed donor manifest: [content and provenance register](../design/content-and-provenance.md).
+
+
+Navigation/profile glyphs: Reicon direct SVG factories → shared navigation config and navigation controls. Source and retained MIT notice are linked on About. Main history fill density is controlled solely by the canonical opacity tokens. [Navigation glyphs](../design/navigation-and-settings.md#navigation-glyphs).

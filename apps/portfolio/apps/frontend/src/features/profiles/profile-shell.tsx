@@ -1,3 +1,5 @@
+import Users from "reicon/icons/Users";
+import { ReiconGlyph } from "@/components/reicon";
 import {useFamilyName,familyTitle} from "@/features/family-office/family-name";
 import "./profile-shell.css";
 import { type ReactNode, useEffect, useState } from "react";
@@ -63,9 +65,9 @@ export function ProfileShell({ children }: { children: ReactNode }) {
     <DitherButton aria-label={`Open ${row.name}`} color="green" variant="dotted" bloom="off" className={buttonVariants({ variant: "outline", className: "mt-auto" })} disabled={saving || row.lockEnabled} onClick={() => void selectProfile(row.id)}>Open profile</DitherButton>
     {row.lockEnabled && <p className="text-xs text-muted-foreground">Open this protected profile in its original host.</p>}
   </article>;
-  if (choosing) return <main className="relative isolate mx-auto max-w-4xl space-y-6 p-6 text-foreground">
+  if (choosing) return <main className="profile-entry relative isolate mx-auto max-w-4xl text-foreground">
     <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 overflow-hidden" aria-hidden="true"><DitherGradient from="green" direction="down" opacity={0.1} className="size-full" /></div>
-    <header className="space-y-2"><p className="text-sm text-muted-foreground">{familyTitle()}</p><h1 className="text-3xl font-semibold">Who is visiting the family office?</h1><p className="text-sm text-muted-foreground">Choose your profile to open the shared family office.</p></header>
+    <header className="profile-entry-header"><div className="profile-entry-mark"><ReiconGlyph icon={Users} className="profile-entry-glyph"/></div><div className="profile-entry-copy"><p className="text-sm text-muted-foreground">{familyTitle()}</p><h1 className="text-3xl font-semibold">Who is visiting the family office?</h1><p className="text-sm text-muted-foreground">Choose your profile to open the shared family office.</p></div></header>
     {error && <p role="alert" className="rounded-md border p-3 text-sm text-destructive">{error}</p>}
     <div className="profile-role-carousel grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{profiles.filter(row => isOfficePersona(row.id)).map(tile)}</div>
     <details className="rounded-lg border p-4" open={editing !== null || undefined}>
