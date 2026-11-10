@@ -62,7 +62,7 @@ The order below explains the development approach rather than asserting an exact
 
 > we as a student team want to combine selected parts of our constitutions. different members want to retain particular sections from their own work and use useful parts from the others. help us turn those selections into one coherent operating charter. show where each provision came from, where they conflict and which decisions we need to make as a team. dont describe this as merging four family businesses and dont invent agreement between incompatible rules
 
-**Rationale:** The students identify the combined-constitution idea as their own. AI's proposed role is organising, comparing and implementing their selections, while students retain responsibility for choices and conflicts. The [combined operating charter](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md) is the canonical home for the selected provisions.
+**Rationale:** The students identify the combined-constitution idea as their own. AI's proposed role is organising, comparing and implementing their selections, while students retain responsibility for choices and conflicts. The [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md) is the canonical home for the adopted family policy.
 
 ## 8. Interlinking the Workspaces
 

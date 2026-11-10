@@ -52,6 +52,8 @@ const report = { runId, base: base.href, startedAt: new Date().toISOString(), st
 const persist = () => fs.writeFileSync(path.join(out, 'results.json'), JSON.stringify(report, null, 2));
 persist();
 const urlFor = route => { const url = new URL(base); url.hash = route; return url.href; };
+// Prepared-office symbols such as FAMILY-BUS have no bundled mark. The avatar falls back to initials.
+const optionalAsset = (value) => { try { return new URL(value).pathname.includes('/ticker-logos/'); } catch { return false; } };
 const bounded = async (work, label) => {
   let timer;
   try { return await Promise.race([work(), new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(`${label}: exceeded ${routeTimeout} ms deadline`)), routeTimeout); })]); }
@@ -75,7 +77,7 @@ async function inspect(context, route, heading, width, theme) {
   const page = await context.newPage();
   let closing = false;
   page.on('pageerror', error => result.errors.push(error.message));
-  page.on('response', response => { if (response.status() >= 400) result.badHTTP.push({ status: response.status(), url: response.url() }); });
+  page.on('response', response => { if (response.status() >= 400 && !optionalAsset(response.url())) result.badHTTP.push({ status: response.status(), url: response.url() }); });
   page.on('requestfailed', request => { if (!closing || !/ABORTED/i.test(request.failure()?.errorText || '')) result.failedRequests.push({ url: request.url(), error: request.failure()?.errorText }); });
   page.on('console', message => { if (message.type() === 'error') result.consoleErrors.push(message.text()); });
   try {
@@ -140,7 +142,7 @@ async function inspect(context, route, heading, width, theme) {
       const setup = await context.newPage();
       const selection = { width, passed: false, errors: [], badHTTP: [] };
       setup.on('pageerror', error => selection.errors.push(error.message));
-      setup.on('response', response => { if (response.status() >= 400) selection.badHTTP.push({ status: response.status(), url: response.url() }); });
+      setup.on('response', response => { if (response.status() >= 400 && !optionalAsset(response.url())) selection.badHTTP.push({ status: response.status(), url: response.url() }); });
       try {
         await bounded(async () => {
           const entry = new URL(base); entry.searchParams.set('choose-profile', '1'); entry.hash = '/office/case';

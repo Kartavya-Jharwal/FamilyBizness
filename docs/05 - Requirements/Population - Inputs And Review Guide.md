@@ -4,7 +4,7 @@ Product identity: [Identity](../00%20-%20Canonical/Identity.md). Current impleme
 
 ## Prepared office
 
-Choose a visitor profile such as **Patriarch** or **Family technician** to enter the already-populated office. The [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md) owns the selected provisions from Golden Bird, Calcot / Stone, Sandoval and Vasnani, the rationale for conflicting alternatives and the retained GBP numerical scenario. Visitor profiles share these records. Earlier Golden Bird and independent workspaces remain recoverable separately.
+Choose a visitor profile such as **Patriarch** or **Family technician** to enter the already-populated office. The [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md) owns the adopted family policy and the retained GBP numerical scenario. Visitor profiles share these records. Earlier Golden Bird and independent workspaces remain recoverable separately.
 
 ## Source material
 

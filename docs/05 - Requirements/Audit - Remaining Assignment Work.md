@@ -13,4 +13,4 @@ The 5 November implementation addresses the user's latest scope: shared design t
 
 The previous review's empty income/movements/AUM-history finding is closed for the prepared case. Values/IPS now have an explicit Board-adopted implementation mandate. The optimiser remains an investment-portfolio model; operating-company concentration is shown in the consolidated capital view, rather than falsely claiming a single whole-family covariance engine. The existing estate comparison retains its supported scope. These boundaries are not new broad-model work or additional tests in this revision.
 
-Fresh execution results and the deployed revision are maintained in [Release - MVP](../03%20-%20Architecture/Release%20-%20MVP.md). The [combined charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md) owns the selected scenario and policy choices.
+Fresh execution results and the deployed revision are maintained in [Release - MVP](../03%20-%20Architecture/Release%20-%20MVP.md). The [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md) owns the selected scenario and policy choices.

@@ -27,13 +27,25 @@
     previous = title;
   };
   const field = document.getElementById('family-surname');
+  const save = value => {
+    surname = normalize(value);
+    try { localStorage.setItem(key, surname); } catch {}
+    apply();
+  };
   if (field) {
     field.value = surname === 'Smith' ? '' : surname;
-    field.addEventListener('input', () => {
-      surname = normalize(field.value);
-      try { localStorage.setItem(key, surname); } catch {}
-      apply();
+    field.addEventListener('input', () => save(field.value));
+  }
+  // Asked once per browser; Settings → General changes it afterwards.
+  const welcome = document.getElementById('family-welcome');
+  const seenKey = 'familybizness:welcome-seen';
+  const seen = () => { try { return localStorage.getItem(seenKey) === '1'; } catch { return sessionStorage.getItem?.(seenKey) === '1'; } };
+  if (welcome && typeof welcome.showModal === 'function' && !seen()) {
+    welcome.addEventListener('close', () => {
+      save(welcome.returnValue === 'custom' && field ? field.value : 'Smith');
+      try { localStorage.setItem(seenKey, '1'); } catch { try { sessionStorage.setItem(seenKey, '1'); } catch {} }
     });
+    welcome.showModal();
   }
   window.addEventListener('storage', event => {
     if (event.key !== key && event.key !== null) return;

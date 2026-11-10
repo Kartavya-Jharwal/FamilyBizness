@@ -43,7 +43,7 @@ Mandated capabilities (detail → [`../05 - Requirements/Pillars.md`](../05%20-%
 
 ## Family office and constitution
 
-The application is one prepared family-office experience. Its [combined operating charter](Smith%20Family%20-%20Constitution.md) selects provisions from Golden Bird, Calcot / Stone, Sandoval and Vasnani. These are source constitutions for the application, not four merged businesses or a requirement for visiting families to build constitutions. Golden Bird alone does not define the product.
+The application is one prepared family-office experience. Its operating charter is the [Smith Family Constitution](Smith%20Family%20-%20Constitution.md): one Smith family policy for the family enterprise. Supplied constitutions were synthesised into that policy. Visiting families use this prepared office.
 
 ## Cold-visit flow
 

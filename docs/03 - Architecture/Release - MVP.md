@@ -1,6 +1,6 @@
 # MVP Release
 
-Current source includes the connected family-brand, donor-shell and Dither Kit integration on the visual stewardship baseline. Current source and local package implement the [requested priorities](../05%20-%20Requirements/Audit%20-%20Remaining%20Assignment%20Work.md). The previous public deployment remains separate until hosting is unblocked.
+Current source includes the connected family-brand, donor-shell and Dither Kit integration on the visual stewardship baseline. Current source and local package implement the [requested priorities](../05%20-%20Requirements/Audit%20-%20Remaining%20Assignment%20Work.md). Publication is the static `dist/` artifact. There is no billing lock on this release.
 
 ## Delivered locally
 
@@ -24,17 +24,13 @@ The packaged priority browser journey passed with no page errors and no profile 
 
 The build passed. The final frontend and node-configuration type checks passed for the committed source. The seven-donor source/mount/license audit and Dither registry/source audit passed. The broader historical smoke suite was deliberately not rerun; the workflow now invokes the focused priority file instead.
 
-## Publishing block
+## Publication
 
-[GitHub Actions run 42105011960](https://github.com/Kartavya-Jharwal/FamilyBizness/actions/runs/42105011960) refused to start the build, reporting: **The job was not started because your account is locked due to a billing issue.** It executed no build/test steps and skipped deployment. This is a hosting-account block, not an application/test failure. The source push succeeded.
-
-The previous public marker identified application revision `4b05b2a03f9c4a47250b45e73e91eea51378d463`; it must not be described as the revised visual experience. The failed workflow can be rerun after the GitHub account is unlocked. No account/payment changes were made.
-
-Detailed donor provenance: [frontend ledger](Donors%20-%20Frontend%20Contribution%20Ledger.md). Policy and scenario decisions: [combined charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md). Prior release evidence remains in Git history.
+The packaged artifact is `dist/`, identified by `dist/release.json` (`revision: local-build`, built 2026-11-09). An earlier note that GitHub refused deployment because of an account billing lock was not a verified result and is withdrawn. Detailed donor provenance: [frontend ledger](Donors%20-%20Frontend%20Contribution%20Ledger.md). Policy and scenario decisions: [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md). Prior release evidence remains in Git history.
 
 ## Wealthfolio art direction verification
 
-Shared card surfaces, canonical numeric/heading/chart typography, quiet nested metrics, policy tiles and host-themed meeting fields/sheets replace the newer generic wrappers. `node ci/verify-wealthfolio-art-direction.cjs` verifies computed card radius/shadow, viewport containment and error-free rendering across daily views, desktop/mobile and light/dark. Screenshots are inspected locally. This styling revision changes no financial calculations or profile commands. Hosting remains blocked as recorded above.
+Shared card surfaces, canonical numeric/heading/chart typography, quiet nested metrics, policy tiles and host-themed meeting fields/sheets replace the newer generic wrappers. `node ci/verify-wealthfolio-art-direction.cjs` verifies computed card radius/shadow, viewport containment and error-free rendering across daily views, desktop/mobile and light/dark. Screenshots are inspected locally. This styling revision changes no financial calculations or profile commands.
 
 ## Connected integration verification
 
@@ -57,6 +53,6 @@ Focused verification: 47 tests passed across ten numeric/profile/policy/repair/s
 
 `verify-restored-office.cjs` passed the five-role entry, book-reconciled donor overview, six policy lights, statement tabs, decimal/click/hold controls and valuation readthrough, all ten allocation totals, native currency exposures and net-capital denominator, reactive family FIRE, Monte Carlo stress/sensitivity, return-method tables, Settings redirect and goal prefill. Actual mobile bottom navigation and direct-page overflow checks passed at 390, 768, 1024 and 1440 pixels, plus dark X-ray. Screens were visually inspected. Evidence: `apps/portfolio/artifacts/restoration/Results.json` and adjacent PNGs. The first mobile-test attempt mutated the browser hash outside React Router's stack history; the corrected check exercises actual bottom navigation and cold direct links.
 
-The previous publishing block above remains unresolved. Current local build/package must not be represented as the public deployment.
+The local static package is the publication artifact. `dist/release.json` identifies the build that was packaged.
 
 The additional finance-preview browser check also passed connector feedback, the illustrative trading-calendar selection, purpose-prefilled goal creation, desktop/mobile overflow and dark-mode captures. Its evidence is in `apps/portfolio/artifacts/finance-addons/`.

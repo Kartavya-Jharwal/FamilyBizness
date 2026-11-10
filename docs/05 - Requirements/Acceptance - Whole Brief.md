@@ -39,6 +39,6 @@ The earlier implementation covered useful isolated calculations and workflow sli
 
 ## Population and release boundary
 
-The prepared office uses the [combined charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md), selecting provisions from all four supplied constitutions. Visitor profiles share its existing saved records. Earlier independent cases and administrative revision/import tools remain available as secondary maintenance/recovery capabilities. Production authentication, donor servers/synchronization and financial/legal execution are excluded by the static-MVP contract.
+The prepared office uses the [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md). Visitor profiles share its existing saved records. Earlier independent cases and administrative revision/import tools remain available as secondary maintenance/recovery capabilities. Production authentication, donor servers/synchronization and financial/legal execution are excluded by the static-MVP contract.
 
 The release matrix separates verified product behavior from genuine institutional/team submission inputs, which the software cannot invent. Source snapshots, user-authored parameters and prototype workflow records are retained for review and export.

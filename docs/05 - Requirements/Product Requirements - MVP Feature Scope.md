@@ -7,7 +7,7 @@ FamilyBizness is a browser-local functional MVP for governance, estate planning,
 | Area | Delivered MVP behavior |
 |---|---|
 | Entry and family setup | Brand-first introduction, continuity narrative, visitor-profile selection inside Portfolio, one prepared family office shared by role profiles, returning profile resume and secondary earlier-workspace recovery |
-| Constitutions | Readable combined operating charter selected from Golden Bird, Calcot / Stone, Sandoval and Vasnani; connected checks and sources; revisions/library/import/export remain expandable administration |
+| Constitutions | Readable Smith Family Constitution; connected checks and sources; revisions/library/import/export remain expandable administration |
 | Governance and succession | Participants, entity economic/voting interests, RACI workflows, approvals/history, weighted constitutional decisions, continuity prerequisites/evidence, before/after scenarios and event log |
 | Estate and structuring | Scoped English-law IHT, gifts/reliefs/bands, holding/ownership register, direct/holding/cash-trust comparison, separate trust lifecycle and timed succession-liquidity schedule |
 | Portfolio and risk | Host portfolio/holdings/activity/insights; constrained continuous allocation, correlations, screens and counterfactual, stress/concentration, fees/tax/private assets, historical VaR/CVaR, drawdown/Sharpe and seeded generation projections |
@@ -32,7 +32,7 @@ Unknown external fund constituents, unauthenticated legal approvals and unsuppor
 
 The [whole-brief contract](Acceptance%20-%20Whole%20Brief.md) defines functional acceptance. The release gate combines source/type/model checks, production static packaging, donor provenance, and desktop/mobile/keyboard/contrast checks on the packaged artifact. A successful local build alone is not a public deployment; the release record states the deployed URL and revision separately.
 
-The selected operating model and conflict resolutions are owned by the [combined charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md), which supersedes the earlier primary constitution-creation flow.
+The selected operating model and conflict resolutions are owned by the [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md), which supersedes the earlier primary constitution-creation flow.
 
 ## Visual stewardship priorities
 

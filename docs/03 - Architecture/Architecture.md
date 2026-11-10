@@ -20,7 +20,7 @@ Visitor-profile selection for the prepared office lives inside Portfolio. Legacy
 
 The prepared office uses one existing module store shared by visitor personas. `profile-workspace.ts` resolves office-persona IDs to that store; immutable session scope still belongs to the individual application load. Earlier independent profiles retain their own case storage and are available through secondary recovery entry.
 
-The [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md) owns selected provisions from all four documents. `family-office-constitution.ts` supplies the adopted pack and trace; `family-office-case.ts` reuses the existing validated GBP numerical scenario and imports the combined operational records once, transactionally. No new backend, accounting ledger or financial engine is introduced. Source changes invalidate dependent constitutional bindings.
+The [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md) owns the adopted family policy. `family-office-constitution.ts` supplies the adopted pack and trace; `family-office-case.ts` reuses the existing validated GBP numerical scenario and imports the operational records once, transactionally. No new backend, accounting ledger or financial engine is introduced. Source changes invalidate dependent constitutional bindings.
 
 The [office profile guide](../05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md) owns entry/maintenance behavior; [Trace](Trace.md) maps the selected topics to existing tools.
 

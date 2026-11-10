@@ -24,9 +24,21 @@
       <a href="#legacy">Our story</a>
       <a class="hide-sm" href="#family-office">The family office</a>
       <a href="#team">Team</a>
+      <a class="hide-sm" href="#fork">Fork</a>
     </nav>
-  <label class="landing-family-name">Family surname <input id="family-surname" aria-label="Family surname" maxlength="60" placeholder="Smith"></label>
   </header>
+  <dialog class="family-welcome" id="family-welcome" aria-labelledby="family-welcome-title">
+    <form method="dialog" class="family-welcome-card">
+      <p class="section-label">Welcome to the family office</p>
+      <h2 id="family-welcome-title">Whose family office is this?</h2>
+      <p>Explore the prepared demo as the hypothetical Smith family, or see it with your own family surname. You can change this later in Settings.</p>
+      <label class="family-welcome-field">Family surname <input id="family-surname" aria-label="Family surname" maxlength="60" placeholder="Your surname" autocomplete="family-name"></label>
+      <div class="family-welcome-actions">
+        <button class="btn btn-primary" value="custom" type="submit">Use my family name</button>
+        <button class="btn btn-ghost" value="demo" type="submit">Continue with the Smith demo</button>
+      </div>
+    </form>
+  </dialog>
   <main id="main" tabindex="-1">
     <section class="hero family-hero" aria-labelledby="hero-title">
       <div class="hero-inner">
@@ -76,7 +88,7 @@
     </section>
 
     <section class="section academic-section" id="team" aria-labelledby="team-title">
-      <div><p class="section-label">The student team</p><h2 id="team-title">An academic project.<br>A practical exploration.</h2><p>This family-office experience was developed as an academic project. AI was used extensively in research support, coding, integration and documentation; the implementation record describes that process and its limits.</p><details class="team-details"><summary>Team &amp; individual contributions</summary><p class="pending-credit">Student names and individual contribution credits are awaiting the team's final submission details.</p></details></div>
+      <div><p class="section-label">The student team</p><h2 id="team-title">An academic project.<br>A practical exploration.</h2><p>This family-office experience was developed as an academic project. AI was used extensively in research support, coding, integration and documentation; the implementation record describes that process and its limits.</p><ul class="team-list" aria-label="Group members"><li>Kartavya Jharwal</li><li>Abdul Rafay Malik</li><li>Dalet Sandoval</li><li>Michael Stone</li><li>Sonia Vasnani</li></ul></div>
       <div class="project-materials" aria-label="Project supporting materials">
         <a href="https://github.com/Kartavya-Jharwal/FamilyBizness/blob/main/docs/01%20-%20Notes/AI%20-%20Implementation%20Record.md">AI usage &amp; implementation record <span aria-hidden="true">↗</span></a>
         <a href="https://github.com/Kartavya-Jharwal/FamilyBizness/blob/main/docs/07%20-%20Submission/Report%20-%20Platform%20Design%20And%20Evaluation.md">Supporting report <span aria-hidden="true">↗</span></a>
@@ -84,12 +96,25 @@
         <div class="material-pending"><span>Supporting video</span><span>Awaiting team upload</span></div>
       </div>
     </section>
+
+    <section class="section fork-section" id="fork" aria-labelledby="fork-title">
+      <div><p class="section-label">From proof of concept to your own office</p><h2 id="fork-title">Fork it.<br>Run it on your own hardware.</h2><p class="lede">Copy this prompt, paste it into your personal Claude, and it will fork the repository, wire in real data APIs and set the platform up for your own micro single-family office.</p></div>
+      <copy-prompt src="./Fork%20-%20Setup%20Plan.md">Fork https://github.com/Kartavya-Jharwal/FamilyBizness into my own GitHub account and set it up as a private micro single-family office on my own hardware.
+1. Clone the fork and run it locally with Bun (bun install, bun run build, bun run preview).
+2. Replace the prepared Smith demo records with my family's details, keeping every record browser-local or on my machine.
+3. Wire in the real APIs I choose (accounting, banking or broker, market data) behind the existing Settings → Integrations previews. Keep keys out of the repository.
+4. Keep the open-source licences and credits intact, and tell me plainly what still needs a qualified legal, tax or investment adviser.
+Start from this proof of concept; do not rebuild it from scratch.</copy-prompt>
+    </section>
+
+    <section class="continuity-band open-source-band" aria-labelledby="open-source-title"><p class="section-label">Open by design</p><h2 id="open-source-title">Built on open source.<br>Kept in the open.</h2><p>This platform was made by forking and merging open-source projects, and it remains in the open-source domain. Fellow small single-family offices can contribute, adapt and scale this merged version, so it can grow from a proof of concept into a long-term tool. <a href="https://github.com/Kartavya-Jharwal/FamilyBizness">Contribute on GitHub ↗</a></p></section>
   </main>
   <footer class="site-footer narrative-footer">
     <div class="footer-story"><a class="footer-brand" href="/">Smith Family Office</a><p>A shared purpose, carried forward.<br>For the family, the enterprise and the generations to come.</p></div>
-    <nav aria-label="Footer"><a href="#legacy">Our story</a><a href="#family-office">The family office</a><a href="#team">Team &amp; project materials</a><a href="/portfolio/#/open-source">Open-source credits</a></nav>
-    <p class="footer-disclosure">Academic proof of work · The Smith family, palace-service history and Royal Warrant narrative are hypothetical; no real royal endorsement is claimed. Landscape photography is illustrative, not a representation of family members or assets. <a href="https://github.com/Kartavya-Jharwal/FamilyBizness/blob/main/docs/04%20-%20Design/Assets%20-%20Landing%20Imagery.md">Photography credits</a>.</p>
+    <nav aria-label="Footer"><a href="#legacy">Our story</a><a href="#family-office">The family office</a><a href="#team">Team &amp; project materials</a><a href="#fork">Fork for your office</a><a href="/portfolio/#/open-source">Open-source credits</a><a href="https://github.com/Kartavya-Jharwal/FamilyBizness">Source on GitHub</a></nav>
+    <p class="footer-disclosure">Academic proof of concept by Kartavya Jharwal, Abdul Rafay Malik, Dalet Sandoval, Michael Stone and Sonia Vasnani · Open source · The Smith family, palace-service history and Royal Warrant narrative are hypothetical; no real royal endorsement is claimed. Landscape photography is illustrative, not a representation of family members or assets. <a href="https://github.com/Kartavya-Jharwal/FamilyBizness/blob/main/docs/04%20-%20Design/Assets%20-%20Landing%20Imagery.md">Photography credits</a>.</p>
   </footer>
 <script src="/family-name.js"></script>
+<script src="/copy-prompt.js" defer></script>
 </body>
 </html>

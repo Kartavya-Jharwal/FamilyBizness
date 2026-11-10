@@ -1,6 +1,6 @@
 # Office Profiles and Constitution Administration
 
-The current product direction is a prepared family office using the [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md). It supersedes the earlier primary flow of creating independent family cases and authoring constitutions.
+The current product direction is a prepared family office using the [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md). It supersedes the earlier primary flow of creating independent family cases and authoring constitutions.
 
 ## Enter the prepared office
 

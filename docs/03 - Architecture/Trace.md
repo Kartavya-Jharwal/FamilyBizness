@@ -6,7 +6,7 @@ Reference-family presentation and default surname follow [Canonical Identity](..
 
 Public-entry release evidence is recorded in the [landing UX audit](../07%20-%20Submission/Report%20-%20Landing%20UX.md) and [landing performance audit](../07%20-%20Submission/Report%20-%20Landing%20Performance.md). Decorative photography has [separate provenance](../04%20-%20Design/Assets%20-%20Landing%20Imagery.md) and is not evidence of family identity, ownership or charter facts.
 
-The prepared office uses the [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md), selecting from all four source constitutions. Visitor personas share the same existing records. Current lifecycle: [Office profiles](../05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md).
+The prepared office uses the [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md). Visitor personas share the same existing records. Current lifecycle: [Office profiles](../05%20-%20Requirements/Cases%20-%20Setup%20And%20Constitution%20Management.md).
 
 | Constitutional topic | Runtime owner and dependent behavior | Evidence retained |
 |---|---|---|

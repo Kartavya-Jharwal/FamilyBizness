@@ -2,9 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState, type FC } from "reac
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
-  Bar,
-  BarChart,
-  Cell,
+  Area,
+  AreaChart,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -87,7 +86,6 @@ import { EventsCard } from "./events-card";
 import { RecentActivityCard } from "./recent-activity-card";
 import { SpendingPeriodSelector } from "./spending-period-toggle";
 
-const FUTURE_BAR = "var(--muted)";
 const SPENDING_TAXONOMY = "spending_categories";
 type SpendingDashboardPeriod = "MTD" | "LAST_MONTH" | "3M" | "6M" | "YTD" | "1Y";
 
@@ -786,6 +784,11 @@ export default function SpendingTabContent() {
           : t("spending:tabContent.monthlyAvg");
     return { barData: data, avgValue: avg, avgLabel: labelByGranularity };
   }, [report?.byDay, granularity, dateRange, appTimezone, t]);
+  // Future buckets have no spending yet, so the line stops at today instead of dropping to zero.
+  const lineData = useMemo(
+    () => barData.map((entry) => ({ ...entry, line: entry.future ? null : entry.value })),
+    [barData],
+  );
 
   const categoriesMeta = useMemo(() => {
     const meta = new Map<
@@ -1003,11 +1006,25 @@ export default function SpendingTabContent() {
             </div>
           ) : (
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={barData} margin={{ top: 8, right: 24, left: 16, bottom: 8 }}>
+              <AreaChart
+                data={lineData}
+                margin={{ top: 8, right: 24, left: 16, bottom: 8 }}
+                onClick={(state: unknown) => {
+                  const entry = (state as { activePayload?: { payload?: (typeof barData)[number] }[] })
+                    ?.activePayload?.[0]?.payload;
+                  if (!entry || entry.future || entry.value <= 0) return;
+                  const bucket = barKeyToRange(entry.key, granularity);
+                  const rangeStart = dateRange?.from ? formatDateISO(dateRange.from) : bucket.from;
+                  const rangeEnd = dateRange?.to ? formatDateISO(dateRange.to) : bucket.to;
+                  const from = bucket.from < rangeStart ? rangeStart : bucket.from;
+                  const to = bucket.to > rangeEnd ? rangeEnd : bucket.to;
+                  navigate(`/activities?tab=spending&from=${from}&to=${to}`);
+                }}
+              >
                 <defs>
-                  <linearGradient id="spending-bar" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={theme.deep} stopOpacity={0.95} />
-                    <stop offset="100%" stopColor={theme.mid} stopOpacity={0.7} />
+                  <linearGradient id="spending-line-fill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={theme.mid} stopOpacity={0.35} />
+                    <stop offset="100%" stopColor={theme.mid} stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <XAxis
@@ -1019,7 +1036,7 @@ export default function SpendingTabContent() {
                   minTickGap={granularity === "day" ? 8 : 16}
                 />
                 <Tooltip
-                  cursor={{ fill: "var(--muted)", opacity: 0.3 }}
+                  cursor={{ stroke: "var(--muted-foreground)", strokeOpacity: 0.3 }}
                   content={({ active, payload }) => {
                     if (!active || !payload?.length) return null;
                     const p = payload[0].payload as {
@@ -1060,35 +1077,19 @@ export default function SpendingTabContent() {
                     strokeOpacity={0.4}
                   />
                 )}
-                <Bar
-                  dataKey="value"
-                  radius={[4, 4, 0, 0]}
-                  maxBarSize={28}
+                <Area
+                  type="monotone"
+                  dataKey="line"
+                  stroke={theme.deep}
+                  strokeWidth={2}
+                  fill="url(#spending-line-fill)"
+                  dot={false}
+                  activeDot={{ r: 4, fill: theme.deep, stroke: "var(--background)", strokeWidth: 2 }}
+                  connectNulls={false}
                   isAnimationActive={false}
-                  onClick={(data: unknown) => {
-                    const entry = ((data as { payload?: (typeof barData)[number] })?.payload ??
-                      data) as (typeof barData)[number];
-                    if (!entry || entry.future || entry.value <= 0) return;
-                    const bucket = barKeyToRange(entry.key, granularity);
-                    const rangeStart = dateRange?.from
-                      ? formatDateISO(dateRange.from)
-                      : bucket.from;
-                    const rangeEnd = dateRange?.to ? formatDateISO(dateRange.to) : bucket.to;
-                    const from = bucket.from < rangeStart ? rangeStart : bucket.from;
-                    const to = bucket.to > rangeEnd ? rangeEnd : bucket.to;
-                    navigate(`/activities?tab=spending&from=${from}&to=${to}`);
-                  }}
-                >
-                  {barData.map((entry, i) => (
-                    <Cell
-                      key={`cell-${i}`}
-                      fill={entry.future ? FUTURE_BAR : "url(#spending-bar)"}
-                      opacity={entry.future ? 0.7 : 1}
-                      style={{ cursor: entry.future || entry.value <= 0 ? "default" : "pointer" }}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
+                  style={{ cursor: "pointer" }}
+                />
+              </AreaChart>
             </ResponsiveContainer>
           )}
           <div className="flex w-full justify-center">

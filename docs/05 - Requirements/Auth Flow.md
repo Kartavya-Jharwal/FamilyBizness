@@ -1,6 +1,6 @@
 # Entry and profile flow
 
-The public entry and continuity narrative lead to profile selection inside Portfolio; legacy login/splash/verification URLs redirect there. The primary experience is the prepared office defined by [combined operating charter](../00%20-%20Canonical/Family%20Office%20-%20Combined%20Operating%20Charter.md).
+The public entry and continuity narrative lead to profile selection inside Portfolio; legacy login/splash/verification URLs redirect there. The primary experience is the prepared office defined by the [Smith Family Constitution](../00%20-%20Canonical/Smith%20Family%20-%20Constitution.md).
 
 A cold visitor chooses Patriarch, Family board, Managing director / CEO, Associate / family technician, or Legal counsel. These personas share one charter, calendar, financial/estate inputs and operational evidence. **Add profile** adds a visitor to this office; it does not create a new family business or ask for a constitution. Each application load retains its immutable session scope while the planning storage resolves to the prepared office ID.
 

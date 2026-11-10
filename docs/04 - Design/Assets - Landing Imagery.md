@@ -12,6 +12,10 @@ Downloaded on 9 November 2026. Each source page identifies the photograph as fre
 | `heritage-house.webp` | T / @tanyabarrow | [Historic manor house surrounded by parkland](https://unsplash.com/photos/historic-manor-house-surrounded-by-lush-green-parkland-IEaMLhVLS3w) | Foundations |
 | `woodland-path.webp` | Hannah Wright | [Pathway between trees](https://unsplash.com/photos/pathway-between-trees-during-daytime-Nb_4U27IPwM) | Next generation |
 
+## Sharing and icon images
+
+`assets/seo/favicon-32.png` and `favicon-180.png` are rendered from `favicon.svg`. `assets/seo/open-graph.png` (1200 × 630) combines the token dark background and type with the `legacy-oak.webp` photograph above. No new photography was added.
+
 ## Delivery and presentation
 
 The photographs are stored locally as cropped WebP assets. The browser does not depend on a third-party image host. The hero loads eagerly with high fetch priority; below-fold photographs use lazy loading and asynchronous decoding. Explicit dimensions and aspect-ratio containers reserve layout space. Captions sit on solid, token-derived surfaces so their contrast does not depend on photographic detail. The existing palette, typography and spacing remain defined in [tokens.css](../../packages/tokens/tokens.css).
