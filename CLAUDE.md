@@ -14,7 +14,9 @@ FamilyBizness is a wealth platform for an SFO: estate + family-business financia
 2. Prefer **contender refactor path**: clone into `donor/contenders/` → static web UI → fit into this monorepo.
 3. Never commit contender clones (`donor/` is gitignored aside from READMEs).
 4. No full auth, portfolio engines, or financial models unless explicitly requested.
-5. Docs = Markdown under `docs/` only (no mkdocs yet).
+5. Docs = plain Markdown under `docs/` only. MkDocs is retired; never add a docs site generator.
+6. Deploy = `GITHUB_PAGES=1 bun run build`, then force-push `dist/` to the `gh-pages` branch. `main` does not deploy. Live: https://kartavya.tech/FamilyBizness/.
+7. Search and sharing files (`robots.txt`, `sitemap.xml`, `llms.txt`, Open Graph, JSON-LD) are described in `AGENTS.md`.
 
 ## Structure rules
 

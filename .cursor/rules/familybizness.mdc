@@ -14,5 +14,6 @@ alwaysApply: true
 - `donor/` contender clones: never commit (except README placeholders). Prefer contender → static UI → integrate over greenfield full app.
 - Don’t build full auth / portfolio engines / financial models unless asked.
 - Release blockers: poor text contrast; overlapping chart labels — render and verify before shipping.
-- Preview app: `apps/web` Bun static → GitHub Pages. Brand-first hero; pillars after first viewport.
-- Docs: Markdown only (no mkdocs yet).
+- Preview app: `apps/web` Bun static → `dist/` → `gh-pages` branch → https://kartavya.tech/FamilyBizness/ (`main` does not deploy). Brand-first hero; pillars after first viewport.
+- Docs: plain Markdown only. MkDocs is retired — never add it.
+- SEO/agent files (`robots.txt`, `sitemap.xml`, `llms.txt`, OG cards, JSON-LD): see `AGENTS.md`.
