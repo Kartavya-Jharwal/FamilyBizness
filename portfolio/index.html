@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" class="overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Addon sandboxes use srcdoc. Blocking all frame navigations here prevents
+         addon code from turning its opaque iframe into a network request. -->
+    <meta http-equiv="Content-Security-Policy" content="frame-src 'none'" />
+    <link rel="icon" type="image/svg+xml" href="/FamilyBizness/portfolio/brand-mark.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Smith Family Office</title>
+    <meta name="description" content="The FamilyBizness workspace: stewardship, family charter, goals, financials and scenario models for a single-family office. Browser-only demo with the hypothetical Smith family." />
+    <link rel="canonical" href="https://kartavya.tech/FamilyBizness/portfolio/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FamilyBizness" />
+    <meta property="og:url" content="https://kartavya.tech/FamilyBizness/portfolio/" />
+    <meta property="og:title" content="FamilyBizness — Family office workspace" />
+    <meta property="og:description" content="Stewardship, charter, goals, financials and scenario models for a single-family office, in an open-source browser demo." />
+    <meta property="og:image" content="https://kartavya.tech/FamilyBizness/assets/seo/open-graph.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://kartavya.tech/FamilyBizness/assets/seo/open-graph.png" />
+    <!-- Splash styles live in an external file on purpose: an inline <style>
+         here makes Tauri nonce the CSP style-src at runtime, which disables
+         'unsafe-inline' and breaks runtime-injected styles (NumberFlow, sonner,
+         addon CSS) in packaged builds. See public/splash.css. -->
+    <link rel="stylesheet" href="/FamilyBizness/portfolio/splash.css" />
+    <script type="module" crossorigin src="/FamilyBizness/portfolio/assets/main-Dh2Pe5oe.js"></script>
+    <link rel="stylesheet" crossorigin href="/FamilyBizness/portfolio/assets/main-BvnPfPL6.css">
+  </head>
+
+  <body class="overflow-x-hidden font-mono">
+    <script>
+      try { document.title = (localStorage.getItem("familybizness:family-name")?.trim().slice(0, 60) || "Smith") + " Family Office"; } catch {}
+      // Apply cached theme before first paint to prevent flash on login screen
+      (function () {
+        try {
+          var theme = localStorage.getItem("familybizness-theme") || "system";
+          var resolved =
+            theme === "system"
+              ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+              : theme === "dark"
+                ? "dark"
+                : "light";
+          document.documentElement.classList.add(resolved);
+          document.documentElement.style.colorScheme = resolved;
+          // The CSS shows Classic for an ID it doesn't know.
+          var themeId = localStorage.getItem("familybizness-theme-id");
+          if (themeId) document.documentElement.setAttribute("data-theme", themeId);
+        } catch (e) {}
+        // Presentation hint only; profile access is still checked by the app.
+        try {
+          var opening = JSON.parse(sessionStorage.getItem("familybizness-profile-opening") || "null");
+          var age = opening && Date.now() - opening.at;
+          if (opening && typeof opening.at === "number" && age >= 0 && age < 300000) {
+            document.documentElement.classList.add("profile-opening");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <div id="root"></div>
+    <div id="profile-splash" class="profile-lock-screen" role="status" aria-label="Opening profile">
+      <span class="profile-lock-avatar profile-opening-placeholder" aria-hidden="true"></span>
+    </div>
+  </body>
+</html>

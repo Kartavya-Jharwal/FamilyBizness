@@ -1,0 +1,1 @@
+import{ay as e,F as a,ns as i}from"./main-Dh2Pe5oe.js";function r(){const[t]=e(),s=t.get("section");return a.jsx(i,{replace:!0,to:s==="policy"?"/office/policy?edit=1":s==="backup"?"/settings/records":s==="data"?"/settings/sources":"/settings/office"})}export{r as default};

@@ -1,0 +1,1 @@
+import{aA as a,eZ as n,e_ as u,aI as f}from"./main-Dh2Pe5oe.js";function d(){const{data:s=[],isLoading:r,isError:t,error:i}=a({queryKey:[f.ASSETS],queryFn:u});return{assets:s.filter(e=>!(e.kind==="FX"||n(e.kind))),isLoading:r,isError:t,error:i}}export{d as u};

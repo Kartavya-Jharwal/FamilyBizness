@@ -1,0 +1,1 @@
+import{F as s,fl as t,d5 as l}from"./main-Dh2Pe5oe.js";function e({className:a,orientation:r="horizontal",...o}){return s.jsx(t,{"data-slot":"separator",orientation:r,className:l("bg-border shrink-0",r==="horizontal"?"h-px w-full":"h-full w-px",a),...o})}export{e as S};

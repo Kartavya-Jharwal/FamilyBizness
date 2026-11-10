@@ -1,0 +1,15 @@
+{
+  "name": "FamilyBizness",
+  "short_name": "FamilyBizness",
+  "id": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "brand-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

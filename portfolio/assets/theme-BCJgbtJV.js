@@ -1,0 +1,1 @@
+const s={key:"spending",label:"Spending",hsl:"var(--spending-accent)",deep:"var(--spending-deep)",mid:"var(--spending-mid)"},a=(n,e)=>`color-mix(in oklab, ${n} ${Math.round(e*100)}%, transparent)`,t=(n,e)=>a(n.hsl,e);export{s as S,t as a,a as t};

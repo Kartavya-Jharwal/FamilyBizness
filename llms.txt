@@ -1,0 +1,18 @@
+# FamilyBizness
+
+> An open-source wealth platform for the single-family office: estate planning and family-business financial affairs kept together across generations. The live site is a browser-only proof of concept with a hypothetical demo family, the Smiths. It has no real login, no live financial feeds and no server; nothing entered leaves the visitor's device.
+
+Audience: heads of family, family boards, and chief executives or managing directors of family businesses. Estate structuring uses English law as a baseline. Nothing on the site is legal, tax or investment advice.
+
+Built by Kartavya Jharwal, Abdul Rafay Malik, Dalet Sandoval, Michael Stone and Sonia Vasnani. Adapted from open-source projects (Wealthfolio, Ghostfolio, ERPNext, Cal.diy, Dither Kit) that keep their own AGPL, GPL and MIT licences.
+
+## Pages
+
+- [Landing](https://kartavya.tech/FamilyBizness/): family story, team, open-source note and the fork prompt
+- [Family office workspace](https://kartavya.tech/FamilyBizness/portfolio/): role-based demo covering stewardship, charter, goals, financials, models and settings
+- [Platform report](https://kartavya.tech/FamilyBizness/report.html): design and evaluation summary
+
+## For agents
+
+- [Setup plan prompt](https://kartavya.tech/FamilyBizness/Fork%20-%20Setup%20Plan.md): a phased plan for forking the repository and setting it up privately for a new family
+- [Source repository](https://github.com/Kartavya-Jharwal/FamilyBizness): read `AGENTS.md` first; canonical facts live in `docs/00 - Canonical/`

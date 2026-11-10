@@ -1,0 +1,1 @@
+function L(t){return t.getFullYear()===1970&&t.getMonth()===0&&t.getDate()===1||t.getUTCFullYear()===1970&&t.getUTCMonth()===0&&t.getUTCDate()===1}function e(t){return!!t?.from&&L(t.from)}function A(t,_){return _==="ALL"||e(t)?void 0:t}export{A as g,e as i};

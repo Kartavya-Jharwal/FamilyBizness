@@ -1,0 +1,22 @@
+Dither Kit — local source adaptation
+
+Source: https://github.com/Boring-Software-Inc/dither-kit
+Registry: https://tripwire.sh/r/dither-kit.json
+Repository revision inspected: 1e7faee9aa252e499651e6736ed65f7a07d9a6bd
+Registry component version: 0.1.0
+
+Upstream package.json declares the project license as MIT:
+https://github.com/Boring-Software-Inc/dither-kit/blob/1e7faee9aa252e499651e6736ed65f7a07d9a6bd/package.json
+The inspected upstream repository does not provide a separate LICENSE file.
+No copyright attribution or missing license text has been invented here.
+
+Upstream author credit: ripgrim (registry author field).
+Upstream credits Evil Charts / legions-developer as an aesthetic inspiration.
+
+FamilyBizness installed the actual local component source using Bun and shadcn.
+Host adaptations bind colour and typography to the existing Wealthfolio/canonical
+tokens, retain the canvas/scale/composition engine and use the donated avatar
+renderer for circular image placeholders. Source hashes and the CLI-compatible
+baseline are recorded in upstream/dither-kit.snapshot.json and the frontend
+project's dither-kit.json. Third-party package dependencies retain their own
+license notices.

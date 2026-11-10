@@ -1,0 +1,212 @@
+/**
+ * FamilyBizness design tokens — SINGLE SOURCE OF TRUTH.
+ * Import this file; do not hardcode colours, fonts, or spacing from memory.
+ * See docs/04 - Design/Design.md
+ */
+
+:root {
+  /* Classic / Flexoki foundation; original credits are recorded under upstream/.
+     Light and dark primitives are
+     separate so applications can bind their own theme selectors to them. */
+  --design-light-bg: 48 100% 97%;
+  --design-light-bg-raised: 51 59% 95%;
+  --design-light-ui: 51 21% 88%;
+  --design-light-ui-2: 50 14% 83%;
+  --design-light-ui-3: 55 10% 79%;
+  --design-light-text: 0 3% 6%;
+  --design-light-text-muted: 50 3% 36%;
+  --design-light-text-faint: 49 7% 70%;
+  --design-light-danger: 3 62% 42%;
+  --design-light-success: 73 84% 26%;
+  --design-light-warning: 45 99% 28%;
+  --design-light-info: 214 67% 39%;
+  --design-dark-bg: 0 3% 6%;
+  --design-dark-bg-raised: 30 4% 11%;
+  --design-dark-ui: 30 3% 15%;
+  --design-dark-ui-2: 40 3% 20%;
+  --design-dark-ui-3: 30 3% 24%;
+  --design-dark-text: 55 10% 79%;
+  --design-dark-text-muted: 43 3% 60.5%;
+  --design-dark-text-faint: 45 2% 33%;
+  --design-dark-danger: 5 61% 58.5%;
+  --design-dark-success: 72 46% 41%;
+  --design-dark-warning: 45 82% 45%;
+  --design-dark-info: 210 47% 50%;
+  --design-font-sans: "Inter Variable", "Inter", "Rubik Arabic", ui-sans-serif, system-ui, sans-serif;
+  --design-font-serif: "Merriweather", "Rubik Arabic", ui-serif, Georgia, serif;
+  --design-font-mono: "JetBrains Mono", "Rubik Arabic", ui-monospace, monospace;
+  /* Financial workspace composition. Surfaces still read the active host theme. */
+  --design-metric-size: clamp(1.375rem, 2.1vw, 1.875rem);
+  --design-metric-tracking: -0.035em;
+  --design-chart-tick-gap: 112; /* Minimum labelled interval in CSS pixels. */
+  --design-overview-fill-strong: 0.52;
+  --design-overview-fill-mid: 0.32;
+  --design-overview-fill-floor: 0.12;
+  --design-overview-fill-zero: 0.16;
+  --design-chart-line-glow: 3; /* CSS pixels before canvas backing scaling. */
+  --design-chart-edge-space: 24; /* SVG plot padding in CSS pixels. */
+  --design-chart-label-size: 0.75rem;
+  --design-workspace-title-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  --design-workspace-title-tracking: -0.04em;
+  --design-radius-card: 0.4375rem;
+  --design-radius-control: 0.35rem;
+  --design-radius-pill: 9999px;
+  --design-avatar-inset: 15%;
+  --design-calendar-hour-height: 6rem;
+  --design-calendar-time-width: 3.5rem;
+  --design-calendar-sidebar-width: 13rem;
+  --design-erp-board-column-width: 16rem;
+  --design-calendar-day-width: 7rem;
+  --design-overview-chart-height: clamp(18rem, 35vh, 25rem);
+  --design-number-stacked-width: 184;
+  --design-signature-radius: .7rem;
+  --design-signature-control-radius: .7rem;
+  --design-signature-popup-radius: .875rem;
+  --design-signature-dialog-radius: 1.225rem;
+  --design-ember-radius: .7rem;
+  --design-ember-button-radius: .6125rem;
+  --design-ember-control-radius: .6125rem;
+  --design-ember-card-radius: .7rem;
+  --design-ember-popup-radius: .6125rem;
+  --design-ember-dialog-radius: .7rem;
+  --design-ember-badge-radius: .6125rem;
+  --design-ember-segmented-radius: .6125rem;
+  --design-cupertino-radius: .7875rem;
+  --design-cupertino-control-radius: .6125rem;
+  --design-cupertino-card-radius: 1.1375rem;
+  --design-cupertino-popup-radius: .9625rem;
+  --design-cupertino-dialog-radius: 1.575rem;
+  --design-radius-offset-small: .0875rem;
+  --design-radius-offset-large: .175rem;
+  --design-radius-2xl: .7rem;
+  --design-radius-3xl: 1.05rem;
+  --design-radius-navigation: 1.4rem;
+  --design-radius-navigation-item: 1.225rem;
+  --design-radius-popup: .7rem;
+  --design-radius-badge: .525rem;
+  --design-number-step-size: 2rem;
+  --design-number-step-size-touch: 2.5rem;
+  --design-number-drag-notch: 10;
+  --design-number-roll-duration: 650ms;
+  --design-number-drag-duration: 180ms;
+  --design-number-digit-width: .62em;
+  --design-number-digit-cell: 1.2em;
+  --design-number-digit-blur: 1.4px;
+  --design-radius-button: 0.9625rem;
+  --design-radius-segmented: 0.875rem;
+  --design-control-height: 2.75rem;
+  --design-chart-light-1: #659892;
+  --design-chart-light-2: #83925b;
+  --design-chart-light-3: #b99f64;
+  --design-chart-light-4: #bb7b5b;
+  --design-chart-light-5: #688daf;
+  --design-chart-light-6: #938dba;
+  --design-chart-light-7: #c07b9b;
+  --design-chart-light-8: #9f9d96;
+  --design-chart-light-9: #cecdc3;
+  --design-chart-dark-1: #5ea49c;
+  --design-chart-dark-2: #899857;
+  --design-chart-dark-3: #c5a556;
+  --design-chart-dark-4: #c87c51;
+  --design-chart-dark-5: #769ebb;
+  --design-chart-dark-6: #a59cc4;
+  --design-chart-dark-7: #d489a7;
+  --design-chart-dark-8: #9f9d96;
+  --design-chart-dark-9: #878580;
+  --design-series-light-1: #205ea6;
+  --design-series-light-2: #a02f6f;
+  --design-series-light-3: #24837b;
+  --design-series-light-4: #5e409d;
+  --design-series-light-5: #66800b;
+  --design-series-light-6: #ad8301;
+  --design-series-light-7: #bc5215;
+  --design-series-light-8: #af3029;
+  --design-series-dark-1: #4385be;
+  --design-series-dark-2: #ce5d97;
+  --design-series-dark-3: #3aa99f;
+  --design-series-dark-4: #8b7ec8;
+  --design-series-dark-5: #879a39;
+  --design-series-dark-6: #d0a215;
+  --design-series-dark-7: #da702c;
+  --design-series-dark-8: #d14d41;
+  /* Brand */
+  --color-ink: hsl(var(--design-light-text));
+  --color-ink-muted: hsl(var(--design-light-text-muted));
+  --color-paper: hsl(var(--design-light-bg));
+  --color-mist: hsl(var(--design-light-ui));
+  --color-sea: hsl(var(--design-light-info));
+  --color-sea-deep: #1a4f8c;
+  --color-brass: hsl(var(--design-light-warning));
+  --color-brass-soft: var(--design-chart-dark-3);
+  --color-foam: hsl(var(--design-light-bg));
+  --color-danger: hsl(var(--design-light-danger));
+  --color-gain-on-dark: #c2df93;
+  --color-loss-on-dark: #ffb4ab;
+  --color-muted-on-dark: #b9c7ce;
+
+  /* Surfaces / atmosphere */
+  --gradient-hero: linear-gradient(155deg, hsl(var(--design-dark-bg)) 0%, hsl(var(--design-dark-bg-raised)) 65%, hsl(var(--design-dark-ui-2)) 100%);
+  --gradient-wash: none;
+
+  /* Typography */
+  --font-display: var(--design-font-sans);
+  --font-body: var(--design-font-sans);
+  --font-size-hero: clamp(2.75rem, 6vw, 4.5rem);
+  --font-size-h1: clamp(1.75rem, 3vw, 2.25rem);
+  --font-size-h2: clamp(1.25rem, 2vw, 1.5rem);
+  --font-size-body: 1.0625rem;
+  --font-size-small: 0.875rem;
+  --line-height-tight: 1.15;
+  --line-height-body: 1.6;
+  --letter-brand: 0.04em;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6rem;
+
+  /* Layout */
+  --max-width: 68rem;
+  --nav-height: 4rem;
+  --radius-sm: var(--design-radius-control);
+  --radius-md: var(--design-radius-card);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 180ms;
+  --duration-med: 480ms;
+  --duration-slow: 900ms;
+
+  /* Contrast-safe text on hero */
+  --color-on-hero: hsl(var(--design-light-bg));
+  --color-on-hero-muted: color-mix(in srgb, var(--color-on-hero) 78%, transparent);
+  --color-on-hero-faint: color-mix(in srgb, var(--color-on-hero) 55%, transparent);
+
+  /* Presentation workspace: fixed dark canvas, shared source palette. */
+  --studio-bg: hsl(var(--design-dark-bg));
+  --studio-panel: hsl(var(--design-dark-bg-raised));
+  --studio-line: hsl(var(--design-dark-ui-3));
+  --studio-text: var(--color-on-hero);
+  --studio-muted: var(--color-on-hero-muted);
+  --studio-gold: var(--design-chart-dark-3);
+  --studio-teal: var(--design-chart-dark-1);
+  --studio-good: var(--color-gain-on-dark);
+  --studio-alert: var(--color-loss-on-dark);
+  --studio-radius: 1.5rem;
+  --studio-display: clamp(2.25rem, 4.5vw, 4.5rem);
+  --studio-number: clamp(1.75rem, 3vw, 3rem);
+}
+
+:root {
+  --nav-indent-step: var(--space-4);
+  --nav-icon-size: var(--space-5);
+  --touch-target: 2.75rem;
+  --settings-sidebar-width: 15rem;
+  --settings-content-width: 48rem;
+}

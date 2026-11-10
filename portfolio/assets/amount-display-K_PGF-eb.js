@@ -1,0 +1,1 @@
+import{bl as p,F as d,d5 as f}from"./main-Dh2Pe5oe.js";function A({value:t,currency:e="USD",isHidden:o,displayCurrency:n=!0,colorFormat:c,invertColor:s=!1,className:a}){const{formatAmount:r}=p(),u=r(t,e,n),m=s?"text-destructive":"text-success",i=s?"text-success":"text-destructive",x=c?t>=0?m:i:"";return d.jsx("span",{className:f(x,a),children:o?"••••":u})}export{A};

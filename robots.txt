@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /FamilyBizness/
+Disallow: /FamilyBizness/login.html
+Disallow: /FamilyBizness/splash.html
+Disallow: /FamilyBizness/verify.html
+Disallow: /FamilyBizness/legacy.html
+
+Sitemap: https://kartavya.tech/FamilyBizness/sitemap.xml
